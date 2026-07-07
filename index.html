@@ -121,6 +121,7 @@ select.st{padding:3px 6px;border:1px solid var(--line);border-radius:6px;backgro
   <h2>Commodity interdependency map</h2>
   <p class="sub" style="margin-bottom:10px">Click any commodity to trace what it is made from, what it feeds into, where supply comes from, and which companies depend on it — directly or through the chain. Square color = supply concentration.</p>
   <div class="card" id="commap" style="overflow-x:auto"></div>
+  <div class="card" id="corrbox" style="overflow-x:auto"></div>
   <div class="grid" id="comgrid"></div>
   <div class="card" id="comdetail"></div>
 </div>
@@ -156,7 +157,7 @@ select.st{padding:3px 6px;border:1px solid var(--line);border-radius:6px;backgro
       <tr><td>Transition</td><td>Qualitative rating: decarbonization exposure, technology shifts, documented competitive disruption.</td></tr>
     </table>
     <div class="lbl">Data pipeline</div>
-    <p style="font-size:14px">A six-agent weekly cycle (planner → document scout → risk analyst → company mapper → rival monitor → service mapper) scans EUR-Lex, European Commission DGs, Consilium, RBI, DGFT, CBIC, PIB, WTO, USTR, Federal Register, and exchange filings. Reasoning is recorded before conclusions in each cycle JSON. Secondary sources are tagged and queued for primary retrieval. Live market data: open.er-api.com / frankfurter.dev (ECB) / gold-api.com, fetched client-side on open with an embedded dated snapshot as fallback.</p>
+    <p style="font-size:14px">A six-agent weekly cycle (planner → document scout → risk analyst → company mapper → rival monitor → service mapper) scans EUR-Lex, European Commission DGs, Consilium, RBI, DGFT, CBIC, PIB, WTO, USTR, Federal Register, and exchange filings. Reasoning is recorded before conclusions in each cycle JSON. Secondary sources are tagged and queued for primary retrieval. Live market data: open.er-api.com / frankfurter.dev (ECB) / gold-api.com, fetched client-side on open with an embedded dated snapshot as fallback. An optional free Alpha Vantage key — entered in the Commodities tab and stored only in the viewer's browser, never in the published file — adds computed 5-year monthly price correlations (EIA/IMF/ECB source series), cached locally for 24 hours to respect the 25-requests/day free limit.</p>
     <div class="lbl">Caveats</div>
     <ul style="font-size:14px">
       <li>Company cost-share weights are estimates where issuers do not disclose input-cost breakdowns; anchored figures cite their filing.</li>
@@ -1056,6 +1057,8 @@ document.getElementById('panel').addEventListener('click', e => {
 
 const MM = { dep: true, corr: true, org: true, sel: null };
 window.mmToggle = k => { MM[k] = !MM[k]; renderMindMap(); };
+let LIVECORR = {};
+const liveR = (a,b) => LIVECORR[a+'|'+b] !== undefined ? LIVECORR[a+'|'+b] : (LIVECORR[b+'|'+a] !== undefined ? LIVECORR[b+'|'+a] : null);
 const MMPOS = {
   crude:[40,60], natgas:[40,120], coal:[40,180],
   diesel:[210,30], petcoke:[210,85], plastics:[210,140], elec:[210,195],
@@ -1094,6 +1097,7 @@ function renderMindMap() {
     nb.add(sel);
     if (MM.dep) for (const k in MMPOS) (DATA.commodities[k][4]||[]).forEach(i => { if (k===sel) nb.add(i); if (i===sel) nb.add(k); });
     if (MM.corr) MMCORR.forEach(c => { if (c[0]===sel) nb.add(c[1]); if (c[1]===sel) nb.add(c[0]); });
+    if (MM.corr) for (const pk in LIVECORR) { if (Math.abs(LIVECORR[pk]) < 0.55) continue; const pr = pk.split('|'); if (pr[0]===sel) nb.add(pr[1]); if (pr[1]===sel) nb.add(pr[0]); }
     if (MM.org) MMHUBS.forEach((h,i) => { if ('hub'+i===sel) h[3].forEach(k=>nb.add(k)); if (h[3].includes(sel)) nb.add('hub'+i); });
   }
   const trim = (x1,y1,x2,y2,rw,rh) => { const dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy)||1; const ux=dx/L, uy=dy/L; const o=1/Math.hypot(ux/rw, uy/rh); return [x2-ux*o, y2-uy*o]; };
@@ -1108,9 +1112,22 @@ function renderMindMap() {
     if (!MMPOS[inp]) return;
     edges += line(ctr(inp), ctr(k), 'stroke="var(--ink3)" stroke-width="1.5"', true, `${DATA.commodities[inp][0]} → ${DATA.commodities[k][0]} (processing input)`, [k,inp]);
   });
-  if (MM.corr) MMCORR.forEach(c => {
-    if (MMPOS[c[0]] && MMPOS[c[1]]) edges += line(ctr(c[0]), ctr(c[1]), 'stroke="#378ADD" stroke-width="1.6" stroke-dasharray="7,4"', false, c[2], [c[0],c[1]]);
-  });
+  if (MM.corr) {
+    const drawn = {};
+    MMCORR.forEach(c => {
+      if (!(MMPOS[c[0]] && MMPOS[c[1]])) return;
+      const lr = liveR(c[0], c[1]);
+      const t = c[2] + (lr != null ? ` — live 5y monthly correlation ρ = ${lr.toFixed(2)}` : '');
+      const w = lr != null ? (1 + Math.abs(lr) * 1.8).toFixed(1) : '1.6';
+      drawn[c[0]+'|'+c[1]] = drawn[c[1]+'|'+c[0]] = 1;
+      edges += line(ctr(c[0]), ctr(c[1]), `stroke="#378ADD" stroke-width="${w}" stroke-dasharray="7,4"`, false, t, [c[0],c[1]]);
+    });
+    for (const pk in LIVECORR) {
+      const pr = pk.split('|');
+      if (drawn[pk] || !MMPOS[pr[0]] || !MMPOS[pr[1]] || Math.abs(LIVECORR[pk]) < 0.55) continue;
+      edges += line(ctr(pr[0]), ctr(pr[1]), `stroke="#378ADD" stroke-width="${(1+Math.abs(LIVECORR[pk])*1.8).toFixed(1)}" stroke-dasharray="7,4"`, false, `Live 5y monthly correlation ρ = ${LIVECORR[pk].toFixed(2)} (Alpha Vantage)`, pr);
+    }
+  }
   let hubs = '';
   if (MM.org) MMHUBS.forEach((h,i) => {
     const hc = [h[1]+60, h[2]+12];
@@ -1134,7 +1151,93 @@ function renderMindMap() {
       ${sel?`<button class="tabbtn" style="padding:2px 10px;font-size:12px" onclick="MM.sel=null;renderMindMap()">Clear highlight</button>`:''}
     </div>
     <svg viewBox="0 0 900 625" width="100%" style="min-width:720px" role="img" aria-label="Relationship map of commodities: supply-chain flows, price co-movement, and shared supply origins"><defs><marker id="mmarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink3)"/></marker></defs>${edges}${hubs}${nodes}</svg>
-    <p class="meta" style="margin:6px 0 0">Click any node to isolate its relationships and open its profile below; hover an edge for the linkage; dashed pills are supply-origin chokepoints. Node color = supply concentration; sublabel = India import dependence. Co-movement links are documented market linkages (fuel substitution, oil-indexed contracts, shared demand complexes) — indicative, not computed correlation coefficients.</p>`;
+    <p class="meta" style="margin:6px 0 0">Click any node to isolate its relationships and open its profile below; hover an edge for the linkage; dashed pills are supply-origin chokepoints. Node color = supply concentration; sublabel = India import dependence. Co-movement links are documented market linkages — add a free Alpha Vantage key below to overlay computed 5-year correlations (edge thickness scales with ρ; strong new pairs appear automatically).</p>`;
+}
+
+const AVSER = [['crude','BRENT','Brent'],['natgas','NATURAL_GAS','US gas'],['copper','COPPER','Copper'],['alum','ALUMINUM','Aluminum'],['wheat','WHEAT','Wheat'],['sugar','SUGAR','Sugar'],['coffee','COFFEE','Coffee'],['gold',null,'Gold']];
+const avName = id => { const s = AVSER.find(x=>x[0]===id); return s ? s[2] : id; };
+function pearson(xs, ys) {
+  const n = xs.length;
+  const mx = xs.reduce((a,b)=>a+b,0)/n, my = ys.reduce((a,b)=>a+b,0)/n;
+  let num = 0, dx = 0, dy = 0;
+  for (let i=0;i<n;i++) { const a = xs[i]-mx, b = ys[i]-my; num += a*b; dx += a*a; dy += b*b; }
+  return num / (Math.sqrt(dx*dy) || 1);
+}
+function buildCorr(series, when, warn) {
+  const ids = AVSER.map(s=>s[0]).filter(id => series[id] && series[id].length > 24);
+  LIVECORR = {};
+  for (let i=0;i<ids.length;i++) for (let j=i+1;j<ids.length;j++) {
+    const ma = new Map(series[ids[i]]), mb = new Map(series[ids[j]]);
+    const months = [...ma.keys()].filter(m=>mb.has(m)).sort().slice(-61);
+    if (months.length < 25) continue;
+    const ra = [], rb = [];
+    for (let k=1;k<months.length;k++) {
+      const a0=ma.get(months[k-1]), a1=ma.get(months[k]), b0=mb.get(months[k-1]), b1=mb.get(months[k]);
+      if (a0>0 && a1>0 && b0>0 && b1>0) { ra.push(Math.log(a1/a0)); rb.push(Math.log(b1/b0)); }
+    }
+    if (ra.length >= 24) LIVECORR[ids[i]+'|'+ids[j]] = pearson(ra, rb);
+  }
+  renderCorrBox('done', { ids: ids, when: when, warn: warn });
+  renderMindMap();
+}
+async function loadCorr(force) {
+  const key = localStorage.getItem('tpm-avkey');
+  if (!key) { renderCorrBox('nokey'); return; }
+  let cache = null;
+  try { cache = JSON.parse(localStorage.getItem('tpm-avcache')||'null'); } catch(e) {}
+  if (!force && cache && Date.now() - cache.ts < 86400000) { buildCorr(cache.series, new Date(cache.ts)); return; }
+  renderCorrBox('loading');
+  const series = {};
+  try {
+    for (const s of AVSER) {
+      let j;
+      if (s[1]) {
+        j = await (await fetch(`https://www.alphavantage.co/query?function=${s[1]}&interval=monthly&apikey=${key}`)).json();
+        if (j && j.data) series[s[0]] = j.data.filter(d=>d.value!=='.' && d.value!=null).map(d=>[d.date.slice(0,7), +d.value]);
+        else if (j && (j.Note || j.Information)) throw new Error('limit');
+      } else {
+        j = await (await fetch(`https://www.alphavantage.co/query?function=FX_MONTHLY&from_symbol=XAU&to_symbol=USD&apikey=${key}`)).json();
+        const ts = j && j['Time Series FX (Monthly)'];
+        if (ts) series[s[0]] = Object.keys(ts).map(d=>[d.slice(0,7), +ts[d]['4. close']]);
+        else if (j && (j.Note || j.Information)) throw new Error('limit');
+      }
+    }
+  } catch(e) {
+    if (cache) { buildCorr(cache.series, new Date(cache.ts), 'API limit or network issue — showing last cached data.'); }
+    else renderCorrBox('error');
+    return;
+  }
+  try { localStorage.setItem('tpm-avcache', JSON.stringify({ts: Date.now(), series: series})); } catch(e) {}
+  buildCorr(series, new Date());
+}
+window.avSave = () => { const v = document.getElementById('avkey').value.trim(); if (v) { localStorage.setItem('tpm-avkey', v); loadCorr(true); } };
+window.avForget = () => { localStorage.removeItem('tpm-avkey'); localStorage.removeItem('tpm-avcache'); LIVECORR = {}; renderMindMap(); renderCorrBox('nokey'); };
+window.avRefresh = () => loadCorr(true);
+function renderCorrBox(state, info) {
+  const el = document.getElementById('corrbox');
+  const head = `<div style="font-weight:600">Live price correlation matrix <span class="meta">5-year monthly returns · Alpha Vantage (EIA/IMF/ECB series)</span></div>`;
+  if (state === 'nokey') {
+    el.innerHTML = head + `<p style="font-size:13px;color:var(--ink2);margin:8px 0">Add a free Alpha Vantage API key to compute real correlations for Brent, US gas, copper, aluminum, wheat, sugar, coffee, and gold — and overlay them on the map above. Get a key in ~30 seconds at <a href="https://www.alphavantage.co/support/#api-key" target="_blank" rel="noopener">alphavantage.co</a> (no card needed). The key is stored only in this browser — never in the shared file.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><input id="avkey" type="text" placeholder="Paste API key" style="padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:13px;min-width:240px"><button class="tabbtn" onclick="avSave()">Save and fetch</button></div>`;
+    return;
+  }
+  if (state === 'loading') { el.innerHTML = head + `<p class="meta" style="margin:8px 0">Fetching 8 price series… (8 of your 25 free daily requests; cached for 24h)</p>`; return; }
+  if (state === 'error') { el.innerHTML = head + `<p style="font-size:13px;color:var(--ink2);margin:8px 0">Could not fetch — API daily limit (25 requests) reached or network blocked, and no cache exists yet. Try again later.</p><div style="display:flex;gap:8px"><button class="tabbtn" onclick="avRefresh()">Retry</button><button class="tabbtn" onclick="avForget()">Change key</button></div>`; return; }
+  const ids = info.ids;
+  let t = `<table class="t" style="margin-top:8px;max-width:640px"><tr><th></th>${ids.map(i=>`<th style="text-align:center">${avName(i)}</th>`).join('')}</tr>`;
+  ids.forEach(a => {
+    t += `<tr><th>${avName(a)}</th>` + ids.map(b => {
+      if (a === b) return `<td style="text-align:center;color:var(--ink3)">—</td>`;
+      const r = liveR(a, b);
+      if (r == null) return `<td style="text-align:center;color:var(--ink3)">·</td>`;
+      const bg = r > 0 ? `rgba(55,138,221,${(Math.abs(r)*0.8).toFixed(2)})` : `rgba(216,90,48,${(Math.abs(r)*0.8).toFixed(2)})`;
+      return `<td style="text-align:center;background:${bg};color:${Math.abs(r)>0.5?'#fff':'var(--ink)'};font-weight:600">${r.toFixed(2)}</td>`;
+    }).join('') + `</tr>`;
+  });
+  t += `</table>`;
+  el.innerHTML = head + t +
+    `<p class="meta" style="margin:8px 0 0">${info.warn ? info.warn + ' ' : ''}Computed ${new Date(info.when).toLocaleString()} from monthly closes (last ~5 years of overlapping data). Blue = move together, coral = move opposite. Note: gas series is US Henry Hub — Asian LNG is oil-indexed and correlates more tightly with Brent. These correlations also feed the dashed edges on the map above.</p>
+    <div style="display:flex;gap:8px;margin-top:8px"><button class="tabbtn" onclick="avRefresh()">Refresh now</button><button class="tabbtn" onclick="avForget()">Remove key</button></div>`;
 }
 
 drawGrid('');
@@ -1147,6 +1250,7 @@ renderMindMap();
 showCom('crude');
 renderDeep('titan');
 simulate('oil22');
+loadCorr(false);
 loadLive();
 </script>
 </body>
