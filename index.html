@@ -144,7 +144,70 @@ select.st{padding:3px 6px;border:1px solid var(--line);border-radius:6px;backgro
 </div>
 
 <div id="tab-methodology" style="display:none">
-  <h2>Methodology</h2>
+  <h2>Methodology and reader's guide</h2>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:6px">The 60-second tour</div>
+    <p style="font-size:14px;margin:4px 0">This dashboard answers one question: <b>which large Indian companies are exposed to commodity prices, currency moves, and trade policy — and how badly.</b> Suggested path: start on <b>Overview</b> (the headline numbers and top targets), click a company to see its full risk brief, open <b>Deep dive</b> for its supply chain traced back to raw sources, then try <b>Scenarios</b> to replay real events like the 2022 oil shock and watch who gets hurt and who gains.</p>
+    <details><summary>What each tab does</summary><ul style="font-size:14px">
+      <li><b>Overview</b> — headline counts, the six highest-priority companies, and the next hard regulatory deadlines.</li>
+      <li><b>Companies</b> — every company's full brief: risk scores, commodity dependencies, products, weaknesses, and policy impacts.</li>
+      <li><b>Deep dive</b> — one company end to end: where every input physically comes from, product-by-product vulnerability, and how it fares in every shock scenario.</li>
+      <li><b>Scenarios</b> — pick a real historical shock or policy stress; the model spreads it through the supply chain and ranks companies and products by damage.</li>
+      <li><b>Commodities</b> — the relationship map: what is made from what, whose prices move together, and which countries control supply.</li>
+      <li><b>Pipeline</b> — the resulting business-development opportunities with deadlines and a pursuit tracker.</li>
+      <li><b>Calendar</b> — dated regulatory obligations with live countdowns.</li>
+      <li><b>Weekly cycles</b> — the raw weekly research reports with every source cited.</li>
+    </ul></details>
+    <details><summary>How to read the colors and shapes</summary><ul style="font-size:14px">
+      <li><b>Red / amber / green nodes and squares</b> — supply concentration: red means one country or a handful of suppliers controls the market (cobalt-style chokepoint); green means supply is spread out.</li>
+      <li><b>Badges on companies</b> — "overall" is the blended six-lens risk grade; "policy" is how hard current regulation hits them (urgent / material / watch).</li>
+      <li><b>Red bars vs green bars in scenarios</b> — red = input costs rise; green = the company produces that commodity and gains when its price spikes.</li>
+      <li><b>Solid arrows on the map</b> — physical transformation ("becomes"): crude oil → diesel. <b>Dashed blue</b> — prices move together. <b>Dotted amber</b> — same country controls supply of both.</li>
+      <li><b>Blue vs coral cells in the correlation matrix</b> — blue = prices historically move together; coral = they move opposite; the number is the strength (−1 to +1).</li>
+    </ul></details>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:6px">Glossary — the technical terms, in plain English</div>
+    <details><summary>Money and risk basics</summary><ul style="font-size:14px">
+      <li><b>Commodity</b> — a raw or semi-processed material bought in bulk where one supplier's tonne is like another's: crude oil, steel, cocoa, gold.</li>
+      <li><b>Exposure</b> — how much money is at stake when a price moves. If palm oil is 12% of your costs and it rises 50%, you lose ~6% of your cost base.</li>
+      <li><b>Cost base / input costs</b> — everything a company spends to make its products. "Steel = 14% of cost base" means 14 rupees of every 100 spent go to steel.</li>
+      <li><b>Volatility</b> — how violently a price swings. Cocoa tripling in 2024 = extreme volatility; milk prices barely moving = low.</li>
+      <li><b>Supply concentration</b> — how few places supply the world. DRC mines 73% of cobalt: one political crisis can reprice the whole market.</li>
+      <li><b>Import dependence</b> — the share of India's consumption bought abroad. High import share means a weaker rupee directly raises costs even if the world price is flat.</li>
+      <li><b>Chokepoint</b> — a single origin, plant, or route whose failure breaks the whole chain (Ukraine made ~half the world's chip-grade neon before 2022).</li>
+      <li><b>Pass-through</b> — how much of a cost rise travels to the next buyer. Our model assumes 50% survives each processing step: crude +40% → diesel +20%.</li>
+      <li><b>Correlation (ρ)</b> — a number from −1 to +1 measuring whether two prices move together. +0.8 = nearly always together; 0 = unrelated; −0.5 = tend to move opposite.</li>
+      <li><b>Net beneficiary</b> — a company that produces a commodity gains when its price spikes. ONGC pumps oil, so an oil shock helps it — that's the green bar.</li>
+      <li><b>Windfall levy</b> — an extra tax governments impose on producers when prices spike, capping the benefit.</li>
+    </ul></details>
+    <details><summary>Treasury and hedging terms</summary><ul style="font-size:14px">
+      <li><b>Treasury</b> — the corporate function that manages cash, debt, currencies, and financial risk.</li>
+      <li><b>Hedging</b> — paying a little today to lock a price for tomorrow; insurance against price and currency moves.</li>
+      <li><b>Forward contract</b> — an agreement to exchange currency at a fixed rate on a future date; the workhorse of Indian corporate FX hedging.</li>
+      <li><b>Cancel-and-rebook</b> — the old habit of cancelling a forward and re-striking it when the market moved your way. The RBI barred this in June 2026 — which is why every corporate hedge policy needs a rewrite.</li>
+      <li><b>NDF (non-deliverable forward)</b> — an offshore bet on the rupee settled in dollars, without actually exchanging rupees. RBI barred banks from offering these to residents in 2026, pushing hedging onshore.</li>
+      <li><b>FCNR(B) deposit</b> — a foreign-currency account NRIs hold at Indian banks. In June 2026 the RBI began paying banks' hedging costs on fresh 3–5 year deposits (window closes 30 Sep 2026) to pull dollars into India and defend the rupee.</li>
+      <li><b>ECB (external commercial borrowing)</b> — a foreign-currency loan taken by an Indian company; cheap until the rupee falls and repayment gets expensive.</li>
+      <li><b>UFCE (unhedged foreign currency exposure)</b> — an RBI rule forcing banks to hold extra capital against borrowers who haven't hedged their FX debt — which makes unhedged clients expensive for banks.</li>
+      <li><b>EUA (EU emissions allowance)</b> — the tradeable permit price of one tonne of CO2 in Europe; the price CBAM bills are calculated from, and a brand-new hedgeable risk for Indian exporters.</li>
+      <li><b>Natural hedge</b> — when exposures cancel out on their own: ONGC earns dollar-linked revenue, so its dollar costs hurt less.</li>
+    </ul></details>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:6px">Policy guide — each regulation in one breath</div>
+    <details><summary>CBAM — the EU's carbon border tax (live since 1 Jan 2026)</summary><p style="font-size:14px">European factories pay for their CO2 emissions; CBAM makes importers pay the same, so foreign steel can't undercut European steel on carbon. Anyone selling steel, aluminum, cement, fertilizer, hydrogen, or electricity into the EU must count the emissions embedded in their goods and buy certificates priced off the EU carbon market. The liability started accruing 1 Jan 2026; certificates go on sale 1 Feb 2027; the first bill is due 30 Sep 2027. For Indian steel and aluminum exporters this is a new cost line and a new financial risk (the EUA price) their treasuries have never managed. Source: European Commission.</p></details>
+    <details><summary>EUDR — the EU deforestation rule (applies 30 Dec 2026)</summary><p style="font-size:14px">To sell cocoa, coffee, palm oil, rubber, soy, wood, or cattle products in the EU, you must prove — with GPS coordinates of the farm plots — that the land wasn't deforested after 2020. Applies to large companies from 30 Dec 2026 (postponed twice; smaller firms mid-2027). For Indian FMCG and paper exporters this means traceability systems and possibly switching suppliers. Source: Regulation (EU) 2025/2650.</p></details>
+    <details><summary>EU–India FTA — the trade deal (concluded 27 Jan 2026, not yet in force)</summary><p style="font-size:14px">The largest trade agreement either side has ever negotiated: tariffs dismantled both ways across a market of two billion people. Indian pharma, textiles, and auto components gain EU access; EU cars, wines, and machinery gain Indian access. It only takes effect after ratification votes on both sides — that timing is the trigger to watch. Companies whose euro revenue will grow are under-hedged today. Source: European Commission IP/26/184.</p></details>
+    <details><summary>RBI June 2026 package — defending the rupee</summary><p style="font-size:14px">With the rupee near record lows (~95/$), the RBI moved on several fronts: it pays banks' hedging costs on fresh FCNR(B) dollar deposits until 30 Sep 2026 (pulling dollars in), gives state-owned companies cheap currency swaps on foreign loans, banned offshore-style NDF products for residents, and barred the cancel-and-rebook forward habit. Net effect: every large importer's hedging playbook is obsolete and needs re-papering — the single biggest treasury-advisory trigger in this dashboard. Source: RBI, June 2026.</p></details>
+    <details><summary>US Section 232 — metal tariffs (restructured Apr–Jun 2026)</summary><p style="font-size:14px">US national-security tariffs on metals: 50% on goods that are almost entirely steel/aluminum/copper, 25% on metal-heavy derivatives, a temporary 15% on industrial equipment until end-2027, and exemption below 15% metal content. Keeps the US market expensive for Indian metal exporters — pushing volumes toward the EU, where CBAM is waiting. Source: White House proclamations, Apr and Jun 2026.</p></details>
+    <details><summary>China export controls — the refining chokepoint</summary><p style="font-size:14px">China dominates the processing (not necessarily mining) of many critical inputs — ~65–70% of lithium refining, ~90% of graphite, most rare earths, the majority of India's pharma raw materials (APIs). Since 2023 it has progressively required export licenses on several of these. For India this is a supply-security risk that no hedge fixes — only dual sourcing and inventories. Sources: IEA; Dept of Pharmaceuticals.</p></details>
+    <details><summary>India's own levers — gold duty and the carbon market</summary><p style="font-size:14px">India hiked gold import duties in May 2026 explicitly to slow dollar outflows and defend the rupee (gold imports hit a record $72B in FY26 — hitting jewellers like Titan directly). Separately, India's Carbon Credit Trading Scheme (CCTS) is phasing in a domestic carbon price that will eventually reach cement, steel, and power — CBAM logic, applied at home. Sources: CBIC/Commerce Ministry; Ministry of Power.</p></details>
+  </div>
+
   <div class="card">
     <div class="lbl">Six-lens scoring (1 = low risk, 5 = high risk)</div>
     <table class="t">
