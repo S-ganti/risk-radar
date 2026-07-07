@@ -1019,8 +1019,8 @@ function simulate(id) {
   const mx = Math.max(arr[0][2], 0.1);
   document.getElementById('evimp').innerHTML = arr.filter((r,i)=>(i<12 && r[2]>0.05) || r[2]<-0.05).map(r=>{
     const neg = r[2]<0, v = Math.abs(r[2]);
-    return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:340px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:88px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap">${neg?'−':'+'}${v.toFixed(1)}%${neg?' gain':''}</span></div>`;
-  }).join('') + `<p class="meta" style="margin:8px 0 0">* NTPC largely recovers fuel costs through regulated tariffs. Click a company for its deep dive.</p>`;
+    return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:320px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:118px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap">${neg?'tailwind ≈ '+v.toFixed(1)+'%':'+'+v.toFixed(1)+'%'}</span></div>`;
+  }).join('') + `<p class="meta" style="margin:8px 0 0">Red = input costs inflate. Green = net beneficiary: the company produces the shocked commodity, so revenue gains exceed its own cost pressure (magnitude expressed relative to cost base, before hedging, price regulation, or windfall levies). * NTPC largely recovers fuel costs through regulated tariffs. Click a company for its deep dive.</p>`;
   const rows = [];
   for (const co in DATA.products) DATA.products[co].forEach(p => {
     let t = 0; for (const k in p.mix) t += p.mix[k] * (sh[k]||0);
@@ -1090,7 +1090,7 @@ function renderDeep(id) {
   const smx = Math.max(sens[0][1], 0.1);
   sens.forEach(s => {
     const neg = s[1] < 0, v = Math.abs(s[1]);
-    h += `<div class="crow"><span class="cn" style="width:230px">${s[0]}</span><span class="cbar" style="max-width:260px"><span style="width:${Math.min(100,Math.round(v/smx*100))}%;background:${neg?'#1D9E75':v<0.05?'var(--line)':'#E24B4A'}"></span></span><span style="font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap">${neg?'−':'+'}${v.toFixed(1)}%${neg?' gain':''}</span></div>`;
+    h += `<div class="crow"><span class="cn" style="width:230px">${s[0]}</span><span class="cbar" style="max-width:260px"><span style="width:${Math.min(100,Math.round(v/smx*100))}%;background:${neg?'#1D9E75':v<0.05?'var(--line)':'#E24B4A'}"></span></span><span style="font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap">${neg?'tailwind ≈ '+v.toFixed(1)+'%':'+'+v.toFixed(1)+'%'}</span></div>`;
   });
   h += `</div>`;
   document.getElementById('ddout').innerHTML = h;
