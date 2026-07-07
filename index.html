@@ -120,6 +120,7 @@ select.st{padding:3px 6px;border:1px solid var(--line);border-radius:6px;backgro
 <div id="tab-commodities" style="display:none">
   <h2>Commodity interdependency map</h2>
   <p class="sub" style="margin-bottom:10px">Click any commodity to trace what it is made from, what it feeds into, where supply comes from, and which companies depend on it — directly or through the chain. Square color = supply concentration.</p>
+  <div class="card" id="commap" style="overflow-x:auto"></div>
   <div class="grid" id="comgrid"></div>
   <div class="card" id="comdetail"></div>
 </div>
@@ -1040,7 +1041,10 @@ document.getElementById('tab-scenarios').addEventListener('click', e => {
   const dd = e.target.closest('[data-dd]'); if (dd) goDeep(dd.dataset.dd);
 });
 document.getElementById('tab-commodities').addEventListener('click', e => {
-  const cm = e.target.closest('[data-com]'); if (cm) { showCom(cm.dataset.com); return; }
+  const hb = e.target.closest('[data-mmhub]');
+  if (hb) { const hid = 'hub' + hb.dataset.mmhub; MM.sel = MM.sel === hid ? null : hid; renderMindMap(); return; }
+  const cm = e.target.closest('[data-com]');
+  if (cm) { MM.sel = MM.sel === cm.dataset.com ? null : cm.dataset.com; renderMindMap(); showCom(cm.dataset.com); return; }
   const dd = e.target.closest('[data-dd]'); if (dd) goDeep(dd.dataset.dd);
 });
 document.getElementById('tab-deepdive').addEventListener('click', e => {
@@ -1050,12 +1054,96 @@ document.getElementById('panel').addEventListener('click', e => {
   const cm = e.target.closest('[data-com]'); if (cm) { tab('commodities'); showCom(cm.dataset.com); }
 });
 
+const MM = { dep: true, corr: true, org: true, sel: null };
+window.mmToggle = k => { MM[k] = !MM[k]; renderMindMap(); };
+const MMPOS = {
+  crude:[40,60], natgas:[40,120], coal:[40,180],
+  diesel:[210,30], petcoke:[210,85], plastics:[210,140], elec:[210,195],
+  ironore:[40,290], metcoal:[40,350], bauxite:[40,410], limestone:[40,470],
+  steel:[210,290], alum:[210,355], cement:[210,455],
+  poly:[380,150], pallad:[380,225], copper:[380,300],
+  lithium:[550,110], chips:[550,180], tio2:[550,250], api:[550,320],
+  gold:[760,60], diamonds:[760,125],
+  natrub:[340,455], palm:[480,455], coffee:[620,455], cocoa:[760,455],
+  sugar:[340,515], wheat:[480,515], milk:[620,515], tea:[760,515],
+  tobacco:[340,575], pulp:[480,575], sodaash:[620,575]
+};
+const MMCORR = [
+  ['crude','natgas','Energy complex — Asian LNG contracts are oil-indexed'],
+  ['coal','natgas','Power-generation fuel substitution'],
+  ['crude','natrub','Synthetic-rubber substitution ties rubber prices to crude'],
+  ['crude','palm','Biodiesel blending links vegetable oils to crude'],
+  ['crude','sugar','Brazilian ethanol links sugar to crude'],
+  ['ironore','metcoal','Co-move on steel demand'],
+  ['alum','copper','Base-metals complex — shared demand cycle'],
+  ['coffee','cocoa','Softs complex — shared weather shocks'],
+  ['palm','natrub','Southeast Asian acreage and weather overlap'],
+  ['gold','diamonds','Discretionary jewellery demand']
+];
+const MMHUBS = [
+  ['OPEC+ / Gulf',150,2,['crude','natgas']],
+  ['Australia',150,240,['coal','metcoal','ironore']],
+  ['China refining',470,30,['lithium','poly','tio2','api']],
+  ['Russia',700,180,['diamonds','pallad']],
+  ['SE Asia',410,400,['natrub','palm']]
+];
+function renderMindMap() {
+  const NW = 108, NH = 32, sel = MM.sel;
+  const nb = new Set();
+  if (sel) {
+    nb.add(sel);
+    if (MM.dep) for (const k in MMPOS) (DATA.commodities[k][4]||[]).forEach(i => { if (k===sel) nb.add(i); if (i===sel) nb.add(k); });
+    if (MM.corr) MMCORR.forEach(c => { if (c[0]===sel) nb.add(c[1]); if (c[1]===sel) nb.add(c[0]); });
+    if (MM.org) MMHUBS.forEach((h,i) => { if ('hub'+i===sel) h[3].forEach(k=>nb.add(k)); if (h[3].includes(sel)) nb.add('hub'+i); });
+  }
+  const trim = (x1,y1,x2,y2,rw,rh) => { const dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy)||1; const ux=dx/L, uy=dy/L; const o=1/Math.hypot(ux/rw, uy/rh); return [x2-ux*o, y2-uy*o]; };
+  const line = (a,b,style,arrow,title,ids) => {
+    const s = trim(b[0],b[1],a[0],a[1],60,20), e = trim(a[0],a[1],b[0],b[1],60,20);
+    const op = sel ? (ids.indexOf(sel) >= 0 ? 0.9 : 0.06) : 0.55;
+    return `<line x1="${s[0].toFixed(0)}" y1="${s[1].toFixed(0)}" x2="${e[0].toFixed(0)}" y2="${e[1].toFixed(0)}" ${style} opacity="${op}" ${arrow?'marker-end="url(#mmarrow)"':''}>${title?`<title>${title}</title>`:''}</line>`;
+  };
+  const ctr = k => [MMPOS[k][0]+NW/2, MMPOS[k][1]+NH/2];
+  let edges = '';
+  if (MM.dep) for (const k in MMPOS) (DATA.commodities[k][4]||[]).forEach(inp => {
+    if (!MMPOS[inp]) return;
+    edges += line(ctr(inp), ctr(k), 'stroke="var(--ink3)" stroke-width="1.5"', true, `${DATA.commodities[inp][0]} → ${DATA.commodities[k][0]} (processing input)`, [k,inp]);
+  });
+  if (MM.corr) MMCORR.forEach(c => {
+    if (MMPOS[c[0]] && MMPOS[c[1]]) edges += line(ctr(c[0]), ctr(c[1]), 'stroke="#378ADD" stroke-width="1.6" stroke-dasharray="7,4"', false, c[2], [c[0],c[1]]);
+  });
+  let hubs = '';
+  if (MM.org) MMHUBS.forEach((h,i) => {
+    const hc = [h[1]+60, h[2]+12];
+    h[3].forEach(k => { if (MMPOS[k]) edges += line(hc, ctr(k), 'stroke="#BA7517" stroke-width="1.5" stroke-dasharray="2,4"', false, `${h[0]} is a dominant supply origin for ${DATA.commodities[k][0]}`, [k,'hub'+i]); });
+    const hop = sel ? (sel==='hub'+i || h[3].indexOf(sel) >= 0 ? 1 : 0.12) : 1;
+    hubs += `<g data-mmhub="${i}" style="cursor:pointer" opacity="${hop}"><rect x="${h[1]}" y="${h[2]}" width="120" height="24" rx="12" fill="var(--card)" stroke="#BA7517" stroke-dasharray="3,3"/><text x="${h[1]+60}" y="${h[2]+16}" text-anchor="middle" font-size="11" font-weight="600" fill="#BA7517">${h[0]}</text></g>`;
+  });
+  let nodes = '';
+  for (const k in MMPOS) {
+    const m = DATA.commodities[k], p = MMPOS[k];
+    const col = m[2]>=5?'#E24B4A':m[2]>=3?'#BA7517':'#1D9E75';
+    const op = sel ? (nb.has(k) ? 1 : 0.15) : 1;
+    nodes += `<g data-com="${k}" style="cursor:pointer" opacity="${op}"><rect x="${p[0]}" y="${p[1]}" width="${NW}" height="${NH}" rx="6" fill="${col}" fill-opacity="0.13" stroke="${col}" ${k===sel?'stroke-width="2.5"':''}/><text x="${p[0]+NW/2}" y="${p[1]+14}" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--ink)">${m[0].length>17?m[0].slice(0,16)+'…':m[0]}</text><text x="${p[0]+NW/2}" y="${p[1]+26}" text-anchor="middle" font-size="10.5" fill="var(--ink3)">${m[3]}% imported</text></g>`;
+  }
+  const sw = (col,dash) => `<svg width="26" height="8" style="vertical-align:middle"><line x1="0" y1="4" x2="26" y2="4" stroke="${col}" stroke-width="2" ${dash?`stroke-dasharray="${dash}"`:''}/></svg>`;
+  document.getElementById('commap').innerHTML =
+    `<div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--ink2);margin-bottom:8px">
+      <label style="cursor:pointer"><input type="checkbox" ${MM.dep?'checked':''} onchange="mmToggle('dep')"> ${sw('#898781')} supply-chain flow (arrow = becomes)</label>
+      <label style="cursor:pointer"><input type="checkbox" ${MM.corr?'checked':''} onchange="mmToggle('corr')"> ${sw('#378ADD','7,4')} price co-movement</label>
+      <label style="cursor:pointer"><input type="checkbox" ${MM.org?'checked':''} onchange="mmToggle('org')"> ${sw('#BA7517','2,4')} shared supply origin</label>
+      ${sel?`<button class="tabbtn" style="padding:2px 10px;font-size:12px" onclick="MM.sel=null;renderMindMap()">Clear highlight</button>`:''}
+    </div>
+    <svg viewBox="0 0 900 625" width="100%" style="min-width:720px" role="img" aria-label="Relationship map of commodities: supply-chain flows, price co-movement, and shared supply origins"><defs><marker id="mmarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink3)"/></marker></defs>${edges}${hubs}${nodes}</svg>
+    <p class="meta" style="margin:6px 0 0">Click any node to isolate its relationships and open its profile below; hover an edge for the linkage; dashed pills are supply-origin chokepoints. Node color = supply concentration; sublabel = India import dependence. Co-movement links are documented market linkages (fuel substitution, oil-indexed contracts, shared demand complexes) — indicative, not computed correlation coefficients.</p>`;
+}
+
 drawGrid('');
 show('tatasteel');
 renderOverview();
 renderPipeline();
 renderCalendar();
 renderComGrid();
+renderMindMap();
 showCom('crude');
 renderDeep('titan');
 simulate('oil22');
