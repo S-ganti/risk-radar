@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trade policy monitor — company reports</title>
+<style>
+:root{--bg:#faf9f5;--card:#ffffff;--ink:#1a1a19;--ink2:#52514e;--ink3:#898781;--line:rgba(0,0,0,.12);--accent:#185FA5;--red:#A32D2D;--redbg:#FCEBEB;--amber:#854F0B;--amberbg:#FAEEDA;--teal:#0F6E56;--tealbg:#E1F5EE}
+@media(prefers-color-scheme:dark){:root{--bg:#1a1a19;--card:#242423;--ink:#f0efec;--ink2:#c3c2b7;--ink3:#898781;--line:rgba(255,255,255,.14);--accent:#85B7EB;--red:#F09595;--redbg:#501313;--amber:#FAC775;--amberbg:#412402;--teal:#9FE1CB;--tealbg:#04342C}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif;padding:24px}
+.wrap{max-width:960px;margin:0 auto}
+h1{font-size:21px;font-weight:600;margin:0 0 2px}
+h2{font-size:16px;font-weight:600;margin:26px 0 10px}
+.sub{color:var(--ink3);font-size:13px;margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:10px 0}
+.grid{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.co{border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:13px;cursor:pointer;background:var(--card);color:var(--ink)}
+.co:hover{border-color:var(--accent)}
+.co.on{border-color:var(--accent);color:var(--accent);font-weight:600}
+.co .n{color:var(--ink3);font-weight:400;font-size:12px}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:6px;margin-left:8px;vertical-align:2px}
+.b-urgent{background:var(--redbg);color:var(--red)}
+.b-material{background:var(--amberbg);color:var(--amber)}
+.b-watch{background:var(--tealbg);color:var(--teal)}
+.b-none{background:var(--tealbg);color:var(--teal)}
+.pill{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:6px;padding:2px 9px;margin:2px 4px 2px 0;color:var(--ink2)}
+.lbl{font-size:12px;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em;margin:14px 0 4px;font-weight:600}
+.svc{border-left:3px solid var(--accent);padding:2px 0 2px 12px;margin:8px 0;font-size:14px}
+ol,ul{margin:6px 0;padding-left:22px}
+li{margin:6px 0}
+a{color:var(--accent);word-break:break-all}
+input[type=search]{width:100%;max-width:420px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:14px}
+.meta{font-size:12px;color:var(--ink3)}
+details{margin:8px 0}
+summary{cursor:pointer;font-weight:600;font-size:14px}
+.cite{font-size:12px;color:var(--ink3)}
+.crow{display:flex;align-items:center;gap:10px;font-size:13px;margin:5px 0}
+.crow .cn{width:150px;text-align:right}
+.cbar{flex:1;height:10px;background:var(--bg);border:1px solid var(--line);border-radius:3px;overflow:hidden;max-width:180px}
+.cbar span{display:block;height:100%;background:var(--accent)}
+.tag{font-size:11px;font-weight:600;padding:1px 8px;border-radius:5px;white-space:nowrap}
+.mrow{display:flex;flex-wrap:wrap;gap:20px;margin:10px 0;font-size:13px;color:var(--ink2)}
+.mrow b{color:var(--ink);font-weight:600;font-size:15px}
+.cdot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:7px;vertical-align:0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0 14px}
+.tabbtn{border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:8px;padding:6px 14px;font-size:13px;cursor:pointer;font-weight:600}
+.tabbtn.on{color:var(--accent);border-color:var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:12px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{font-size:22px;font-weight:600;display:block}
+.kpi span{font-size:12px;color:var(--ink3)}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+.t th{text-align:left;color:var(--ink3);font-size:12px;font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}
+.t td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.t tr[data-go]{cursor:pointer}
+.t tr[data-go]:hover td{background:var(--bg)}
+select.st{padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font-size:12px}
+@media print{body.brief .wrap>*:not(#tab-companies){display:none!important}body.brief #tab-companies>*:not(#panel){display:none!important}body{background:#fff}.no-print{display:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Commodity &amp; treasury risk radar — India large caps</h1>
+<p class="sub">Strategy &amp; risk accelerator: weekly policy monitoring, six-lens company risk assessment, and a live engagement pipeline for commodity and treasury advisory. Public official sources and company disclosures only. Latest cycle: <span id="lastcycle"></span> — regenerated weekly by a six-agent pipeline (planner → document scout → risk analyst → company mapper → rival monitor → service mapper).</p>
+
+<div class="card" id="live">
+  <div style="font-weight:600">Live market tracking <span class="meta" id="livestatus">connecting…</span></div>
+  <div class="mrow" id="liverates"></div>
+  <div id="livesignal" style="font-size:13px;color:var(--ink2)"></div>
+</div>
+
+<div class="tabs no-print">
+  <button class="tabbtn on" data-tab="overview">Overview</button>
+  <button class="tabbtn" data-tab="companies">Companies</button>
+  <button class="tabbtn" data-tab="pipeline">Pipeline</button>
+  <button class="tabbtn" data-tab="calendar">Calendar</button>
+  <button class="tabbtn" data-tab="cycles">Weekly cycles</button>
+  <button class="tabbtn" data-tab="methodology">Methodology</button>
+</div>
+
+<div id="tab-overview">
+  <div class="kpis" id="kpis"></div>
+  <h2>Priority targets</h2>
+  <div class="card" style="overflow-x:auto"><table class="t" id="toptargets"></table></div>
+  <h2>Next hard dates</h2>
+  <div class="card" id="minical"></div>
+</div>
+
+<div id="tab-companies" style="display:none">
+<p class="sub" style="margin-bottom:10px">Colored square = overall balanced risk across six lenses · badge = policy impact status from the latest cycle. Click a company for its full brief.</p>
+<input type="search" id="q" placeholder="Filter companies — Titan, Tata Steel, HUL…">
+<div class="grid" id="cogrid"></div>
+
+<div id="panel"></div>
+</div>
+
+<div id="tab-pipeline" style="display:none">
+  <h2>Engagement pipeline</h2>
+  <p class="sub" style="margin-bottom:10px">Opportunities generated by the service-mapper agent from the latest cycle. Pursuit status is saved locally in this browser and survives weekly regeneration.</p>
+  <div class="card" style="overflow-x:auto"><table class="t" id="pipetable"></table></div>
+</div>
+
+<div id="tab-calendar" style="display:none">
+  <h2>Regulatory calendar</h2>
+  <p class="sub" style="margin-bottom:10px">Hard dates from official documents; countdowns computed live each time the file opens.</p>
+  <div class="card" style="overflow-x:auto"><table class="t" id="caltable"></table></div>
+</div>
+
+<div id="tab-cycles" style="display:none">
+<h2>Cycle reports</h2>
+<div id="cycles"></div>
+</div>
+
+<div id="tab-methodology" style="display:none">
+  <h2>Methodology</h2>
+  <div class="card">
+    <div class="lbl">Six-lens scoring (1 = low risk, 5 = high risk)</div>
+    <table class="t">
+      <tr><th>Lens</th><th>How it is scored</th></tr>
+      <tr><td>Commodity</td><td>Computed: Σ (cost-base weight × 0.4 supply concentration + 0.4 India import share + 0.2 price volatility). Weights from annual reports where disclosed, otherwise labeled estimates; concentration and import shares from USGS, PPAC, IEA, USDA, ICCO, Ministry of Steel.</td></tr>
+      <tr><td>Policy</td><td>Computed from the latest weekly cycle's impact status (urgent 5, material 4, watch 3, none 1). Official documents only.</td></tr>
+      <tr><td>Currency</td><td>Qualitative rating from disclosed FX structures: foreign-currency debt, royalty flows, revenue/cost currency mismatch.</td></tr>
+      <tr><td>Financial</td><td>Qualitative rating from disclosed balance-sheet posture (net cash vs capex leverage vs refinancing dependence).</td></tr>
+      <tr><td>Concentration</td><td>Qualitative rating: product, customer, geography, or single-segment profit dependence per segment disclosures.</td></tr>
+      <tr><td>Transition</td><td>Qualitative rating: decarbonization exposure, technology shifts, documented competitive disruption.</td></tr>
+    </table>
+    <div class="lbl">Data pipeline</div>
+    <p style="font-size:14px">A six-agent weekly cycle (planner → document scout → risk analyst → company mapper → rival monitor → service mapper) scans EUR-Lex, European Commission DGs, Consilium, RBI, DGFT, CBIC, PIB, WTO, USTR, Federal Register, and exchange filings. Reasoning is recorded before conclusions in each cycle JSON. Secondary sources are tagged and queued for primary retrieval. Live market data: open.er-api.com / frankfurter.dev (ECB) / gold-api.com, fetched client-side on open with an embedded dated snapshot as fallback.</p>
+    <div class="lbl">Caveats</div>
+    <ul style="font-size:14px">
+      <li>Company cost-share weights are estimates where issuers do not disclose input-cost breakdowns; anchored figures cite their filing.</li>
+      <li>Qualitative lens scores are structured judgments from public facts — a prioritization layer, not measurements.</li>
+      <li>Scenario mathematics assume 50% cost pass-through per processing step, no hedging or inventories — structural exposure, not price forecasts.</li>
+    </ul>
+    <p class="meta">Illustrative analysis assembled from public official sources and company disclosures for internal business development. Not audit evidence, investment research, or client advice. Verify primary sources before any external use.</p>
+  </div>
+</div>
+
+<p class="meta no-print" style="margin-top:28px;border-top:1px solid var(--line);padding-top:12px">Internal working tool — illustrative analysis from public sources. Not client advice. Pursuit statuses are stored only in this browser.</p>
+
+<script>
+const DATA = {
+  companies: [
+    {"id":"reliance","name":"Reliance Industries","sector":"Energy, petchem, retail, telecom"},
+    {"id":"tcs","name":"TCS","sector":"IT services"},
+    {"id":"hdfcbank","name":"HDFC Bank","sector":"Banking"},
+    {"id":"bhartiairtel","name":"Bharti Airtel","sector":"Telecom"},
+    {"id":"icicibank","name":"ICICI Bank","sector":"Banking"},
+    {"id":"sbi","name":"State Bank of India","sector":"Banking"},
+    {"id":"infosys","name":"Infosys","sector":"IT services"},
+    {"id":"hul","name":"Hindustan Unilever","sector":"FMCG"},
+    {"id":"itc","name":"ITC","sector":"FMCG, tobacco, paper"},
+    {"id":"lic","name":"LIC","sector":"Insurance"},
+    {"id":"bajajfinance","name":"Bajaj Finance","sector":"NBFC"},
+    {"id":"bajajfinserv","name":"Bajaj Finserv","sector":"Financial services"},
+    {"id":"lt","name":"Larsen & Toubro","sector":"Engineering and construction"},
+    {"id":"hcltech","name":"HCL Tech","sector":"IT services"},
+    {"id":"kotakbank","name":"Kotak Mahindra Bank","sector":"Banking"},
+    {"id":"sunpharma","name":"Sun Pharma","sector":"Pharmaceuticals"},
+    {"id":"maruti","name":"Maruti Suzuki","sector":"Automotive"},
+    {"id":"mm","name":"Mahindra & Mahindra","sector":"Automotive and farm"},
+    {"id":"ultratech","name":"UltraTech Cement","sector":"Cement"},
+    {"id":"axisbank","name":"Axis Bank","sector":"Banking"},
+    {"id":"ntpc","name":"NTPC","sector":"Power generation"},
+    {"id":"titan","name":"Titan","sector":"Jewellery and watches"},
+    {"id":"adaniports","name":"Adani Ports","sector":"Ports and logistics"},
+    {"id":"wipro","name":"Wipro","sector":"IT services"},
+    {"id":"tatamotors","name":"Tata Motors","sector":"Automotive"},
+    {"id":"tatasteel","name":"Tata Steel","sector":"Steelmaking"},
+    {"id":"jswsteel","name":"JSW Steel","sector":"Steelmaking"},
+    {"id":"hindalco","name":"Hindalco","sector":"Aluminum and copper"},
+    {"id":"nestleindia","name":"Nestlé India","sector":"Food"},
+    {"id":"asianpaints","name":"Asian Paints","sector":"Paints"},
+    {"id":"coalindia","name":"Coal India","sector":"Mining"},
+    {"id":"powergrid","name":"Power Grid","sector":"Transmission"},
+    {"id":"adanient","name":"Adani Enterprises","sector":"Incubator, coal trading, solar"},
+    {"id":"ongc","name":"ONGC","sector":"Oil and gas production"}
+  ],
+  commodities: {
+    "crude":["Crude oil",4,4,89],"natgas":["Natural gas",5,4,50],"coal":["Thermal coal",4,3,25],"metcoal":["Coking coal",5,4,85],
+    "elec":["Electricity",3,2,0],"plastics":["Plastics and resins",3,2,20],"diesel":["Diesel and freight fuel",4,3,0],"petcoke":["Petcoke",4,3,35],
+    "natrub":["Natural rubber",4,4,40],"ironore":["Iron ore",4,2,0],"steel":["Steel",3,3,5],"bauxite":["Bauxite",3,3,0],
+    "alum":["Aluminum",4,3,10],"copper":["Copper",4,3,45],"lithium":["Lithium",5,4,100],"chips":["Semiconductors",3,4,95],
+    "poly":["Polysilicon",4,4,100],"pallad":["Palladium",5,5,100],"gold":["Gold",3,2,99],"diamonds":["Rough diamonds",3,4,100],
+    "limestone":["Limestone",1,1,0],"cement":["Cement",2,1,0],"tio2":["Titanium dioxide",3,4,60],"api":["Pharma APIs and KSMs",3,5,70],
+    "tobacco":["Leaf tobacco",2,1,0],"tea":["Tea",3,2,0],"pulp":["Pulp and paperboard",3,2,50],"sodaash":["Soda ash",3,2,25],
+    "milk":["Dairy",3,1,0],"wheat":["Wheat",4,2,0],"sugar":["Sugar",4,2,0],"cocoa":["Cocoa",5,4,75],
+    "coffee":["Coffee",5,2,0],"palm":["Palm oil",4,4,96]
+  },
+  deps: {
+    "reliance":{"crude":0.50,"natgas":0.04},
+    "bhartiairtel":{"elec":0.05,"diesel":0.03,"chips":0.02,"copper":0.01},
+    "hul":{"palm":0.12,"plastics":0.06,"tea":0.05,"sodaash":0.02,"milk":0.02},
+    "itc":{"tobacco":0.08,"wheat":0.06,"pulp":0.05,"palm":0.03,"plastics":0.03,"milk":0.02},
+    "lt":{"steel":0.12,"cement":0.08,"diesel":0.04,"copper":0.03,"alum":0.02},
+    "sunpharma":{"api":0.18,"plastics":0.03},
+    "maruti":{"steel":0.14,"plastics":0.07,"alum":0.05,"chips":0.05,"copper":0.03,"pallad":0.02,"natrub":0.01},
+    "mm":{"steel":0.13,"plastics":0.06,"chips":0.05,"alum":0.04,"copper":0.03,"natrub":0.01},
+    "ultratech":{"coal":0.12,"petcoke":0.10,"limestone":0.06,"diesel":0.06,"elec":0.06},
+    "ntpc":{"coal":0.55,"natgas":0.03},
+    "titan":{"gold":0.55,"diamonds":0.08},
+    "adaniports":{"diesel":0.05,"elec":0.03},
+    "tatamotors":{"steel":0.12,"chips":0.06,"plastics":0.06,"alum":0.05,"copper":0.03,"lithium":0.02,"pallad":0.02,"natrub":0.01},
+    "tatasteel":{"metcoal":0.25,"elec":0.06,"ironore":0.05,"natgas":0.02},
+    "jswsteel":{"metcoal":0.25,"ironore":0.22,"elec":0.06},
+    "hindalco":{"alum":0.20,"coal":0.15,"bauxite":0.05},
+    "nestleindia":{"milk":0.18,"wheat":0.05,"palm":0.04,"sugar":0.04,"cocoa":0.04,"coffee":0.03,"plastics":0.04},
+    "asianpaints":{"tio2":0.18,"plastics":0.15,"diesel":0.02},
+    "coalindia":{"diesel":0.08,"elec":0.02},
+    "powergrid":{"alum":0.03,"steel":0.03},
+    "adanient":{"coal":0.15,"diesel":0.03,"poly":0.03},
+    "ongc":{"diesel":0.04,"steel":0.03}
+  },
+  anchors: {
+    "reliance":"O2C is the largest segment and crude the dominant cost (AR FY25). India imports 88.6% of its crude (PPAC).",
+    "bhartiairtel":"Network energy (grid + tower diesel) is a disclosed cost line; imported electronics embed chip exposure.",
+    "hul":"AR flags palm-oil derivatives and crude-linked chemicals as key input-cost drivers; India is the world's largest palm importer.",
+    "itc":"AR names leaf tobacco, wheat, paperboard pulp, and edible oils as principal inputs; shares estimated.",
+    "lt":"Steel and cement are the largest bought-out EPC materials (AR commentary); contracts often carry escalation clauses.",
+    "sunpharma":"India imports ≥70% of many APIs/KSMs from China (Dept of Pharmaceuticals, 2026); in-house API plants partially offset.",
+    "maruti":"Raw materials ≈ 75% of net sales (AR); steel largest. 2021 chip shortage forced production cuts.",
+    "mm":"Estimated: AR names steel, aluminum, and semiconductors as key inputs; cost shares not disclosed.",
+    "ultratech":"Energy (coal/petcoke) plus freight (diesel) ≈ half of cement cost (AR commentary); captive limestone.",
+    "ntpc":"Fuel ≈ 60% of expenses but regulated tariffs pass fuel costs through to DISCOMs (AR).",
+    "titan":"Jewellery ≈ 90% of revenue (AR); gold dominant. Record $72B national gold imports FY2025-26; duty hiked May 2026.",
+    "adaniports":"Fuel and power are the main commodity inputs; low overall intensity.",
+    "tatamotors":"Steel largest input (AR); JLR lost ~100k units to the 2021 chip shortage; EVs add lithium exposure.",
+    "tatasteel":"Captive mines cover ~100% of Indian iron-ore needs; coking coal ~85% imported (Ministry of Steel). Produces steel — partly a price beneficiary.",
+    "jswsteel":"Limited captive ore — buys iron ore domestically, imports most coking coal (AR). Produces steel.",
+    "hindalco":"Smelters run on captive coal power; Novelis largely passes aluminum prices through (AR). Produces aluminum.",
+    "nestleindia":"AR: fresh milk is the largest raw material; cocoa and coffee cost pressure flagged in FY2024-25.",
+    "asianpaints":"Raw materials ≈ 55-60% of revenue (AR); TiO2 and crude-linked monomers dominate; TiO2 substantially imported.",
+    "coalindia":"World's largest coal miner; diesel for mining equipment is the main input. Produces coal — beneficiary of coal spikes.",
+    "powergrid":"Conductor metals matter for capex, not opex; regulated returns limit commodity risk.",
+    "adanient":"Coal trading (IRM) legacy business; solar module manufacturing adds polysilicon exposure.",
+    "ongc":"India's largest oil and gas producer — net beneficiary of energy price spikes; realizations track Brent.",
+    "_default":"No material direct commodity inputs. Exposure is indirect — via loan books, client sectors, or investment portfolios."
+  },
+  watch: {
+    "reliance":[
+      {"t":"FX / funding","w":"Large USD borrowing program plus a crude import bill priced in USD — INR depreciation hits both debt service and working capital at once (AR).","a":"Pitch a consolidated FX-book review under the RBI 2026 cancel/rebook rules — few corporates have re-papered a book this size yet."},
+      {"t":"Margin cyclicality","w":"O2C earnings swing with refining cracks and petchem spreads; product export levies have been imposed and removed episodically since 2022.","a":"Propose crack-spread hedging plus a levy-reintroduction scenario playbook for the export book."}
+    ],
+    "tcs":[
+      {"t":"FX / concentration","w":"USD revenue ~half of book, BFSI clients ~30% of revenue (investor factsheet); INR strength compresses margin guidance.","a":"Receivables-hedging optimization: layered forward program tuned to the new NDF restrictions — low commodity risk does not mean low treasury need."}
+    ],
+    "infosys":[
+      {"t":"FX / concentration","w":"US-heavy revenue and BFSI concentration mirror TCS; margin guidance is FX-sensitive (AR).","a":"Same receivables-hedging play; differentiate with volatility-regime triggers rather than static hedge ratios."}
+    ],
+    "hcltech":[{"t":"FX","w":"USD/EUR service exports with INR cost base; translation risk on guidance (AR).","a":"Layered receivables hedge review."}],
+    "wipro":[{"t":"FX","w":"Same exporter profile; additionally mid-cycle restructuring pressure on margins.","a":"Hedge-ratio audit against peers as a benchmarking pitch."}],
+    "hdfcbank":[
+      {"t":"Regulatory / channel","w":"RBI's unhedged foreign currency exposure (UFCE) framework forces banks to collect borrower hedging data and hold capital against unhedged clients.","a":"Channel play: offer borrower-facing hedge audits that reduce the bank's UFCE provisioning — the bank sources clients, you deliver."},
+      {"t":"Concentration","w":"Commodity-sector loan exposure (steel, power, infra) makes credit costs cyclical with commodity prices.","a":"Sector stress-testing service for the credit risk team using the commodity dependency data in this dashboard."}
+    ],
+    "icicibank":[{"t":"Regulatory / channel","w":"Same UFCE data-collection burden on corporate borrowers.","a":"Same channel play — borrower hedge audits co-branded with the bank."}],
+    "sbi":[{"t":"Regulatory / channel","w":"Largest corporate loan book — biggest UFCE surface and PSU borrower base.","a":"UFCE audit channel play at scale; PSU ECB swap-window advisory (RBI June 2026) for its borrowers."}],
+    "kotakbank":[{"t":"Channel","w":"Smaller corporate book; treasury products for mid-caps are a growth push.","a":"White-label hedging advisory for mid-cap clients the big banks underserve."}],
+    "axisbank":[{"t":"Regulatory / channel","w":"UFCE framework as above.","a":"Borrower hedge-audit channel play."}],
+    "lic":[{"t":"Concentration","w":"Outsized single-name equity positions and sovereign-linked mandate; limited commodity/FX advisory surface.","a":"Low priority — monitor only."}],
+    "bajajfinance":[{"t":"Funding","w":"Wholesale funding cost sensitivity to rate cycles; no commodity surface.","a":"Low priority — monitor only."}],
+    "bajajfinserv":[{"t":"Funding","w":"Holding-company structure; exposure via lending/insurance arms.","a":"Low priority — monitor only."}],
+    "bhartiairtel":[
+      {"t":"FX","w":"USD debt against INR/African-currency revenues; Nigerian naira and other African devaluations have repeatedly hit reported earnings (AR segment disclosures).","a":"Africa currency-risk framework: exposure mapping and proxy-hedge design where local markets are illiquid."},
+      {"t":"Capex","w":"5G/network capex is import-heavy (equipment, chips) and USD-priced.","a":"Hedge the capex import schedule, not just opex — a commonly missed book."}
+    ],
+    "hul":[
+      {"t":"FX / royalty","w":"Royalty and central-service fees to Unilever plc are GBP-linked and stepped up in recent years (disclosed); palm import bill is USD-priced.","a":"Combine palm+INR hedging with a royalty FX plan — one integrated cost-line review."},
+      {"t":"Demand","w":"Rural volumes track monsoon and food inflation (management commentary).","a":"Monsoon-scenario stress tests linking commodity costs, pricing power, and FX."}
+    ],
+    "itc":[
+      {"t":"Regulatory","w":"Majority of profit still from cigarettes — GST/compensation-cess changes are a recurring budget risk (AR segment data).","a":"Tax-shock scenario planning tied to cash-flow hedging of the agri/paper export book."},
+      {"t":"Policy","w":"EUDR due-diligence on paper and agri exports from 30 Dec 2026.","a":"EUDR compliance costing with FX overlay (already in the service map)."}
+    ],
+    "lt":[
+      {"t":"FX / orders","w":"Middle East hydrocarbon orders are a large order-book share — oil-price dependent, with AED/SAR/USD receivables (AR order-book disclosures).","a":"Project-currency hedging plus an escalation-clause audit across live EPC contracts."},
+      {"t":"Working capital","w":"EPC working-capital cycles stretch when clients defer milestones.","a":"Milestone-linked hedge laddering."}
+    ],
+    "sunpharma":[
+      {"t":"Regulatory","w":"US FDA inspection risk at key plants is a recurring, documented earnings risk (past warning letters disclosed); US is the largest market.","a":"FX contingency planning for remediation-cost scenarios; EUR build-out plan for the FTA opening."},
+      {"t":"Supply chain","w":"China API/KSM dependence (≥70% for many molecules — DoP 2026).","a":"Dual-sourcing cost model with currency overlay (CNY vs INR vs domestic PLI)."}
+    ],
+    "maruti":[
+      {"t":"FX","w":"JPY royalty to Suzuki plus JPY-linked component imports — a disclosed, structural INR/JPY exposure most peers do not carry.","a":"JPY hedge-program review under the new RBI derivative rules — a precise, differentiated pitch."},
+      {"t":"Demand / transition","w":"Small-car demand weakness and a late EV ramp are public strategy risks.","a":"Capex-FX planning for the EV/battery import phase."}
+    ],
+    "mm":[
+      {"t":"Climate / demand","w":"Tractor sales are monsoon-linked (disclosed cyclicality).","a":"Monsoon-scenario revenue stress tests tied to input-cost hedging."},
+      {"t":"Transition","w":"EV ramp needs imported cells (battery, lithium chain).","a":"Battery import hedge design."}
+    ],
+    "ultratech":[
+      {"t":"Energy / carbon","w":"Petcoke/coal and freight dominate costs; India's CCTS carbon market is being phased in — a future domestic carbon cost (official scheme).","a":"Fuel-mix hedging plus carbon-cost readiness — position before CCTS obligations bite."},
+      {"t":"Capex","w":"Aggressive capacity expansion keeps the balance sheet working.","a":"Financing-mix and rate-hedge review."}
+    ],
+    "ntpc":[
+      {"t":"Transition / funding","w":"Renewable pivot is funded partly via USD/green bonds while coal assets face long-run displacement (AR).","a":"Green-bond FX hedging advisory for the renewables subsidiary."},
+      {"t":"Regulatory","w":"Fuel cost passes through, but capacity-charge recovery depends on plant availability and DISCOM payment discipline.","a":"Receivables-risk monitoring — smaller opportunity."}
+    ],
+    "titan":[
+      {"t":"Commodity / FX","w":"Gold-on-lease funding leaves lease-rate and duty-change exposure; May 2026 duty hike proves the policy risk is live.","a":"Gold hedging architecture review (lease vs futures vs options) plus a duty-shock playbook — flagship pitch."},
+      {"t":"Competition","w":"Lab-grown diamonds are pressuring the studded-jewellery mix (public industry data).","a":"Margin-mix stress test combining diamond demand and gold price scenarios."}
+    ],
+    "adaniports":[
+      {"t":"Funding / FX","w":"USD bond maturities against INR cash flows; group-level governance episodes (2023) raised refinancing spreads (public).","a":"Refinancing-window FX hedge scheduling ahead of maturities."},
+      {"t":"Trade flows","w":"Transshipment volumes sensitive to Red Sea/route disruptions (public 2024 episode).","a":"Volume-linked revenue stress scenarios."}
+    ],
+    "tatamotors":[
+      {"t":"FX / structure","w":"JLR carries GBP costs against EUR/USD/CNY revenues, and the 2025 CV/PV demerger re-cut every treasury book (public).","a":"Post-demerger multi-currency hedge redesign — a natural, time-boxed mandate."},
+      {"t":"Demand","w":"JLR China demand weakness is a recurring earnings risk (quarterly disclosures).","a":"CNY revenue-at-risk quantification."}
+    ],
+    "tatasteel":[
+      {"t":"Funding / transition","w":"UK Port Talbot EAF transition (government-supported) and Dutch operations keep EUR/GBP funding and restructuring costs on the book (public, AR).","a":"EUR/GBP funding hedge plus CBAM certificate cash-flow planning to 2027 — combined pitch."},
+      {"t":"Commodity","w":"Coking-coal import bill (~85% imported) against INR.","a":"Coking coal + INR combined hedge (already in service map)."}
+    ],
+    "jswsteel":[
+      {"t":"Funding","w":"Capex-heavy growth funded partly by USD bonds — leverage plus FX rollover risk (AR).","a":"Refinancing-window hedge design; map bond maturities to export cash flows."},
+      {"t":"Supply","w":"No large captive ore — spot iron-ore exposure on top of imported coal.","a":"Dual-commodity hedge overlay."}
+    ],
+    "hindalco":[
+      {"t":"Structure / FX","w":"Novelis carries USD debt and US/EU demand exposure; scrap spreads drive its margin (AR).","a":"Consolidated group exposure map: LME aluminum, scrap spreads, USD debt — most reviews treat these separately."}
+    ],
+    "nestleindia":[
+      {"t":"FX / royalty","w":"Royalty to Nestlé SA is CHF-linked and was publicly contested by shareholders (2024); cocoa/coffee import inflation hit FY25 margins (commentary).","a":"CHF royalty hedge plus import-basket program — specific and current."}
+    ],
+    "asianpaints":[
+      {"t":"Competition","w":"Grasim's Birla Opus entry triggered a price war — margin compression is public and ongoing.","a":"Input-cost hedging matters more when pricing power is gone: TiO2+crude+INR program pitched as margin defense."}
+    ],
+    "coalindia":[
+      {"t":"Transition","w":"Long-run thermal displacement by renewables; wage settlements are the main cost swing (AR).","a":"Limited treasury surface — monitor; diesel hedge is the only near-term item."}
+    ],
+    "powergrid":[
+      {"t":"Rates","w":"Regulated returns make borrowing cost the main sensitivity; heavy transmission capex pipeline (AR).","a":"Rate-hedge review on the borrowing program — modest opportunity."}
+    ],
+    "adanient":[
+      {"t":"Funding","w":"Incubator model funds airports/solar/roads with USD-heavy debt against INR cash flows (AR).","a":"Project-finance FX structuring per incubated vertical."},
+      {"t":"Policy","w":"Solar module economics swing with customs duties and PLI terms (official notifications).","a":"Duty-scenario cost model for the solar supply chain."}
+    ],
+    "ongc":[
+      {"t":"Regulatory","w":"APM gas price caps and episodic windfall levies compress realizations regardless of Brent (official notifications).","a":"Realization hedging within policy bands; ECB swap-window advisory (RBI June 2026) — time-limited."}
+    ]
+  },
+  snapshot: {date:"7 Jul 2026", usdinr:95.4, gold:4148, brent:72.1, note:"Rupee 2026 range 89.9-96.6; gold +25.6% y/y; Brent +3.6% y/y (Trading Economics / exchangerates.org.uk, 7 Jul 2026)"},
+  lenses: {
+    "reliance":{fx:[4,"USD debt program plus USD-priced crude bill (AR)"],fin:[2,"Deleveraged since 2021; strong FCF"],conc:[2,"Diversified: O2C, retail, Jio"],trans:[3,"O2C long-run transition; new-energy build underway"]},
+    "tcs":{fx:[3,"USD receivables vs INR costs — translation swings guidance"],fin:[1,"Net cash"],conc:[3,"BFSI ~30% of revenue (factsheet)"],trans:[2,"GenAI pricing-model disruption watch"]},
+    "hdfcbank":{fx:[2,"Institutionally hedged"],fin:[3,"Post-merger funding mix still normalizing"],conc:[3,"Mortgage-heavy book"],trans:[2,"Fintech competition"]},
+    "bhartiairtel":{fx:[4,"USD debt; African currency earnings (naira episodes disclosed)"],fin:[3,"Deleveraging but capex-heavy"],conc:[2,"India + Africa spread"],trans:[2,"Technology refresh cycles"]},
+    "icicibank":{fx:[2,"Institutionally hedged"],fin:[2,"Strong capital"],conc:[3,"Domestic credit cycle"],trans:[2,"Fintech competition"]},
+    "sbi":{fx:[2,"Institutionally hedged"],fin:[3,"PSU capital-raise cycles"],conc:[3,"Largest corporate book — commodity sector credit"],trans:[2,"Fintech competition"]},
+    "infosys":{fx:[3,"USD/EUR receivables"],fin:[1,"Net cash"],conc:[3,"BFSI concentration"],trans:[2,"GenAI disruption watch"]},
+    "hul":{fx:[3,"USD palm bill + GBP-linked royalty (disclosed)"],fin:[1,"Net cash"],conc:[2,"Broad category spread"],trans:[2,"Rural demand cyclicality"]},
+    "itc":{fx:[2,"Modest net FX book"],fin:[1,"Net cash"],conc:[4,"Cigarettes still the profit engine (segment data)"],trans:[3,"Tobacco secular decline; FMCG pivot ongoing"]},
+    "lic":{fx:[2,"Domestic liabilities"],fin:[2,"Sovereign-linked"],conc:[4,"Outsized single-name equity positions"],trans:[2,"Private insurer share gains"]},
+    "bajajfinance":{fx:[2,"Domestic book"],fin:[3,"Wholesale funding cost cycle"],conc:[3,"Consumer credit cycle"],trans:[2,"Fintech competition"]},
+    "bajajfinserv":{fx:[2,"Domestic"],fin:[3,"Holding structure"],conc:[3,"Arms' cycles correlated"],trans:[2,"Competition"]},
+    "lt":{fx:[3,"Gulf receivables (AED/SAR/USD) on hydrocarbon orders"],fin:[2,"Working-capital cycles"],conc:[3,"Middle East hydrocarbon order share"],trans:[2,"Green EPC pipeline building"]},
+    "hcltech":{fx:[3,"USD/EUR receivables"],fin:[1,"Net cash"],conc:[3,"Client concentration typical of IT"],trans:[2,"GenAI watch"]},
+    "kotakbank":{fx:[2,"Institutionally hedged"],fin:[2,"Conservative underwriting"],conc:[3,"Domestic cycle"],trans:[2,"Competition"]},
+    "sunpharma":{fx:[3,"US revenue dominant; CNY-linked API costs"],fin:[1,"Net cash"],conc:[3,"US specialty portfolio weight"],trans:[3,"FDA inspection history; generic price erosion"]},
+    "maruti":{fx:[4,"JPY royalty + JPY component imports (AR) — structural"],fin:[1,"Net cash"],conc:[3,"Small-car mix in a SUV market"],trans:[4,"Late EV ramp; hybrid bridge strategy"]},
+    "mm":{fx:[2,"Moderate import book"],fin:[2,"Comfortable leverage"],conc:[3,"Tractor cycle is monsoon-linked"],trans:[3,"EV cell imports; farm-cycle swings"]},
+    "ultratech":{fx:[3,"USD petcoke/coal imports"],fin:[3,"Expansion capex on the balance sheet"],conc:[2,"Pan-India spread"],trans:[4,"Carbon intensity; India CCTS obligations coming"]},
+    "axisbank":{fx:[2,"Institutionally hedged"],fin:[3,"Capital adequate, cost of funds cyclical"],conc:[3,"Domestic cycle"],trans:[2,"Competition"]},
+    "ntpc":{fx:[3,"USD/green bond funding for RE pivot"],fin:[3,"Regulated leverage — high but stable"],conc:[3,"Coal fleet dominance"],trans:[4,"Coal-to-renewables pivot execution risk"]},
+    "titan":{fx:[4,"Gold ~99% imported; duty-change shocks (May 2026 live)"],fin:[2,"Gold-on-lease funding structure"],conc:[3,"Jewellery ~90% of revenue"],trans:[3,"Lab-grown diamond pressure on studded mix"]},
+    "adaniports":{fx:[4,"USD bonds vs INR cash flows"],fin:[3,"Group refinancing spread episodes (2023, public)"],conc:[2,"Diversified cargo and coasts"],trans:[2,"Route disruption sensitivity"]},
+    "wipro":{fx:[3,"USD receivables"],fin:[1,"Net cash"],conc:[3,"Client concentration"],trans:[3,"Growth lag vs peers"]},
+    "tatamotors":{fx:[5,"JLR: GBP costs vs EUR/USD/CNY revenues; multi-currency book (AR)"],fin:[2,"Auto net debt cleared FY25 (disclosed)"],conc:[4,"JLR dominates earnings"],trans:[4,"JLR EV transition + Sep 2025 cyberattack recovery (public)"]},
+    "tatasteel":{fx:[4,"EUR/GBP funding + USD coking coal"],fin:[3,"European restructuring costs (Port Talbot EAF, public)"],conc:[3,"Europe drag vs India strength"],trans:[5,"EAF conversion + CBAM compliance to 2027"]},
+    "jswsteel":{fx:[4,"USD bonds + USD coal imports"],fin:[4,"Capex-led leverage (AR)"],conc:[3,"Domestic steel cycle"],trans:[4,"Carbon intensity + CBAM on EU exports"]},
+    "hindalco":{fx:[4,"Novelis USD debt; LME-priced flows"],fin:[3,"Novelis leverage"],conc:[3,"Novelis ~2/3 of EBITDA"],trans:[3,"Smelter coal power vs decarbonization"]},
+    "nestleindia":{fx:[3,"CHF-linked royalty + cocoa/coffee imports"],fin:[1,"Net cash"],conc:[3,"Few mega-brands drive profit"],trans:[2,"Nutrition regulation watch"]},
+    "asianpaints":{fx:[3,"TiO2 + crude-derivative imports"],fin:[1,"Net cash"],conc:[3,"Decorative paint core"],trans:[4,"Birla Opus price war compressing margins (public)"]},
+    "coalindia":{fx:[1,"Domestic revenue and costs"],fin:[1,"Cash-rich"],conc:[4,"Single commodity"],trans:[5,"Structural thermal-coal decline"]},
+    "powergrid":{fx:[2,"Mostly INR borrowing"],fin:[3,"Regulated leverage"],conc:[3,"Single network business (also a moat)"],trans:[2,"Grid buildout is transition-aligned"]},
+    "adanient":{fx:[4,"USD-heavy project debt vs INR cash flows"],fin:[4,"Incubation leverage across verticals"],conc:[3,"Multiple early-stage bets"],trans:[3,"Solar policy/duty swings"]},
+    "ongc":{fx:[2,"USD-linked realizations are a natural hedge"],fin:[2,"Strong cash generation"],conc:[4,"Hydrocarbon single-sector"],trans:[4,"Long-run demand + APM caps/windfall levies"]}
+  },
+  mitigants: {
+    "reliance":["Diversified earnings — retail and Jio cushion O2C cycles","Deleveraged balance sheet since 2021","Feedstock sourcing flexibility (discounted crude)"],
+    "tcs":["Net cash balance sheet","Annuity-like long-tenor contracts","INR weakness lifts margins"],
+    "hdfcbank":["Deposit franchise scale","Granular, diversified loan book"],
+    "bhartiairtel":["Market duopoly with rising ARPU","Consistent deleveraging trajectory"],
+    "icicibank":["Strong capital ratios","Granular retail book"],
+    "sbi":["Sovereign backing","Structural deposit-cost advantage"],
+    "infosys":["Net cash","Geographic client diversification"],
+    "hul":["Net cash","Unmatched distribution moat","Pricing power in premium tiers"],
+    "itc":["Net cash; FMCG share of profit rising","Deep agri-sourcing network"],
+    "lic":["Sovereign backing","Distribution scale"],
+    "bajajfinance":["Granular retail book","Consumer-credit pricing power"],
+    "bajajfinserv":["Diversified financial arms"],
+    "lt":["Record, diversified order book","Escalation clauses in most EPC contracts"],
+    "hcltech":["Net cash","Engineering/ER&D niche"],
+    "kotakbank":["Capital strength","Conservative underwriting record"],
+    "sunpharma":["Net cash","Specialty portfolio margin buffer","In-house API capability"],
+    "maruti":["Net cash","Suzuki platform scale; hybrid bridge","Export ramp diversifies INR revenue"],
+    "mm":["SUV franchise momentum","Farm + auto diversification"],
+    "ultratech":["Scale leadership on the cost curve","Captive limestone; growing green-power mix"],
+    "axisbank":["Improved capital and retail mix"],
+    "ntpc":["Regulated fuel-cost pass-through","Sovereign-linked offtake"],
+    "titan":["Brand and hallmark trust moat","Gold price largely passes through to consumers","Net cash core business"],
+    "adaniports":["Dominant network with long concessions","Cargo mix diversification"],
+    "wipro":["Net cash","Large-deal pipeline stabilizing"],
+    "tatamotors":["Auto net debt eliminated (FY25, disclosed)","JLR brand pricing power","Post-demerger focused capital allocation"],
+    "tatasteel":["Captive iron ore in India — structural cost moat","India volumes growing at industry-leading margins"],
+    "jswsteel":["Cost-efficient converter model","Domestic infra-capex demand tailwind"],
+    "hindalco":["Novelis recycling moat (scrap spreads)","Captive coal and bauxite for Indian operations"],
+    "nestleindia":["Net cash","Category leadership in noodles and nutrition"],
+    "asianpaints":["Net cash","Distribution moat; still the category leader"],
+    "coalindia":["Cash-rich near-monopoly","Prices at a discount to imports — volume security"],
+    "powergrid":["Regulated RoE — high cash-flow visibility","Monopoly network position"],
+    "adanient":["Incubation track record (ports, energy spun out)","Airport traffic growth"],
+    "ongc":["USD-linked revenue natural hedge","Cash generation across the cycle"]
+  },
+  impacts: {},
+  cycles: []
+};
+</script>
+<script id="impacts-data" type="application/json">
+{"__placeholder": "The run-cycle playbook replaces the two JSON script blocks below on each regeneration."}
+</script>
+<script>
+DATA.impacts = {
+  "tatasteel": [{"cycle":"2026-W28","policies":["CBAM","Section 232","RBI June 2026"],"exposure":"EU is a core market (incl. own EU operations); CBAM liability accrues on Indian-origin exports from Jan 2026; coking coal ~85% imported adds INR cost risk under rupee pressure.","risk":"urgent","services":["CBAM cost quantification and EUA exposure advisory","Hedge-policy redesign under RBI June 2026 rules","Combined commodity + currency stress testing"]}],
+  "jswsteel": [{"cycle":"2026-W28","policies":["CBAM","Section 232","RBI June 2026"],"exposure":"Exports to EU face certificate liability; US derivatives tariffs push diversion; large USD borrowing base affected by hedging-rule changes.","risk":"urgent","services":["CBAM cost quantification and EUA exposure advisory","Hedge-policy redesign under RBI June 2026 rules","Combined commodity + currency stress testing"]}],
+  "hindalco": [{"cycle":"2026-W28","policies":["CBAM","Section 232"],"exposure":"Aluminum in CBAM scope; Novelis straddles US/EU tariff regimes; energy-intensive smelting sensitive to carbon-cost signals.","risk":"material","services":["CBAM cost quantification and EUA exposure advisory"]}],
+  "reliance": [{"cycle":"2026-W28","policies":["RBI June 2026","EU-India FTA"],"exposure":"Largest corporate FX book in the universe (crude imports, USD debt); forwards cancel/rebook bar forces hedge-program redesign; petchem exports gain under FTA.","risk":"material","services":["Hedge-policy redesign under RBI June 2026 rules"]}],
+  "titan": [{"cycle":"2026-W28","policies":["Gold duty hike May 2026","RBI June 2026"],"exposure":"Gold ~55% of cost base, ~99% imported; duty hike raises landed cost directly; INR pressure compounds; gold-lease hedging structures touched by derivative rules.","risk":"urgent","services":["Hedge-policy redesign under RBI June 2026 rules","Combined commodity + currency stress testing (gold+INR)"]}],
+  "sunpharma": [{"cycle":"2026-W28","policies":["EU-India FTA","RBI June 2026"],"exposure":"Pharma is a headline FTA winner — EU revenue share set to grow, expanding EUR exposure beyond current hedge sizing.","risk":"material","services":["EUR-INR exposure build-out planning for FTA winners"]}],
+  "maruti": [{"cycle":"2026-W28","policies":["EU-India FTA","RBI June 2026"],"exposure":"EU auto tariff dismantling raises import competition; JPY royalty and import exposure meets new hedging constraints.","risk":"watch","services":["Hedge-policy redesign under RBI June 2026 rules"]}],
+  "tatamotors": [{"cycle":"2026-W28","policies":["EU-India FTA","CBAM","RBI June 2026"],"exposure":"JLR gives direct EU/UK revenue exposure; group steel/battery inputs; multi-currency book under new RBI rules.","risk":"material","services":["Hedge-policy redesign under RBI June 2026 rules","EUR-INR exposure build-out planning for FTA winners"]}],
+  "mm": [{"cycle":"2026-W28","policies":["EU-India FTA","RBI June 2026"],"exposure":"EU competition in SUVs/tractors post-FTA; moderate import book.","risk":"watch","services":["Hedge-policy redesign under RBI June 2026 rules"]}],
+  "hul": [{"cycle":"2026-W28","policies":["EUDR","RBI June 2026"],"exposure":"Palm derivatives ~96% import-linked; EUDR traceability flows through Unilever group sourcing; INR pressure on the palm bill.","risk":"material","services":["Combined commodity + currency stress testing (palm+INR)","EUDR sourcing-shift cost modeling with FX overlay","Hedge-policy redesign under RBI June 2026 rules"]}],
+  "itc": [{"cycle":"2026-W28","policies":["EUDR"],"exposure":"Paperboard (wood), coffee and agri exports to EU require due-diligence statements from 30 Dec 2026.","risk":"watch","services":["EUDR sourcing-shift cost modeling with FX overlay"]}],
+  "nestleindia": [{"cycle":"2026-W28","policies":["EUDR","RBI June 2026"],"exposure":"Cocoa and coffee inputs are EUDR commodities; import-cost INR risk on cocoa (75% imported).","risk":"watch","services":["EUDR sourcing-shift cost modeling with FX overlay"]}],
+  "ongc": [{"cycle":"2026-W28","policies":["RBI June 2026"],"exposure":"PSU ECB concessional swap facility is a direct funding-cost opportunity; USD revenue partially natural-hedges.","risk":"watch","services":["FCNR(B)/ECB funding-cost optimization"]}],
+  "ultratech": [{"cycle":"2026-W28","policies":["CBAM"],"exposure":"Cement is CBAM-covered — relevant only for any EU-bound clinker/cement volumes (small today), but sets carbon-cost precedent for domestic pricing.","risk":"watch","services":["CBAM cost quantification (precedent monitoring)"]}]
+};
+DATA.cycles = [
+  {
+    "cycle":"2026-W28","dated":"2026-07-07",
+    "planning_questions":[
+      "Scope confirmed with user 2026-07-07: treasury & FX advisory services, all commodity classes, India top-34 universe, weekly cloud automation.",
+      "Open: should banks be treated as prospects for the FCNR(B) window advisory, or only as distribution channel? Currently marked 'channel'.",
+      "Open: track EU-India FTA chapter-level tariff schedules when the legal text publishes in the Official Journal?",
+      "Open: add Tier-2 CBAM exposure (Indian suppliers of EU manufacturers) from cycle 2?",
+      "Open: gold duty hike currently cited to CNBC — primary CBIC notification to be pulled next cycle."
+    ],
+    "document_summary":[
+      {"item":"EU-India FTA — negotiations concluded 27 Jan 2026 (New Delhi summit); largest deal either side has concluded; pending legal scrubbing, Council decision, EP consent, Indian Cabinet approval.","citations":["https://ec.europa.eu/commission/presscorner/detail/en/ip_26_184","https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/india/eu-india-agreements/memo-eu-india-free-trade-agreement-chapter-chapter-summary_en"]},
+      {"item":"CBAM definitive regime in force 1 Jan 2026; 9 implementing/delegated acts adopted 17 Dec 2025; certificate sales open 1 Feb 2027; first surrender 30 Sep 2027 for 2026 imports; 50 t/yr de-minimis; downstream scope extension proposed.","citations":["https://taxation-customs.ec.europa.eu/news/cbam-successfully-entered-force-1-january-2026-2026-01-14_en","https://trade.ec.europa.eu/access-to-markets/en/news/start-definitive-period-cbam-eu"]},
+      {"item":"EUDR postponed to 30 Dec 2026 for large operators via Regulation (EU) 2025/2650 (OJ 23 Dec 2025); simplification package (May 2026) claims ~75% compliance-cost cut. Covers cattle, cocoa, coffee, palm oil, rubber, soya, wood.","citations":["https://www.consilium.europa.eu/en/press/press-releases/2025/12/18/deforestation-council-signs-off-targeted-revision-to-simplify-and-postpone-the-regulation/","https://trade.ec.europa.eu/access-to-markets/en/news/delay-until-december-2026-and-other-developments-implementation-eudr-regulation"]},
+      {"item":"RBI rupee-defense package (5-8 Jun 2026): fully subsidized FX hedging on fresh 3-5y FCNR(B) deposits (window to 30 Sep 2026); concessional FX swaps for PSU ECBs; rupee NDFs barred for residents; related-party derivative curbs; cancel-and-rebook of forwards barred. [MUFG summary is secondary — primary RBI circular queued]","citations":["https://www.mufgresearch.com/fx/india-shoring-up-the-indian-rupee-rbi-june-2026-measures-8-june-2026/","https://www.rbi.org.in/commonman/english/scripts/Notification.aspx?Id=853"]},
+      {"item":"US Section 232 restructuring: 2 Apr 2026 proclamation (50%/25%/15% tiers, sub-15% metal content exempt); further adjustment 1 Jun 2026 effective 8 Jun 2026.","citations":["https://www.whitehouse.gov/fact-sheets/2026/04/fact-sheet-president-donald-j-trump-strengthens-tariffs-on-steel-aluminum-and-copper-imports/","https://www.whitecase.com/insight-alert/united-states-modifies-steel-aluminum-and-copper-section-232-tariffs"]},
+      {"item":"India hiked bullion import duties (May 2026) to arrest the rupee slide; gold imports a record USD 71.98 bn in FY2025-26. [secondary — CBIC notification to be pulled]","citations":["https://www.cnbc.com/2026/05/13/india-hikes-bullion-import-duties-to-arrest-rupee-slide.html","https://www.gold.org/goldhub/gold-focus/2026/05/india-gold-market-update-import-tightening"]}
+    ],
+    "risk_and_impact_analysis":[
+      "Step 1 — CBAM: certificate liability accrues on 2026 EU imports of steel/aluminum/cement etc., cash-settled from Sep 2027 and priced off EUA auctions. Creates a new cost line AND a new hedgeable risk (EUA price) for Indian metal exporters; accrual starts now, settlement later — a classic deferred-P&L trap.",
+      "Step 2 — FTA: concluded, unratified. On entry into force, EUR revenue share grows for pharma/textiles/auto components (EUR hedging undersized) while EU autos gain Indian access (domestic pricing pressure). Trigger to watch: ratification steps, not the announcement.",
+      "Step 3 — EUDR: from 30 Dec 2026 large operators placing cocoa, coffee, palm, rubber, wood products on the EU market need geolocation-verified due diligence; Indian FMCG and paper exporters face traceability and sourcing-shift costs.",
+      "Step 4 — RBI June 2026: cancel/rebook bar breaks the default Indian corporate forward-rolling playbook; NDF bar forces flows onshore; subsidized FCNR(B) hedging window (to 30 Sep 2026) is a dated funding arbitrage. Demand shock for hedge-policy redesign across all importers.",
+      "Step 5 — Section 232: US market stays penalized for metal derivatives, diverting Indian volumes toward the EU (where CBAM waits) and home market; export currency mix and margin volatility shift.",
+      "Step 6 — Rupee: duty hikes and the RBI package are officially framed as rupee defense — policy signals sustained INR pressure on import-heavy cost bases (crude 88.6% import-dependent per PPAC; gold ~99%; palm ~96%)."
+    ],
+    "rival_activity_analysis":[
+      "IBSFINtech named Leader in IDC MarketScape for AI-enabled embedded trade financing (Feb 2026); 400+ entities, USD 1tn+ processed — deepening reach into target treasury offices.",
+      "Kyriba pushing 'AI-orchestrated treasury' (KyribaLive 2026) with embedded FX/rates data — TMS vendors moving from execution toward analytics.",
+      "So-what: software rivals automate execution, not policy interpretation. RBI-2026 hedge-policy redesign and CBAM/EUA advisory are whitespace before vendors ship compliance modules."
+    ],
+    "affected_companies":["Tata Steel (urgent)","JSW Steel (urgent)","Titan (urgent)","Hindalco (material)","Reliance Industries (material)","Sun Pharma (material)","Tata Motors (material)","Hindustan Unilever (material)","Maruti Suzuki (watch)","Mahindra & Mahindra (watch)","ITC (watch)","Nestlé India (watch)","ONGC (watch)","UltraTech Cement (watch)"],
+    "suggested_services":[
+      "1. Hedge-policy redesign under RBI June 2026 rules — Reliance, Titan, Tata Motors, Maruti, JSW, Tata Steel, HUL (rules already in force; highest urgency).",
+      "2. FCNR(B)/ECB funding-cost optimization — ONGC, large USD borrowers, banks as channel (window closes 30 Sep 2026).",
+      "3. CBAM cost quantification and EUA exposure advisory — Tata Steel, JSW Steel, Hindalco (before FY27 audit planning; certificates sell from Feb 2027).",
+      "4. EUR-INR exposure build-out planning for FTA winners — Sun Pharma, Tata Motors, auto-component exporters (pre-ratification window).",
+      "5. Combined commodity + currency stress testing — Titan (gold+INR), HUL (palm+INR), steelmakers (coking coal+INR).",
+      "6. EUDR sourcing-shift cost modeling with FX overlay — HUL, ITC, Nestlé India (H2 2026 budgeting)."
+    ],
+    "sources":[
+      "https://ec.europa.eu/commission/presscorner/detail/en/ip_26_184",
+      "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/india/eu-india-agreements/memo-eu-india-free-trade-agreement-chapter-chapter-summary_en",
+      "https://taxation-customs.ec.europa.eu/news/cbam-successfully-entered-force-1-january-2026-2026-01-14_en",
+      "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
+      "https://trade.ec.europa.eu/access-to-markets/en/news/start-definitive-period-cbam-eu",
+      "https://www.consilium.europa.eu/en/press/press-releases/2025/12/18/deforestation-council-signs-off-targeted-revision-to-simplify-and-postpone-the-regulation/",
+      "https://trade.ec.europa.eu/access-to-markets/en/news/delay-until-december-2026-and-other-developments-implementation-eudr-regulation",
+      "https://environment.ec.europa.eu/topics/forests/deforestation/regulation-deforestation-free-products_en",
+      "https://www.mufgresearch.com/fx/india-shoring-up-the-indian-rupee-rbi-june-2026-measures-8-june-2026/",
+      "https://www.rbi.org.in/commonman/english/scripts/Notification.aspx?Id=853",
+      "https://www.whitehouse.gov/fact-sheets/2026/04/fact-sheet-president-donald-j-trump-strengthens-tariffs-on-steel-aluminum-and-copper-imports/",
+      "https://www.whitecase.com/insight-alert/united-states-modifies-steel-aluminum-and-copper-section-232-tariffs",
+      "https://www.cnbc.com/2026/05/13/india-hikes-bullion-import-duties-to-arrest-rupee-slide.html",
+      "https://www.gold.org/goldhub/gold-focus/2026/05/india-gold-market-update-import-tightening",
+      "https://www.ibsfintech.com/",
+      "https://www.kyriba.com/news/kyribalive-2026-ai-orchestrated-treasury/"
+    ]
+  }
+];
+
+const worst = im => im.some(x=>x.risk==='urgent') ? 'urgent' : im.some(x=>x.risk==='material') ? 'material' : im.some(x=>x.risk==='watch') ? 'watch' : 'none';
+const order = {urgent:0, material:1, watch:2, none:3};
+const cscore = id => { const d = DATA.deps[id]||{}; let s = 0; for (const c in d) { const m = DATA.commodities[c]; s += d[c] * (0.4*m[2]/5 + 0.4*m[3]/100 + 0.2*m[1]/5) * 100; } return s; };
+const cgrade = s => s>=22 ? ['Very high','#E24B4A'] : s>=12 ? ['High','#D85A30'] : s>=5 ? ['Moderate','#BA7517'] : ['Low','#1D9E75'];
+const concTag = v => v>=5 ? ['high conc','b-urgent'] : v>=3 ? ['medium conc','b-material'] : ['low conc','b-watch'];
+const LENS = ['Commodity','Policy','Currency','Financial','Concentration','Transition'];
+function lensScores(id) {
+  const cs = cscore(id); const cl = cs>=22?5:cs>=12?4:cs>=5?3:cs>=2?2:1;
+  const w = worst(DATA.impacts[id]||[]); const pl = w==='urgent'?5:w==='material'?4:w==='watch'?3:1;
+  const q = DATA.lenses[id]||{}; const d = [2,'No specific factor identified'];
+  return [[cl,'Weighted dependency, supply concentration, import share'],[pl,'Latest weekly-cycle policy impact status'],q.fx||d,q.fin||d,q.conc||d,q.trans||d];
+}
+const oavg = id => lensScores(id).reduce((t,x)=>t+x[0],0)/6;
+const ograde = a => a>=3.75 ? ['Very high','#E24B4A'] : a>=3 ? ['High','#D85A30'] : a>=2.25 ? ['Moderate','#BA7517'] : ['Low','#1D9E75'];
+document.getElementById('lastcycle').textContent = DATA.cycles[DATA.cycles.length-1].cycle;
+const grid = document.getElementById('cogrid'), panel = document.getElementById('panel');
+let current = null;
+
+function drawGrid(filter) {
+  const f = (filter||'').toLowerCase();
+  const cos = DATA.companies.slice().sort((a,b)=>{
+    const ra = order[worst(DATA.impacts[a.id]||[])], rb = order[worst(DATA.impacts[b.id]||[])];
+    return ra-rb || oavg(b.id)-oavg(a.id) || a.name.localeCompare(b.name);
+  }).filter(c=>!f || c.name.toLowerCase().includes(f) || c.sector.toLowerCase().includes(f));
+  grid.innerHTML = cos.map(c=>{
+    const w = worst(DATA.impacts[c.id]||[]);
+    const g = ograde(oavg(c.id));
+    const dot = w==='none' ? '' : `<span class="badge b-${w}" style="margin-left:6px">${w}</span>`;
+    return `<button class="co${current===c.id?' on':''}" data-id="${c.id}"><span class="cdot" style="background:${g[1]}" title="Overall balanced risk: ${g[0]}"></span>${c.name}${dot}</button>`;
+  }).join('');
+}
+
+function show(id) {
+  current = id;
+  drawGrid(document.getElementById('q').value);
+  const c = DATA.companies.find(x=>x.id===id);
+  const im = DATA.impacts[id]||[];
+  const w = worst(im);
+  const g = cgrade(cscore(id));
+  const ls = lensScores(id), avg = oavg(id), og = ograde(avg);
+  const deps = DATA.deps[id]||{};
+  const keys = Object.keys(deps).sort((a,b)=>deps[b]-deps[a]);
+  let h = `<div class="card"><button class="no-print" style="float:right;font-size:12px;padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink2);cursor:pointer" onclick="printBrief()">Print client brief</button><div style="font-size:18px;font-weight:600">${c.name}<span class="badge" style="background:${og[1]};color:#fff">overall: ${og[0].toLowerCase()}</span><span class="badge" style="background:transparent;border:1px solid ${g[1]};color:${g[1]}">commodity: ${g[0].toLowerCase()}</span><span class="badge b-${w}">${w==='none'?'no policy impact':'policy: '+w}</span></div><div class="meta">${c.sector}</div>`;
+  h += `<div class="lbl">Balanced risk scorecard — ${avg.toFixed(1)} / 5 across six lenses</div>`;
+  ls.forEach((s,i)=>{
+    const col = s[0]>=4 ? '#E24B4A' : s[0]>=3 ? '#BA7517' : '#1D9E75';
+    h += `<div class="crow"><span class="cn">${LENS[i]}</span><span class="cbar"><span style="width:${s[0]*20}%;background:${col}"></span></span><span style="width:22px;font-weight:600">${s[0]}</span><span class="meta" style="flex:1.4;min-width:200px">${s[1]}</span></div>`;
+  });
+  const mit = DATA.mitigants[id]||[];
+  if (mit.length) {
+    h += `<div class="lbl">Strengths and mitigants</div><ul style="font-size:14px;margin:4px 0 2px">${mit.map(m=>`<li>${m}</li>`).join('')}</ul>`;
+  }
+  h += `<div class="lbl">Commodity dependency risk</div>`;
+  if (!keys.length) {
+    h += `<p style="font-size:14px;color:var(--ink2);margin:6px 0">${DATA.anchors._default}</p>`;
+  } else {
+    let sw = 0, sc = 0, si = 0;
+    keys.forEach(k=>{ const m = DATA.commodities[k]; sw += deps[k]; sc += deps[k]*m[2]; si += deps[k]*m[3]; });
+    h += `<div class="mrow"><span>Cost base mapped<br><b>${Math.round(sw*100)}%</b></span><span>Supply concentration<br><b>${(sc/sw).toFixed(1)} / 5</b></span><span>Import dependence<br><b>${Math.round(si/sw)}%</b></span><span>Overall<br><b style="color:${g[1]}">${g[0]}</b></span></div>`;
+    keys.forEach(k=>{
+      const m = DATA.commodities[k], t = concTag(m[2]);
+      h += `<div class="crow"><span class="cn">${m[0]}</span><span class="cbar"><span style="width:${Math.min(100,Math.round(deps[k]/0.6*100))}%"></span></span><span style="width:38px;font-weight:600">${Math.round(deps[k]*100)}%</span><span class="tag ${t[1]}">${t[0]}</span><span class="meta" style="width:96px">${m[3]}% imported</span></div>`;
+    });
+    h += `<p class="meta" style="margin:8px 0 0">${DATA.anchors[id]||''}</p>`;
+  }
+  const wt = DATA.watch[id]||[];
+  if (wt.length) {
+    h += `<div class="lbl">Risk factors and action openings</div>`;
+    wt.forEach(r=>{
+      h += `<div style="margin:10px 0"><span class="pill">${r.t}</span><p style="font-size:14px;margin:6px 0 4px">${r.w}</p><div class="svc">Act: ${r.a}</div></div>`;
+    });
+  }
+  if (!im.length) {
+    h += `<div class="lbl">Policy impacts</div><p style="color:var(--ink2);font-size:14px">No policy impact recorded in any cycle to date. This company stays in the weekly scan.</p></div>`;
+  } else {
+    im.slice().reverse().forEach(f=>{
+      h += `<div class="lbl">Policy impact — cycle ${f.cycle}</div>
+      <div>${f.policies.map(p=>`<span class="pill">${p}</span>`).join('')}</div>
+      <p style="font-size:14px;margin:8px 0">${f.exposure}</p>
+      <div class="lbl">Suggested services</div>
+      ${f.services.map(s=>`<div class="svc">${s}</div>`).join('')}`;
+    });
+    h += `</div>`;
+  }
+  panel.innerHTML = h;
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+grid.addEventListener('click', e=>{ const b=e.target.closest('[data-id]'); if(b) show(b.dataset.id); });
+document.getElementById('q').addEventListener('input', e=>drawGrid(e.target.value));
+
+document.getElementById('cycles').innerHTML = DATA.cycles.slice().reverse().map(cy=>`
+  <div class="card">
+    <div style="font-weight:600">${cy.cycle} <span class="meta">— ${cy.dated}</span></div>
+    <details open><summary>Planning and open questions</summary><ul>${cy.planning_questions.map(x=>`<li>${x}</li>`).join('')}</ul></details>
+    <details><summary>Document summary (${cy.document_summary.length})</summary><ul>${cy.document_summary.map(d=>`<li>${d.item}<br><span class="cite">${d.citations.map(u=>`<a href="${u}" target="_blank" rel="noopener">${u}</a>`).join(' · ')}</span></li>`).join('')}</ul></details>
+    <details><summary>Risk and impact analysis (step-by-step)</summary><ol>${cy.risk_and_impact_analysis.map(x=>`<li>${x.replace(/^Step \d+ — /,'')}</li>`).join('')}</ol></details>
+    <details><summary>Rival activity</summary><ul>${cy.rival_activity_analysis.map(x=>`<li>${x}</li>`).join('')}</ul></details>
+    <details><summary>Affected companies</summary><div style="margin-top:6px">${cy.affected_companies.map(x=>`<span class="pill">${x}</span>`).join('')}</div></details>
+    <details><summary>Suggested services (ranked)</summary><ul>${cy.suggested_services.map(x=>`<li>${x}</li>`).join('')}</ul></details>
+    <details><summary>Sources (${cy.sources.length})</summary><ul>${cy.sources.map(u=>`<li><a href="${u}" target="_blank" rel="noopener">${u}</a></li>`).join('')}</ul></details>
+  </div>`).join('');
+
+async function loadLive() {
+  const el = document.getElementById('liverates'), st = document.getElementById('livestatus'), sig = document.getElementById('livesignal');
+  const snap = DATA.snapshot;
+  const cell = (l,v,d) => `<span>${l}<br><b>${v}</b>${d!=null?`<br><span class="meta" style="color:${d>=0?'#E24B4A':'#1D9E75'}">${d>=0?'+':''}${d.toFixed(2)}% vs ${snap.date}</span>`:''}</span>`;
+  let rates = null, gold = null, src = [];
+  try { const r = await fetch('https://open.er-api.com/v6/latest/USD'); const j = await r.json(); if (j && j.rates && j.rates.INR) { rates = j.rates; src.push('open.er-api.com'); } } catch(e) {}
+  if (!rates) { try { const r = await fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=INR,EUR,GBP,JPY,CHF'); const j = await r.json(); if (j && j.rates) { rates = j.rates; rates.USD = 1; src.push('frankfurter.dev (ECB)'); } } catch(e) {} }
+  try { const r = await fetch('https://api.gold-api.com/price/XAU'); const j = await r.json(); if (j && j.price) { gold = j.price; src.push('gold-api.com'); } } catch(e) {}
+  let h = '';
+  let inrMove = null;
+  if (rates) {
+    const usdinr = rates.INR;
+    inrMove = (usdinr / snap.usdinr - 1) * 100;
+    h += cell('USD/INR', usdinr.toFixed(2), inrMove);
+    if (rates.EUR) h += cell('EUR/INR', (usdinr/rates.EUR).toFixed(2), null);
+    if (rates.GBP) h += cell('GBP/INR', (usdinr/rates.GBP).toFixed(2), null);
+    if (rates.JPY) h += cell('JPY/INR ×100', (usdinr/rates.JPY*100).toFixed(2), null);
+    if (rates.CHF) h += cell('CHF/INR', (usdinr/rates.CHF).toFixed(2), null);
+  }
+  if (gold) h += cell('Gold $/oz', Math.round(gold).toLocaleString(), (gold/snap.gold-1)*100);
+  if (h) {
+    el.innerHTML = h;
+    st.textContent = 'live — ' + src.join(' + ') + ', fetched ' + new Date().toLocaleString();
+    if (inrMove != null && Math.abs(inrMove) >= 0.3) {
+      const exposed = DATA.companies.map(c => {
+        const d = DATA.deps[c.id]||{}; let si = 0;
+        for (const k in d) si += d[k] * DATA.commodities[k][3];
+        return [c.id, c.name, si];
+      }).filter(x => x[2] > 5).sort((a,b) => b[2]-a[2]).slice(0,6);
+      const dir = inrMove > 0 ? 'weaker' : 'stronger';
+      sig.innerHTML = `Rupee is ${Math.abs(inrMove).toFixed(1)}% ${dir} than the ${snap.date} baseline. ` +
+        (inrMove > 0 ? 'Estimated import-cost pressure if this holds: ' : 'Import-cost relief for: ') +
+        exposed.map(x => `<span class="pill" data-id="${x[0]}" style="cursor:pointer">${x[1]} ${inrMove>0?'+':''}${(x[2]*inrMove/10000*100).toFixed(2)}%</span>`).join(' ');
+      sig.addEventListener('click', e => { const p = e.target.closest('[data-id]'); if (p) show(p.dataset.id); });
+    } else if (inrMove != null) {
+      sig.textContent = 'Rupee within 0.3% of the ' + snap.date + ' baseline — no acute import-cost signal.';
+    }
+  } else {
+    st.textContent = 'offline — showing ' + snap.date + ' snapshot';
+    el.innerHTML = cell('USD/INR', snap.usdinr.toFixed(2), null) + cell('Gold $/oz', snap.gold.toLocaleString(), null) + cell('Brent $/bbl', snap.brent.toFixed(1), null);
+    sig.textContent = snap.note;
+  }
+}
+const TABS = ['overview','companies','pipeline','calendar','cycles','methodology'];
+function tab(t) {
+  TABS.forEach(x => {
+    document.getElementById('tab-'+x).style.display = x===t ? '' : 'none';
+    document.querySelector(`[data-tab="${x}"]`).classList.toggle('on', x===t);
+  });
+}
+document.querySelector('.tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (b) tab(b.dataset.tab); });
+function goCompany(id) { tab('companies'); show(id); }
+
+const SVCMAP = [['RBI June 2026','In force now',1],['FCNR','Closes 30 Sep 2026',1],['CBAM','Certificates Feb 2027; surrender Sep 2027',2],['EUR-INR','FTA ratification window',3],['stress testing','Risk-committee cycle',3],['EUDR','Applies 30 Dec 2026',4]];
+const svcMeta = s => { for (const m of SVCMAP) if (s.includes(m[0])) return m; return ['','Ongoing',3]; };
+function pipeRows() {
+  const rows = [];
+  for (const id in DATA.impacts) DATA.impacts[id].forEach(f => f.services.forEach(s => {
+    const m = svcMeta(s);
+    rows.push({id: id, co: DATA.companies.find(c=>c.id===id).name, svc: s, trig: f.policies.join(', '), win: m[1], u: m[2], risk: f.risk});
+  }));
+  rows.sort((a,b) => a.u-b.u || (order[a.risk]-order[b.risk]) || a.co.localeCompare(b.co));
+  return rows;
+}
+const STAT = ['New','Pitched','In discussion','Won','Parked'];
+function renderPipeline() {
+  const rows = pipeRows();
+  document.getElementById('pipetable').innerHTML =
+    `<tr><th>#</th><th>Company</th><th>Opportunity</th><th>Trigger</th><th>Window</th><th>Status</th></tr>` +
+    rows.map((r,i) => {
+      const key = 'tpm:' + r.id + ':' + r.svc.slice(0,40);
+      let cur = 'New'; try { cur = localStorage.getItem(key) || 'New'; } catch(e) {}
+      return `<tr><td>${i+1}</td><td data-go="${r.id}" style="font-weight:600;white-space:nowrap">${r.co}</td><td>${r.svc}</td><td class="meta">${r.trig}</td><td style="white-space:nowrap">${r.win}</td><td><select class="st" data-key="${key}">${STAT.map(s=>`<option${s===cur?' selected':''}>${s}</option>`).join('')}</select></td></tr>`;
+    }).join('');
+}
+document.getElementById('pipetable').addEventListener('change', e => { const s = e.target.closest('select.st'); if (s) try { localStorage.setItem(s.dataset.key, s.value); } catch(err) {} });
+document.getElementById('pipetable').addEventListener('click', e => { const r = e.target.closest('[data-go]'); if (r) goCompany(r.dataset.go); });
+
+const CAL = [
+  {d:'2026-09-30', t:'RBI subsidized FCNR(B) hedging window closes', s:'RBI June 2026 package', a:'Funding-cost optimization pitches must land before this'},
+  {d:'2026-12-30', t:'EUDR applies to large operators', s:'Regulation (EU) 2025/2650, OJ 23 Dec 2025', a:'EUDR sourcing-shift modeling for HUL, ITC, Nestlé India'},
+  {d:'2027-02-01', t:'CBAM certificate sales open (central EU platform)', s:'EC implementing acts, 17 Dec 2025', a:'EUA hedging design decisions due before purchases begin'},
+  {d:'2027-06-30', t:'EUDR applies to micro and small operators', s:'Regulation (EU) 2025/2650', a:'Supplier-tier readiness for exporters'},
+  {d:'2027-09-30', t:'First CBAM declaration and surrender (2026 imports)', s:'EC CBAM definitive regime', a:'Cash-flow and accrual planning for steel and aluminum exporters'},
+  {d:'2027-12-31', t:'US Section 232 transitional 15% rate expires', s:'Proclamation of 2 Apr 2026', a:'Export-margin scenarios for metal derivatives'},
+  {d:null, t:'EU-India FTA ratification (Council decision, EP consent, Indian Cabinet)', s:'Concluded 27 Jan 2026 — timing open', a:'EUR-INR build-out planning window'}
+];
+function renderCalendar() {
+  const now = Date.now();
+  const html = `<tr><th>Date</th><th>Countdown</th><th>Event</th><th>Source</th><th>Why it matters</th></tr>` + CAL.map(e => {
+    let dd = '—', hot = '';
+    if (e.d) { const days = Math.ceil((new Date(e.d) - now)/86400000); dd = days + ' days'; hot = days <= 120 ? 'color:#E24B4A;font-weight:600' : days <= 300 ? 'color:#BA7517;font-weight:600' : ''; }
+    return `<tr><td style="white-space:nowrap">${e.d||'TBD'}</td><td style="${hot};white-space:nowrap">${dd}</td><td>${e.t}</td><td class="meta">${e.s}</td><td>${e.a}</td></tr>`;
+  }).join('');
+  document.getElementById('caltable').innerHTML = html;
+  document.getElementById('minical').innerHTML = `<table class="t"><tr><th>Date</th><th>Countdown</th><th>Event</th></tr>` +
+    CAL.filter(e=>e.d).slice(0,3).map(e => { const days = Math.ceil((new Date(e.d)-now)/86400000); return `<tr><td style="white-space:nowrap">${e.d}</td><td style="${days<=120?'color:#E24B4A;font-weight:600':''};white-space:nowrap">${days} days</td><td>${e.t}</td></tr>`; }).join('') + `</table>`;
+}
+
+function renderOverview() {
+  let urgent = 0, material = 0, watch = 0;
+  for (const id in DATA.impacts) { const w = worst(DATA.impacts[id]); if (w==='urgent') urgent++; else if (w==='material') material++; else if (w==='watch') watch++; }
+  let openings = 0; for (const id in DATA.watch) openings += DATA.watch[id].length;
+  const pr = pipeRows().length;
+  const days = Math.ceil((new Date('2026-09-30') - Date.now())/86400000);
+  const kpi = (v,l) => `<div class="kpi"><b>${v}</b><span>${l}</span></div>`;
+  document.getElementById('kpis').innerHTML =
+    kpi(DATA.companies.length,'companies tracked') + kpi(urgent,'urgent policy impacts') + kpi(material,'material impacts') +
+    kpi(openings,'action openings identified') + kpi(pr,'pipeline opportunities') + kpi(days + 'd','to FCNR window close');
+  const score = id => { const w = worst(DATA.impacts[id]||[]); return (w==='urgent'?3:w==='material'?2:w==='watch'?1:0)*2 + oavg(id); };
+  const top = DATA.companies.slice().sort((a,b)=>score(b.id)-score(a.id)).slice(0,6);
+  document.getElementById('toptargets').innerHTML =
+    `<tr><th>Company</th><th>Overall risk</th><th>Policy status</th><th>Openings</th><th>Lead opportunity</th></tr>` +
+    top.map(c => {
+      const g = ograde(oavg(c.id)), w = worst(DATA.impacts[c.id]||[]);
+      const svc = (DATA.impacts[c.id] && DATA.impacts[c.id][0].services[0]) || '—';
+      return `<tr data-go="${c.id}"><td style="font-weight:600;white-space:nowrap"><span class="cdot" style="background:${g[1]}"></span>${c.name}</td><td style="color:${g[1]};font-weight:600">${g[0]}</td><td>${w==='none'?'—':w}</td><td>${(DATA.watch[c.id]||[]).length}</td><td>${svc}</td></tr>`;
+    }).join('');
+  document.getElementById('toptargets').addEventListener('click', e => { const r = e.target.closest('[data-go]'); if (r) goCompany(r.dataset.go); });
+}
+
+function printBrief() { document.body.classList.add('brief'); tab('companies'); setTimeout(() => window.print(), 50); }
+window.addEventListener('afterprint', () => document.body.classList.remove('brief'));
+
+drawGrid('');
+show('tatasteel');
+renderOverview();
+renderPipeline();
+renderCalendar();
+loadLive();
+</script>
+</body>
+</html>
