@@ -73,6 +73,9 @@ select.st{padding:3px 6px;border:1px solid var(--line);border-radius:6px;backgro
 <div class="tabs no-print">
   <button class="tabbtn on" data-tab="overview">Overview</button>
   <button class="tabbtn" data-tab="companies">Companies</button>
+  <button class="tabbtn" data-tab="deepdive">Deep dive</button>
+  <button class="tabbtn" data-tab="scenarios">Scenarios</button>
+  <button class="tabbtn" data-tab="commodities">Commodities</button>
   <button class="tabbtn" data-tab="pipeline">Pipeline</button>
   <button class="tabbtn" data-tab="calendar">Calendar</button>
   <button class="tabbtn" data-tab="cycles">Weekly cycles</button>
@@ -93,6 +96,32 @@ select.st{padding:3px 6px;border:1px solid var(--line);border-radius:6px;backgro
 <div class="grid" id="cogrid"></div>
 
 <div id="panel"></div>
+</div>
+
+<div id="tab-deepdive" style="display:none">
+  <h2>Company deep dive</h2>
+  <p class="sub" style="margin-bottom:10px">One company end to end: supply chain traced to source, product vulnerability, current policy exposure, and shock sensitivity.</p>
+  <div style="margin:0 0 12px"><select id="ddsel" style="min-width:260px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:14px"></select></div>
+  <div id="ddout"></div>
+</div>
+
+<div id="tab-scenarios" style="display:none">
+  <h2>Shock scenarios</h2>
+  <p class="sub" style="margin-bottom:10px">Replay actual events or stress policy moves. Shocks cascade through the commodity input graph at 50% pass-through per processing step — structural exposure, not price forecasts.</p>
+  <div id="evb" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"></div>
+  <p id="evd" class="sub" style="margin-bottom:6px"></p>
+  <div id="evchips" style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px"></div>
+  <h2 style="font-size:15px">Company impact — net of producer gains</h2>
+  <div class="card" id="evimp"></div>
+  <h2 style="font-size:15px">Most exposed products</h2>
+  <div class="card" id="evprod"></div>
+</div>
+
+<div id="tab-commodities" style="display:none">
+  <h2>Commodity interdependency map</h2>
+  <p class="sub" style="margin-bottom:10px">Click any commodity to trace what it is made from, what it feeds into, where supply comes from, and which companies depend on it — directly or through the chain. Square color = supply concentration.</p>
+  <div class="grid" id="comgrid"></div>
+  <div class="card" id="comdetail"></div>
 </div>
 
 <div id="tab-pipeline" style="display:none">
@@ -178,15 +207,47 @@ const DATA = {
     {"id":"ongc","name":"ONGC","sector":"Oil and gas production"}
   ],
   commodities: {
-    "crude":["Crude oil",4,4,89],"natgas":["Natural gas",5,4,50],"coal":["Thermal coal",4,3,25],"metcoal":["Coking coal",5,4,85],
-    "elec":["Electricity",3,2,0],"plastics":["Plastics and resins",3,2,20],"diesel":["Diesel and freight fuel",4,3,0],"petcoke":["Petcoke",4,3,35],
-    "natrub":["Natural rubber",4,4,40],"ironore":["Iron ore",4,2,0],"steel":["Steel",3,3,5],"bauxite":["Bauxite",3,3,0],
-    "alum":["Aluminum",4,3,10],"copper":["Copper",4,3,45],"lithium":["Lithium",5,4,100],"chips":["Semiconductors",3,4,95],
-    "poly":["Polysilicon",4,4,100],"pallad":["Palladium",5,5,100],"gold":["Gold",3,2,99],"diamonds":["Rough diamonds",3,4,100],
-    "limestone":["Limestone",1,1,0],"cement":["Cement",2,1,0],"tio2":["Titanium dioxide",3,4,60],"api":["Pharma APIs and KSMs",3,5,70],
-    "tobacco":["Leaf tobacco",2,1,0],"tea":["Tea",3,2,0],"pulp":["Pulp and paperboard",3,2,50],"sodaash":["Soda ash",3,2,25],
-    "milk":["Dairy",3,1,0],"wheat":["Wheat",4,2,0],"sugar":["Sugar",4,2,0],"cocoa":["Cocoa",5,4,75],
-    "coffee":["Coffee",5,2,0],"palm":["Palm oil",4,4,96]
+    "crude":["Crude oil",4,4,89,[],"OPEC+ ~40% of world supply; Russia ~31% of India's imports (PPAC)"],
+    "natgas":["Natural gas",5,4,50,[],"US, Qatar, Russia top exporters; ~half of Indian consumption is imported LNG"],
+    "coal":["Thermal coal",4,3,25,[],"Domestic (Coal India) ~75%; imports from Indonesia and Australia"],
+    "metcoal":["Coking coal",5,4,85,[],"Australia dominates India's imports (Ministry of Steel)"],
+    "elec":["Electricity",3,2,0,["coal","natgas"],"Indian grid ~70% coal-fired (CEA)"],
+    "plastics":["Plastics and resins",3,2,20,["crude"],"Polymers largely domestic (RIL, IOC), derived from crude"],
+    "diesel":["Diesel and freight fuel",4,3,0,["crude"],"Refined domestically from ~89%-imported crude"],
+    "petcoke":["Petcoke",4,3,35,["crude"],"Refinery byproduct; imports from US and Saudi Arabia"],
+    "natrub":["Natural rubber",4,4,40,[],"Thailand + Indonesia + Vietnam ~70% of world output (ANRPC); Kerala domestic"],
+    "ironore":["Iron ore",4,2,0,[],"Domestic (Odisha, NMDC); Australia + Brazil rule seaborne trade"],
+    "steel":["Steel",3,3,5,["ironore","metcoal","elec"],"India is the #2 producer (~140 Mt)"],
+    "bauxite":["Bauxite",3,3,0,[],"Domestic (Odisha); Guinea dominates world seaborne supply"],
+    "alum":["Aluminum",4,3,10,["bauxite","elec"],"Domestic smelting (Hindalco, Vedanta, NALCO) — power-intensive"],
+    "copper":["Copper",4,3,45,[],"Chile top miner; China ~44% of refining; India net importer since 2018"],
+    "lithium":["Lithium",5,4,100,[],"Mined in Australia/Chile; China refines ~65-70% (IEA)"],
+    "chips":["Semiconductors",3,4,95,["poly","copper","pallad"],"Taiwan ~90% of leading-edge fabrication"],
+    "poly":["Polysilicon",4,4,100,["elec"],"China dominates solar grade (Bernreuter); quartz from US (Spruce Pine) and Norway"],
+    "pallad":["Palladium",5,5,100,[],"Russia 44% of mine supply — Norilsk (USGS MCS 2026)"],
+    "gold":["Gold",3,2,99,[],"Mined in China, Australia, Russia; India imports ~800 t/yr (WGC)"],
+    "diamonds":["Rough diamonds",3,4,100,[],"Mined in Russia and Botswana; Surat cuts ~90% by volume"],
+    "limestone":["Limestone",1,1,0,[],"Captive domestic mines"],
+    "cement":["Cement",2,1,0,["limestone","petcoke","coal","elec"],"Domestic; India is the #2 producer"],
+    "tio2":["Titanium dioxide",3,4,60,[],"China is the top producer; India substantially import-dependent"],
+    "api":["Pharma APIs and KSMs",3,5,70,[],"China ≥70% of Indian imports for many molecules (DoP 2026)"],
+    "tobacco":["Leaf tobacco",2,1,0,[],"Domestic (Andhra Pradesh, Karnataka); India is the #2 producer"],
+    "tea":["Tea",3,2,0,[],"Domestic (Assam, Nilgiris); India is the #2 producer"],
+    "pulp":["Pulp and paperboard",3,2,50,[],"Wood pulp substantially imported (Latin America, SE Asia)"],
+    "sodaash":["Soda ash",3,2,25,[],"Domestic (Tata Chemicals, GHCL) plus imports"],
+    "milk":["Dairy",3,1,0,[],"India is the world's largest producer (NDDB)"],
+    "wheat":["Wheat",4,2,0,[],"Domestic; exports banned since May 2022"],
+    "sugar":["Sugar",4,2,0,[],"Domestic; Brazil, India, Thailand lead world output"],
+    "cocoa":["Cocoa",5,4,75,[],"Côte d'Ivoire + Ghana ~60% of world crop (ICCO)"],
+    "coffee":["Coffee",5,2,0,[],"Domestic (Karnataka); Brazil and Vietnam dominate world supply"],
+    "palm":["Palm oil",4,4,96,[],"Indonesia 58% + Malaysia 26% of world output (USDA)"]
+  },
+  prod: {
+    "ongc":{"crude":0.70,"natgas":0.15},
+    "coalindia":{"coal":0.85},
+    "tatasteel":{"steel":0.80},
+    "jswsteel":{"steel":0.80},
+    "hindalco":{"alum":0.45}
   },
   deps: {
     "reliance":{"crude":0.50,"natgas":0.04},
@@ -643,7 +704,7 @@ function show(id) {
   const ls = lensScores(id), avg = oavg(id), og = ograde(avg);
   const deps = DATA.deps[id]||{};
   const keys = Object.keys(deps).sort((a,b)=>deps[b]-deps[a]);
-  let h = `<div class="card"><button class="no-print" style="float:right;font-size:12px;padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink2);cursor:pointer" onclick="printBrief()">Print client brief</button><div style="font-size:18px;font-weight:600">${c.name}<span class="badge" style="background:${og[1]};color:#fff">overall: ${og[0].toLowerCase()}</span><span class="badge" style="background:transparent;border:1px solid ${g[1]};color:${g[1]}">commodity: ${g[0].toLowerCase()}</span><span class="badge b-${w}">${w==='none'?'no policy impact':'policy: '+w}</span></div><div class="meta">${c.sector}</div>`;
+  let h = `<div class="card"><span class="no-print" style="float:right;display:flex;gap:6px"><button style="font-size:12px;padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink2);cursor:pointer" onclick="goDeep('${id}')">Deep dive</button><button style="font-size:12px;padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink2);cursor:pointer" onclick="printBrief()">Print client brief</button></span><div style="font-size:18px;font-weight:600">${c.name}<span class="badge" style="background:${og[1]};color:#fff">overall: ${og[0].toLowerCase()}</span><span class="badge" style="background:transparent;border:1px solid ${g[1]};color:${g[1]}">commodity: ${g[0].toLowerCase()}</span><span class="badge b-${w}">${w==='none'?'no policy impact':'policy: '+w}</span></div><div class="meta">${c.sector}</div>`;
   h += `<div class="lbl">Balanced risk scorecard — ${avg.toFixed(1)} / 5 across six lenses</div>`;
   ls.forEach((s,i)=>{
     const col = s[0]>=4 ? '#E24B4A' : s[0]>=3 ? '#BA7517' : '#1D9E75';
@@ -666,22 +727,7 @@ function show(id) {
     });
     h += `<p class="meta" style="margin:8px 0 0">${DATA.anchors[id]||''}</p>`;
   }
-  const prods = DATA.products[id]||[];
-  if (prods.length) {
-    h += `<div class="lbl">Product vulnerability breakdown</div>`;
-    prods.forEach(p=>{
-      let ps = 0, tot = 0;
-      for (const k in p.mix) { const m = DATA.commodities[k]; ps += p.mix[k]*(0.4*m[2]/5 + 0.4*m[3]/100 + 0.2*m[1]/5)*100; tot += p.mix[k]; }
-      const pg = cgrade(ps);
-      const segs = Object.keys(p.mix).sort((a,b)=>p.mix[b]-p.mix[a]);
-      h += `<div style="margin:10px 0 14px">
-        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-weight:600;font-size:14px">${p.p}</span><span class="meta">~${Math.round(p.share*100)}% of revenue (est.)</span><span class="tag" style="background:transparent;border:1px solid ${pg[1]};color:${pg[1]}">vulnerability: ${pg[0].toLowerCase()}</span></div>
-        <div style="display:flex;gap:2px;height:14px;border-radius:4px;overflow:hidden;margin:6px 0;max-width:440px">${segs.map(k=>{const m=DATA.commodities[k];const col=m[2]>=5?'#E24B4A':m[2]>=3?'#BA7517':'#1D9E75';return `<span title="${m[0]} — ${Math.round(p.mix[k]*100)}% of product input cost, ${m[3]}% imported" style="width:${(p.mix[k]/tot*100).toFixed(1)}%;background:${col}"></span>`;}).join('')}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px">${segs.map(k=>{const m=DATA.commodities[k];return `<span class="pill">${m[0]} ${Math.round(p.mix[k]*100)}% · ${m[3]}% imp</span>`;}).join('')}</div>
-      </div>`;
-    });
-    h += `<p class="meta" style="margin:2px 0 6px">Revenue shares and product input mixes are estimates from segment disclosures; commodity ratings from the sourced reference data. Bar segment color = supply concentration of that input; segment width = share of the product's mapped input cost.</p>`;
-  }
+  h += prodHTML(id);
   const wt = DATA.watch[id]||[];
   if (wt.length) {
     h += `<div class="lbl">Risk factors and action openings</div>`;
@@ -763,7 +809,7 @@ async function loadLive() {
     sig.textContent = snap.note;
   }
 }
-const TABS = ['overview','companies','pipeline','calendar','cycles','methodology'];
+const TABS = ['overview','companies','deepdive','scenarios','commodities','pipeline','calendar','cycles','methodology'];
 function tab(t) {
   TABS.forEach(x => {
     document.getElementById('tab-'+x).style.display = x===t ? '' : 'none';
@@ -844,11 +890,175 @@ function renderOverview() {
 function printBrief() { document.body.classList.add('brief'); tab('companies'); setTimeout(() => window.print(), 50); }
 window.addEventListener('afterprint', () => document.body.classList.remove('brief'));
 
+function prodHTML(id) {
+  const prods = DATA.products[id]||[];
+  if (!prods.length) return '';
+  let o = `<div class="lbl">Product vulnerability breakdown</div>`;
+  prods.forEach(p=>{
+    let ps = 0, tot = 0;
+    for (const k in p.mix) { const m = DATA.commodities[k]; ps += p.mix[k]*(0.4*m[2]/5 + 0.4*m[3]/100 + 0.2*m[1]/5)*100; tot += p.mix[k]; }
+    const pg = cgrade(ps);
+    const segs = Object.keys(p.mix).sort((a,b)=>p.mix[b]-p.mix[a]);
+    o += `<div style="margin:10px 0 14px">
+      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-weight:600;font-size:14px">${p.p}</span><span class="meta">~${Math.round(p.share*100)}% of revenue (est.)</span><span class="tag" style="background:transparent;border:1px solid ${pg[1]};color:${pg[1]}">vulnerability: ${pg[0].toLowerCase()}</span></div>
+      <div style="display:flex;gap:2px;height:14px;border-radius:4px;overflow:hidden;margin:6px 0;max-width:440px">${segs.map(k=>{const m=DATA.commodities[k];const col=m[2]>=5?'#E24B4A':m[2]>=3?'#BA7517':'#1D9E75';return `<span title="${m[0]} — ${Math.round(p.mix[k]*100)}% of product input cost, ${m[3]}% imported" style="width:${(p.mix[k]/tot*100).toFixed(1)}%;background:${col}"></span>`;}).join('')}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">${segs.map(k=>{const m=DATA.commodities[k];return `<span class="pill" data-com="${k}" style="cursor:pointer">${m[0]} ${Math.round(p.mix[k]*100)}% · ${m[3]}% imp</span>`;}).join('')}</div>
+    </div>`;
+  });
+  o += `<p class="meta" style="margin:2px 0 6px">Revenue shares and product input mixes are estimates from segment disclosures; commodity ratings from the sourced reference data. Bar segment color = supply concentration of that input; segment width = share of the product's mapped input cost.</p>`;
+  return o;
+}
+
+const CONS = {};
+for (const k in DATA.commodities) (DATA.commodities[k][4]||[]).forEach(i => { (CONS[i] = CONS[i]||[]).push(k); });
+function closureOf(coId) {
+  const s = new Set(), st = Object.keys(DATA.deps[coId]||{});
+  while (st.length) { const c = st.pop(); if (!s.has(c)) { s.add(c); (DATA.commodities[c][4]||[]).forEach(i => st.push(i)); } }
+  return s;
+}
+const EV = {
+  inr:['Rupee −10% (currency stress)', null, 'Rupee depreciation applied as +10% × each commodity\'s import share — the India-specific stress. The rupee has already slid from 89.9 to ~95.4 in 2026; duty hikes and the RBI June package are official rupee defense.'],
+  oil22:['2022 oil shock (actual)', {crude:48, natgas:100}, 'Brent +48% to $139 after the Feb 2022 invasion; record Asian LNG prices. Crude is among India\'s largest import bills (PPAC).'],
+  coal22:['2021–22 coal crunch (actual)', {coal:120, metcoal:120}, 'Newcastle thermal coal hit ~$440/t and Australian coking coal ~$670/t; Indian power plants ran critical stock levels in Oct 2021.'],
+  cocoa24:['2024 cocoa crisis (actual)', {cocoa:177}, 'West African crop failure: cocoa +177% in 2024 to a record $12,646/t (ICCO / CNBC).'],
+  palm22:['2022 Indonesia palm ban (actual)', {palm:50}, 'Indonesia banned palm-oil exports in Apr 2022; CPO hit record highs. India imports ~96% of its palm oil.'],
+  gold25:['2025 gold rally (actual)', {gold:50}, 'Gold crossed $4,000/oz in Oct 2025, up ~50% for the year; India\'s gold import bill hit a record $72B in FY2025-26.'],
+  china:['China export curbs (policy)', {api:40, tio2:20, lithium:25}, 'Modeled: China supplies ≥70% of many Indian APIs (DoP 2026), most TiO2 imports, and refines ~65-70% of lithium (IEA).'],
+  chip21:['2021 chip shortage (actual)', {chips:20}, 'Maruti cut output up to ~40% in some months; JLR lost ~100k units. Modeled as +20% component cost.']
+};
+function evDirect(id) {
+  if (id === 'inr') { const d = {}; for (const c in DATA.commodities) if (DATA.commodities[c][3] > 0) d[c] = 10 * DATA.commodities[c][3] / 100; return d; }
+  return EV[id][1];
+}
+function propagate(direct) {
+  const sh = Object.assign({}, direct);
+  for (let k = 0; k < 6; k++) for (const c in DATA.commodities) {
+    let m = 0;
+    (DATA.commodities[c][4]||[]).forEach(i => { if (sh[i]) m = Math.max(m, sh[i] * 0.5); });
+    if (m > (sh[c]||0)) sh[c] = m;
+  }
+  return sh;
+}
+function netImpact(coId, sh) {
+  const d = DATA.deps[coId]||{}, pr = DATA.prod[coId]||{};
+  let t = 0;
+  for (const k in d) t += d[k] * (sh[k]||0);
+  for (const k in pr) t -= pr[k] * (sh[k]||0);
+  return t;
+}
+function simulate(id) {
+  const sh = propagate(evDirect(id));
+  document.getElementById('evd').textContent = EV[id][2];
+  document.getElementById('evchips').innerHTML = Object.keys(sh).sort((a,b)=>sh[b]-sh[a]).slice(0,8).map(c=>`<span class="pill" data-com="${c}" style="cursor:pointer">${DATA.commodities[c][0]} +${sh[c]<10?sh[c].toFixed(1):Math.round(sh[c])}%</span>`).join(' ');
+  const arr = DATA.companies.map(c => [c.id, c.name, netImpact(c.id, sh)]).sort((a,b)=>b[2]-a[2]);
+  const mx = Math.max(arr[0][2], 0.1);
+  document.getElementById('evimp').innerHTML = arr.filter((r,i)=>(i<12 && r[2]>0.05) || r[2]<-0.05).map(r=>{
+    const neg = r[2]<0, v = Math.abs(r[2]);
+    return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:340px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:88px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap">${neg?'−':'+'}${v.toFixed(1)}%${neg?' gain':''}</span></div>`;
+  }).join('') + `<p class="meta" style="margin:8px 0 0">* NTPC largely recovers fuel costs through regulated tariffs. Click a company for its deep dive.</p>`;
+  const rows = [];
+  for (const co in DATA.products) DATA.products[co].forEach(p => {
+    let t = 0; for (const k in p.mix) t += p.mix[k] * (sh[k]||0);
+    if (t > 0.5) rows.push([co, DATA.companies.find(x=>x.id===co).name, p.p, t]);
+  });
+  rows.sort((a,b)=>b[3]-a[3]);
+  const pm = rows.length ? rows[0][3] : 1;
+  document.getElementById('evprod').innerHTML = rows.slice(0,10).map(r=>
+    `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer;width:260px">${r[1]} — ${r[2]}</span><span class="cbar" style="max-width:300px"><span style="width:${Math.round(r[3]/pm*100)}%;background:#E24B4A"></span></span><span style="font-weight:600;white-space:nowrap">+${r[3].toFixed(1)}%</span></div>`
+  ).join('') || '<p class="meta">No product crosses the 0.5% input-cost threshold in this scenario.</p>';
+  document.querySelectorAll('#evb button').forEach(b => b.classList.toggle('on', b.dataset.ev === id));
+}
+function renderComGrid() {
+  const ids = Object.keys(DATA.commodities).sort((a,b)=>DATA.commodities[b][2]-DATA.commodities[a][2] || DATA.commodities[a][0].localeCompare(DATA.commodities[b][0]));
+  document.getElementById('comgrid').innerHTML = ids.map(k=>{
+    const m = DATA.commodities[k], col = m[2]>=5?'#E24B4A':m[2]>=3?'#BA7517':'#1D9E75';
+    return `<button class="co" data-com="${k}"><span class="cdot" style="background:${col}"></span>${m[0]}</button>`;
+  }).join('');
+}
+function showCom(k) {
+  const m = DATA.commodities[k];
+  const made = (m[4]||[]).map(i=>`<span class="pill" data-com="${i}" style="cursor:pointer">${DATA.commodities[i][0]}</span>`).join(' ');
+  const feeds = (CONS[k]||[]).map(i=>`<span class="pill" data-com="${i}" style="cursor:pointer">${DATA.commodities[i][0]}</span>`).join(' ');
+  const users = DATA.companies.filter(c=>closureOf(c.id).has(k)).map(c=>{
+    const w = (DATA.deps[c.id]||{})[k];
+    return `<span class="pill" data-dd="${c.id}" style="cursor:pointer">${c.name}${w?' · '+Math.round(w*100)+'%':' · indirect'}</span>`;
+  }).join(' ');
+  const row = (l,v) => v ? `<div class="lbl">${l}</div><div style="display:flex;flex-wrap:wrap;gap:6px">${v}</div>` : '';
+  document.getElementById('comdetail').innerHTML =
+    `<div style="font-size:17px;font-weight:600">${m[0]}</div>` +
+    `<div style="font-size:13px;color:var(--ink2);margin:2px 0 8px">Source: ${m[5]}</div>` +
+    `<div class="mrow"><span>Price volatility<br><b>${m[1]} / 5</b></span><span>Supply concentration<br><b>${m[2]} / 5</b></span><span>India import dependence<br><b>${m[3]}%</b></span></div>` +
+    row('Made from', made) + row('Feeds into', feeds) + row('Used by (direct % of cost base, or indirect via the chain)', users);
+}
+function chainHTML(k, depth, w) {
+  const m = DATA.commodities[k];
+  let o = `<div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:4px 0 4px ${depth*24}px;${depth?'':'border-top:1px solid var(--line)'}">` +
+    `<span style="font-weight:${depth?400:600};font-size:13px">${depth?'↳ ':''}${m[0]}</span>` +
+    (w != null ? `<span style="font-weight:600;font-size:13px">${Math.round(w*100)}%</span>` : '') +
+    `<span class="meta">${m[5]} · ${m[3]}% imported</span></div>`;
+  if (depth < 2) (m[4]||[]).forEach(i => o += chainHTML(i, depth+1, null));
+  return o;
+}
+function renderDeep(id) {
+  document.getElementById('ddsel').value = id;
+  const c = DATA.companies.find(x=>x.id===id);
+  const deps = DATA.deps[id]||{};
+  const g = ograde(oavg(id));
+  let h = `<div class="card"><div style="font-size:18px;font-weight:600">${c.name} <span class="badge" style="background:${g[1]};color:#fff">overall: ${g[0].toLowerCase()}</span></div><div class="meta">${c.sector} · ${DATA.anchors[id]||DATA.anchors._default}</div>`;
+  const keys = Object.keys(deps).sort((a,b)=>deps[b]-deps[a]);
+  if (keys.length) {
+    h += `<div class="lbl">Supply chain traced to source</div>`;
+    keys.forEach(k => h += chainHTML(k, 0, deps[k]));
+    h += `<p class="meta" style="margin:6px 0 0">Bold rows = direct inputs with share of cost base; indented rows = upstream inputs and their supply origin.</p>`;
+  } else {
+    h += `<p style="font-size:14px;color:var(--ink2)">${DATA.anchors._default}</p>`;
+  }
+  h += prodHTML(id);
+  const im = DATA.impacts[id]||[];
+  h += `<div class="lbl">Current policy exposure</div>`;
+  if (im.length) im.forEach(f => {
+    h += `<div style="margin:6px 0">${f.policies.map(p=>`<span class="pill">${p}</span>`).join('')}<span class="badge b-${f.risk}" style="margin-left:6px">${f.risk}</span><p style="font-size:14px;margin:6px 0">${f.exposure}</p></div>`;
+  });
+  else h += `<p style="font-size:14px;color:var(--ink2)">No policy impact recorded in the cycles to date.</p>`;
+  h += `<div class="lbl">Shock sensitivity — all scenarios</div>`;
+  const sens = Object.keys(EV).map(e => [EV[e][0], netImpact(id, propagate(evDirect(e)))]).sort((a,b)=>b[1]-a[1]);
+  const smx = Math.max(sens[0][1], 0.1);
+  sens.forEach(s => {
+    const neg = s[1] < 0, v = Math.abs(s[1]);
+    h += `<div class="crow"><span class="cn" style="width:230px">${s[0]}</span><span class="cbar" style="max-width:260px"><span style="width:${Math.min(100,Math.round(v/smx*100))}%;background:${neg?'#1D9E75':v<0.05?'var(--line)':'#E24B4A'}"></span></span><span style="font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap">${neg?'−':'+'}${v.toFixed(1)}%${neg?' gain':''}</span></div>`;
+  });
+  h += `</div>`;
+  document.getElementById('ddout').innerHTML = h;
+}
+function goDeep(id) { tab('deepdive'); renderDeep(id); }
+document.getElementById('ddsel').innerHTML = DATA.companies.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>`<option value="${c.id}">${c.name} — ${c.sector}</option>`).join('');
+document.getElementById('ddsel').addEventListener('change', e => renderDeep(e.target.value));
+document.getElementById('evb').innerHTML = Object.keys(EV).map(id=>`<button class="tabbtn" data-ev="${id}">${EV[id][0]}</button>`).join('');
+document.getElementById('tab-scenarios').addEventListener('click', e => {
+  const ev = e.target.closest('[data-ev]'); if (ev) { simulate(ev.dataset.ev); return; }
+  const cm = e.target.closest('[data-com]'); if (cm) { tab('commodities'); showCom(cm.dataset.com); return; }
+  const dd = e.target.closest('[data-dd]'); if (dd) goDeep(dd.dataset.dd);
+});
+document.getElementById('tab-commodities').addEventListener('click', e => {
+  const cm = e.target.closest('[data-com]'); if (cm) { showCom(cm.dataset.com); return; }
+  const dd = e.target.closest('[data-dd]'); if (dd) goDeep(dd.dataset.dd);
+});
+document.getElementById('tab-deepdive').addEventListener('click', e => {
+  const cm = e.target.closest('[data-com]'); if (cm) { tab('commodities'); showCom(cm.dataset.com); }
+});
+document.getElementById('panel').addEventListener('click', e => {
+  const cm = e.target.closest('[data-com]'); if (cm) { tab('commodities'); showCom(cm.dataset.com); }
+});
+
 drawGrid('');
 show('tatasteel');
 renderOverview();
 renderPipeline();
 renderCalendar();
+renderComGrid();
+showCom('crude');
+renderDeep('titan');
+simulate('oil22');
 loadLive();
 </script>
 </body>
