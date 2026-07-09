@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trade policy monitor — company reports</title>
+<title>Commodity &amp; Treasury Risk Radar — India</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23185FA5'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <style>
 :root{--bg:#faf9f5;--card:#ffffff;--ink:#1a1a19;--ink2:#52514e;--ink3:#898781;--line:rgba(0,0,0,.12);--accent:#185FA5;--red:#A32D2D;--redbg:#FCEBEB;--amber:#854F0B;--amberbg:#FAEEDA;--teal:#0F6E56;--tealbg:#E1F5EE}
 @media(prefers-color-scheme:dark){:root{--bg:#1a1a19;--card:#242423;--ink:#f0efec;--ink2:#c3c2b7;--ink3:#898781;--line:rgba(255,255,255,.14);--accent:#85B7EB;--red:#F09595;--redbg:#501313;--amber:#FAC775;--amberbg:#412402;--teal:#9FE1CB;--tealbg:#04342C}}
@@ -56,6 +57,20 @@ table.t{width:100%;border-collapse:collapse;font-size:13px}
 .t tr[data-go]{cursor:pointer}
 .t tr[data-go]:hover td{background:var(--bg)}
 select.st{padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font-size:12px}
+body{-webkit-font-smoothing:antialiased}
+h1{letter-spacing:-0.015em}
+.tabs{position:sticky;top:0;z-index:30;background:var(--bg);padding:10px 0;margin:14px 0 16px;border-bottom:1px solid var(--line)}
+.tabbtn{transition:color .15s,border-color .15s}
+.tabbtn:hover{border-color:var(--accent);color:var(--accent)}
+.co{transition:border-color .15s,transform .12s,box-shadow .12s}
+.co:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.10)}
+.hub{transition:background .15s}
+.card{box-shadow:0 1px 2px rgba(0,0,0,.05)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.kpi b{font-variant-numeric:tabular-nums}
+.kcap{font-size:11.5px;color:var(--ink3);margin-top:4px;line-height:1.45}
+.cbar span{border-radius:3px}
+a{cursor:pointer}
 @media print{body.brief .wrap>*:not(#tab-companies){display:none!important}body.brief #tab-companies>*:not(#panel){display:none!important}body{background:#fff}.no-print{display:none!important}}
 </style>
 </head>
@@ -83,6 +98,7 @@ select.st{padding:3px 6px;border:1px solid var(--line);border-radius:6px;backgro
 </div>
 
 <div id="tab-overview">
+  <p class="sub" style="margin:0 0 10px">First time here? <a onclick="tab('methodology')">Open the 60-second reader's guide</a> — every term, color, and policy explained in plain English.</p>
   <div class="kpis" id="kpis"></div>
   <h2>Priority targets</h2>
   <div class="card" style="overflow-x:auto"><table class="t" id="toptargets"></table></div>
@@ -786,6 +802,7 @@ function show(id) {
     let sw = 0, sc = 0, si = 0;
     keys.forEach(k=>{ const m = DATA.commodities[k]; sw += deps[k]; sc += deps[k]*m[2]; si += deps[k]*m[3]; });
     h += `<div class="mrow"><span>Cost base mapped<br><b>${Math.round(sw*100)}%</b></span><span>Supply concentration<br><b>${(sc/sw).toFixed(1)} / 5</b></span><span>Import dependence<br><b>${Math.round(si/sw)}%</b></span><span>Overall<br><b style="color:${g[1]}">${g[0]}</b></span></div>`;
+    h += `<p class="kcap" style="margin:0 0 8px">How to weigh these: cost base mapped = how much of spending is commodity-driven; concentration near 5 = chokepoint supply that reprices instantly on disruption; import dependence = the share paid in foreign currency, which rupee weakness hits directly. The overall grade blends all three, weighted by cost share.</p>`;
     keys.forEach(k=>{
       const m = DATA.commodities[k], t = concTag(m[2]);
       h += `<div class="crow"><span class="cn">${m[0]}</span><span class="cbar"><span style="width:${Math.min(100,Math.round(deps[k]/0.6*100))}%"></span></span><span style="width:38px;font-weight:600">${Math.round(deps[k]*100)}%</span><span class="tag ${t[1]}">${t[0]}</span><span class="meta" style="width:96px">${m[3]}% imported</span></div>`;
@@ -936,10 +953,14 @@ function renderOverview() {
   let openings = 0; for (const id in DATA.watch) openings += DATA.watch[id].length;
   const pr = pipeRows().length;
   const days = Math.ceil((new Date('2026-09-30') - Date.now())/86400000);
-  const kpi = (v,l) => `<div class="kpi"><b>${v}</b><span>${l}</span></div>`;
+  const kpi = (v,l,cap) => `<div class="kpi"><b>${v}</b><span>${l}</span>${cap?`<div class="kcap">${cap}</div>`:''}</div>`;
   document.getElementById('kpis').innerHTML =
-    kpi(DATA.companies.length,'companies tracked') + kpi(urgent,'urgent policy impacts') + kpi(material,'material impacts') +
-    kpi(openings,'action openings identified') + kpi(pr,'pipeline opportunities') + kpi(days + 'd','to FCNR window close');
+    kpi(DATA.companies.length,'companies tracked','The 34 largest listed names — any top-25 cut is a subset') +
+    kpi(urgent,'urgent policy impacts','Rules already in force that compel action now') +
+    kpi(material,'material impacts','Significant exposure with an open action window') +
+    kpi(openings,'action openings','Documented weaknesses mapped to a sellable service') +
+    kpi(pr,'pipeline opportunities','Deadline-ranked in the Pipeline tab') +
+    kpi(days + 'd','to FCNR window close','Hard RBI deadline — subsidized hedging ends 30 Sep 2026');
   const score = id => { const w = worst(DATA.impacts[id]||[]); return (w==='urgent'?3:w==='material'?2:w==='watch'?1:0)*2 + oavg(id); };
   const top = DATA.companies.slice().sort((a,b)=>score(b.id)-score(a.id)).slice(0,6);
   document.getElementById('toptargets').innerHTML =
@@ -1064,6 +1085,48 @@ function chainHTML(k, depth, w) {
   if (depth < 2) (m[4]||[]).forEach(i => o += chainHTML(i, depth+1, null));
   return o;
 }
+function flowSVG(id) {
+  const deps = DATA.deps[id]||{};
+  const direct = Object.keys(deps).sort((a,b)=>deps[b]-deps[a]);
+  if (!direct.length) return '';
+  const depth = {};
+  const walk = (k,d) => { if (depth[k]==null || d>depth[k]) { depth[k]=d; if (d<3) (DATA.commodities[k][4]||[]).forEach(i=>walk(i,d+1)); } };
+  direct.forEach(k=>walk(k,1));
+  const maxd = Math.max.apply(null, Object.values(depth));
+  const W = 900, colW = (W-16)/(maxd+1), nodeW = Math.min(185, Math.round(colW-18));
+  const cols = []; for (let i=0;i<=maxd;i++) cols.push([]);
+  cols[1] = direct.slice();
+  const rowIdx = {}; cols[1].forEach((k,i)=>rowIdx[k]=i);
+  for (let d=2; d<=maxd; d++) {
+    const ids = Object.keys(depth).filter(k=>depth[k]===d);
+    ids.sort((a,b)=>{ const key = k => Math.min.apply(null,(CONS[k]||[]).filter(c=>rowIdx[c]!=null).map(c=>rowIdx[c]).concat([99])); return key(a)-key(b); });
+    cols[d] = ids; ids.forEach((k,i)=>rowIdx[k]=i);
+  }
+  const maxRows = Math.max.apply(null, cols.map(c=>c.length||1));
+  const H = maxRows*58 + 16;
+  const pos = {};
+  for (let d=1; d<=maxd; d++) cols[d].forEach((k,i)=>pos[k]={x: Math.round(8+d*colW+9), y: 8+i*58});
+  const coY = Math.max(8, H/2 - 24);
+  let edges = '', nodes = '';
+  direct.forEach(k=>{
+    const p = pos[k], ew = Math.min(5, 1+deps[k]*16);
+    edges += `<path d="M ${8+nodeW} ${coY+24} C ${8+nodeW+42} ${coY+24}, ${p.x-42} ${p.y+24}, ${p.x} ${p.y+24}" fill="none" stroke="var(--ink3)" stroke-opacity="0.5" stroke-width="${ew.toFixed(1)}"/>`;
+  });
+  for (const k in depth) (DATA.commodities[k][4]||[]).forEach(inp=>{
+    if (depth[inp]!=null && depth[inp]>depth[k]) {
+      const a = pos[k], b = pos[inp];
+      edges += `<path d="M ${a.x+nodeW} ${a.y+24} C ${a.x+nodeW+42} ${a.y+24}, ${b.x-42} ${b.y+24}, ${b.x} ${b.y+24}" fill="none" stroke="var(--ink3)" stroke-opacity="0.32" stroke-width="1.2"/>`;
+    }
+  });
+  const ci = DATA.companies.find(x=>x.id===id);
+  nodes += `<g><rect x="8" y="${coY}" width="${nodeW}" height="48" rx="8" fill="var(--accent)" fill-opacity="0.12" stroke="var(--accent)"/><text x="${8+nodeW/2}" y="${coY+20}" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--ink)">${ci.name.length>22?ci.name.slice(0,21)+'…':ci.name}</text><text x="${8+nodeW/2}" y="${coY+36}" text-anchor="middle" font-size="10.5" fill="var(--ink3)">${ci.sector.split(',')[0]}</text></g>`;
+  for (const k in pos) {
+    const m = DATA.commodities[k], p = pos[k], w = deps[k];
+    const col = m[2]>=5?'#E24B4A':m[2]>=3?'#BA7517':'#1D9E75';
+    nodes += `<g data-com="${k}" style="cursor:pointer"><rect x="${p.x}" y="${p.y}" width="${nodeW}" height="48" rx="8" fill="${col}" fill-opacity="0.12" stroke="${col}"/><text x="${p.x+nodeW/2}" y="${p.y+19}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)">${m[0].length>21?m[0].slice(0,20)+'…':m[0]}</text><text x="${p.x+nodeW/2}" y="${p.y+35}" text-anchor="middle" font-size="10.5" fill="var(--ink3)">${w?Math.round(w*100)+'% of cost base · ':''}${m[3]}% imported</text><title>${m[0]} — ${m[5]}</title></g>`;
+  }
+  return `<div class="lbl">Commodity flowchart — inputs traced upstream</div><div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:700px" role="img" aria-label="Flowchart of ${ci.name} commodity inputs traced back to raw sources">${edges}${nodes}</svg></div><p class="meta" style="margin:2px 0 10px">Edge thickness = share of cost base. Node color = supply concentration (red = chokepoint). Hover a node for its supply origin; click it for the full commodity profile.</p>`;
+}
 function renderDeep(id) {
   document.getElementById('ddsel').value = id;
   const c = DATA.companies.find(x=>x.id===id);
@@ -1072,9 +1135,10 @@ function renderDeep(id) {
   let h = `<div class="card"><div style="font-size:18px;font-weight:600">${c.name} <span class="badge" style="background:${g[1]};color:#fff">overall: ${g[0].toLowerCase()}</span></div><div class="meta">${c.sector} · ${DATA.anchors[id]||DATA.anchors._default}</div>`;
   const keys = Object.keys(deps).sort((a,b)=>deps[b]-deps[a]);
   if (keys.length) {
-    h += `<div class="lbl">Supply chain traced to source</div>`;
+    h += flowSVG(id);
+    h += `<details style="margin:0 0 8px"><summary style="font-size:13px;color:var(--ink2)">Text view — every input with origin and source detail</summary>`;
     keys.forEach(k => h += chainHTML(k, 0, deps[k]));
-    h += `<p class="meta" style="margin:6px 0 0">Bold rows = direct inputs with share of cost base; indented rows = upstream inputs and their supply origin.</p>`;
+    h += `<p class="meta" style="margin:6px 0 0">Bold rows = direct inputs with share of cost base; indented rows = upstream inputs and their supply origin.</p></details>`;
   } else {
     h += `<p style="font-size:14px;color:var(--ink2)">${DATA.anchors._default}</p>`;
   }
