@@ -144,10 +144,25 @@ h1{animation:rise .45s cubic-bezier(.22,1,.36,1) backwards}
 .tabs .tabbtn{animation:rise .4s cubic-bezier(.22,1,.36,1) backwards}
 .tabs .tabbtn:nth-child(1){animation-delay:.02s}.tabs .tabbtn:nth-child(2){animation-delay:.05s}.tabs .tabbtn:nth-child(3){animation-delay:.08s}.tabs .tabbtn:nth-child(4){animation-delay:.11s}.tabs .tabbtn:nth-child(5){animation-delay:.14s}.tabs .tabbtn:nth-child(6){animation-delay:.17s}.tabs .tabbtn:nth-child(7){animation-delay:.2s}.tabs .tabbtn:nth-child(8){animation-delay:.23s}.tabs .tabbtn:nth-child(9){animation-delay:.26s}
 @media print{:root{--bg:#fff;--card:#F5F5F3;--card2:#EBEBE8;--ink:#101013;--ink2:#43434A;--ink3:#6B6B72;--line:rgba(16,16,19,.1);--accent:#002FA7;--redbg:#F7E9E6;--red:#A63A22;--amberbg:#F3ECDC;--amber:#7D591A;--tealbg:#E4EFE8;--teal:#1E5F43}body::before{display:none}}
+input[type=range]{-webkit-appearance:none;appearance:none;height:22px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:3px;background:var(--card2)}
+input[type=range]::-moz-range-track{height:4px;border-radius:3px;background:var(--card2)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);margin-top:-6px;box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent);transition:box-shadow .15s}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 24%,transparent)}
+input[type=range]:active::-webkit-slider-thumb{box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 28%,transparent)}
+/* Editorial theme — units.gr-inspired bright minimalism: true off-white, charcoal ink, generous air, one confident accent */
+body.editorial{--bg:#FBFBFA;--card:#F3F3F1;--card2:#EAEAE7;--ink:#16171A;--ink2:#54555B;--ink3:#87888E;--line:rgba(20,22,26,.09);--accent:#1B3BB3;--redbg:#F7E9E6;--red:#A3341C;--amberbg:#F3ECDA;--amber:#7A5410;--tealbg:#E2EFE7;--teal:#1B5E40}
+body.editorial::before{background:radial-gradient(760px 440px at 88% -6%,rgba(27,59,179,.05),transparent 62%)}
+body.editorial h1{letter-spacing:-0.035em}
+body.editorial .card{box-shadow:0 1px 2px rgba(16,16,19,.05)}
+body.editorial ::selection{background:var(--accent);color:#fff}
+.themebtn{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.06em;color:var(--ink3);border:1px solid var(--line);border-radius:6px;padding:3px 9px;cursor:pointer;background:var(--card);text-transform:uppercase}
+.themebtn:hover{color:var(--accent);border-color:var(--accent)}
 </style>
 </head>
 <body>
-<div class="brand no-print">Risk Radar<button class="kbd" onclick="cmdOpen()" title="Open command menu">Ctrl K</button></div>
+<div class="brand no-print">Risk Radar<button class="kbd" onclick="cmdOpen()" title="Open command menu">Ctrl K</button><button class="themebtn" id="themebtn" onclick="toggleTheme()" title="Switch visual theme">Terminal</button></div>
 <div class="wrap">
 <h1>Commodity &amp; treasury risk radar — India large caps</h1>
 <p class="sub">Strategy &amp; risk accelerator: weekly policy monitoring, six-lens company risk assessment, and a live engagement pipeline for commodity and treasury advisory. Public official sources and company disclosures only. Latest cycle: <span id="lastcycle"></span> — regenerated weekly by a six-agent pipeline (planner → document scout → risk analyst → company mapper → rival monitor → service mapper).</p>
@@ -198,11 +213,19 @@ h1{animation:rise .45s cubic-bezier(.22,1,.36,1) backwards}
 </div>
 
 <div id="tab-scenarios" style="display:none">
-  <h2>Shock scenarios</h2>
-  <p class="sub" style="margin-bottom:10px">Replay actual events or stress policy moves. Shocks cascade through the commodity input graph at 50% pass-through per processing step — structural exposure, not price forecasts.</p>
-  <div id="evb" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"></div>
-  <p id="evd" class="sub" style="margin-bottom:6px"></p>
-  <div id="evchips" style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px"></div>
+  <h2>Stress lab</h2>
+  <p class="sub" style="margin-bottom:18px">Stack real events, then fine-tune with custom dials. Shocks cascade through the commodity input graph at 50% pass-through per processing step — structural exposure, not price forecasts.</p>
+  <div class="lbl">Preset events — click to stack, combine as many as you like</div>
+  <div id="evb" style="display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 6px"></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 2px">
+    <button class="ghost" onclick="scReset()">Reset all</button>
+    <button class="ghost" onclick="scClearManual()">Clear custom dials</button>
+  </div>
+  <p id="evd" class="sub" style="margin:8px 0 22px;min-height:20px"></p>
+  <div class="lbl">Custom shock dials — drag to override a preset or add your own</div>
+  <div class="card" id="scdials" style="margin:10px 0 22px"></div>
+  <div class="lbl">Combined direct shock applied</div>
+  <div id="evchips" style="display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 26px;min-height:26px"></div>
   <h2 style="font-size:15px">Company impact — net of producer gains</h2>
   <div class="card" id="evimp"></div>
   <h2 style="font-size:15px">Most exposed products</h2>
@@ -1113,27 +1136,56 @@ function netImpact(coId, sh) {
   for (const k in pr) t -= pr[k] * (sh[k]||0);
   return t;
 }
-function simulate(id) {
-  const sh = propagate(evDirect(id));
-  document.getElementById('evd').textContent = EV[id][2];
-  document.getElementById('evchips').innerHTML = Object.keys(sh).sort((a,b)=>sh[b]-sh[a]).slice(0,8).map(c=>`<span class="pill" data-com="${c}" style="cursor:pointer">${DATA.commodities[c][0]} +${sh[c]<10?sh[c].toFixed(1):Math.round(sh[c])}%</span>`).join(' ');
+const SCDIALS = ['crude','natgas','coal','metcoal','ironore','steel','alum','copper','gold','lithium','chips','pallad','api','tio2','palm','cocoa','coffee','natrub','wheat','sugar'];
+let scActive = new Set(), scManual = {};
+function presetVec() { const v = {}; scActive.forEach(id => { const d = evDirect(id); for (const c in d) v[c] = Math.max(v[c]||0, d[c]); }); return v; }
+function combinedDirect() { const v = presetVec(); for (const c in scManual) v[c] = scManual[c]; const out = {}; for (const c in v) if (v[c] > 0) out[c] = v[c]; return out; }
+window.scToggle = id => { if (scActive.has(id)) scActive.delete(id); else scActive.add(id); scSync(); };
+window.scReset = () => { scActive.clear(); scManual = {}; scSync(); };
+window.scClearManual = () => { scManual = {}; scSync(); };
+function scSetDial(c, v) { scManual[c] = v; scSync(); }
+function simulate(id) { scActive = new Set([id]); scManual = {}; scSync(); }
+function renderDials() {
+  document.getElementById('scdials').innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4px 26px">` + SCDIALS.map(c => {
+    const m = DATA.commodities[c];
+    return `<div style="display:flex;align-items:center;gap:12px;margin:6px 0"><span style="width:104px;font-size:12.5px;color:var(--ink2)">${m[0]}</span><input type="range" id="dial-${c}" min="0" max="150" step="5" value="0" data-dial="${c}" style="flex:1;min-width:80px"><span id="dialv-${c}" style="width:52px;text-align:right;font-family:'Spline Sans Mono',ui-monospace,monospace;font-weight:600;font-size:12.5px;color:var(--ink3)">+0%</span></div>`;
+  }).join('') + `</div>`;
+}
+function scSync() {
+  const pv = presetVec();
+  document.querySelectorAll('#evb [data-ev]').forEach(b => b.classList.toggle('on', scActive.has(b.dataset.ev)));
+  SCDIALS.forEach(c => {
+    const man = scManual[c] !== undefined, eff = man ? scManual[c] : (pv[c]||0);
+    const sl = document.getElementById('dial-'+c); if (sl) sl.value = Math.round(eff);
+    const out = document.getElementById('dialv-'+c);
+    if (out) { out.textContent = '+' + Math.round(eff) + '%'; out.style.color = eff>=60?'#E24B4A':eff>=25?'#BA7517':eff>0?'var(--ink)':'var(--ink3)'; out.style.textDecoration = man && eff>0 ? 'underline' : 'none'; }
+  });
+  const names = [...scActive].map(id => EV[id][0]), nm = Object.keys(scManual).filter(c=>scManual[c]>0).length;
+  document.getElementById('evd').textContent = names.length
+    ? 'Stacked: ' + names.join('  +  ') + (nm ? '  +  ' + nm + ' custom dial' + (nm>1?'s':'') : '') + '. Overlapping shocks combine at the larger value.'
+    : (nm ? 'Custom shock — ' + nm + ' dial' + (nm>1?'s':'') + ' set. Add a preset to layer real events on top.' : 'Pick one or more preset events, or drag a dial to build a custom shock.');
+  scCompute();
+}
+function scCompute() {
+  const sh = propagate(combinedDirect());
+  const keys = Object.keys(sh).sort((a,b)=>sh[b]-sh[a]);
+  document.getElementById('evchips').innerHTML = keys.length
+    ? keys.slice(0,10).map(c=>`<span class="pill" data-com="${c}" style="cursor:pointer">${DATA.commodities[c][0]} +${sh[c]<10?sh[c].toFixed(1):Math.round(sh[c])}%</span>`).join('')
+    : `<span class="meta">No shock applied yet.</span>`;
   const arr = DATA.companies.map(c => [c.id, c.name, netImpact(c.id, sh)]).sort((a,b)=>b[2]-a[2]);
-  const mx = Math.max(arr[0][2], 0.1);
-  document.getElementById('evimp').innerHTML = arr.filter((r,i)=>(i<12 && r[2]>0.05) || r[2]<-0.05).map(r=>{
+  const mx = Math.max(arr[0][2], Math.abs(arr[arr.length-1][2]), 0.1);
+  const shown = arr.filter((r,i)=>(i<12 && r[2]>0.05) || r[2]<-0.05);
+  document.getElementById('evimp').innerHTML = (shown.length ? shown.map(r=>{
     const neg = r[2]<0, v = Math.abs(r[2]);
     return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:320px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:118px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap">${neg?'tailwind ≈ '+v.toFixed(1)+'%':'+'+v.toFixed(1)+'%'}</span></div>`;
-  }).join('') + `<p class="meta" style="margin:8px 0 0">Red = input costs inflate. Green = net beneficiary: the company produces the shocked commodity, so revenue gains exceed its own cost pressure (magnitude expressed relative to cost base, before hedging, price regulation, or windfall levies). * NTPC largely recovers fuel costs through regulated tariffs. Click a company for its deep dive.</p>`;
+  }).join('') : `<p class="meta">Build a shock above to see company impact.</p>`) + `<p class="meta" style="margin:10px 0 0">Red = input costs inflate. Green = net beneficiary: the company produces the shocked commodity, so revenue gains exceed its own cost pressure (relative to cost base, before hedging, price regulation, or windfall levies). * NTPC largely recovers fuel costs through regulated tariffs. Click a company for its deep dive.</p>`;
   const rows = [];
-  for (const co in DATA.products) DATA.products[co].forEach(p => {
-    let t = 0; for (const k in p.mix) t += p.mix[k] * (sh[k]||0);
-    if (t > 0.5) rows.push([co, DATA.companies.find(x=>x.id===co).name, p.p, t]);
-  });
+  for (const co in DATA.products) DATA.products[co].forEach(p => { let t = 0; for (const k in p.mix) t += p.mix[k] * (sh[k]||0); if (t > 0.5) rows.push([co, DATA.companies.find(x=>x.id===co).name, p.p, t]); });
   rows.sort((a,b)=>b[3]-a[3]);
   const pm = rows.length ? rows[0][3] : 1;
   document.getElementById('evprod').innerHTML = rows.slice(0,10).map(r=>
     `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer;width:260px">${r[1]} — ${r[2]}</span><span class="cbar" style="max-width:300px"><span style="width:${Math.round(r[3]/pm*100)}%;background:#E24B4A"></span></span><span style="font-weight:600;white-space:nowrap">+${r[3].toFixed(1)}%</span></div>`
-  ).join('') || '<p class="meta">No product crosses the 0.5% input-cost threshold in this scenario.</p>';
-  document.querySelectorAll('#evb button').forEach(b => b.classList.toggle('on', b.dataset.ev === id));
+  ).join('') || '<p class="meta">No product crosses the 0.5% input-cost threshold in this shock.</p>';
 }
 function renderComGrid() {
   const ids = Object.keys(DATA.commodities).sort((a,b)=>DATA.commodities[b][2]-DATA.commodities[a][2] || DATA.commodities[a][0].localeCompare(DATA.commodities[b][0]));
@@ -1243,10 +1295,12 @@ function renderDeep(id) {
 function goDeep(id) { tab('deepdive'); renderDeep(id); }
 document.getElementById('ddsel').innerHTML = DATA.companies.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>`<option value="${c.id}">${c.name} — ${c.sector}</option>`).join('');
 document.getElementById('ddsel').addEventListener('change', e => renderDeep(e.target.value));
-document.getElementById('evb').innerHTML = Object.keys(EV).map(id=>`<button class="tabbtn" data-ev="${id}">${EV[id][0]}</button>`).join('');
+document.getElementById('evb').innerHTML = Object.keys(EV).map(id=>`<button class="tabbtn" data-ev="${id}" title="${EV[id][2]}">${EV[id][0]}</button>`).join('');
+renderDials();
+document.getElementById('scdials').addEventListener('input', e => { const s = e.target.closest('[data-dial]'); if (s) scSetDial(s.dataset.dial, +s.value); });
 document.getElementById('tab-scenarios').addEventListener('click', e => {
-  const ev = e.target.closest('[data-ev]'); if (ev) { simulate(ev.dataset.ev); return; }
-  const cm = e.target.closest('[data-com]'); if (cm) { tab('commodities'); showCom(cm.dataset.com); return; }
+  const ev = e.target.closest('[data-ev]'); if (ev) { scToggle(ev.dataset.ev); return; }
+  const cm = e.target.closest('[data-com]'); if (cm) { tab('commodities'); MM.sel = cm.dataset.com; renderMindMap(); showCom(cm.dataset.com); return; }
   const dd = e.target.closest('[data-dd]'); if (dd) goDeep(dd.dataset.dd);
 });
 document.getElementById('tab-commodities').addEventListener('click', e => {
@@ -1549,6 +1603,8 @@ renderQuad();
 renderPipeline();
 renderCalendar();
 renderTimeline();
+window.toggleTheme = () => { const ed = document.body.classList.toggle('editorial'); document.getElementById('themebtn').textContent = ed ? 'Editorial' : 'Terminal'; try { localStorage.setItem('tpm-theme', ed ? 'editorial' : 'terminal'); } catch(e) {} };
+try { if (localStorage.getItem('tpm-theme') === 'editorial') { document.body.classList.add('editorial'); document.getElementById('themebtn').textContent = 'Editorial'; } } catch(e) {}
 renderComGrid();
 renderMindMap();
 showCom('crude');
