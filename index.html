@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commodity &amp; Treasury Risk Radar — India</title>
-<meta name="build" content="2026-07-09-cockpit-v8">
+<meta name="build" content="2026-07-09-risk-os-v9">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -240,6 +240,8 @@ h2{color:var(--th)}
       <button data-persona="partner" class="on">Partner</button>
       <button data-persona="director">Director</button>
       <button data-persona="analyst">Analyst</button>
+      <button data-persona="treasury">Treasury</button>
+      <button data-persona="commodity">Commodity</button>
     </div>
     <span class="lab" id="lastupd">updated —</span>
   </div>
@@ -269,15 +271,11 @@ h2{color:var(--th)}
 <div id="tab-cockpit">
   <div class="kpis" id="ckHero"></div>
   <div id="ckThresholds" style="margin:2px 0 4px"></div>
-  <div id="ckA"></div>
-  <div id="ckB"></div>
-  <div id="ckC"></div>
-  <div id="ckD"></div>
-  <div id="ckE"></div>
+  <div id="ckBody"></div>
 </div>
 
 <div id="tab-overview" style="display:none">
-  <p class="sub" style="margin:0 0 10px">First time here? <a onclick="tab('methodology')">Open the 60-second reader's guide</a> — every term, color, and policy explained in plain English.</p>
+  <p class="sub" id="firsttime" style="margin:0 0 10px;display:none">First time here? <a onclick="tab('methodology')">Open the 60-second reader's guide</a> — every term, color, and policy explained in plain English. <span class="lab" style="cursor:pointer" onclick="document.getElementById('firsttime').style.display='none';try{localStorage.setItem('tpm-seen','1')}catch(e){}">dismiss ✕</span></p>
   <div class="kpis" id="kpis"></div>
   <div id="gradestrip"></div>
   <h2>Risk landscape</h2>
@@ -305,7 +303,7 @@ h2{color:var(--th)}
 
 <div id="tab-scenarios" style="display:none">
   <h2>Stress lab</h2>
-  <p class="sub" style="margin-bottom:18px">Stack real events, then fine-tune with custom dials. Shocks cascade through the commodity input graph at 50% pass-through per processing step — structural exposure, not price forecasts.</p>
+  <p class="sub" style="margin-bottom:18px">Stack real events, then fine-tune with custom dials in either direction. Company margin impact applies sector-specific cost pass-through (editable below), not a flat rate. <b style="color:var(--ink2)">Modelled estimate, not a forecast.</b></p>
   <div class="lbl">Preset events — click to stack, combine as many as you like</div>
   <div id="evb" style="display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 6px"></div>
   <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 2px">
@@ -315,9 +313,11 @@ h2{color:var(--th)}
   <p id="evd" class="sub" style="margin:8px 0 22px;min-height:20px"></p>
   <div class="lbl">Custom shock dials — drag to override a preset or add your own</div>
   <div class="card" id="scdials" style="margin:10px 0 22px"></div>
+  <div class="lbl">Assumption editor — how the shock hits margin</div>
+  <div class="card" id="scassume" style="margin:10px 0 22px"></div>
   <div class="lbl">Combined direct shock applied</div>
   <div id="evchips" style="display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 26px;min-height:26px"></div>
-  <h2 style="font-size:15px">Company impact — net of producer gains</h2>
+  <h2 style="font-size:15px">Company margin impact — after pass-through, hedge & inventory</h2>
   <div class="card" id="evimp"></div>
   <h2 style="font-size:15px">Most exposed products</h2>
   <div class="card" id="evprod"></div>
@@ -355,16 +355,16 @@ h2{color:var(--th)}
 
   <div class="card">
     <div style="font-weight:600;margin-bottom:6px">The 60-second tour</div>
-    <p style="font-size:14px;margin:4px 0">This dashboard answers one question: <b>which large Indian companies are exposed to commodity prices, currency moves, and trade policy — and how badly.</b> Suggested path: start on <b>Overview</b> (the headline numbers and top targets), click a company to see its full risk brief, open <b>Deep dive</b> for its supply chain traced back to raw sources, then try <b>Scenarios</b> to replay real events like the 2022 oil shock and watch who gets hurt and who gains.</p>
+    <p style="font-size:14px;margin:4px 0">This product answers: <b>what changed, who is exposed, how bad it gets under stress, what breached, and what to do next.</b> Suggested path: start on <b>Cockpit</b> (top movers, priority risks, breaches), switch persona to reframe it, click any risk for the drill-down drawer, then open the <b>Stress lab</b> to combine shocks and edit pass-through assumptions.</p>
     <details><summary>What each tab does</summary><ul style="font-size:14px">
-      <li><b>Overview</b> — headline counts, the six highest-priority companies, and the next hard regulatory deadlines.</li>
-      <li><b>Companies</b> — every company's full brief: risk scores, commodity dependencies, products, weaknesses, and policy impacts.</li>
-      <li><b>Deep dive</b> — one company end to end: where every input physically comes from, product-by-product vulnerability, and how it fares in every shock scenario.</li>
-      <li><b>Scenarios</b> — pick a real historical shock or policy stress; the model spreads it through the supply chain and ranks companies and products by damage.</li>
-      <li><b>Commodities</b> — the relationship map: what is made from what, whose prices move together, and which countries control supply.</li>
-      <li><b>Pipeline</b> — the resulting business-development opportunities with deadlines and a pursuit tracker.</li>
-      <li><b>Calendar</b> — dated regulatory obligations with live countdowns.</li>
-      <li><b>Weekly cycles</b> — the raw weekly research reports with every source cited.</li>
+      <li><b>Cockpit</b> — the workbench: top movers, composite-scored priority risks, exposure map, concentration, counterparty and breach queues, and the output center. Reorders by persona.</li>
+      <li><b>Who is exposed</b> — every company's full brief: composite risk scores, commodity dependencies, products, weaknesses, and policy impacts.</li>
+      <li><b>Company deep dive</b> — one company end to end: where every input physically comes from, product-by-product vulnerability, and its sensitivity to every shock.</li>
+      <li><b>Stress lab</b> — stack real or custom shocks in either direction, edit sector pass-through / hedge / inventory assumptions, and rank company margin impact by band.</li>
+      <li><b>Commodity map</b> — the relationship map: what is made from what, whose prices move together, and which countries control supply.</li>
+      <li><b>Advisory pipeline</b> — the resulting engagement opportunities with deadlines and a pursuit tracker.</li>
+      <li><b>Deadlines</b> — dated regulatory obligations with live countdowns.</li>
+      <li><b>Risk landscape / Evidence log</b> — the analytical quadrant, and the raw weekly research reports with every source cited.</li>
     </ul></details>
     <details><summary>How to read the colors and shapes</summary><ul style="font-size:14px">
       <li><b>Red / amber / green nodes and squares</b> — supply concentration: red means one country or a handful of suppliers controls the market (cobalt-style chokepoint); green means supply is spread out.</li>
@@ -1304,13 +1304,17 @@ function scCompute() {
   document.getElementById('evchips').innerHTML = keys.length
     ? keys.slice(0,10).map(c=>`<span class="pill" data-com="${c}" style="cursor:pointer${sh[c]<0?';color:var(--teal)':''}">${DATA.commodities[c][0]} ${sgn(sh[c])}%</span>`).join('')
     : `<span class="meta">No shock applied yet.</span>`;
-  const arr = DATA.companies.map(c => [c.id, c.name, netImpact(c.id, sh)]).sort((a,b)=>b[2]-a[2]);
-  const mx = Math.max(arr[0][2], Math.abs(arr[arr.length-1][2]), 0.1);
+  const arr = DATA.companies.map(c => [c.id, c.name, marginImpact(c.id, sh), netImpact(c.id, sh)]).sort((a,b)=>b[2]-a[2]);
+  const mx = Math.max(Math.abs(arr[0][2]), Math.abs(arr[arr.length-1][2]), 0.1);
   const shown = arr.filter((r,i)=>(i<12 && r[2]>0.05) || r[2]<-0.05);
-  document.getElementById('evimp').innerHTML = (shown.length ? shown.map(r=>{
+  const costRise = shown.filter(r=>r[2]>0).length >= shown.filter(r=>r[2]<0).length;
+  const avgAbs = shown.length ? shown.reduce((s,r)=>s+Math.abs(r[2]),0)/shown.length : 0;
+  const dir = (up)=>up?'<b style="color:var(--red)">▲</b>':'<b style="color:var(--teal)">▼</b>';
+  const summary = shown.length ? `<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)"><span>${bandChip(avgAbs*(costRise?1:-1))} portfolio</span><span style="font-size:12px;color:var(--ink3)">COGS ${dir(costRise)} · EBITDA / margin ${dir(!costRise)} · working capital ${dir(costRise)}</span><span style="font-size:12px;color:var(--ink3);margin-left:auto">Most exposed: <b style="color:var(--ink)">${shown[0][1]}</b> ${shown[0][2]>0?'+':'−'}${Math.abs(shown[0][2]).toFixed(1)}%</span></div>` : '';
+  document.getElementById('evimp').innerHTML = summary + (shown.length ? shown.map(r=>{
     const neg = r[2]<0, v = Math.abs(r[2]);
-    return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:320px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:118px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap">${neg?'tailwind ≈ '+v.toFixed(1)+'%':'+'+v.toFixed(1)+'%'}</span></div>`;
-  }).join('') : `<p class="meta">Build a shock above to see company impact.</p>`) + `<p class="meta" style="margin:10px 0 0">Red = input costs rise (a price spike, or a producer whose output price falls). Green = a tailwind — either cost relief from a price fall, or a producer gaining when its output price spikes (relative to cost base, before hedging, price regulation, or windfall levies). * NTPC largely recovers fuel costs through regulated tariffs. Click a company for its deep dive.</p>`;
+    return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:280px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:66px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap;text-align:right">${neg?'−':'+'}${v.toFixed(1)}%</span>${bandChip(r[2])}</div>`;
+  }).join('') : `<p class="meta">Build a shock above to see company impact.</p>`) + `<p class="meta" style="margin:10px 0 0">Bar = estimated margin/COGS impact after sector pass-through, hedge and inventory. Band: Low / Moderate / High / Severe. Green = tailwind (cost relief, or a producer gaining). * NTPC recovers fuel via regulated tariffs. Modelled estimate, not a forecast — click a company for its deep dive.</p>`;
   const rows = [];
   for (const co in DATA.products) DATA.products[co].forEach(p => { let t = 0; for (const k in p.mix) t += p.mix[k] * (sh[k]||0); if (Math.abs(t) > 0.5) rows.push([co, DATA.companies.find(x=>x.id===co).name, p.p, t]); });
   rows.sort((a,b)=>Math.abs(b[3])-Math.abs(a[3]));
@@ -1318,6 +1322,15 @@ function scCompute() {
   document.getElementById('evprod').innerHTML = rows.slice(0,10).map(r=>{ const neg = r[3]<0;
     return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer;width:260px">${r[1]} — ${r[2]}</span><span class="cbar" style="max-width:300px"><span style="width:${Math.round(Math.abs(r[3])/pm*100)}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="font-weight:600;white-space:nowrap;color:${neg?'#1D9E75':'var(--ink)'}">${neg?'−':'+'}${Math.abs(r[3]).toFixed(1)}%</span></div>`;
   }).join('') || '<p class="meta">No product crosses the ±0.5% input-cost threshold in this shock.</p>';
+}
+function renderAssume() {
+  const passLabel = ASSUME.pass==null ? 'sector default' : ASSUME.pass+'%';
+  document.getElementById('scassume').innerHTML =
+    `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 26px">
+      <div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12.5px;color:var(--ink2)">Cost pass-through (retained)</span><span id="av-pass" style="font-family:'Spline Sans Mono',monospace;font-weight:600;font-size:12.5px">${passLabel}</span></div><input type="range" id="as-pass" min="-1" max="100" step="5" value="${ASSUME.pass==null?-1:ASSUME.pass}" style="width:100%"><div class="meta">−1 = sector default (airlines 80% · pharma 70% · FMCG 45% · steel 30%)</div></div>
+      <div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12.5px;color:var(--ink2)">Hedge coverage</span><span id="av-hedge" style="font-family:'Spline Sans Mono',monospace;font-weight:600;font-size:12.5px">${ASSUME.hedge}%</span></div><input type="range" id="as-hedge" min="0" max="100" step="5" value="${ASSUME.hedge}" style="width:100%"><div class="meta">Share of exposure already hedged</div></div>
+      <div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12.5px;color:var(--ink2)">Inventory buffer</span><span id="av-inv" style="font-family:'Spline Sans Mono',monospace;font-weight:600;font-size:12.5px">${ASSUME.inv}%</span></div><input type="range" id="as-inv" min="0" max="80" step="5" value="${ASSUME.inv}" style="width:100%"><div class="meta">Near-term cover damping the impact</div></div>
+    </div>`;
 }
 function renderComGrid() {
   const ids = Object.keys(DATA.commodities).sort((a,b)=>DATA.commodities[b][2]-DATA.commodities[a][2] || DATA.commodities[a][0].localeCompare(DATA.commodities[b][0]));
@@ -1430,6 +1443,13 @@ document.getElementById('ddsel').addEventListener('change', e => renderDeep(e.ta
 document.getElementById('evb').innerHTML = Object.keys(EV).map(id=>`<button class="tabbtn" data-ev="${id}" title="${EV[id][2]}">${EV[id][0]}</button>`).join('');
 renderDials();
 document.getElementById('scdials').addEventListener('input', e => { const s = e.target.closest('[data-dial]'); if (s) scSetDial(s.dataset.dial, +s.value); });
+document.getElementById('scassume').addEventListener('input', e => {
+  const t = e.target; if (!t.id) return; const v = +t.value;
+  if (t.id==='as-pass') { ASSUME.pass = v<0?null:v; document.getElementById('av-pass').textContent = v<0?'sector default':v+'%'; }
+  else if (t.id==='as-hedge') { ASSUME.hedge = v; document.getElementById('av-hedge').textContent = v+'%'; }
+  else if (t.id==='as-inv') { ASSUME.inv = v; document.getElementById('av-inv').textContent = v+'%'; }
+  scCompute();
+});
 document.getElementById('tab-scenarios').addEventListener('click', e => {
   const ev = e.target.closest('[data-ev]'); if (ev) { scToggle(ev.dataset.ev); return; }
   const cm = e.target.closest('[data-com]'); if (cm) { tab('commodities'); MM.sel = cm.dataset.com; renderMindMap(); showCom(cm.dataset.com); return; }
@@ -1836,16 +1856,51 @@ const PLAY = {
 };
 // Persona emphasis: section order for ckA..ckE
 const PERSONA = {
-  partner:['risks','advisory','outputs','exposure','scenario'],
-  director:['exposure','risks','scenario','outputs','advisory'],
-  analyst:['risks','exposure','evidence','scenario','outputs']
+  partner:  ['movers','risks','breaches','advisory','outputs'],
+  director: ['movers','exposure','concentration','scenario','breaches','counterparty','actions','outputs'],
+  analyst:  ['movers','risks','exposure','concentration','counterparty','breaches','evidence','outputs'],
+  treasury: ['breaches','counterparty','exposure','concentration','scenario','actions','outputs'],
+  commodity:['exposure','concentration','scenario','movers','counterparty','actions']
 };
 let PMODE = 'partner';
 try { PMODE = localStorage.getItem('tpm-persona') || 'partner'; } catch(e) {}
 const sevClass = s => 'sev'+s;
 const deltaTag = r => { const d = r.sev - r.prev; if (d>0) return `<span class="chip" style="background:var(--redbg);color:var(--red)">▲ ${SEVL[r.prev]}→${SEVL[r.sev]}</span>`; if (d<0) return `<span class="chip sev2">▼ eased</span>`; return `<span class="chip sev1">● stable</span>`; };
 const rkSectors = r => Object.keys(r.sectors).sort((a,b)=>r.sectors[b]-r.sectors[a]);
-const rkScore = r => r.sev*2 + (r.sev-r.prev) + (r.conf==='High'?1:0);
+// ---- Composite dynamic risk score (0-100): 0.30 sev + 0.20 vel + 0.25 exp + 0.15 conc + 0.10 conf ----
+const CONFN = { High:90, Medium:60, Low:30 };
+// per-risk score inputs (velocity, exposure, concentration 0-100; prev = prior composite; dl = days to relevant deadline; why = what moved)
+const RSCORE = {
+  'rbi-fx': {vel:85, exp:78, con:70, prev:71, dl:83,  why:'RBI circular moved it from watch to in-force; the FCNR window deadline is now inside 90 days.'},
+  'cbam':   {vel:45, exp:72, con:74, prev:70, dl:420, why:'Severity stable, but exposure is rising as 2026 EU shipments accrue certificate liability.'},
+  'oil':    {vel:70, exp:66, con:58, prev:62, dl:null,why:'Renewed OPEC+ supply risk lifted velocity; the crude import bill widens the exposure base.'},
+  'usdinr': {vel:80, exp:82, con:64, prev:69, dl:null,why:'Rupee broke its prior range; fast velocity and import-heavy exposure now dominate the score.'},
+  'china':  {vel:55, exp:60, con:88, prev:63, dl:null,why:'Widened control list; single-country (China) concentration is the key upward driver.'},
+  'coal':   {vel:40, exp:55, con:80, prev:55, dl:null,why:'Stable severity; Australia supply concentration keeps the score elevated.'},
+  'gold':   {vel:60, exp:48, con:72, prev:52, dl:null,why:'Import-duty change and a record import bill lifted velocity and severity together.'},
+  'rates':  {vel:50, exp:58, con:50, prev:55, dl:null,why:'Tighter-for-longer rupee-defence stance raises refinancing exposure for leveraged names.'}
+};
+function rsc(r){ return RSCORE[r.id] || {vel:50,exp:55,con:55,prev:null,dl:null,why:'No change recorded since last refresh.'}; }
+function compo(r){ const s=rsc(r), sevN=r.sev/5*100; return Math.round(0.30*sevN + 0.20*s.vel + 0.25*s.exp + 0.15*s.con + 0.10*(CONFN[r.conf]||60)); }
+function prevCompo(r){ const s=rsc(r); return s.prev!=null ? s.prev : compo(r); }
+function scoreDelta(r){ return compo(r) - prevCompo(r); }
+function drivers(r){ const s=rsc(r), sevN=r.sev/5*100;
+  return [['severity',0.30*sevN],['velocity',0.20*s.vel],['exposure',0.25*s.exp],['concentration',0.15*s.con],['confidence',0.10*(CONFN[r.conf]||60)]]
+    .sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]); }
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+function actionability(r){ return clamp((r.actions||[]).length*25 + (r.conf==='High'?20:0), 0, 100); }
+function deadlineProx(r){ const dl=rsc(r).dl; return dl==null ? 20 : clamp(100 - dl/3.65, 0, 100); }
+function priority(r){ return 0.40*compo(r) + 0.25*clamp(scoreDelta(r)*4,0,100) + 0.20*deadlineProx(r) + 0.15*actionability(r); }
+const rkScore = r => priority(r);
+const scoreColor = v => v>=80?'var(--red)':v>=60?'var(--amber)':v>=40?'var(--teal)':'var(--ink3)';
+// ---- Dynamic sector-specific cost pass-through (retained-cost share) replacing flat 50% for company margin impact ----
+const SECRETAIN = { autos:0.5, steel:0.3, metals:0.4, paints:0.6, jewellery:0.65, pharma:0.7, fmcg:0.45, cement:0.55, power:0.2, energy:0.3, infra:0.5, banks:0.1, it:0.15 };
+let ASSUME = { pass:null, hedge:0, inv:0 };  // pass=null → use sector default; hedge/inv are % (0-100)
+function retainOf(id){ if(ASSUME.pass!=null) return ASSUME.pass/100; const s=secOf(id); return SECRETAIN[s]!=null?SECRETAIN[s]:0.5; }
+function marginImpact(coId, sh){ const gross=netImpact(coId,sh); const h=(1-ASSUME.hedge/100), iv=(1-ASSUME.inv/100);
+  return gross<0 ? gross*h : gross*retainOf(coId)*h*iv; }  // relief passes through hedge only; cost rise damped by retain × hedge × inventory
+function impactBand(v){ const a=Math.abs(v); return a>=12?'Severe':a>=6?'High':a>=2.5?'Moderate':a>=0.5?'Low':'Minimal'; }
+function bandChip(v){ const b=impactBand(v), c=b==='Severe'?'sev5':b==='High'?'sev4':b==='Moderate'?'sev3':b==='Low'?'sev2':'sev1'; return `<span class="chip ${c}">${b}</span>`; }
 
 function breaches() {
   const now = Date.now(), out = [];
@@ -1861,21 +1916,81 @@ function renderThresholds() {
   el.innerHTML = `<div class="card" style="padding:12px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--redbg)"><span class="chip sev5">● ${b.length} live breaches</span>${near?`<span style="font-size:12.5px;color:var(--red)"><b>Nearest deadline:</b> ${near.cal.t} — ${near.days} days</span>`:''}<span class="lab" style="margin-left:auto;cursor:pointer" onclick="tab('calendar')">See all deadlines →</span></div>`;
 }
 function riskCard(r) {
-  const secs = rkSectors(r).slice(0,4).map(s=>SECTORS[s][0]).join(' · ');
+  const secs = rkSectors(r).slice(0,3).map(s=>SECTORS[s][0]).join(' · ');
   const topAct = PLAY[(r.actions||[])[0]];
-  return `<div class="rk" data-risk="${r.id}" style="--sv:${r.sev>=4?'var(--red)':r.sev>=3?'var(--amber)':'var(--teal)'}">
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px"><span class="chip ${sevClass(r.sev)}">${SEVL[r.sev]}</span>${deltaTag(r)}<span class="lab">${r.cat}</span><span class="lab" style="margin-left:auto">conf: ${r.conf}</span></div>
+  const sc = compo(r), d = scoreDelta(r), drv = drivers(r);
+  const srcN = (r.evidence||[]).length;
+  return `<div class="rk" data-risk="${r.id}" style="--sv:${sc>=80?'var(--red)':sc>=60?'var(--amber)':'var(--teal)'}">
+    <div style="display:flex;gap:10px;align-items:baseline;margin-bottom:4px"><span style="font-family:'Spline Sans Mono',monospace;font-size:26px;font-weight:700;color:${scoreColor(sc)}">${sc}</span><span class="chip ${d>0?'sev5':d<0?'sev2':'sev1'}">${d>0?'+':''}${d} since last</span><span class="lab" style="margin-left:auto">${srcN} src</span></div>
     <div class="rkt">${r.title}</div>
-    <div style="font-size:12px;color:var(--ink3);margin:6px 0 8px"><b style="color:var(--th)">Why now:</b> ${r.whyNow}</div>
-    <div style="font-size:11.5px;color:var(--ink2);margin-bottom:8px"><span class="lab">Affected:</span> ${secs} · ${r.companies.length} companies</div>
-    ${topAct?`<div style="font-size:12px;color:var(--ink2)"><span class="lab">Next step:</span> ${topAct[0]}</div>`:''}
-    <div style="display:flex;gap:6px;margin-top:11px;flex-wrap:wrap"><button class="btn sec" data-open="${r.id}">Detail</button><button class="btn sec" data-scen="${r.id}">Run scenario</button><button class="btn pri" data-brief="${r.id}">Generate brief</button></div>
+    <div style="font-size:11.5px;color:var(--ink3);margin:6px 0 7px"><span class="lab">Top drivers:</span> ${drv.join(' · ')} · <span class="lab">conf</span> ${r.conf}</div>
+    <div style="font-size:12px;color:var(--ink3);margin-bottom:7px"><b style="color:var(--th)">Why now:</b> ${r.whyNow}</div>
+    <div style="font-size:11.5px;color:var(--ink2);margin-bottom:7px"><span class="lab">Affected:</span> ${secs} · ${r.companies.length} co · <span class="chip ${sevClass(r.sev)}" style="padding:1px 6px">${SEVL[r.sev]}</span></div>
+    ${topAct?`<div style="font-size:12px;color:var(--ink2)"><span class="lab">Next:</span> ${topAct[0]}</div>`:''}
+    <div style="display:flex;gap:6px;margin-top:11px;flex-wrap:wrap"><button class="btn sec" data-open="${r.id}">Detail</button><button class="btn sec" data-scen="${r.id}">Scenario</button><button class="btn pri" data-brief="${r.id}">Brief</button></div>
   </div>`;
 }
-function secRisks(host) {
-  const ranked = RISKS.slice().sort((a,b)=>rkScore(b)-rkScore(a));
-  const n = PMODE==='partner'?5:RISKS.length;
-  return `<h2>Priority risks — what changed</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">${ranked.slice(0,n).map(riskCard).join('')}</div>`;
+function secRisks() {
+  const ranked = RISKS.slice().sort((a,b)=>priority(b)-priority(a));
+  const n = (PMODE==='partner')?5:RISKS.length;
+  return `<h2>Priority risks — ranked by composite score</h2><p class="sub" style="margin:0 0 10px">Priority = 0.40 score + 0.25 severity delta + 0.20 deadline proximity + 0.15 actionability. Score = 0.30 severity + 0.20 velocity + 0.25 exposure + 0.15 concentration + 0.10 confidence, all 0–100.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">${ranked.slice(0,n).map(riskCard).join('')}</div>`;
+}
+function secMovers() {
+  const moved = RISKS.filter(r=>Math.abs(scoreDelta(r))>=1).sort((a,b)=>Math.abs(scoreDelta(b))-Math.abs(scoreDelta(a))).slice(0,4);
+  if (!moved.length) return '';
+  return `<h2>Top movers — what changed since last update</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Risk</th><th>Prev</th><th>Now</th><th>Δ</th><th>Why it moved</th><th>Next action</th></tr>
+  ${moved.map(r=>{const d=scoreDelta(r),a=PLAY[(r.actions||[])[0]];return `<tr data-open="${r.id}" style="cursor:pointer"><td style="font-weight:600">${r.title.split('—')[0]}</td><td style="font-family:'Spline Sans Mono',monospace">${prevCompo(r)}</td><td style="font-family:'Spline Sans Mono',monospace;font-weight:600;color:${scoreColor(compo(r))}">${compo(r)}</td><td><span class="chip ${d>0?'sev5':d<0?'sev2':'sev1'}">${d>0?'+':''}${d}</span></td><td style="font-size:11.5px">${rsc(r).why}</td><td class="lab">${a?a[0]:'—'}</td></tr>`;}).join('')}</table></div>`;
+}
+// ---- Concentration index: 0.40 top-1 share + 0.30 top-3 share + 0.20 substitution difficulty + 0.10 data confidence ----
+function concScore(id){ const d=DATA.deps[id]||{}; const ks=Object.keys(d); if(!ks.length) return null;
+  const tot=ks.reduce((s,k)=>s+d[k],0); const sorted=ks.slice().sort((a,b)=>d[b]-d[a]);
+  const top1=d[sorted[0]]/tot*100; const top3=sorted.slice(0,3).reduce((s,k)=>s+d[k],0)/tot*100;
+  const subDiff=Math.min(100, sorted.slice(0,3).reduce((s,k)=>s+DATA.commodities[k][2]/5*100*d[k],0)/sorted.slice(0,3).reduce((s,k)=>s+d[k],0)); // weighted supply concentration
+  const dataConf=60; return Math.round(0.40*top1 + 0.30*top3 + 0.20*subDiff + 0.10*dataConf); }
+function concStatus(s){ return s==null?['insufficient','var(--ink3)']:s>=70?['critical','var(--red)']:s>=50?['concentrated','var(--amber)']:['diversified','var(--teal)']; }
+function secConcentration() {
+  const rows = DATA.companies.map(c=>({c,s:concScore(c.id)})).filter(x=>x.s!=null).sort((a,b)=>b.s-a.s).slice(0,10);
+  return `<h2>Concentration risk — dependency on few inputs</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Company</th><th>Concentration</th><th>Top input</th><th>Status</th></tr>
+  ${rows.map(({c,s})=>{const st=concStatus(s);const d=DATA.deps[c.id];const top=Object.keys(d).sort((a,b)=>d[b]-d[a])[0];return `<tr data-dd="${c.id}" style="cursor:pointer"><td style="font-weight:600">${c.name}</td><td><span style="display:inline-block;width:44px;font-family:'Spline Sans Mono',monospace;font-weight:600;color:${st[1]}">${s}</span><span class="cbar" style="width:120px;display:inline-block;vertical-align:middle"><span style="width:${s}%;background:${st[1]}"></span></span></td><td>${DATA.commodities[top][0]} ${Math.round(d[top]*100)}%</td><td><span class="chip" style="background:color-mix(in srgb,${st[1]} 16%,transparent);color:${st[1]}">${st[0]}</span></td></tr>`;}).join('')}</table>
+  <p class="meta" style="margin:8px 0 0">Index = 0.40 top-1 share + 0.30 top-3 share + 0.20 substitution difficulty + 0.10 data confidence. Red ≥70 critical · amber ≥50 concentrated · green diversified.</p></div>`;
+}
+// ---- Lightweight counterparty risk module (consulting-friendly mock, not a credit system) ----
+const COUNTERPARTIES = [
+  {n:'Australian coking-coal suppliers',ty:'supplier',geo:'Australia',band:'High',conc:82,util:88,status:'warning',act:'Diversify supplier — qualify US/Mozambique met-coal'},
+  {n:'China API & KSM vendors',ty:'supplier',geo:'China',band:'High',conc:88,util:92,status:'breach',act:'Dual-source; escalate to supply-chain committee'},
+  {n:'EU steel buyers (CBAM-exposed)',ty:'buyer',geo:'EU',band:'Medium',conc:58,util:64,status:'warning',act:'Revisit contract terms to pass CBAM cost'},
+  {n:'USD bondholders / offshore lenders',ty:'lender',geo:'Global',band:'High',conc:70,util:81,status:'warning',act:'Review refinancing window and covenant headroom'},
+  {n:'Bullion banks (gold-on-lease)',ty:'bank',geo:'India/Global',band:'Medium',conc:66,util:74,status:'warning',act:'Review lease-rate exposure and hedge limit'},
+  {n:'Indonesia/Malaysia palm shippers',ty:'supplier',geo:'SE Asia',band:'Medium',conc:60,util:55,status:'normal',act:'Monitor export-policy risk; keep buffer stock'},
+  {n:'Domestic ore & power (captive)',ty:'supplier',geo:'India',band:'Low',conc:30,util:40,status:'normal',act:'No action — natural hedge'},
+  {n:'FX forward counterparty banks',ty:'bank',geo:'India',band:'Medium',conc:52,util:78,status:'warning',act:'Re-paper forwards under RBI June 2026 rules'}
+];
+const cpStatus = s => s==='breach'?['breach','var(--red)']:s==='warning'?['warning','var(--amber)']:s==='normal'?['normal','var(--teal)']:['no data','var(--ink3)'];
+function secCounterparty() {
+  return `<h2>Counterparty risk — supplier, buyer, lender concentration</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Counterparty</th><th>Type</th><th>Geography</th><th>Exposure</th><th>Conc.</th><th>Limit use</th><th>Status</th><th>Recommended action</th></tr>
+  ${COUNTERPARTIES.slice().sort((a,b)=>b.util-a.util).map(c=>{const st=cpStatus(c.status);return `<tr><td style="font-weight:600">${c.n}</td><td class="lab">${c.ty}</td><td>${c.geo}</td><td>${c.band}</td><td style="font-family:'Spline Sans Mono',monospace">${c.conc}</td><td><span style="font-family:'Spline Sans Mono',monospace;color:${c.util>100?'var(--red)':c.util>=80?'var(--amber)':'var(--ink2)'}">${c.util}%</span></td><td><span class="chip" style="background:color-mix(in srgb,${st[1]} 16%,transparent);color:${st[1]}">${st[0]}</span></td><td style="font-size:11.5px">${c.act}</td></tr>`;}).join('')}</table>
+  <p class="meta" style="margin:8px 0 0">Limit utilization >80% flags a warning, >100% a breach. Illustrative exposure bands — not a credit-risk model.</p></div>`;
+}
+// ---- Threshold breach & escalation queue ----
+function allBreaches(){ const now=Date.now(), out=[];
+  RISKS.forEach(r=>{ const sc=compo(r), d=scoreDelta(r);
+    if(sc>80) out.push({sev:'urgent',type:'Risk score > 80',trig:r.title.split('—')[0]+' ('+sc+')',ent:rkSectors(r).map(s=>SECTORS[s][0]).slice(0,2).join(', '),act:PLAY[(r.actions||[])[0]]?PLAY[(r.actions||[])[0]][0]:'Review',owner:PLAY[(r.actions||[])[0]]?PLAY[(r.actions||[])[0]][3]:'CFO',dl:'This week',rid:r.id});
+    if(d>10) out.push({sev:'warning',type:'Score moved > 10',trig:r.title.split('—')[0]+' (+'+d+')',ent:rkSectors(r).slice(0,1).map(s=>SECTORS[s][0]).join(''),act:'Validate & brief',owner:'Analyst',dl:'48h',rid:r.id});
+    if(r.conf==='Low'&&r.sev>=4) out.push({sev:'warning',type:'Low confidence + high impact',trig:r.title.split('—')[0],ent:'—',act:'Data validation request',owner:'Analyst',dl:'This week',rid:r.id}); });
+  COUNTERPARTIES.forEach(c=>{ if(c.util>100) out.push({sev:'urgent',type:'Limit utilization > 100%',trig:c.n+' ('+c.util+'%)',ent:c.geo,act:c.act,owner:'Treasury',dl:'Immediate'}); else if(c.util>=80) out.push({sev:'warning',type:'Limit utilization > 80%',trig:c.n+' ('+c.util+'%)',ent:c.geo,act:c.act,owner:'Treasury',dl:'This week'}); });
+  CAL.forEach(e=>{ if(e.d){const dd=Math.ceil((new Date(e.d)-now)/86400000); if(dd>0&&dd<=30) out.push({sev:'urgent',type:'Deadline within 30 days',trig:e.t+' ('+dd+'d)',ent:e.s,act:e.a,owner:'CFO',dl:e.d});} });
+  const rank={urgent:0,warning:1}; return out.sort((a,b)=>(rank[a.sev]-rank[b.sev])); }
+function secBreaches() {
+  const b = allBreaches();
+  return `<h2>Breaches & escalation queue — what tripped</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Sev</th><th>Breach type</th><th>Trigger</th><th>Affected entity</th><th>Required action</th><th>Owner</th><th>By</th></tr>
+  ${b.map(x=>{const c=x.sev==='urgent'?'var(--red)':'var(--amber)';return `<tr${x.rid?` data-open="${x.rid}" style="cursor:pointer"`:''}><td><span class="chip" style="background:color-mix(in srgb,${c} 16%,transparent);color:${c}">${x.sev}</span></td><td style="font-weight:600;font-size:12px">${x.type}</td><td style="font-size:11.5px">${x.trig}</td><td style="font-size:11.5px">${x.ent}</td><td style="font-size:11.5px">${x.act}</td><td class="lab">${x.owner}</td><td class="lab">${x.dl}</td></tr>`;}).join('')}</table>
+  <p class="meta" style="margin:8px 0 0">Red = breach/urgent · amber = warning. Click a row to drill into the underlying risk.</p></div>`;
+}
+// ---- Recommended action queue (aggregated across risks) ----
+function secActions() {
+  const seen={}, rows=[];
+  RISKS.slice().sort((a,b)=>priority(b)-priority(a)).forEach(r=>(r.actions||[]).forEach(a=>{const p=PLAY[a];if(p&&!seen[a]){seen[a]=1;rows.push({p,r});}}));
+  return `<h2>Recommended actions — what to do next</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">${rows.slice(0,6).map(({p,r})=>`<div class="rk" data-open="${r.id}" style="--sv:${p[2]==='Urgent'?'var(--red)':p[2]==='High'?'var(--amber)':'var(--teal)'}"><div style="display:flex;gap:8px;align-items:center"><span class="chip ${p[2]==='Urgent'?'sev5':p[2]==='High'?'sev3':'sev2'}">${p[2]}</span><span class="lab" style="margin-left:auto">${p[5]} value</span></div><div class="rkt" style="font-size:14px;margin-top:6px">${p[0]}</div><div style="font-size:11.5px;color:var(--ink3);margin:5px 0 7px">${p[1]}</div><div class="actmeta"><span>owner <b>${p[3]}</b></span><span>time <b>${p[4]}</b></span><span>output <b>${p[6]}</b></span></div><div style="font-size:11px;color:var(--ink3);margin-top:6px"><span class="lab">Trigger:</span> ${r.title.split('—')[0]}</div></div>`).join('')}</div>`;
 }
 function exposureLevel(riskRow, secKey) { return riskRow.sectors[secKey]||0; }
 function secExposure() {
@@ -1899,11 +2014,11 @@ function secScenario() {
   <div style="display:flex;flex-wrap:wrap;gap:7px">${['oil22','usdinr10','coal22','china','gold25','cbamcost'].map(id=>`<button class="btn sec" data-scen2="${id}">${EV[id]?EV[id][0]:id}</button>`).join('')}</div>`;
 }
 const OUTPUTS = [
-  ['partner-onepager','Partner one-pager','Top risks, why-now, business impact, talking points'],
-  ['client-brief','Client risk brief','Exposure, impact, recommended action for a named client'],
-  ['board-memo','Board summary','Concise board note on the priority risk and mitigation'],
-  ['treasury-note','Treasury action note','Hedge/funding actions with owners and deadlines'],
-  ['analyst-pack','Analyst evidence pack','Sources, assumptions, methodology, change log']
+  ['partner-brief','Partner brief','Top risks, scores, why-now, business impact, talking points'],
+  ['director-note','Director action note','Exposure, breaches, scenario impact, actions with owners'],
+  ['analyst-pack','Analyst evidence pack','Sources, assumptions, methodology, change log'],
+  ['treasury-note','Treasury risk note','FX / hedge / funding actions, counterparty limits, deadlines'],
+  ['client-talking','Client talking points','Punchy why-now points to open a client conversation']
 ];
 function secOutputs() {
   return `<h2>What to send — output center</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px">${OUTPUTS.map(o=>`<div class="oc" data-out="${o[0]}"><div style="font-weight:600;font-size:14px;color:var(--ink);margin-bottom:5px">${o[1]}</div><div style="font-size:11.5px;color:var(--ink3)">${o[2]}</div><div class="btn pri" style="display:inline-block;margin-top:11px">Generate ↗</div></div>`).join('')}</div>`;
@@ -1919,22 +2034,23 @@ function secEvidence() {
   const all = RISKS.flatMap(r=>r.evidence.map(e=>({r,e})));
   return `<h2>Evidence & assumptions</h2><div class="card">${all.map(({r,e})=>`<div class="ev"><div class="evh"><span class="chip sev1">${e.ty}</span><b style="font-size:12.5px">${e.t}</b><span class="lab" style="margin-left:auto">${e.d}</span></div><div style="font-size:12px;color:var(--ink2)"><b>Fact:</b> ${e.fact}</div><div style="font-size:11.5px;color:var(--ink3);margin-top:3px"><b>Assumption:</b> ${e.assume} · conf ${e.conf} · verified ${e.ver} · ${e.chg}</div><div style="font-size:11px;margin-top:4px"><a href="${e.u}" target="_blank" rel="noopener">${e.u}</a></div></div>`).join('')}</div>`;
 }
-const SECFN = { risks:secRisks, exposure:secExposure, scenario:secScenario, outputs:secOutputs, advisory:secAdvisory, evidence:secEvidence };
+const SECFN = { movers:secMovers, risks:secRisks, exposure:secExposure, concentration:secConcentration, counterparty:secCounterparty, breaches:secBreaches, scenario:secScenario, actions:secActions, outputs:secOutputs, advisory:secAdvisory, evidence:secEvidence };
 function renderCockpit() {
-  const hi = RISKS.filter(r=>r.sev>=4).length;
-  const moved = RISKS.filter(r=>r.sev>r.prev).length;
-  const brc = breaches().filter(x=>x.cal || x.sev>=4).length;
+  const urgent = RISKS.filter(r=>compo(r)>80).length;
+  const movers = RISKS.filter(r=>scoreDelta(r)>=10).length;
+  const brc = allBreaches().length;
   const now = Date.now();
   const dl = CAL.filter(e=>e.d && (()=>{const d=Math.ceil((new Date(e.d)-now)/86400000);return d>0&&d<=30;})()).length;
-  const kpi = (v,l,cap,go)=>`<div class="kpi"${go?` data-goto="${go}" role="button" tabindex="0"`:''}><b>${v}</b><span>${l}</span>${cap?`<div class="kcap">${cap}</div>`:''}</div>`;
+  const avg0 = Math.round(RISKS.reduce((s,r)=>s+prevCompo(r),0)/RISKS.length), avg1 = Math.round(RISKS.reduce((s,r)=>s+compo(r),0)/RISKS.length);
+  const kpi = (v,l,delta,go)=>`<div class="kpi"${go?` data-goto="${go}" role="button" tabindex="0"`:''}><b>${v}</b><span>${l}</span>${delta!=null?`<div class="kcap" style="color:${delta>0?'var(--red)':delta<0?'var(--teal)':'var(--ink3)'}">${delta>0?'▲ +':delta<0?'▼ ':'● '}${delta!==0?Math.abs(delta):''} since last update</div>`:''}</div>`;
   document.getElementById('ckHero').innerHTML =
-    kpi(hi,'high-priority risks','Severity high or critical, needing action now') +
-    kpi(moved,'risks escalated','Moved up in severity since last refresh') +
-    kpi(brc,'exposures breached','Thresholds tripped — see red banner') +
-    kpi(dl,'deadlines ≤30d','Regulatory dates inside the month','calendar');
+    kpi(urgent,'urgent risks (score > 80)',urgent-RISKS.filter(r=>prevCompo(r)>80).length) +
+    kpi(movers,'top movers (Δ ≥ 10)',null) +
+    kpi(brc,'live breaches',null) +
+    kpi(dl,'deadlines ≤ 30d',null,'calendar') +
+    kpi(avg1,'avg risk score',avg1-avg0);
   renderThresholds();
-  const order = PERSONA[PMODE], hosts = ['ckA','ckB','ckC','ckD','ckE'];
-  hosts.forEach((h,i)=>{ const key = order[i]; document.getElementById(h).innerHTML = key && SECFN[key] ? SECFN[key]() : ''; });
+  document.getElementById('ckBody').innerHTML = (PERSONA[PMODE]||PERSONA.partner).map(k=>SECFN[k]?`<div style="margin-top:6px">${SECFN[k]()}</div>`:'').join('');
   document.querySelectorAll('#persona button').forEach(b=>b.classList.toggle('on', b.dataset.persona===PMODE));
 }
 // ----- Drill-down drawer -----
@@ -1969,17 +2085,22 @@ function briefFor(kind, riskId) {
   const acts = (r.actions||[]).map(a=>PLAY[a]).filter(Boolean);
   const ev = r.evidence;
   const kindName = (OUTPUTS.find(o=>o[0]===kind)||[null,kind])[1];
-  const persona = kind==='analyst-pack'?'analyst':kind==='board-memo'?'board':'partner';
-  let md = `# ${kindName}\n**Risk Radar** · ${date} · prepared for ${persona==='board'?'the Board':persona==='analyst'?'the engagement team':'partner review'}\n\n`;
-  md += `## Executive summary\n${r.title}. Severity ${SEVL[r.sev]} (${r.sev>r.prev?'escalated from '+SEVL[r.prev]:'stable'}), confidence ${r.conf}. ${r.impact}\n\n`;
-  md += `## Why now\n${r.whyNow}\n\n`;
-  md += `## Affected exposure\n- Sectors: ${secs}\n- Companies: ${cos.join(', ')}\n- Channels: ${(r.channels||[]).join('; ')}\n- Commodities/FX: ${[...r.commodities.map(c=>DATA.commodities[c]?DATA.commodities[c][0]:c),...r.fx].join(', ')||'—'}\n\n`;
-  md += `## Potential impact (directional — modelled estimate)\n${r.impact} Effects are directional bands, not point forecasts; pass-through assumed ~50% per processing step, before hedging and price regulation.\n\n`;
-  md += `## Recommended action\n${acts.map(a=>`- **${a[0]}** — ${a[1]} (owner: ${a[3]}, ${a[4]}, value ${a[5]}, output: ${a[6]})`).join('\n')||'- Review exposure and brief the risk owner.'}\n\n`;
-  if (persona!=='board') { md += `## Evidence & sources\n${ev.map(e=>`- [${e.ty}] ${e.t} (${e.d}) — ${e.fact} — ${e.u}`).join('\n')}\n\n`; }
-  if (persona==='analyst') { md += `## Assumptions & method\n${ev.map(e=>`- ${e.assume} (conf ${e.conf}, verified ${e.ver})`).join('\n')}\n\n## Change log\n${ev.map(e=>`- ${e.chg}`).join('\n')}\n\n`; }
-  md += `## Open questions\n- Confirm the company's actual hedge cover ratio and contract structure.\n- Validate cost-share estimates against the latest filing.\n- Timing of the exposure vs the client's planning cycle.\n\n`;
-  if (persona!=='board') { md += `## Suggested consulting intervention\n${r.adv?`**${r.adv.project}** for ${r.adv.buyer} (value ${r.adv.value}, status ${r.adv.status}).\nFirst talking point: "${r.adv.talk}"`:'Scope a short diagnostic on the exposure and mitigation options.'}\n`; }
+  const persona = kind==='analyst-pack'?'analyst':kind==='director-note'?'director':kind==='treasury-note'?'treasury':kind==='client-talking'?'client':'partner';
+  const sc = compo(r), d = scoreDelta(r);
+  const brk = allBreaches().filter(x=>x.rid===r.id);
+  const forWho = {analyst:'the engagement team',director:'the engagement lead',treasury:'the treasury committee',client:'a client conversation',partner:'partner review'}[persona];
+  let md = `# ${kindName}\n**Risk Radar** · ${date} · prepared for ${forWho}\n\n`;
+  md += `## Executive summary\n${r.title}. Composite risk score ${sc}/100 (${d>0?'up '+d:d<0?'down '+Math.abs(d):'unchanged'} since last update), severity ${SEVL[r.sev]}, confidence ${r.conf}. Top drivers: ${drivers(r).join(' and ')}. ${r.impact}\n\n`;
+  md += `## What changed\nScore moved ${prevCompo(r)} → ${sc} (${d>=0?'+':''}${d}). ${rsc(r).why}\n\n`;
+  md += `## Who is exposed\n- Sectors: ${secs}\n- Companies: ${cos.join(', ')}\n- Channels: ${(r.channels||[]).join('; ')}\n- Commodities / FX: ${[...r.commodities.map(c=>DATA.commodities[c]?DATA.commodities[c][0]:c),...r.fx].join(', ')||'—'}\n\n`;
+  md += `## Scenario impact (directional — modelled estimate)\n${r.impact} Company margin impact applies sector-specific cost pass-through (airlines ~80%, pharma ~70%, FMCG ~45%, steel ~30%), adjustable for hedge cover and inventory. Directional bands (Low / Moderate / High / Severe), not point forecasts.\n\n`;
+  if (brk.length) md += `## Threshold breaches\n${brk.map(x=>`- **${x.type}** — ${x.trig} → ${x.act} (owner ${x.owner}, by ${x.dl})`).join('\n')}\n\n`;
+  md += `## Recommended actions\n${acts.map(a=>`- **${a[0]}** — ${a[1]} (owner: ${a[3]}, ${a[4]}, value ${a[5]}, output: ${a[6]})`).join('\n')||'- Review exposure and brief the risk owner.'}\n\n`;
+  if (persona==='client') { md += `## Talking points\n- ${r.adv?r.adv.talk:r.whyNow}\n- ${r.impact}\n- We can quantify your specific exposure in a short diagnostic.\n\n`; }
+  md += `## Evidence & assumptions\n${ev.map(e=>`- [${e.ty}] ${e.t} (${e.d}) — ${e.fact}${persona==='analyst'?` — assumption: ${e.assume} (conf ${e.conf}, verified ${e.ver})`:''} — ${e.u}`).join('\n')}\n\n`;
+  if (persona==='analyst') { md += `## Change log\n${ev.map(e=>`- ${e.chg}`).join('\n')}\n\n`; }
+  md += `## Open questions / what would change our view\n- A confirmed hedge cover ratio materially above assumption would lower the score.\n- Disclosed cost shares differing from estimates would reprice exposure.\n- A reversal in the underlying driver (${drivers(r)[0]}) would cut velocity.\n\n`;
+  if (persona!=='client') { md += `## Suggested consulting intervention\n${r.adv?`**${r.adv.project}** for ${r.adv.buyer} (value ${r.adv.value}, status ${r.adv.status}).\nFirst talking point: "${r.adv.talk}"`:'Scope a short diagnostic on the exposure and mitigation options.'}\n`; }
   md += `\n---\n*Illustrative analysis from public official sources and company disclosures. Directional estimates, not audit evidence or investment advice. Verify primary sources before external use.*`;
   BRIEFTEXT = md; BRIEFTITLE = `${kindName} — ${r.title.split('—')[0].trim()}`;
   const html = md.replace(/^# (.*)$/gm,'<div class="doc-h1">$1</div>').replace(/^## (.*)$/gm,'<h4>$1</h4>').replace(/^\- (.*)$/gm,'<li>$1</li>').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'$1').replace(/\n\n/g,'</p><p>').replace(/(<li>.*?<\/li>)/gs,m=>'<ul>'+m+'</ul>');
@@ -1994,24 +2115,25 @@ function printBriefDoc(){ const w=window.open('','_blank'); w.document.write('<p
 window.closeDrawer=closeDrawer; window.closeBrief=closeBrief; window.copyBrief=copyBrief; window.downloadBrief=downloadBrief; window.printBriefDoc=printBriefDoc;
 // Cockpit event delegation
 document.getElementById('tab-cockpit').addEventListener('click', e => {
-  const b=e.target.closest('[data-brief]'); if(b){ e.stopPropagation(); briefFor('partner-onepager', b.dataset.brief); return; }
+  const b=e.target.closest('[data-brief]'); if(b){ e.stopPropagation(); briefFor('partner-brief', b.dataset.brief); return; }
   const s=e.target.closest('[data-scen]'); if(s){ e.stopPropagation(); scenFromRisk(s.dataset.scen); return; }
   const s2=e.target.closest('[data-scen2]'); if(s2){ scReset(); scActive.add(s2.dataset.scen2); scSync(); tab('scenarios'); return; }
   const cell=e.target.closest('[data-cell]'); if(cell){ openRisk(cell.dataset.cell.split('|')[0]); return; }
-  const out=e.target.closest('[data-out]'); if(out){ const map={'partner-onepager':'partner-onepager','client-brief':'client-brief','board-memo':'board-memo','treasury-note':'treasury-note','analyst-pack':'analyst-pack'}; briefFor(map[out.dataset.out]||'partner-onepager'); return; }
+  const out=e.target.closest('[data-out]'); if(out){ briefFor(out.dataset.out); return; }
   const dd=e.target.closest('[data-dd]'); if(dd){ goDeep(dd.dataset.dd); return; }
   const op=e.target.closest('[data-open]'); if(op){ openRisk(op.dataset.open); return; }
   const k=e.target.closest('[data-goto]'); if(k){ tab(k.dataset.goto); return; }
   const rk=e.target.closest('[data-risk]'); if(rk){ openRisk(rk.dataset.risk); return; }
 });
 document.getElementById('drawer').addEventListener('click', e => {
-  const b=e.target.closest('[data-brief]'); if(b){ briefFor('partner-onepager', b.dataset.brief); return; }
+  const b=e.target.closest('[data-brief]'); if(b){ briefFor('partner-brief', b.dataset.brief); return; }
   const s=e.target.closest('[data-scen]'); if(s){ closeDrawer(); scenFromRisk(s.dataset.scen); return; }
   const dd=e.target.closest('[data-dd]'); if(dd){ closeDrawer(); goDeep(dd.dataset.dd); return; }
 });
 document.getElementById('persona').addEventListener('click', e => { const b=e.target.closest('[data-persona]'); if(b){ PMODE=b.dataset.persona; try{localStorage.setItem('tpm-persona',PMODE);}catch(err){} renderCockpit(); } });
 document.addEventListener('keydown', e => { if(e.key==='Escape'){ closeDrawer(); closeBrief(); } });
-try { document.getElementById('lastupd').textContent = 'updated ' + new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + ' · cycle 2026-W28'; } catch(e){}
+try { const _n=new Date(); document.getElementById('lastupd').textContent = 'updated ' + _n.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + ', ' + _n.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) + ' · cycle 2026-W28'; } catch(e){}
+try { if (!localStorage.getItem('tpm-seen')) document.getElementById('firsttime').style.display = ''; } catch(e){ document.getElementById('firsttime').style.display=''; }
 
 drawGrid('');
 show('tatasteel');
@@ -2027,6 +2149,7 @@ renderComGrid();
 renderMindMap();
 showCom('crude');
 renderDeep('titan');
+renderAssume();
 simulate('oil22');
 loadCorr(false);
 loadLive();
