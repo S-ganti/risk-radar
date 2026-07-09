@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commodity &amp; Treasury Risk Radar — India</title>
-<meta name="build" content="2026-07-09-stresslab-heroes-v7">
+<meta name="build" content="2026-07-09-cockpit-v8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -178,13 +178,72 @@ h2{color:var(--th)}
 #live{box-shadow:inset 0 2px 0 color-mix(in srgb,var(--th) 50%,transparent)}
 .cmdbox{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5)}
 @media(max-width:920px){.tabs{backdrop-filter:blur(12px)}#tabhero .hmotif{display:none}}
+/* Cockpit v1 — personas, priority risks, exposure heatmap, drawer, brief modal */
+.persona{display:inline-flex;gap:2px;background:var(--card2);border-radius:9px;padding:3px}
+.persona button{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;border:none;background:transparent;color:var(--ink3);padding:5px 11px;border-radius:7px;cursor:pointer;transition:background .15s,color .15s}
+.persona button.on{background:var(--accent);color:#fff;font-weight:600}
+.rk{background:color-mix(in srgb,var(--card) 76%,transparent);border-radius:14px;padding:16px 18px;cursor:pointer;transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden}
+.rk:hover{transform:translateY(-2px);box-shadow:0 14px 40px -18px rgba(0,0,0,.4)}
+.rk::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--sv)}
+.rk .rkt{font-size:15px;font-weight:600;color:var(--ink);line-height:1.25;font-family:'Spline Sans Mono',ui-monospace,monospace}
+.chip{display:inline-flex;align-items:center;gap:4px;font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:6px}
+.sev5{background:var(--redbg);color:var(--red)}.sev4{background:color-mix(in srgb,var(--red) 16%,transparent);color:var(--red)}.sev3{background:var(--amberbg);color:var(--amber)}.sev2{background:var(--tealbg);color:var(--teal)}.sev1{background:var(--card2);color:var(--ink3)}
+.lab{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+.hx{border-collapse:separate;border-spacing:3px;font-size:11px}
+.hx th{font-weight:500;color:var(--ink3);font-size:10px;padding:3px;text-align:center;white-space:nowrap}
+.hx th.rw{text-align:right;padding-right:8px;max-width:130px}
+.hx td{width:52px;height:34px;text-align:center;border-radius:6px;cursor:pointer;font-family:'Spline Sans Mono',monospace;font-weight:600;font-size:11px;transition:transform .12s,outline .12s;position:relative}
+.hx td:hover{transform:scale(1.08);outline:2px solid var(--ink);z-index:2}
+.hx td .cnt{font-size:8.5px;opacity:.72;font-weight:400}
+.oc{background:color-mix(in srgb,var(--card) 76%,transparent);border-radius:14px;padding:15px 17px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.oc:hover{transform:translateY(-2px);box-shadow:0 12px 34px -16px color-mix(in srgb,var(--th) 60%,transparent)}
+#scrim{position:fixed;inset:0;background:rgba(6,8,7,.5);z-index:90;display:none;backdrop-filter:blur(3px)}
+#scrim.open{display:block}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:560px;max-width:94vw;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);z-index:95;box-shadow:-24px 0 70px -30px rgba(0,0,0,.6);transform:translateX(100%);transition:transform .32s cubic-bezier(.22,1,.36,1);overflow-y:auto;padding:28px 30px}
+.drawer.open{transform:none}
+.drawer h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:25px;margin:0 0 2px;color:var(--ink)}
+.dsect{margin:18px 0 0}
+.dsect>.lab{display:block;margin-bottom:7px}
+.path{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:12.5px}
+.path .node{background:var(--card2);border-radius:7px;padding:4px 10px;font-family:'Spline Sans Mono',monospace}
+.path .ar{color:var(--th);font-weight:700}
+.ev{background:var(--card);border-radius:10px;padding:11px 13px;margin:7px 0;font-size:12.5px}
+.ev .evh{display:flex;gap:8px;align-items:center;margin-bottom:4px;flex-wrap:wrap}
+.act{background:var(--card);border-radius:10px;padding:11px 13px;margin:7px 0}
+.act .acth{font-weight:600;font-size:13.5px;font-family:'Spline Sans Mono',monospace;color:var(--ink)}
+.actmeta{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--ink3);margin-top:5px}
+.actmeta b{color:var(--ink2);font-weight:600}
+.btn{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:11.5px;font-weight:600;letter-spacing:.03em;border:none;border-radius:9px;padding:9px 15px;cursor:pointer;transition:transform .12s,box-shadow .15s}
+.btn.pri{background:var(--accent);color:#fff}.btn.pri:hover{transform:translateY(-1px);box-shadow:0 8px 22px -10px var(--accent)}
+.btn.sec{background:var(--card2);color:var(--ink2)}.btn.sec:hover{color:var(--accent)}
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;background:rgba(6,8,7,.55);backdrop-filter:blur(4px);overflow-y:auto}
+.modal.open{display:flex}
+.mbox{width:760px;max-width:96vw;background:var(--bg);border-radius:16px;box-shadow:0 40px 100px -30px rgba(0,0,0,.6);overflow:hidden}
+.mbox .mh{display:flex;align-items:center;gap:10px;padding:16px 22px;border-bottom:1px solid var(--line)}
+.mbody{padding:8px 26px 22px;max-height:66vh;overflow-y:auto}
+.mbody h4{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--th);margin:18px 0 5px}
+.mbody p,.mbody li{font-family:'Hanken Grotesk',sans-serif;font-size:13.5px;line-height:1.6;color:var(--ink2)}
+.mbody .doc-h1{font-family:'Instrument Serif',Georgia,serif;font-size:26px;color:var(--ink);margin:6px 0 2px}
+@media(max-width:920px){.drawer{width:100%;padding:22px}}
 </style>
 </head>
 <body>
 <div class="brand no-print">Risk Radar<button class="kbd" onclick="cmdOpen()" title="Open command menu">Ctrl K</button><button class="themebtn" id="themebtn" onclick="toggleTheme()" title="Switch visual theme">Terminal</button></div>
 <div class="wrap">
-<h1>Commodity &amp; treasury risk radar — India large caps</h1>
-<p class="sub">Strategy &amp; risk accelerator: weekly policy monitoring, six-lens company risk assessment, and a live engagement pipeline for commodity and treasury advisory. Public official sources and company disclosures only. Latest cycle: <span id="lastcycle"></span> — regenerated weekly by a six-agent pipeline (planner → document scout → risk analyst → company mapper → rival monitor → service mapper).</p>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+  <div>
+    <h1>Risk Radar</h1>
+    <p class="sub" style="margin:2px 0 0">Consulting-grade risk intelligence cockpit — signal to decision to client-ready output. India large caps, official sources only.</p>
+  </div>
+  <div class="no-print" style="display:flex;flex-direction:column;align-items:flex-end;gap:7px">
+    <div class="persona" id="persona">
+      <button data-persona="partner" class="on">Partner</button>
+      <button data-persona="director">Director</button>
+      <button data-persona="analyst">Analyst</button>
+    </div>
+    <span class="lab" id="lastupd">updated —</span>
+  </div>
+</div>
 
 <div class="card" id="live">
   <div style="font-weight:600">Live market tracking <span class="meta" id="livestatus">connecting…</span></div>
@@ -193,20 +252,31 @@ h2{color:var(--th)}
 </div>
 
 <div class="tabs no-print">
-  <button class="tabbtn on" data-tab="overview">Overview</button>
-  <button class="tabbtn" data-tab="companies">Companies</button>
-  <button class="tabbtn" data-tab="deepdive">Deep dive</button>
-  <button class="tabbtn" data-tab="scenarios">Scenarios</button>
-  <button class="tabbtn" data-tab="commodities">Commodities</button>
-  <button class="tabbtn" data-tab="pipeline">Pipeline</button>
-  <button class="tabbtn" data-tab="calendar">Calendar</button>
-  <button class="tabbtn" data-tab="cycles">Weekly cycles</button>
+  <button class="tabbtn on" data-tab="cockpit">Cockpit</button>
+  <button class="tabbtn" data-tab="companies">Who is exposed</button>
+  <button class="tabbtn" data-tab="deepdive">Company deep dive</button>
+  <button class="tabbtn" data-tab="scenarios">Stress lab</button>
+  <button class="tabbtn" data-tab="commodities">Commodity map</button>
+  <button class="tabbtn" data-tab="pipeline">Advisory pipeline</button>
+  <button class="tabbtn" data-tab="calendar">Deadlines</button>
+  <button class="tabbtn" data-tab="overview">Risk landscape</button>
+  <button class="tabbtn" data-tab="cycles">Evidence log</button>
   <button class="tabbtn" data-tab="methodology">Methodology</button>
 </div>
 
 <div id="tabhero" class="no-print"></div>
 
-<div id="tab-overview">
+<div id="tab-cockpit">
+  <div class="kpis" id="ckHero"></div>
+  <div id="ckThresholds" style="margin:2px 0 4px"></div>
+  <div id="ckA"></div>
+  <div id="ckB"></div>
+  <div id="ckC"></div>
+  <div id="ckD"></div>
+  <div id="ckE"></div>
+</div>
+
+<div id="tab-overview" style="display:none">
   <p class="sub" style="margin:0 0 10px">First time here? <a onclick="tab('methodology')">Open the 60-second reader's guide</a> — every term, color, and policy explained in plain English.</p>
   <div class="kpis" id="kpis"></div>
   <div id="gradestrip"></div>
@@ -371,6 +441,10 @@ h2{color:var(--th)}
 <p class="meta no-print" style="margin-top:28px;border-top:1px solid var(--line);padding-top:12px">Internal working tool — illustrative analysis from public sources. Not client advice. Pursuit statuses are stored only in this browser.</p>
 
 <div id="cmdk" role="dialog" aria-label="Command menu"><div class="cmdbox"><input id="cmdq" placeholder="Jump to a company, commodity, scenario, or view…" autocomplete="off"><div class="cmdlist" id="cmdlist"></div></div></div>
+
+<div id="scrim" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-label="Risk detail"></aside>
+<div class="modal" id="briefmodal" role="dialog" aria-label="Generated brief"><div class="mbox"><div class="mh"><span class="lab" id="briefkind">brief</span><span style="flex:1"></span><button class="btn sec" onclick="copyBrief()">Copy</button><button class="btn sec" onclick="downloadBrief()">Download .md</button><button class="btn sec" onclick="printBriefDoc()">Print</button><button class="btn sec" onclick="closeBrief()">Close</button></div><div class="mbody" id="briefbody"></div></div></div>
 
 <script>
 const DATA = {
@@ -880,7 +954,7 @@ function lensScores(id) {
 }
 const oavg = id => lensScores(id).reduce((t,x)=>t+x[0],0)/6;
 const ograde = a => a>=3.75 ? ['Very high','#E24B4A'] : a>=3 ? ['High','#D85A30'] : a>=2.25 ? ['Moderate','#BA7517'] : ['Low','#1D9E75'];
-document.getElementById('lastcycle').textContent = DATA.cycles[DATA.cycles.length-1].cycle;
+{ const _lc = document.getElementById('lastcycle'); if (_lc) _lc.textContent = DATA.cycles[DATA.cycles.length-1].cycle; }
 const grid = document.getElementById('cogrid'), panel = document.getElementById('panel');
 let current = null;
 
@@ -1016,10 +1090,11 @@ async function loadLive() {
     sig.textContent = snap.note;
   }
 }
-const TABS = ['overview','companies','deepdive','scenarios','commodities','pipeline','calendar','cycles','methodology'];
-const THUE = { overview:'#5D8BFF', companies:'#E8A24A', deepdive:'#86D0A8', scenarios:'#F49380', commodities:'#B39DFF', pipeline:'#5DBE9E', calendar:'#E8BC66', cycles:'#7FA8FF', methodology:'#9CA3AF' };
+const TABS = ['cockpit','overview','companies','deepdive','scenarios','commodities','pipeline','calendar','cycles','methodology'];
+const THUE = { cockpit:'#5D8BFF', overview:'#7FA8FF', companies:'#E8A24A', deepdive:'#86D0A8', scenarios:'#F49380', commodities:'#B39DFF', pipeline:'#5DBE9E', calendar:'#E8BC66', cycles:'#7FA8FF', methodology:'#9CA3AF' };
 const THERO = {
-  overview:['Executive overview','The headline risk picture across 34 companies — landscape, priorities, and the clock on live regulatory deadlines.'],
+  cockpit:['Risk cockpit','What changed, who is exposed, how bad it gets under stress, and what to do next — one screen from signal to client-ready action.'],
+  overview:['Risk landscape','The analytical picture across 34 companies — quadrant, grade mix, and the priority table.'],
   companies:['Company briefs','Six-lens risk assessment, commodity dependencies, product vulnerability, and policy exposure for every name.'],
   deepdive:['Company deep dive','One company end to end — supply chain traced to source, product flowchart, and sensitivity to every shock.'],
   scenarios:['Stress lab','Stack real events and dial custom moves in either direction; watch the impact cascade through the supply chain live.'],
@@ -1029,7 +1104,7 @@ const THERO = {
   cycles:['Weekly cycles','The raw weekly research reports — reasoning first, every claim cited to an official source.'],
   methodology:['Methodology & reader’s guide','How every number is built, plus a plain-English guide to the terms, colors, and policies.']
 };
-const TMOTIF = { overview:'bars', companies:'bars', pipeline:'bars', scenarios:'wave', cycles:'wave', commodities:'net', deepdive:'net', calendar:'grid', methodology:'grid' };
+const TMOTIF = { cockpit:'wave', overview:'bars', companies:'bars', pipeline:'bars', scenarios:'wave', cycles:'wave', commodities:'net', deepdive:'net', calendar:'grid', methodology:'grid' };
 function motif(kind) {
   const s = 'var(--th)';
   if (kind === 'bars') { let b=''; [30,55,40,70,50,85,60,95,72,58].forEach((h,i)=>b+=`<rect x="${i*28+8}" y="${100-h}" width="15" height="${h}" rx="3" fill="${s}" opacity="${(0.22+i*0.045).toFixed(2)}"/>`); return `<svg viewBox="0 0 290 100" preserveAspectRatio="xMaxYMid slice" width="100%" height="100%">${b}</svg>`; }
@@ -1162,11 +1237,19 @@ const EV = {
   palm22:['2022 Indonesia palm ban (actual)', {palm:50}, 'Indonesia banned palm-oil exports in Apr 2022; CPO hit record highs. India imports ~96% of its palm oil.'],
   gold25:['2025 gold rally (actual)', {gold:50}, 'Gold crossed $4,000/oz in Oct 2025, up ~50% for the year; India\'s gold import bill hit a record $72B in FY2025-26.'],
   china:['China export curbs (policy)', {api:40, tio2:20, lithium:25}, 'Modeled: China supplies ≥70% of many Indian APIs (DoP 2026), most TiO2 imports, and refines ~65-70% of lithium (IEA).'],
-  chip21:['2021 chip shortage (actual)', {chips:20}, 'Maruti cut output up to ~40% in some months; JLR lost ~100k units. Modeled as +20% component cost.']
+  chip21:['2021 chip shortage (actual)', {chips:20}, 'Maruti cut output up to ~40% in some months; JLR lost ~100k units. Modeled as +20% component cost.'],
+  oil25:['Oil +25% shock', {crude:25, natgas:40}, 'A sharper crude spike — supply disruption or geopolitical escalation.'],
+  usdinr5:['USD/INR −5% (rupee)', null, 'Rupee depreciates 5% — applied pro-rata to each commodity’s India import share; import-heavy sectors most exposed.', 'fx', 5],
+  usdinr10:['USD/INR −10% (rupee)', null, 'Rupee depreciates 10% — the India-specific import-cost stress.', 'fx', 10],
+  alu15:['Aluminium +15%', {alum:15}, 'Aluminium price spike — LME squeeze or energy-cost driven; metals and autos exposed.'],
+  tariff:['Metals tariff +10%', {steel:10, alum:10}, 'A 10% import-tariff pass-through into domestic steel and aluminium prices.'],
+  cbamcost:['CBAM cost shock', {steel:8, alum:8}, 'Modelled CBAM certificate cost as an effective price add on EU-bound steel and aluminium.'],
+  redsea:['Red Sea / freight +15%', {diesel:15}, 'Shipping disruption lifts freight and bunker costs; diesel-linked logistics and import lead-times hit.']
 };
 function evDirect(id) {
-  if (id === 'inr') { const d = {}; for (const c in DATA.commodities) if (DATA.commodities[c][3] > 0) d[c] = 10 * DATA.commodities[c][3] / 100; return d; }
-  return EV[id][1];
+  const e = EV[id]; if (!e) return {};
+  if (e[3] === 'fx' || id === 'inr') { const p = e[4] || 10; const d = {}; for (const c in DATA.commodities) if (DATA.commodities[c][3] > 0) d[c] = p * DATA.commodities[c][3] / 100; return d; }
+  return e[1] || {};
 }
 function propagate(direct) {
   const sh = Object.assign({}, direct);
@@ -1528,8 +1611,8 @@ function renderCorrBox(state, info) {
   const el = document.getElementById('corrbox');
   const head = `<div style="font-weight:600">Live price correlation matrix <span class="meta">5-year monthly returns · Alpha Vantage (EIA/IMF/ECB series)</span></div>`;
   if (state === 'nokey') {
-    el.innerHTML = head + `<p style="font-size:13px;color:var(--ink2);margin:8px 0">Add a free Alpha Vantage API key to compute real correlations for Brent, US gas, copper, aluminum, wheat, sugar, coffee, and gold — and overlay them on the map above. Get a key in ~30 seconds at <a href="https://www.alphavantage.co/support/#api-key" target="_blank" rel="noopener">alphavantage.co</a> (no card needed). The key is stored only in this browser — never in the shared file.</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><input id="avkey" type="text" placeholder="Paste API key" style="padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:13px;min-width:240px"><button class="tabbtn" onclick="avSave()">Save and fetch</button></div>`;
+    el.innerHTML = head + `<p style="font-size:13px;color:var(--ink2);margin:8px 0">Price co-movement on the map above uses documented market linkages (fuel substitution, oil-indexed contracts, shared demand complexes). Computed 5-year correlations are available on the managed data feed. <span class="meta">Analysts can connect a personal data key below to compute them client-side; enterprise deployments use a backend-managed feed — no key required.</span></p>
+    <details style="margin-top:4px"><summary class="lab" style="cursor:pointer">Analyst option — connect a data key</summary><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><input id="avkey" type="text" placeholder="Alpha Vantage key (stored only in this browser)" style="padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:13px;min-width:260px"><button class="tabbtn" onclick="avSave()">Compute correlations</button></div><p class="meta" style="margin:6px 0 0">Free key from alphavantage.co · 25 requests/day · cached 24h. Never written to the shared file.</p></details>`;
     return;
   }
   if (state === 'loading') { el.innerHTML = head + `<p class="meta" style="margin:8px 0">Fetching 8 price series… (8 of your 25 free daily requests; cached for 24h)</p>`; return; }
@@ -1644,6 +1727,292 @@ document.getElementById('cmdq').addEventListener('input', e => cmdFilter(e.targe
 document.getElementById('kpis').addEventListener('click', e => { const k = e.target.closest('[data-goto]'); if (k) tab(k.dataset.goto); });
 document.getElementById('kpis').addEventListener('keydown', e => { if (e.key === 'Enter') { const k = e.target.closest('[data-goto]'); if (k) tab(k.dataset.goto); } });
 
+// ===== Risk intelligence layer (v1 cockpit) =====
+const SECTORS = {
+  autos:['Autos',['maruti','mm','tatamotors']],
+  steel:['Steel',['tatasteel','jswsteel']],
+  metals:['Metals',['hindalco']],
+  paints:['Paints',['asianpaints']],
+  jewellery:['Jewellery',['titan']],
+  pharma:['Pharma',['sunpharma']],
+  fmcg:['FMCG',['hul','itc','nestleindia']],
+  cement:['Cement',['ultratech']],
+  power:['Power',['ntpc','powergrid']],
+  energy:['Energy',['reliance','ongc','coalindia','adanient']],
+  infra:['Infra/EPC',['lt','adaniports']],
+  banks:['Banks/NBFC',['hdfcbank','icicibank','sbi','kotakbank','axisbank','bajajfinance','bajajfinserv','lic']],
+  it:['IT/Telecom',['tcs','infosys','hcltech','wipro','bhartiairtel']]
+};
+const secOf = id => { for (const k in SECTORS) if (SECTORS[k][1].includes(id)) return k; return null; };
+// RiskSignal: signal → commodity/FX/reg → sector → company → channel → impact → action → evidence → advisory
+const RISKS = [
+  { id:'rbi-fx', title:'RBI June 2026 FX hedging regime overhaul', cat:'regulation', sev:5, prev:3, conf:'High', detected:'2026-06-08', updated:'2026-07-07',
+    whyNow:'Cancel-and-rebook of forwards barred and resident NDFs prohibited; the default Indian corporate hedging playbook is now non-compliant, with the subsidized FCNR(B) window closing 30 Sep 2026.',
+    commodities:['crude','gold'], fx:['USDINR'], countries:['India'],
+    sectors:{energy:3,jewellery:3,autos:2,fmcg:2,metals:2,steel:2,it:1}, companies:['reliance','titan','tatamotors','maruti','hul','jswsteel','ongc'],
+    channels:['Forward-book documentation','Cancel/rebook restriction','FCNR(B) funding window'], impact:'Re-papering of hedge policy across every large importer; time-boxed funding arbitrage to 30 Sep 2026.',
+    thresholds:['Regulatory change in force','Deadline within 90 days'],
+    actions:['hedge-review','funding-window','board-note'],
+    evidence:[ {t:'RBI notification on risk management and inter-bank dealings',ty:'official',d:'2026-06-08',u:'https://www.rbi.org.in/commonman/english/scripts/Notification.aspx?Id=853',fact:'Bars cancel-and-rebook of forwards on the same exposure; prohibits resident rupee NDFs; subsidizes FCNR(B) hedging cost to 30 Sep 2026.',assume:'MUFG summary corroborates; primary text to be re-pulled next cycle.',conf:'High',ver:'2026-07-07',chg:'New this cycle — severity 3→5'} ],
+    adv:{buyer:'Group CFO / Treasurer',project:'Hedge-policy redesign and FCNR(B) funding-cost optimization',value:'High',status:'pursue',talk:'Your forward-rolling programme is now non-compliant under the June RBI circular and the subsidized funding window shuts 30 Sep — worth a 2-week policy re-paper before quarter-end.'} },
+  { id:'cbam', title:'CBAM definitive regime live — EU carbon border cost', cat:'regulation', sev:4, prev:4, conf:'High', detected:'2026-01-01', updated:'2026-07-01',
+    whyNow:'Certificate liability accrues on 2026 EU-bound steel and aluminium now; certificates go on sale 1 Feb 2027 and first surrender is 30 Sep 2027 — a P&L item and a brand-new EUA price exposure Indian treasuries have never carried.',
+    commodities:['steel','alum'], fx:['EURINR'], countries:['EU','India'],
+    sectors:{steel:3,metals:3,cement:1}, companies:['tatasteel','jswsteel','hindalco','ultratech'],
+    channels:['Embedded-emissions certificate cost','EUA price exposure','Export margin'], impact:'New cost line on EU exports plus an unhedged carbon-price risk; unmanaged 2026 accrual becomes a 2027 surprise.',
+    thresholds:['Regulation in force','Deadline within 12 months'],
+    actions:['cbam-diagnostic','hedge-review','board-note'],
+    evidence:[ {t:'European Commission — CBAM entered definitive phase',ty:'official',d:'2026-01-14',u:'https://taxation-customs.ec.europa.eu/news/cbam-successfully-entered-force-1-january-2026-2026-01-14_en',fact:'Definitive regime in force 1 Jan 2026; certificate sales open 1 Feb 2027; first surrender 30 Sep 2027; 50t de-minimis.',assume:'Indian mills’ EU volumes carry the liability pro-rata to embedded emissions.',conf:'High',ver:'2026-07-01',chg:'Stable — monitoring 9 implementing acts for OJ publication'} ],
+    adv:{buyer:'CFO / Head of Exports',project:'CBAM cost quantification and EUA hedging design',value:'High',status:'qualify',talk:'Your 2026 EU shipments are already accruing CBAM liability priced off EUAs — a quantification and hedge-design sprint now avoids a 2027 P&L shock.'} },
+  { id:'oil', title:'Brent crude +10% move — COGS pressure across the chain', cat:'commodity', sev:4, prev:3, conf:'Medium', detected:'2026-07-02', updated:'2026-07-07',
+    whyNow:'OPEC+ supply signalling plus geopolitical risk premium; India imports ~89% of its crude, so a move transmits straight into diesel, packaging, paints and freight.',
+    commodities:['crude','diesel','plastics'], fx:['USDINR'], countries:['India','Saudi Arabia','Russia'],
+    sectors:{paints:3,fmcg:2,autos:2,infra:2,energy:2}, companies:['asianpaints','hul','nestleindia','tatamotors','lt','reliance'],
+    channels:['Crude-derivative input cost','Diesel/freight','Packaging resin'], impact:'Directional COGS pressure for paints and FMCG; net beneficiary is upstream (ONGC, Reliance O2C).',
+    thresholds:['Commodity move >10%'],
+    actions:['pricing-review','hedge-review','procurement'],
+    evidence:[ {t:'PPAC — India crude import dependence',ty:'official',d:'2026-05-31',u:'https://ppac.gov.in/import-export',fact:'Import dependence 88.6% (FY2025-26); Russia ~31% of imports.',assume:'10% Brent move passes ~50% into first-order derivatives per processing step.',conf:'Medium',ver:'2026-07-07',chg:'Severity 3→4 on renewed supply risk'} ],
+    adv:{buyer:'CFO / Procurement head',project:'Input-cost pass-through and hedge review for paints/FMCG',value:'Medium',status:'identify',talk:'A sustained 10% crude move erodes paints and FMCG gross margin through resin and freight — a pricing and hedge review protects the quarter.'} },
+  { id:'usdinr', title:'USD/INR depreciation — import-heavy cost inflation', cat:'FX', sev:4, prev:3, conf:'High', detected:'2026-06-20', updated:'2026-07-07',
+    whyNow:'Rupee near record lows (~95.4/$, from 89.9 in Jan); gold-duty hikes and the RBI package are explicit rupee defence, signalling sustained pressure on import bills.',
+    commodities:['crude','gold','palm','lithium','api'], fx:['USDINR'], countries:['India'],
+    sectors:{jewellery:3,energy:3,fmcg:2,pharma:2,autos:2}, companies:['titan','reliance','hul','sunpharma','maruti'],
+    channels:['Landed cost of imports','USD debt service','Working capital'], impact:'Every import-heavy cost base inflates in rupee terms; gold (~99% imported) and crude (~89%) worst hit.',
+    thresholds:['USDINR moved >3% in quarter','Exposure score >4/5'],
+    actions:['hedge-review','working-capital','pricing-review'],
+    evidence:[ {t:'RBI FX reference rate history / market data',ty:'market-data',d:'2026-07-06',u:'https://www.rbi.org.in',fact:'USD/INR ~95.4, 2026 range 89.9–96.6.',assume:'A 10% depreciation applied pro-rata to each commodity’s import share.',conf:'High',ver:'2026-07-07',chg:'Severity 3→4 as rupee breaks prior range'} ],
+    adv:{buyer:'Treasurer',project:'Import-basket FX exposure map and layered hedge',value:'High',status:'pursue',talk:'With the rupee in policy-defended territory, your import basket carries un-sized FX risk — a two-week exposure map and hedge ladder is timely.'} },
+  { id:'china', title:'China export controls — API, battery and rare-earth risk', cat:'geopolitics', sev:4, prev:3, conf:'Medium', detected:'2026-05-15', updated:'2026-07-01',
+    whyNow:'China licenses exports of graphite, rare earths and specialty inputs, and supplies ≥70% of many Indian pharma APIs — a supply-security risk no hedge fixes, only dual sourcing.',
+    commodities:['api','lithium','tio2'], fx:[], countries:['China','India'],
+    sectors:{pharma:3,autos:2,paints:2}, companies:['sunpharma','tatamotors','asianpaints'],
+    channels:['API/KSM sourcing','Battery-metal refining','TiO2 imports'], impact:'Availability and cost risk on pharma inputs and EV battery chain; margin and continuity exposure.',
+    thresholds:['Single-country dependence >70%'],
+    actions:['supplier-diversification','procurement','board-note'],
+    evidence:[ {t:'Dept of Pharmaceuticals — API import dependence tabled in Parliament',ty:'official',d:'2026-03-01',u:'https://www.policycircle.org/industry/bulk-drugs-india-api-dependence/',fact:'China ≥70% of Indian imports for many APIs/KSMs in FY24 and FY25.',assume:'IEA: China refines ~65–70% of lithium, ~90% of graphite.',conf:'Medium',ver:'2026-07-01',chg:'Severity 3→4 on widened control list'} ],
+    adv:{buyer:'COO / Head of Supply Chain',project:'Dual-sourcing diagnostic with FX overlay (PLI vs China)',value:'Medium',status:'qualify',talk:'Your API supply is a single-country dependence the government is now flagging — a dual-sourcing and cost diagnostic de-risks continuity.'} },
+  { id:'coal', title:'Coking coal supply/price risk — Australia concentration', cat:'supply-chain', sev:3, prev:3, conf:'Medium', detected:'2026-06-10', updated:'2026-07-05',
+    whyNow:'India imports ~85% of coking coal, concentrated in Australia; weather or freight disruption transmits directly to steelmaking cash cost.',
+    commodities:['metcoal','steel'], fx:['USDINR'], countries:['Australia','India'],
+    sectors:{steel:3,autos:1}, companies:['tatasteel','jswsteel'],
+    channels:['Coking-coal cash cost','USD import bill'], impact:'Steel cash-cost pressure; JSW more exposed (limited captive ore), Tata cushioned by captive iron ore.',
+    thresholds:['Single-country dependence >80%'],
+    actions:['procurement','hedge-review'],
+    evidence:[ {t:'Ministry of Steel — coking coal import reliance',ty:'official',d:'2026-04-01',u:'https://steel.gov.in',fact:'~85% coking-coal import dependence; Australia dominant supplier.',assume:'Spot proxy; contracts smooth transmission.',conf:'Medium',ver:'2026-07-05',chg:'Stable'} ],
+    adv:{buyer:'CFO — steel',project:'Coking-coal + INR combined hedge and sourcing review',value:'Medium',status:'identify',talk:'Coking-coal concentration plus rupee weakness is a compound cash-cost risk worth a combined hedge and sourcing look.'} },
+  { id:'gold', title:'Gold rally + import-duty hike — jewellery margin & funding', cat:'commodity', sev:3, prev:2, conf:'High', detected:'2026-05-13', updated:'2026-07-06',
+    whyNow:'Gold above $4,000/oz and record $72bn Indian import bill (FY26) prompted a May 2026 duty hike; jewellers face landed-cost and gold-lease funding pressure.',
+    commodities:['gold'], fx:['USDINR'], countries:['India'],
+    sectors:{jewellery:3}, companies:['titan'],
+    channels:['Landed gold cost','Gold-on-lease funding','Duty'], impact:'Direct COGS and working-capital pressure for Titan; largely passed to consumers but funding structure exposed.',
+    thresholds:['Commodity move >10%','Policy change in force'],
+    actions:['hedge-review','working-capital'],
+    evidence:[ {t:'CNBC / WGC — India gold duty and import bill',ty:'news',d:'2026-05-13',u:'https://www.cnbc.com/2026/05/13/india-hikes-bullion-import-duties-to-arrest-rupee-slide.html',fact:'Duty hiked May 2026 to slow outflows; imports a record $71.98bn FY26.',assume:'Gold ~99% imported; ~55% of Titan cost base.',conf:'High',ver:'2026-07-06',chg:'Severity 2→3 on duty change'} ],
+    adv:{buyer:'CFO — Titan',project:'Gold hedging architecture and duty-shock playbook',value:'Medium',status:'identify',talk:'The duty change makes gold-lease vs futures hedging a live board question — a short architecture review pays for itself.'} },
+  { id:'rates', title:'Rate path & leverage risk — NBFCs and capex-heavy names', cat:'rates', sev:3, prev:3, conf:'Medium', detected:'2026-06-05', updated:'2026-07-04',
+    whyNow:'Rupee-defence measures constrain policy easing; funding-cost and refinancing risk rises for leveraged, capex-heavy and wholesale-funded balance sheets.',
+    commodities:[], fx:['USDINR'], countries:['India'],
+    sectors:{banks:3,infra:2,metals:2,power:1}, companies:['bajajfinance','jswsteel','adanient','adaniports','hindalco'],
+    channels:['Funding cost','Refinancing wall','Covenant headroom'], impact:'Margin and covenant pressure for wholesale-funded NBFCs and USD-bond-reliant capex names.',
+    thresholds:['Refinancing within 12 months','Leverage above sector norm'],
+    actions:['covenant-check','working-capital','board-note'],
+    evidence:[ {t:'RBI monetary policy / MUFG rate commentary',ty:'analyst-estimate',d:'2026-06-08',u:'https://www.mufgresearch.com',fact:'Rupee-defence package limits near-term easing room.',assume:'Directional; no company-specific rate model applied.',conf:'Medium',ver:'2026-07-04',chg:'Stable'} ],
+    adv:{buyer:'CFO / Treasurer',project:'Refinancing-window and covenant stress review',value:'Medium',status:'identify',talk:'A tighter-for-longer rupee-defence stance raises refinancing risk on your USD-bond wall — a covenant and window stress test is prudent now.'} }
+];
+const SEVL = ['—','Info','Low','Medium','High','Critical'];
+const RID = id => RISKS.find(r => r.id === id);
+// Recommended-action playbook
+const PLAY = {
+  'hedge-review':['Hedge policy review','Re-paper the FX/commodity hedge programme for compliance and cover ratio.','Urgent','Treasurer','1–2 weeks','High','Hedge policy memo'],
+  'funding-window':['FCNR(B)/ECB funding-cost play','Exploit the RBI-subsidized hedging window before 30 Sep 2026.','Urgent','Treasurer','1 week','High','Funding action note'],
+  'pricing-review':['Pricing / pass-through review','Assess ability to pass input-cost inflation into price.','High','Commercial / CFO','2–3 weeks','Medium','Pricing memo'],
+  'procurement':['Procurement renegotiation','Reopen supplier terms and index clauses on the exposed input.','High','Procurement','3–4 weeks','Medium','Sourcing plan'],
+  'supplier-diversification':['Supplier diversification','Qualify alternate-country sources to cut single-origin dependence.','High','COO / Supply chain','1–2 quarters','High','Dual-sourcing roadmap'],
+  'working-capital':['Working-capital review','Size inventory and receivables impact of the shock.','Medium','Finance','2 weeks','Medium','WC diagnostic'],
+  'covenant-check':['Covenant & refinancing check','Test covenant headroom and refinancing timing under stress.','High','Treasurer','2 weeks','High','Covenant note'],
+  'cbam-diagnostic':['CBAM compliance diagnostic','Quantify certificate liability and design EUA hedge.','High','CFO / Exports','3–4 weeks','High','CBAM cost model'],
+  'board-note':['Board risk note','Brief the board on the exposure and mitigation plan.','Medium','CFO','1 week','Medium','Board memo'],
+  'client-outreach':['Client outreach','Open the conversation with the exposed client.','High','Partner','2 days','High','Talking points']
+};
+// Persona emphasis: section order for ckA..ckE
+const PERSONA = {
+  partner:['risks','advisory','outputs','exposure','scenario'],
+  director:['exposure','risks','scenario','outputs','advisory'],
+  analyst:['risks','exposure','evidence','scenario','outputs']
+};
+let PMODE = 'partner';
+try { PMODE = localStorage.getItem('tpm-persona') || 'partner'; } catch(e) {}
+const sevClass = s => 'sev'+s;
+const deltaTag = r => { const d = r.sev - r.prev; if (d>0) return `<span class="chip" style="background:var(--redbg);color:var(--red)">▲ ${SEVL[r.prev]}→${SEVL[r.sev]}</span>`; if (d<0) return `<span class="chip sev2">▼ eased</span>`; return `<span class="chip sev1">● stable</span>`; };
+const rkSectors = r => Object.keys(r.sectors).sort((a,b)=>r.sectors[b]-r.sectors[a]);
+const rkScore = r => r.sev*2 + (r.sev-r.prev) + (r.conf==='High'?1:0);
+
+function breaches() {
+  const now = Date.now(), out = [];
+  RISKS.forEach(r => (r.thresholds||[]).forEach(t => out.push({r:r.id, t, sev:r.sev})));
+  CAL.forEach(e => { if (e.d) { const dd = Math.ceil((new Date(e.d)-now)/86400000); if (dd>0 && dd<=45) out.push({cal:e, t:'Regulatory deadline within 45 days', days:dd}); } });
+  return out;
+}
+function renderThresholds() {
+  const b = breaches().filter(x=>x.cal || x.sev>=4);
+  const el = document.getElementById('ckThresholds');
+  if (!b.length) { el.innerHTML=''; return; }
+  const near = breaches().filter(x=>x.cal).sort((a,b)=>a.days-b.days)[0];
+  el.innerHTML = `<div class="card" style="padding:12px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--redbg)"><span class="chip sev5">● ${b.length} live breaches</span>${near?`<span style="font-size:12.5px;color:var(--red)"><b>Nearest deadline:</b> ${near.cal.t} — ${near.days} days</span>`:''}<span class="lab" style="margin-left:auto;cursor:pointer" onclick="tab('calendar')">See all deadlines →</span></div>`;
+}
+function riskCard(r) {
+  const secs = rkSectors(r).slice(0,4).map(s=>SECTORS[s][0]).join(' · ');
+  const topAct = PLAY[(r.actions||[])[0]];
+  return `<div class="rk" data-risk="${r.id}" style="--sv:${r.sev>=4?'var(--red)':r.sev>=3?'var(--amber)':'var(--teal)'}">
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px"><span class="chip ${sevClass(r.sev)}">${SEVL[r.sev]}</span>${deltaTag(r)}<span class="lab">${r.cat}</span><span class="lab" style="margin-left:auto">conf: ${r.conf}</span></div>
+    <div class="rkt">${r.title}</div>
+    <div style="font-size:12px;color:var(--ink3);margin:6px 0 8px"><b style="color:var(--th)">Why now:</b> ${r.whyNow}</div>
+    <div style="font-size:11.5px;color:var(--ink2);margin-bottom:8px"><span class="lab">Affected:</span> ${secs} · ${r.companies.length} companies</div>
+    ${topAct?`<div style="font-size:12px;color:var(--ink2)"><span class="lab">Next step:</span> ${topAct[0]}</div>`:''}
+    <div style="display:flex;gap:6px;margin-top:11px;flex-wrap:wrap"><button class="btn sec" data-open="${r.id}">Detail</button><button class="btn sec" data-scen="${r.id}">Run scenario</button><button class="btn pri" data-brief="${r.id}">Generate brief</button></div>
+  </div>`;
+}
+function secRisks(host) {
+  const ranked = RISKS.slice().sort((a,b)=>rkScore(b)-rkScore(a));
+  const n = PMODE==='partner'?5:RISKS.length;
+  return `<h2>Priority risks — what changed</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">${ranked.slice(0,n).map(riskCard).join('')}</div>`;
+}
+function exposureLevel(riskRow, secKey) { return riskRow.sectors[secKey]||0; }
+function secExposure() {
+  const rows = RISKS.slice().sort((a,b)=>rkScore(b)-rkScore(a));
+  const cols = Object.keys(SECTORS);
+  const cell = (r, sk) => {
+    const lv = exposureLevel(r, sk);
+    if (!lv) return `<td style="background:var(--card2);opacity:.35" title="No material exposure"></td>`;
+    const cnt = r.companies.filter(c=>SECTORS[sk][1].includes(c)).length;
+    const bg = lv>=3?'var(--red)':lv>=2?'var(--amber)':'var(--teal)';
+    const dir = r.sev>r.prev?'▲':r.sev<r.prev?'▼':'';
+    return `<td data-cell="${r.id}|${sk}" style="background:color-mix(in srgb,${bg} ${lv>=3?90:lv>=2?62:40}%,transparent);color:#fff" title="${r.title} → ${SECTORS[sk][0]}: ${['','low','medium','high'][lv]} exposure, ${cnt} companies">${dir}<div class="cnt">${cnt||''}</div></td>`;
+  };
+  return `<h2>Exposure map — who is exposed</h2>
+    <div class="card" style="overflow-x:auto"><table class="hx"><tr><th class="rw"></th>${cols.map(c=>`<th>${SECTORS[c][0]}</th>`).join('')}</tr>
+    ${rows.map(r=>`<tr><th class="rw" title="${r.title}">${r.title.split('—')[0].split(' ').slice(0,3).join(' ')}</th>${cols.map(c=>cell(r,c)).join('')}</tr>`).join('')}</table>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--ink3);margin-top:10px"><span><span class="cdot" style="background:var(--teal)"></span>low</span><span><span class="cdot" style="background:var(--amber)"></span>medium</span><span><span class="cdot" style="background:var(--red)"></span>high</span><span>▲/▼ = severity trend · number = affected companies in universe · click a cell to drill in</span></div></div>`;
+}
+function secScenario() {
+  return `<h2>Under stress — how bad could it get</h2><p class="sub" style="margin:0 0 10px">Jump to the stress lab to stack shocks and dial custom moves either way. Quick presets:</p>
+  <div style="display:flex;flex-wrap:wrap;gap:7px">${['oil22','usdinr10','coal22','china','gold25','cbamcost'].map(id=>`<button class="btn sec" data-scen2="${id}">${EV[id]?EV[id][0]:id}</button>`).join('')}</div>`;
+}
+const OUTPUTS = [
+  ['partner-onepager','Partner one-pager','Top risks, why-now, business impact, talking points'],
+  ['client-brief','Client risk brief','Exposure, impact, recommended action for a named client'],
+  ['board-memo','Board summary','Concise board note on the priority risk and mitigation'],
+  ['treasury-note','Treasury action note','Hedge/funding actions with owners and deadlines'],
+  ['analyst-pack','Analyst evidence pack','Sources, assumptions, methodology, change log']
+];
+function secOutputs() {
+  return `<h2>What to send — output center</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px">${OUTPUTS.map(o=>`<div class="oc" data-out="${o[0]}"><div style="font-weight:600;font-size:14px;color:var(--ink);margin-bottom:5px">${o[1]}</div><div style="font-size:11.5px;color:var(--ink3)">${o[2]}</div><div class="btn pri" style="display:inline-block;margin-top:11px">Generate ↗</div></div>`).join('')}</div>`;
+}
+function secAdvisory() {
+  const ranked = RISKS.filter(r=>r.adv).sort((a,b)=>rkScore(b)-rkScore(a)).slice(0, PMODE==='partner'?6:4);
+  const vC = v => v==='High'?'sev5':v==='Medium'?'sev3':'sev2';
+  return `<h2>Advisory opportunities — top clients to call</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Trigger</th><th>Likely buyer</th><th>Possible project</th><th>Value</th><th>Status</th></tr>
+  ${ranked.map(r=>`<tr data-open="${r.id}" style="cursor:pointer"><td style="font-weight:600">${r.title.split('—')[0]}</td><td>${r.adv.buyer}</td><td>${r.adv.project}</td><td><span class="chip ${vC(r.adv.value)}">${r.adv.value}</span></td><td class="lab">${r.adv.status}</td></tr>`).join('')}</table>
+  <p class="meta" style="margin:8px 0 0">Click a row for the drill-down, evidence, and a first talking point.</p></div>`;
+}
+function secEvidence() {
+  const all = RISKS.flatMap(r=>r.evidence.map(e=>({r,e})));
+  return `<h2>Evidence & assumptions</h2><div class="card">${all.map(({r,e})=>`<div class="ev"><div class="evh"><span class="chip sev1">${e.ty}</span><b style="font-size:12.5px">${e.t}</b><span class="lab" style="margin-left:auto">${e.d}</span></div><div style="font-size:12px;color:var(--ink2)"><b>Fact:</b> ${e.fact}</div><div style="font-size:11.5px;color:var(--ink3);margin-top:3px"><b>Assumption:</b> ${e.assume} · conf ${e.conf} · verified ${e.ver} · ${e.chg}</div><div style="font-size:11px;margin-top:4px"><a href="${e.u}" target="_blank" rel="noopener">${e.u}</a></div></div>`).join('')}</div>`;
+}
+const SECFN = { risks:secRisks, exposure:secExposure, scenario:secScenario, outputs:secOutputs, advisory:secAdvisory, evidence:secEvidence };
+function renderCockpit() {
+  const hi = RISKS.filter(r=>r.sev>=4).length;
+  const moved = RISKS.filter(r=>r.sev>r.prev).length;
+  const brc = breaches().filter(x=>x.cal || x.sev>=4).length;
+  const now = Date.now();
+  const dl = CAL.filter(e=>e.d && (()=>{const d=Math.ceil((new Date(e.d)-now)/86400000);return d>0&&d<=30;})()).length;
+  const kpi = (v,l,cap,go)=>`<div class="kpi"${go?` data-goto="${go}" role="button" tabindex="0"`:''}><b>${v}</b><span>${l}</span>${cap?`<div class="kcap">${cap}</div>`:''}</div>`;
+  document.getElementById('ckHero').innerHTML =
+    kpi(hi,'high-priority risks','Severity high or critical, needing action now') +
+    kpi(moved,'risks escalated','Moved up in severity since last refresh') +
+    kpi(brc,'exposures breached','Thresholds tripped — see red banner') +
+    kpi(dl,'deadlines ≤30d','Regulatory dates inside the month','calendar');
+  renderThresholds();
+  const order = PERSONA[PMODE], hosts = ['ckA','ckB','ckC','ckD','ckE'];
+  hosts.forEach((h,i)=>{ const key = order[i]; document.getElementById(h).innerHTML = key && SECFN[key] ? SECFN[key]() : ''; });
+  document.querySelectorAll('#persona button').forEach(b=>b.classList.toggle('on', b.dataset.persona===PMODE));
+}
+// ----- Drill-down drawer -----
+function openRisk(id, focusSec) {
+  const r = RID(id); if (!r) return;
+  const path = [r.commodities[0]?DATA.commodities[r.commodities[0]][0]:(r.fx[0]||r.cat), rkSectors(r)[0]?SECTORS[rkSectors(r)[0]][0]:'sector', 'company P&L'].filter(Boolean);
+  const cos = r.companies.map(c=>{const ci=DATA.companies.find(x=>x.id===c);return ci?`<span class="pill" data-dd="${c}" style="cursor:pointer">${ci.name}</span>`:'';}).join(' ');
+  const acts = (r.actions||[]).map(a=>{const p=PLAY[a];return p?`<div class="act"><div class="acth">${p[0]}</div><div style="font-size:12px;color:var(--ink2);margin-top:3px">${p[1]}</div><div class="actmeta"><span>urgency <b>${p[2]}</b></span><span>owner <b>${p[3]}</b></span><span>time <b>${p[4]}</b></span><span>value <b>${p[5]}</b></span><span>output <b>${p[6]}</b></span></div></div>`:'';}).join('');
+  const ev = r.evidence.map(e=>`<div class="ev"><div class="evh"><span class="chip sev1">${e.ty}</span><b style="font-size:12.5px">${e.t}</b><span class="lab" style="margin-left:auto">${e.d}</span></div><div style="font-size:12px;color:var(--ink2)"><b>Fact:</b> ${e.fact}</div><div style="font-size:11.5px;color:var(--ink3);margin-top:3px"><b>Assumption:</b> ${e.assume} · conf ${e.conf} · verified ${e.ver}</div><div style="font-size:11.5px;color:var(--th);margin-top:3px"><b>Changed:</b> ${e.chg}</div><div style="font-size:11px;margin-top:4px"><a href="${e.u}" target="_blank" rel="noopener">${e.u}</a></div></div>`).join('');
+  document.getElementById('drawer').innerHTML =
+    `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><div style="display:flex;gap:7px;margin-bottom:4px"><span class="chip ${sevClass(r.sev)}">${SEVL[r.sev]}</span>${deltaTag(r)}<span class="lab">${r.cat} · conf ${r.conf}</span></div><h3>${r.title}</h3></div><button class="btn sec" onclick="closeDrawer()">✕</button></div>
+    <p style="font-size:13px;color:var(--ink2);margin:8px 0 0"><b style="color:var(--th)">Why now:</b> ${r.whyNow}</p>
+    <div class="dsect"><span class="lab">Exposure pathway</span><div class="path">${path.map((n,i)=>`${i?'<span class="ar">→</span>':''}<span class="node">${n}</span>`).join('')}</div><p style="font-size:12.5px;color:var(--ink2);margin-top:8px">${r.impact}</p><div style="font-size:11.5px;color:var(--ink3);margin-top:5px"><b>Channels:</b> ${(r.channels||[]).join(' · ')}</div></div>
+    <div class="dsect"><span class="lab">Affected companies (${r.companies.length})</span><div style="display:flex;flex-wrap:wrap;gap:6px">${cos}</div></div>
+    <div class="dsect"><span class="lab">Recommended actions</span>${acts}</div>
+    <div class="dsect"><span class="lab">Evidence</span>${ev}</div>
+    ${r.adv?`<div class="dsect"><span class="lab">Advisory opportunity</span><div class="act"><div class="acth">${r.adv.project}</div><div class="actmeta"><span>buyer <b>${r.adv.buyer}</b></span><span>value <b>${r.adv.value}</b></span><span>status <b>${r.adv.status}</b></span></div><p style="font-size:12px;color:var(--ink2);margin-top:7px"><b>First talking point:</b> ${r.adv.talk}</p></div></div>`:''}
+    <div style="display:flex;gap:8px;margin:20px 0 6px;flex-wrap:wrap"><button class="btn pri" data-brief="${r.id}">Generate brief</button><button class="btn sec" data-scen="${r.id}">Run in stress lab</button></div>`;
+  document.getElementById('scrim').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+  if (focusSec) {}
+}
+function closeDrawer(){ document.getElementById('drawer').classList.remove('open'); document.getElementById('scrim').classList.remove('open'); }
+// ----- Brief generator -----
+let BRIEFTEXT = '', BRIEFTITLE = 'brief';
+function scenFromRisk(id){ const r=RID(id); if(!r)return; scReset(); if(r.commodities.includes('crude')) scActive.add('oil22'); if(r.commodities.includes('metcoal')) scActive.add('coal22'); if(r.commodities.includes('gold')) scActive.add('gold25'); if(r.commodities.includes('api')||r.commodities.includes('lithium')) scActive.add('china'); if(r.commodities.includes('steel')||r.commodities.includes('alum')) scActive.add('cbamcost'); if(r.fx.includes('USDINR')) scActive.add('usdinr10'); if(!scActive.size) scActive.add('usdinr10'); scSync(); tab('scenarios'); }
+function briefFor(kind, riskId) {
+  const r = riskId ? RID(riskId) : RISKS.slice().sort((a,b)=>rkScore(b)-rkScore(a))[0];
+  const date = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const secs = rkSectors(r).map(s=>SECTORS[s][0]).join(', ');
+  const cos = r.companies.map(c=>{const ci=DATA.companies.find(x=>x.id===c);return ci?ci.name:c;});
+  const acts = (r.actions||[]).map(a=>PLAY[a]).filter(Boolean);
+  const ev = r.evidence;
+  const kindName = (OUTPUTS.find(o=>o[0]===kind)||[null,kind])[1];
+  const persona = kind==='analyst-pack'?'analyst':kind==='board-memo'?'board':'partner';
+  let md = `# ${kindName}\n**Risk Radar** · ${date} · prepared for ${persona==='board'?'the Board':persona==='analyst'?'the engagement team':'partner review'}\n\n`;
+  md += `## Executive summary\n${r.title}. Severity ${SEVL[r.sev]} (${r.sev>r.prev?'escalated from '+SEVL[r.prev]:'stable'}), confidence ${r.conf}. ${r.impact}\n\n`;
+  md += `## Why now\n${r.whyNow}\n\n`;
+  md += `## Affected exposure\n- Sectors: ${secs}\n- Companies: ${cos.join(', ')}\n- Channels: ${(r.channels||[]).join('; ')}\n- Commodities/FX: ${[...r.commodities.map(c=>DATA.commodities[c]?DATA.commodities[c][0]:c),...r.fx].join(', ')||'—'}\n\n`;
+  md += `## Potential impact (directional — modelled estimate)\n${r.impact} Effects are directional bands, not point forecasts; pass-through assumed ~50% per processing step, before hedging and price regulation.\n\n`;
+  md += `## Recommended action\n${acts.map(a=>`- **${a[0]}** — ${a[1]} (owner: ${a[3]}, ${a[4]}, value ${a[5]}, output: ${a[6]})`).join('\n')||'- Review exposure and brief the risk owner.'}\n\n`;
+  if (persona!=='board') { md += `## Evidence & sources\n${ev.map(e=>`- [${e.ty}] ${e.t} (${e.d}) — ${e.fact} — ${e.u}`).join('\n')}\n\n`; }
+  if (persona==='analyst') { md += `## Assumptions & method\n${ev.map(e=>`- ${e.assume} (conf ${e.conf}, verified ${e.ver})`).join('\n')}\n\n## Change log\n${ev.map(e=>`- ${e.chg}`).join('\n')}\n\n`; }
+  md += `## Open questions\n- Confirm the company's actual hedge cover ratio and contract structure.\n- Validate cost-share estimates against the latest filing.\n- Timing of the exposure vs the client's planning cycle.\n\n`;
+  if (persona!=='board') { md += `## Suggested consulting intervention\n${r.adv?`**${r.adv.project}** for ${r.adv.buyer} (value ${r.adv.value}, status ${r.adv.status}).\nFirst talking point: "${r.adv.talk}"`:'Scope a short diagnostic on the exposure and mitigation options.'}\n`; }
+  md += `\n---\n*Illustrative analysis from public official sources and company disclosures. Directional estimates, not audit evidence or investment advice. Verify primary sources before external use.*`;
+  BRIEFTEXT = md; BRIEFTITLE = `${kindName} — ${r.title.split('—')[0].trim()}`;
+  const html = md.replace(/^# (.*)$/gm,'<div class="doc-h1">$1</div>').replace(/^## (.*)$/gm,'<h4>$1</h4>').replace(/^\- (.*)$/gm,'<li>$1</li>').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'$1').replace(/\n\n/g,'</p><p>').replace(/(<li>.*?<\/li>)/gs,m=>'<ul>'+m+'</ul>');
+  document.getElementById('briefkind').textContent = kindName;
+  document.getElementById('briefbody').innerHTML = '<p>'+html+'</p>';
+  document.getElementById('briefmodal').classList.add('open');
+}
+function closeBrief(){ document.getElementById('briefmodal').classList.remove('open'); }
+function copyBrief(){ navigator.clipboard && navigator.clipboard.writeText(BRIEFTEXT); const b=event.target; const o=b.textContent; b.textContent='Copied ✓'; setTimeout(()=>b.textContent=o,1200); }
+function downloadBrief(){ const blob=new Blob([BRIEFTEXT],{type:'text/markdown'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=BRIEFTITLE.replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.md'; a.click(); }
+function printBriefDoc(){ const w=window.open('','_blank'); w.document.write('<pre style="font-family:Georgia,serif;white-space:pre-wrap;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.5">'+BRIEFTEXT.replace(/[<>]/g,'')+'</pre>'); w.document.close(); w.print(); }
+window.closeDrawer=closeDrawer; window.closeBrief=closeBrief; window.copyBrief=copyBrief; window.downloadBrief=downloadBrief; window.printBriefDoc=printBriefDoc;
+// Cockpit event delegation
+document.getElementById('tab-cockpit').addEventListener('click', e => {
+  const b=e.target.closest('[data-brief]'); if(b){ e.stopPropagation(); briefFor('partner-onepager', b.dataset.brief); return; }
+  const s=e.target.closest('[data-scen]'); if(s){ e.stopPropagation(); scenFromRisk(s.dataset.scen); return; }
+  const s2=e.target.closest('[data-scen2]'); if(s2){ scReset(); scActive.add(s2.dataset.scen2); scSync(); tab('scenarios'); return; }
+  const cell=e.target.closest('[data-cell]'); if(cell){ openRisk(cell.dataset.cell.split('|')[0]); return; }
+  const out=e.target.closest('[data-out]'); if(out){ const map={'partner-onepager':'partner-onepager','client-brief':'client-brief','board-memo':'board-memo','treasury-note':'treasury-note','analyst-pack':'analyst-pack'}; briefFor(map[out.dataset.out]||'partner-onepager'); return; }
+  const dd=e.target.closest('[data-dd]'); if(dd){ goDeep(dd.dataset.dd); return; }
+  const op=e.target.closest('[data-open]'); if(op){ openRisk(op.dataset.open); return; }
+  const k=e.target.closest('[data-goto]'); if(k){ tab(k.dataset.goto); return; }
+  const rk=e.target.closest('[data-risk]'); if(rk){ openRisk(rk.dataset.risk); return; }
+});
+document.getElementById('drawer').addEventListener('click', e => {
+  const b=e.target.closest('[data-brief]'); if(b){ briefFor('partner-onepager', b.dataset.brief); return; }
+  const s=e.target.closest('[data-scen]'); if(s){ closeDrawer(); scenFromRisk(s.dataset.scen); return; }
+  const dd=e.target.closest('[data-dd]'); if(dd){ closeDrawer(); goDeep(dd.dataset.dd); return; }
+});
+document.getElementById('persona').addEventListener('click', e => { const b=e.target.closest('[data-persona]'); if(b){ PMODE=b.dataset.persona; try{localStorage.setItem('tpm-persona',PMODE);}catch(err){} renderCockpit(); } });
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ closeDrawer(); closeBrief(); } });
+try { document.getElementById('lastupd').textContent = 'updated ' + new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + ' · cycle 2026-W28'; } catch(e){}
+
 drawGrid('');
 show('tatasteel');
 renderOverview();
@@ -1661,7 +2030,8 @@ renderDeep('titan');
 simulate('oil22');
 loadCorr(false);
 loadLive();
-tab('overview');
+renderCockpit();
+tab('cockpit');
 </script>
 </body>
 </html>
