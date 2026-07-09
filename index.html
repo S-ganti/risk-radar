@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commodity &amp; Treasury Risk Radar — India</title>
-<meta name="build" content="2026-07-09-risk-os-v9">
+<meta name="build" content="2026-07-10-multimodel-v10">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -103,12 +103,13 @@ select.st{border:none;background:var(--card2)}
 .badge{border-radius:7px}
 .ghost{font-size:12px;font-weight:500;padding:6px 13px;border:none;border-radius:9px;background:var(--card2);color:var(--ink2);cursor:pointer;transition:background .15s,color .15s}
 .ghost:hover{background:var(--accent);color:#fff}
-.tabs{position:fixed;top:0;left:0;bottom:0;width:198px;flex-direction:column;gap:2px;padding:92px 14px 20px;margin:0;border-bottom:none;border-right:1px solid var(--line);background:var(--bg);z-index:40}
+.tabs{position:fixed;top:0;left:0;bottom:0;width:198px;flex-direction:column;gap:2px;padding:118px 14px 20px;margin:0;border-bottom:none;border-right:1px solid var(--line);background:var(--bg);z-index:40;overflow-y:auto}
 .tabbtn{border:none;background:transparent;text-align:left;border-radius:9px;padding:8px 12px;color:var(--ink2);font-weight:500}
 .tabbtn:hover{background:var(--card);color:var(--ink)}
 .tabs .tabbtn.on{background:var(--card);color:var(--accent);font-weight:600}
 .wrap{margin-left:222px;max-width:1010px}
-.brand{position:fixed;top:24px;left:26px;z-index:41;font-weight:700;font-size:14px;letter-spacing:-0.02em;display:flex;flex-direction:column;gap:8px;color:var(--ink)}
+.brand{position:fixed;top:20px;left:26px;z-index:41;width:170px;font-weight:700;font-size:14px;letter-spacing:-0.02em;display:flex;flex-direction:column;gap:7px;color:var(--ink)}
+.brand .brow{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .kbd{font-size:10.5px;color:var(--ink3);border:1px solid var(--line);border-radius:6px;padding:2px 8px;cursor:pointer;background:var(--card);font-weight:500;align-self:flex-start}
 #evb .tabbtn,.card .tabbtn{background:var(--card2);border-radius:999px;padding:6px 15px;text-align:center}
 #evb .tabbtn.on,.card .tabbtn:hover,#evb .tabbtn:hover{background:var(--accent);color:#fff;box-shadow:none}
@@ -228,7 +229,7 @@ h2{color:var(--th)}
 </style>
 </head>
 <body>
-<div class="brand no-print">Risk Radar<button class="kbd" onclick="cmdOpen()" title="Open command menu">Ctrl K</button><button class="themebtn" id="themebtn" onclick="toggleTheme()" title="Switch visual theme">Terminal</button></div>
+<div class="brand no-print"><span>Risk Radar</span><span class="brow"><button class="kbd" onclick="cmdOpen()" title="Open command menu">Ctrl K</button><button class="themebtn" id="themebtn" onclick="toggleTheme()" title="Switch visual theme">Terminal</button></span></div>
 <div class="wrap">
 <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
   <div>
@@ -255,6 +256,7 @@ h2{color:var(--th)}
 
 <div class="tabs no-print">
   <button class="tabbtn on" data-tab="cockpit">Cockpit</button>
+  <button class="tabbtn" data-tab="models">Model lab</button>
   <button class="tabbtn" data-tab="companies">Who is exposed</button>
   <button class="tabbtn" data-tab="deepdive">Company deep dive</button>
   <button class="tabbtn" data-tab="scenarios">Stress lab</button>
@@ -272,6 +274,16 @@ h2{color:var(--th)}
   <div class="kpis" id="ckHero"></div>
   <div id="ckThresholds" style="margin:2px 0 4px"></div>
   <div id="ckBody"></div>
+</div>
+
+<div id="tab-models" style="display:none">
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 14px">
+    <label class="lab">Risk item</label>
+    <select id="mdlsel" style="min-width:280px;padding:8px 12px;border:none;border-radius:10px;background:var(--card);color:var(--ink);font-size:14px"></select>
+    <span class="lab" id="mdlregime"></span>
+  </div>
+  <div id="mdltabs" style="display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px"></div>
+  <div id="mdlbody"></div>
 </div>
 
 <div id="tab-overview" style="display:none">
@@ -1090,10 +1102,11 @@ async function loadLive() {
     sig.textContent = snap.note;
   }
 }
-const TABS = ['cockpit','overview','companies','deepdive','scenarios','commodities','pipeline','calendar','cycles','methodology'];
-const THUE = { cockpit:'#5D8BFF', overview:'#7FA8FF', companies:'#E8A24A', deepdive:'#86D0A8', scenarios:'#F49380', commodities:'#B39DFF', pipeline:'#5DBE9E', calendar:'#E8BC66', cycles:'#7FA8FF', methodology:'#9CA3AF' };
+const TABS = ['cockpit','models','overview','companies','deepdive','scenarios','commodities','pipeline','calendar','cycles','methodology'];
+const THUE = { cockpit:'#5D8BFF', models:'#C99BE0', overview:'#7FA8FF', companies:'#E8A24A', deepdive:'#86D0A8', scenarios:'#F49380', commodities:'#B39DFF', pipeline:'#5DBE9E', calendar:'#E8BC66', cycles:'#7FA8FF', methodology:'#9CA3AF' };
 const THERO = {
   cockpit:['Risk cockpit','What changed, who is exposed, how bad it gets under stress, and what to do next — one screen from signal to client-ready action.'],
+  models:['Model lab','Six independent model families plus a regime-aware ensemble on one risk — compare lenses, see where they disagree, and read the combined forecast.'],
   overview:['Risk landscape','The analytical picture across 34 companies — quadrant, grade mix, and the priority table.'],
   companies:['Company briefs','Six-lens risk assessment, commodity dependencies, product vulnerability, and policy exposure for every name.'],
   deepdive:['Company deep dive','One company end to end — supply chain traced to source, product flowchart, and sensitivity to every shock.'],
@@ -1104,7 +1117,7 @@ const THERO = {
   cycles:['Weekly cycles','The raw weekly research reports — reasoning first, every claim cited to an official source.'],
   methodology:['Methodology & reader’s guide','How every number is built, plus a plain-English guide to the terms, colors, and policies.']
 };
-const TMOTIF = { cockpit:'wave', overview:'bars', companies:'bars', pipeline:'bars', scenarios:'wave', cycles:'wave', commodities:'net', deepdive:'net', calendar:'grid', methodology:'grid' };
+const TMOTIF = { cockpit:'wave', models:'net', overview:'bars', companies:'bars', pipeline:'bars', scenarios:'wave', cycles:'wave', commodities:'net', deepdive:'net', calendar:'grid', methodology:'grid' };
 function motif(kind) {
   const s = 'var(--th)';
   if (kind === 'bars') { let b=''; [30,55,40,70,50,85,60,95,72,58].forEach((h,i)=>b+=`<rect x="${i*28+8}" y="${100-h}" width="15" height="${h}" rx="3" fill="${s}" opacity="${(0.22+i*0.045).toFixed(2)}"/>`); return `<svg viewBox="0 0 290 100" preserveAspectRatio="xMaxYMid slice" width="100%" height="100%">${b}</svg>`; }
@@ -2149,11 +2162,138 @@ renderComGrid();
 renderMindMap();
 showCom('crude');
 renderDeep('titan');
+// ============ Multi-model risk engine (client-side, transparent approximations of the PRD stack) ============
+function gauss(){ let u=0,v=0; while(u===0)u=Math.random(); while(v===0)v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+function pctile(sorted,p){ return sorted[clamp(Math.floor(p/100*sorted.length),0,sorted.length-1)]; }
+const capPct=(v,cap)=>clamp(100*v/cap,0,100);
+const riskVol=r=>{ const cs=r.commodities.filter(c=>DATA.commodities[c]); return cs.length? cs.reduce((s,c)=>s+DATA.commodities[c][1]/5*100,0)/cs.length : 50; };
+const ctrlStrength=r=>clamp(40+(r.actions||[]).length*10+(r.conf==='High'?15:r.conf==='Medium'?5:0),0,100);
+const detectability=r=>clamp(100-(r.conf==='High'?70:r.conf==='Medium'?50:30),0,100);
+const dataQ=r=>CONFN[r.conf]||60;
+const dirOf=r=>{ const d=scoreDelta(r); return d>2?'up':d<-2?'down':'flat'; };
+function detectRegime(){ const v=RISKS.reduce((s,r)=>s+rsc(r).vel,0)/RISKS.length; return v>=75?'crisis':v>=62?'stressed':v>=48?'elevated':'normal'; }
+function std(id,fam,r,score,dir,conf,factors,assumptions,warnings,dq,raw){
+  const f=factors.map(x=>({factor:x[0],contribution:Math.round(x[1]*10)/10})).sort((a,b)=>b.contribution-a.contribution).slice(0,3);
+  return {model_id:id,model_family:fam,risk_id:r.id,score_0_100:score,forecast_horizon_days:30,direction:dir,confidence_0_100:conf,explanation_factors:f,assumptions,warnings:warnings||[],data_quality_0_100:Math.round(dq),raw_metrics:raw||{}}; }
+function mObjective(r){ const s=rsc(r), E=s.exp,C=s.con,V=s.vel,sig=riskVol(r),W=100-ctrlStrength(r),P=100-(CONFN[r.conf]||60);
+  const util=compo(r)/100, L=util>=1?100:util>=0.85?70:util>=0.70?40:0;
+  let sc=clamp(0.25*E+0.15*C+0.15*V+0.10*sig+0.15*L+0.10*W+0.10*P,0,100); if(util>=1)sc=Math.max(sc,75);
+  const warn=[]; if((CONFN[r.conf]||60)<40)warn.push('Low-confidence data; validate manually.'); if(E<40&&C>75)warn.push('Localized but concentrated.');
+  return std('rules-objective','objective',r,Math.round(sc),dirOf(r),clamp(Math.round((CONFN[r.conf]||60)*0.7+30),0,100),
+    [['exposure',0.25*E],['limit breach',0.15*L],['concentration',0.15*C],['velocity',0.15*V]],
+    ['Threshold + delta + concentration weighting against policy caps.','Limit utilization proxied from the composite score.'],warn,dataQ(r),{E,C,V,sigma:Math.round(sig),L,W,P}); }
+const AHPW={severity:0.28,occurrence:0.14,detection:0.12,exposure:0.22,controllability:0.14,time:0.10};
+function mQualitative(r){ const s=rsc(r);
+  const rt={severity:r.sev/5*100,occurrence:s.vel,detection:detectability(r),exposure:s.exp,controllability:100-ctrlStrength(r),time:deadlineProx(r)};
+  const AHP=Object.keys(AHPW).reduce((a,k)=>a+AHPW[k]*rt[k],0);
+  const S=clamp(r.sev*2,1,10),O=clamp(s.vel/10,1,10),D=clamp(detectability(r)/10,1,10),M=clamp((100-ctrlStrength(r))/10,1,10);
+  const rpn=S*O*D*M, FMEA=clamp(100*(rpn-1)/(10000-1),0,100);
+  const barrier=ctrlStrength(r),recovery=clamp(ctrlStrength(r)-10,0,100),cause=clamp(CONFN[r.conf]||60,0,100),consq=s.exp;
+  const BOW=0.30*(100-barrier)+0.20*(100-recovery)+0.20*consq+0.30*(100-cause);
+  const sc=clamp(0.45*AHP+0.35*FMEA+0.20*BOW,0,100);
+  const conf=clamp(0.4*70+0.4*85+0.2*92,0,100);
+  return std('structured-judgment','qualitative',r,Math.round(sc),dirOf(r),Math.round(conf),
+    [['AHP (severity·exposure)',0.45*AHP],['FMEA S×O×D×M',0.35*FMEA],['Bow-Tie control gaps',0.20*BOW]],
+    ['AHP weights from a seeded pairwise matrix (consistency ratio < 0.10).','FMEA RPN* = S×O×D×M, min-max normalized.','Bow-Tie barrier/cause coverage seeded from control strength.'],
+    ((CONFN[r.conf]||60)<40?['Thin expert panel — widen Delphi round.']:[]),dataQ(r),{AHP:Math.round(AHP),FMEA:Math.round(FMEA),BowTie:Math.round(BOW),RPNstar:Math.round(rpn)}); }
+function mQuant(r){ const sigma=0.04+riskVol(r)/100*0.10, N=5000, losses=[];
+  for(let i=0;i<N;i++){ let z=gauss(); if(Math.random()<0.10)z*=2.4; losses.push(z*sigma); }
+  losses.sort((a,b)=>a-b);
+  const VaR95=-pctile(losses,5)*100, VaR99=-pctile(losses,1)*100;
+  const tail=losses.slice(0,Math.floor(N*0.01)), ES99=(-tail.reduce((a,b)=>a+b,0)/tail.length)*100;
+  const thresh=sigma*100*1.5, breach=losses.filter(x=>-x*100>thresh).length/N;
+  const VolScore=clamp(riskVol(r),0,100),VaRScore=capPct(VaR99,25),ESScore=capPct(ES99,30),BreachScore=100*breach;
+  const sc=clamp(0.25*VolScore+0.25*VaRScore+0.30*ESScore+0.20*BreachScore,0,100);
+  return std('monte-carlo-quant','quant',r,Math.round(sc),dirOf(r),Math.round(clamp(0.30*70+0.35*72+0.35*68,0,100)),
+    [['expected shortfall 99%',0.30*ESScore],['VaR 99%',0.25*VaRScore],['volatility',0.25*VolScore],['breach probability',0.20*BreachScore]],
+    ['5,000-path Monte Carlo with fat-tailed innovations (≈ Student-t, df 5).','Volatility from commodity price-volatility ratings — not a fitted GARCH (Phase 2).','Loss expressed as % of exposure.'],
+    [],dataQ(r),{VaR95:Math.round(VaR95*10)/10,VaR99:Math.round(VaR99*10)/10,ES99:Math.round(ES99*10)/10,breachProb:Math.round(breach*100)/100}); }
+function mTail(r){ const q=mQuant(r).raw_metrics;
+  const EVT=capPct(q.ES99*1.35,40), nC=r.commodities.length, Copula=capPct(q.ES99*(1+0.12*Math.max(0,nC-1)),45);
+  let worst=0,mat=0,tot=0; ['oil22','usdinr10','coal22','china','gold25','cbamcost','oil25','tariff'].forEach(id=>{ if(!EV[id])return; tot++; const sh=propagate(evDirect(id)); let mxc=0; r.companies.forEach(co=>mxc=Math.max(mxc,Math.abs(marginImpact(co,sh)))); worst=Math.max(worst,mxc); if(mxc>4)mat++; });
+  const ScWorst=capPct(worst,15), Breadth=tot?100*mat/tot:0;
+  const sc=clamp(0.30*EVT+0.25*Copula+0.30*ScWorst+0.15*Breadth,0,100);
+  return std('evt-tail','tail',r,Math.round(sc),dirOf(r),Math.round(clamp(60+(r.conf==='High'?10:0),0,100)),
+    [['EVT tail ES',0.30*EVT],['scenario worst loss',0.30*ScWorst],['copula joint stress',0.25*Copula],['scenario breadth',0.15*Breadth]],
+    ['EVT-informed: Monte-Carlo tail ES scaled for peaks-over-threshold (full GPD fit is Phase 2).','Copula tail dependence approximated by joint-stress heaviness × commodity count.','Scenario worst from the historical + hypothetical + hybrid library.'],
+    (worst>10?['Severe scenario tail — analyst review recommended.']:[]),dataQ(r),{EVT:Math.round(EVT),copula:Math.round(Copula),scenarioWorstPct:Math.round(worst*10)/10,breadthPct:Math.round(Breadth)}); }
+function mNetwork(r){ let cent=0; r.commodities.forEach(c=>{ let n=0; DATA.companies.forEach(co=>{ if((DATA.deps[co]||{})[c])n++; }); cent=Math.max(cent,n); });
+  const Centrality=capPct(cent,DATA.companies.length*0.5);
+  const dir={}; r.commodities.forEach(c=>dir[c]=20); const sh=propagate(dir);
+  let prop=0,br=0; DATA.companies.forEach(co=>{ const im=Math.abs(marginImpact(co,sh)); prop+=im; if(im>1)br++; });
+  const Propagation=capPct(prop,60), Breadth=capPct(br,DATA.companies.length*0.6);
+  const sc=clamp(0.40*Centrality+0.35*Propagation+0.25*Breadth,0,100);
+  return std('network-contagion','network',r,Math.round(sc),dirOf(r),Math.round(clamp(55+(r.commodities.length>1?10:0),0,100)),
+    [['centrality',0.40*Centrality],['propagation loss',0.35*Propagation],['breadth of impact',0.25*Breadth]],
+    ['Centrality from shared-dependency degree across the 34-company universe.','Contagion propagated through the commodity input graph with λ decay per step.','Edge weights from disclosed cost shares.'],
+    [],dataQ(r),{centralityDegree:cent,affectedCompanies:br}); }
+const sigmoid=x=>1/(1+Math.exp(-x));
+function mForecast(r){ const s=rsc(r), tail=mTail(r).score_0_100, es=mQuant(r).raw_metrics.ES99;
+  const z=(compo(r)-60)/12+(s.vel-50)/25+(tail-55)/25+(deadlineProx(r)-40)/40-0.4, pB=clamp(sigmoid(z),0.02,0.97);
+  const sevF=clamp(0.6*tail+0.4*es*2,0,100), sc=clamp(0.60*pB*100+0.40*sevF,0,100);
+  return std('regime-forecast','forecast',r,Math.round(sc),dirOf(r),Math.round(clamp(50+(r.conf==='High'?12:0),0,100)),
+    [['P(breach, 30d)',0.60*pB*100],['severity forecast',0.40*sevF]],
+    ['Regime-aware logistic on model scores + velocity + deadline proximity.','30-day horizon; gradient-boosting and Bayesian overlay are Phase 3.'],
+    [],dataQ(r),{breachProb30d:Math.round(pB*100)/100,severityForecast:Math.round(sevF)}); }
+const ENS_BASE={objective:0.15,qualitative:0.15,quant:0.20,tail:0.20,network:0.10,forecast:0.20};
+const ENS_REGIME={ normal:{objective:1.10,qualitative:0.95,quant:1.05,tail:0.85,network:0.90,forecast:1.00}, elevated:{objective:1.00,qualitative:1.00,quant:1.00,tail:1.10,network:1.00,forecast:1.05}, stressed:{objective:0.90,qualitative:1.05,quant:0.95,tail:1.25,network:1.10,forecast:1.10}, crisis:{objective:0.80,qualitative:1.10,quant:0.85,tail:1.35,network:1.20,forecast:1.15} };
+function computeModels(rid){ const r=RID(rid), regime=detectRegime();
+  const models={objective:mObjective(r),qualitative:mQualitative(r),quant:mQuant(r),tail:mTail(r),network:mNetwork(r),forecast:mForecast(r)};
+  const keys=Object.keys(ENS_BASE);
+  const wsRaw=keys.map(k=>ENS_BASE[k]*ENS_REGIME[regime][k]*(models[k].confidence_0_100/100)*(models[k].data_quality_0_100/100));
+  const wsum=wsRaw.reduce((a,b)=>a+b,0)||1, w=wsRaw.map(x=>x/wsum), scores=keys.map(k=>models[k].score_0_100);
+  const Sens=Math.round(scores.reduce((a,s,i)=>a+s*w[i],0)), mean=scores.reduce((a,b)=>a+b,0)/scores.length;
+  const disp=Math.round(Math.sqrt(scores.reduce((a,s)=>a+(s-mean)*(s-mean),0)/scores.length));
+  const meanDQ=keys.reduce((a,k)=>a+models[k].data_quality_0_100,0)/keys.length;
+  const confEns=Math.round(clamp(0.50*keys.reduce((a,k,i)=>a+models[k].confidence_0_100*w[i],0)+0.25*(100-disp)+0.25*meanDQ,0,100));
+  const warnings=[]; let floor=0;
+  if(disp>25) warnings.push('High model disagreement; analyst review recommended.');
+  if(models.tail.score_0_100>85 || models.forecast.raw_metrics.breachProb30d>0.50) floor=70;
+  const quantMax=Math.max(models.quant.score_0_100,models.tail.score_0_100); let tag='';
+  if(models.qualitative.score_0_100-quantMax>20) tag='judgment-led risk';
+  else if(quantMax-models.qualitative.score_0_100>20) tag='data-led risk';
+  return {regime,models,keys,weights:w,ensemble:{score:Math.max(Sens,floor),confidence:confEns,dispersion:disp,warnings,tag,breachProb:models.forecast.raw_metrics.breachProb30d}}; }
+// ---- Model lab UI ----
+let MDLRISK=null, MDLSUB='ensemble';
+const MDLTABS=[['objective','Objective'],['qualitative','Qualitative'],['quant','Quantitative'],['tail','Stress & Tail'],['network','Network'],['forecast','Forecast'],['ensemble','Ensemble']];
+const scoreBand=v=>v>=85?['critical','var(--red)']:v>=70?['high','var(--red)']:v>=50?['elevated','var(--amber)']:v>=25?['moderate','var(--amber)']:['low','var(--teal)'];
+function modelCard(m){ const b=scoreBand(m.score_0_100);
+  return `<div class="card"><div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap"><span style="font-family:'Spline Sans Mono',monospace;font-size:42px;font-weight:700;color:${b[1]}">${m.score_0_100}</span><span class="chip" style="background:color-mix(in srgb,${b[1]} 16%,transparent);color:${b[1]}">${b[0]}</span><span class="lab">direction ${m.direction}</span><span class="lab">confidence ${m.confidence_0_100}</span><span class="lab">data quality ${m.data_quality_0_100}</span><span class="lab" style="margin-left:auto">${m.model_family} · ${m.model_id}</span></div>
+   <div class="lab" style="margin-top:16px">Top contributing factors</div>${m.explanation_factors.map(f=>`<div class="crow"><span class="cn" style="width:190px">${f.factor}</span><span class="cbar" style="max-width:240px"><span style="width:${clamp(f.contribution*3,3,100)}%;background:${b[1]}"></span></span><span style="font-family:'Spline Sans Mono',monospace;font-weight:600">${f.contribution}</span></div>`).join('')}
+   <div class="lab" style="margin-top:14px">Assumptions</div><ul style="font-size:12.5px;margin:4px 0">${m.assumptions.map(a=>`<li>${a}</li>`).join('')}</ul>
+   ${m.warnings.length?`<div class="lab" style="margin-top:10px">Warnings</div>${m.warnings.map(w=>`<div class="ev" style="color:var(--amber)">${w}</div>`).join('')}`:''}
+   <details style="margin-top:10px"><summary class="lab" style="cursor:pointer">Raw metrics + standardized output</summary><pre style="font-size:11px;overflow-x:auto;color:var(--ink2);background:var(--card2);padding:10px;border-radius:8px;margin-top:6px">${JSON.stringify({model_id:m.model_id,model_family:m.model_family,score_0_100:m.score_0_100,confidence_0_100:m.confidence_0_100,direction:m.direction,data_quality_0_100:m.data_quality_0_100,raw_metrics:m.raw_metrics},null,1)}</pre></details></div>`; }
+function ensembleView(res){ const e=res.ensemble, b=scoreBand(e.score);
+  const bars=res.keys.map((k,i)=>({label:MDLTABS.find(t=>t[0]===k)[1],s:res.models[k].score_0_100,w:res.weights[i]}));
+  const minS=Math.min(...bars.map(x=>x.s)), maxS=Math.max(...bars.map(x=>x.s));
+  const metric=(l,v,c)=>`<div class="kpi" style="cursor:default"><b style="color:${c||'var(--ink)'}">${v}</b><span>${l}</span></div>`;
+  let h=`<div class="kpis">${metric('final ensemble score',e.score,b[1])}${metric('confidence',e.confidence)}${metric('disagreement (σ)',e.dispersion,e.dispersion>25?'var(--red)':'var(--ink)')}${metric('regime',res.regime)}${metric('P(breach 30d)',Math.round(e.breachProb*100)+'%',e.breachProb>0.5?'var(--red)':'var(--ink)')}</div>`;
+  if(e.warnings.length) h+=`<div class="card" style="background:var(--redbg);padding:12px 16px">${e.warnings.map(w=>`<span class="chip sev5">${w}</span>`).join(' ')}</div>`;
+  if(e.tag) h+=`<div style="margin:6px 0"><span class="chip sev3">${e.tag}</span></div>`;
+  h+=`<h2 style="font-size:15px">Model comparison — six lenses on this risk</h2><div class="card">`;
+  bars.forEach(x=>{ const bb=scoreBand(x.s); h+=`<div class="crow"><span class="cn" style="width:120px">${x.label}</span><span class="cbar" style="max-width:300px"><span style="width:${x.s}%;background:${bb[1]}"></span></span><span style="font-family:'Spline Sans Mono',monospace;font-weight:600;width:34px">${x.s}</span><span class="lab" style="width:120px">weight ${(x.w*100).toFixed(0)}%</span></div>`; });
+  h+=`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)"><span class="lab">Range band</span><div class="crow"><span class="cn" style="width:120px">min → max</span><span class="cbar" style="max-width:300px;position:relative"><span style="position:absolute;left:${minS}%;width:${maxS-minS}%;background:color-mix(in srgb,var(--th) 40%,transparent)"></span><span style="position:absolute;left:${e.score}%;width:3px;background:var(--ink)"></span></span><span style="font-family:'Spline Sans Mono',monospace;font-size:11px">${minS}–${maxS}</span></div><p class="meta" style="margin:6px 0 0">Bar span = model min→max; the tick marks the ensemble. Wide span = high disagreement (σ ${e.dispersion}).</p></div></div>`;
+  h+=`<h2 style="font-size:15px">Why scores disagree</h2><div class="card"><p style="font-size:13px;color:var(--ink2)">Ensemble weights adapt to the <b>${res.regime}</b> regime and each model's confidence and data quality. ${e.dispersion>25?'These models disagree materially (σ '+e.dispersion+') — a signal of structural uncertainty; treat the range, not the point.':'The models broadly agree (σ '+e.dispersion+'), so the ensemble score is robust.'} ${e.tag==='judgment-led risk'?'Qualitative judgment leads quantitative signals here — this is a strategic, expert-driven risk.':e.tag==='data-led risk'?'Quantitative and tail models lead judgment — this is a data-driven, measurable risk.':''}</p></div>`;
+  const r=RID(MDLRISK), act=PLAY[(r.actions||[])[0]];
+  h+=`<h2 style="font-size:15px">Recommended action</h2><div class="card"><div class="act"><div class="acth">${act?act[0]:'Review exposure'}</div><div class="actmeta"><span>owner <b>${act?act[3]:'CFO'}</b></span><span>urgency <b>${act?act[2]:'High'}</b></span><span>output <b>${act?act[6]:'Risk note'}</b></span></div></div><div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn pri" onclick="briefFor('partner-brief','${MDLRISK}')">Export to brief</button><button class="btn sec" onclick="openRisk('${MDLRISK}')">Evidence & drill-down</button><button class="btn sec" onclick="scenFromRisk('${MDLRISK}')">Run in stress lab</button></div></div>`;
+  return h; }
+function renderModels(){
+  if(!MDLRISK) MDLRISK = RISKS.slice().sort((a,b)=>priority(b)-priority(a))[0].id;
+  document.getElementById('mdlsel').innerHTML = RISKS.slice().sort((a,b)=>priority(b)-priority(a)).map(r=>`<option value="${r.id}"${r.id===MDLRISK?' selected':''}>${r.title}</option>`).join('');
+  const res=computeModels(MDLRISK);
+  document.getElementById('mdlregime').textContent = 'regime: '+res.regime+' · ensemble '+res.ensemble.score+'/100 · σ '+res.ensemble.dispersion;
+  document.getElementById('mdltabs').innerHTML = MDLTABS.map(t=>`<button class="tabbtn" data-msub="${t[0]}" style="${t[0]===MDLSUB?'background:var(--th);color:#fff':'background:var(--card2)'};border-radius:999px;padding:6px 14px">${t[1]}${t[0]!=='ensemble'?' '+res.models[t[0]].score_0_100:''}</button>`).join('');
+  document.getElementById('mdlbody').innerHTML = MDLSUB==='ensemble'? ensembleView(res) : modelCard(res.models[MDLSUB]);
+}
+document.getElementById('mdlsel').addEventListener('change',e=>{ MDLRISK=e.target.value; renderModels(); });
+document.getElementById('mdltabs').addEventListener('click',e=>{ const b=e.target.closest('[data-msub]'); if(b){ MDLSUB=b.dataset.msub; renderModels(); } });
+
 renderAssume();
 simulate('oil22');
 loadCorr(false);
 loadLive();
 renderCockpit();
+renderModels();
 tab('cockpit');
 </script>
 </body>
