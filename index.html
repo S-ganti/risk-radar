@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commodity &amp; Treasury Risk Radar — India</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23185FA5'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#faf9f5;--card:#ffffff;--ink:#1a1a19;--ink2:#52514e;--ink3:#898781;--line:rgba(0,0,0,.12);--accent:#185FA5;--red:#A32D2D;--redbg:#FCEBEB;--amber:#854F0B;--amberbg:#FAEEDA;--teal:#0F6E56;--tealbg:#E1F5EE}
 @media(prefers-color-scheme:dark){:root{--bg:#1a1a19;--card:#242423;--ink:#f0efec;--ink2:#c3c2b7;--ink3:#898781;--line:rgba(255,255,255,.14);--accent:#85B7EB;--red:#F09595;--redbg:#501313;--amber:#FAC775;--amberbg:#412402;--teal:#9FE1CB;--tealbg:#04342C}}
@@ -72,9 +75,57 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 .cbar span{border-radius:3px}
 a{cursor:pointer}
 @media print{body.brief .wrap>*:not(#tab-companies){display:none!important}body.brief #tab-companies>*:not(#panel){display:none!important}body{background:#fff}.no-print{display:none!important}}
+:root{--bg:#FFFFFF;--card:#F5F5F3;--card2:#EBEBE8;--ink:#101013;--ink2:#43434A;--ink3:#6B6B72;--line:rgba(16,16,19,.08);--accent:#002FA7;--redbg:#F7E9E6;--red:#A63A22;--amberbg:#F3ECDC;--amber:#7D591A;--tealbg:#E4EFE8;--teal:#1E5F43}
+@media(prefers-color-scheme:dark){:root{--bg:#0A0A0C;--card:#151518;--card2:#1E1E22;--ink:#F2F2F0;--ink2:#C0C0C6;--ink3:#9C9CA3;--line:rgba(242,242,240,.09);--accent:#6787FF;--redbg:#2A1410;--red:#F0937E;--amberbg:#251C0B;--amber:#E3B562;--tealbg:#0E241B;--teal:#82CDA6}}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;padding:36px 40px;font-size:14.5px}
+h1{font-size:26px;font-weight:700;letter-spacing:-0.03em;text-wrap:balance}
+h2{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:36px 0 14px}
+.sub{font-size:13px;max-width:72ch}
+.card{border:none;border-radius:16px;box-shadow:none;padding:22px 26px;margin:14px 0}
+.kpi{border:none;border-radius:16px;padding:18px 20px;cursor:pointer;transition:transform .15s cubic-bezier(.22,1,.36,1),box-shadow .15s cubic-bezier(.22,1,.36,1)}
+.kpi:hover{transform:scale(1.01);box-shadow:0 10px 32px -14px rgba(16,16,19,.22)}
+.kpi b{font-size:34px;font-weight:700;letter-spacing:-0.025em}
+.kpi span{text-transform:uppercase;letter-spacing:.08em;font-size:10px;font-weight:600}
+.lbl{text-transform:uppercase;letter-spacing:.1em;font-size:10px;font-weight:600}
+.mrow b{font-size:22px;letter-spacing:-0.015em}
+.co{border:none;background:var(--card);border-radius:10px;padding:7px 14px;transition:transform .15s,box-shadow .15s,background .15s}
+.co:hover{transform:translateY(-1px) scale(1.01);box-shadow:0 6px 20px -10px rgba(16,16,19,.28)}
+.co.on{background:var(--accent);color:#fff;font-weight:600}
+.pill{border:none;background:var(--card2)}
+.tag{border:none}
+.cbar{border:none;background:var(--card2)}
+input[type=search]{border:none;background:var(--card);border-radius:10px;padding:10px 14px}
+select.st{border:none;background:var(--card2)}
+.t th{border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:.07em;font-size:10px}
+.svc{border-left:none;border-radius:10px;background:var(--card2);padding:9px 14px;margin:8px 0;font-size:13.5px}
+.svc::before{content:"→ ";color:var(--accent);font-weight:700}
+.badge{border-radius:7px}
+.ghost{font-size:12px;font-weight:500;padding:6px 13px;border:none;border-radius:9px;background:var(--card2);color:var(--ink2);cursor:pointer;transition:background .15s,color .15s}
+.ghost:hover{background:var(--accent);color:#fff}
+.tabs{position:fixed;top:0;left:0;bottom:0;width:198px;flex-direction:column;gap:2px;padding:92px 14px 20px;margin:0;border-bottom:none;border-right:1px solid var(--line);background:var(--bg);z-index:40}
+.tabbtn{border:none;background:transparent;text-align:left;border-radius:9px;padding:8px 12px;color:var(--ink2);font-weight:500}
+.tabbtn:hover{background:var(--card);color:var(--ink)}
+.tabs .tabbtn.on{background:var(--card);color:var(--accent);font-weight:600}
+.wrap{margin-left:222px;max-width:1010px}
+.brand{position:fixed;top:24px;left:26px;z-index:41;font-weight:700;font-size:14px;letter-spacing:-0.02em;display:flex;flex-direction:column;gap:8px;color:var(--ink)}
+.kbd{font-size:10.5px;color:var(--ink3);border:1px solid var(--line);border-radius:6px;padding:2px 8px;cursor:pointer;background:var(--card);font-weight:500;align-self:flex-start}
+#evb .tabbtn,.card .tabbtn{background:var(--card2);border-radius:999px;padding:6px 15px;text-align:center}
+#evb .tabbtn.on,.card .tabbtn:hover,#evb .tabbtn:hover{background:var(--accent);color:#fff;box-shadow:none}
+#cmdk{position:fixed;inset:0;background:rgba(10,10,14,.45);display:none;z-index:100;align-items:flex-start;justify-content:center;padding-top:13vh}
+#cmdk.open{display:flex}
+.cmdbox{width:580px;max-width:92vw;background:var(--bg);border-radius:16px;box-shadow:0 30px 90px -18px rgba(0,0,0,.4);overflow:hidden}
+.cmdbox input{width:100%;border:none;background:transparent;padding:17px 22px;font-size:15px;color:var(--ink);outline:none;font-family:inherit}
+.cmdlist{max-height:330px;overflow:auto;border-top:1px solid var(--line);padding:7px}
+.cmditem{padding:10px 15px;border-radius:9px;font-size:13.5px;display:flex;gap:10px;align-items:baseline;cursor:pointer;color:var(--ink)}
+.cmditem .k{color:var(--ink3);font-size:10px;margin-left:auto;text-transform:uppercase;letter-spacing:.07em}
+.cmditem.sel,.cmditem:hover{background:var(--card)}
+@media(max-width:920px){.tabs{position:sticky;top:0;left:auto;right:auto;bottom:auto;flex-direction:row;width:auto;border-right:none;border-bottom:1px solid var(--line);padding:10px 0;overflow-x:auto}.wrap{margin-left:0}.brand{display:none}body{padding:20px}}
+@media print{.wrap{margin-left:0}.brand,#cmdk{display:none!important}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 </style>
 </head>
 <body>
+<div class="brand no-print">Risk Radar<button class="kbd" onclick="cmdOpen()" title="Open command menu">Ctrl K</button></div>
 <div class="wrap">
 <h1>Commodity &amp; treasury risk radar — India large caps</h1>
 <p class="sub">Strategy &amp; risk accelerator: weekly policy monitoring, six-lens company risk assessment, and a live engagement pipeline for commodity and treasury advisory. Public official sources and company disclosures only. Latest cycle: <span id="lastcycle"></span> — regenerated weekly by a six-agent pipeline (planner → document scout → risk analyst → company mapper → rival monitor → service mapper).</p>
@@ -117,7 +168,7 @@ a{cursor:pointer}
 <div id="tab-deepdive" style="display:none">
   <h2>Company deep dive</h2>
   <p class="sub" style="margin-bottom:10px">One company end to end: supply chain traced to source, product vulnerability, current policy exposure, and shock sensitivity.</p>
-  <div style="margin:0 0 12px"><select id="ddsel" style="min-width:260px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:14px"></select></div>
+  <div style="margin:0 0 12px"><select id="ddsel" style="min-width:260px;padding:8px 12px;border:none;border-radius:10px;background:var(--card);color:var(--ink);font-size:14px"></select></div>
   <div id="ddout"></div>
 </div>
 
@@ -248,6 +299,8 @@ a{cursor:pointer}
 </div>
 
 <p class="meta no-print" style="margin-top:28px;border-top:1px solid var(--line);padding-top:12px">Internal working tool — illustrative analysis from public sources. Not client advice. Pursuit statuses are stored only in this browser.</p>
+
+<div id="cmdk" role="dialog" aria-label="Command menu"><div class="cmdbox"><input id="cmdq" placeholder="Jump to a company, commodity, scenario, or view…" autocomplete="off"><div class="cmdlist" id="cmdlist"></div></div></div>
 
 <script>
 const DATA = {
@@ -785,7 +838,7 @@ function show(id) {
   const ls = lensScores(id), avg = oavg(id), og = ograde(avg);
   const deps = DATA.deps[id]||{};
   const keys = Object.keys(deps).sort((a,b)=>deps[b]-deps[a]);
-  let h = `<div class="card"><span class="no-print" style="float:right;display:flex;gap:6px"><button style="font-size:12px;padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink2);cursor:pointer" onclick="goDeep('${id}')">Deep dive</button><button style="font-size:12px;padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink2);cursor:pointer" onclick="printBrief()">Print client brief</button></span><div style="font-size:18px;font-weight:600">${c.name}<span class="badge" style="background:${og[1]};color:#fff">overall: ${og[0].toLowerCase()}</span><span class="badge" style="background:transparent;border:1px solid ${g[1]};color:${g[1]}">commodity: ${g[0].toLowerCase()}</span><span class="badge b-${w}">${w==='none'?'no policy impact':'policy: '+w}</span></div><div class="meta">${c.sector}</div>`;
+  let h = `<div class="card"><span class="no-print" style="float:right;display:flex;gap:6px"><button class="ghost" onclick="goDeep('${id}')">Deep dive</button><button class="ghost" onclick="printBrief()">Print client brief</button></span><div style="font-size:18px;font-weight:600">${c.name}<span class="badge" style="background:${og[1]};color:#fff">overall: ${og[0].toLowerCase()}</span><span class="badge" style="background:transparent;border:1px solid ${g[1]};color:${g[1]}">commodity: ${g[0].toLowerCase()}</span><span class="badge b-${w}">${w==='none'?'no policy impact':'policy: '+w}</span></div><div class="meta">${c.sector}</div>`;
   h += `<div class="lbl">Balanced risk scorecard — ${avg.toFixed(1)} / 5 across six lenses</div>`;
   ls.forEach((s,i)=>{
     const col = s[0]>=4 ? '#E24B4A' : s[0]>=3 ? '#BA7517' : '#1D9E75';
@@ -953,14 +1006,14 @@ function renderOverview() {
   let openings = 0; for (const id in DATA.watch) openings += DATA.watch[id].length;
   const pr = pipeRows().length;
   const days = Math.ceil((new Date('2026-09-30') - Date.now())/86400000);
-  const kpi = (v,l,cap) => `<div class="kpi"><b>${v}</b><span>${l}</span>${cap?`<div class="kcap">${cap}</div>`:''}</div>`;
+  const kpi = (v,l,cap,go) => `<div class="kpi"${go?` data-goto="${go}" role="button" tabindex="0"`:''}><b>${v}</b><span>${l}</span>${cap?`<div class="kcap">${cap}</div>`:''}</div>`;
   document.getElementById('kpis').innerHTML =
-    kpi(DATA.companies.length,'companies tracked','The 34 largest listed names — any top-25 cut is a subset') +
-    kpi(urgent,'urgent policy impacts','Rules already in force that compel action now') +
-    kpi(material,'material impacts','Significant exposure with an open action window') +
-    kpi(openings,'action openings','Documented weaknesses mapped to a sellable service') +
-    kpi(pr,'pipeline opportunities','Deadline-ranked in the Pipeline tab') +
-    kpi(days + 'd','to FCNR window close','Hard RBI deadline — subsidized hedging ends 30 Sep 2026');
+    kpi(DATA.companies.length,'companies tracked','The 34 largest listed names — any top-25 cut is a subset','companies') +
+    kpi(urgent,'urgent policy impacts','Rules already in force that compel action now','companies') +
+    kpi(material,'material impacts','Significant exposure with an open action window','companies') +
+    kpi(openings,'action openings','Documented weaknesses mapped to a sellable service','companies') +
+    kpi(pr,'pipeline opportunities','Deadline-ranked in the Pipeline tab','pipeline') +
+    kpi(days + 'd','to FCNR window close','Hard RBI deadline — subsidized hedging ends 30 Sep 2026','calendar');
   const score = id => { const w = worst(DATA.impacts[id]||[]); return (w==='urgent'?3:w==='material'?2:w==='watch'?1:0)*2 + oavg(id); };
   const top = DATA.companies.slice().sort((a,b)=>score(b.id)-score(a.id)).slice(0,6);
   document.getElementById('toptargets').innerHTML =
@@ -1366,6 +1419,35 @@ function renderCorrBox(state, info) {
     `<p class="meta" style="margin:8px 0 0">${info.warn ? info.warn + ' ' : ''}Computed ${new Date(info.when).toLocaleString()} from monthly closes (last ~5 years of overlapping data). Blue = move together, coral = move opposite. Note: gas series is US Henry Hub — Asian LNG is oil-indexed and correlates more tightly with Brent. These correlations also feed the dashed edges on the map above.</p>
     <div style="display:flex;gap:8px;margin-top:8px"><button class="tabbtn" onclick="avRefresh()">Refresh now</button><button class="tabbtn" onclick="avForget()">Remove key</button></div>`;
 }
+
+const TLBL = {};
+document.querySelectorAll('.tabs [data-tab]').forEach(b => TLBL[b.dataset.tab] = b.textContent);
+const CMD = [];
+TABS.forEach(t => CMD.push({ l: TLBL[t] || t, k: 'view', run: () => tab(t) }));
+DATA.companies.forEach(c => {
+  CMD.push({ l: c.name, k: 'company', run: () => goCompany(c.id) });
+  CMD.push({ l: c.name + ' — deep dive', k: 'deep dive', run: () => goDeep(c.id) });
+});
+Object.keys(DATA.commodities).forEach(k => CMD.push({ l: DATA.commodities[k][0], k: 'commodity', run: () => { tab('commodities'); MM.sel = k; renderMindMap(); showCom(k); } }));
+Object.keys(EV).forEach(e => CMD.push({ l: EV[e][0], k: 'scenario', run: () => { tab('scenarios'); simulate(e); } }));
+let cmdSel = 0, cmdF = [];
+function cmdOpen() { document.getElementById('cmdk').classList.add('open'); const i = document.getElementById('cmdq'); i.value = ''; cmdFilter(''); i.focus(); }
+function cmdClose() { document.getElementById('cmdk').classList.remove('open'); }
+function cmdFilter(q) { q = q.toLowerCase(); cmdF = CMD.filter(c => c.l.toLowerCase().includes(q)).slice(0, 12); cmdSel = 0; cmdRender(); }
+function cmdRender() { document.getElementById('cmdlist').innerHTML = cmdF.map((c, i) => `<div class="cmditem${i === cmdSel ? ' sel' : ''}" data-ci="${i}">${c.l}<span class="k">${c.k}</span></div>`).join('') || `<div class="cmditem" style="color:var(--ink3);cursor:default">No matches</div>`; }
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); cmdOpen(); return; }
+  if (!document.getElementById('cmdk').classList.contains('open')) return;
+  if (e.key === 'Escape') cmdClose();
+  else if (e.key === 'ArrowDown') { cmdSel = Math.min(cmdSel + 1, cmdF.length - 1); cmdRender(); e.preventDefault(); }
+  else if (e.key === 'ArrowUp') { cmdSel = Math.max(cmdSel - 1, 0); cmdRender(); e.preventDefault(); }
+  else if (e.key === 'Enter' && cmdF[cmdSel]) { cmdClose(); cmdF[cmdSel].run(); }
+});
+document.getElementById('cmdk').addEventListener('mousedown', e => { if (e.target.id === 'cmdk') cmdClose(); });
+document.getElementById('cmdlist').addEventListener('click', e => { const it = e.target.closest('[data-ci]'); if (it && cmdF[+it.dataset.ci]) { cmdClose(); cmdF[+it.dataset.ci].run(); } });
+document.getElementById('cmdq').addEventListener('input', e => cmdFilter(e.target.value));
+document.getElementById('kpis').addEventListener('click', e => { const k = e.target.closest('[data-goto]'); if (k) tab(k.dataset.goto); });
+document.getElementById('kpis').addEventListener('keydown', e => { if (e.key === 'Enter') { const k = e.target.closest('[data-goto]'); if (k) tab(k.dataset.goto); } });
 
 drawGrid('');
 show('tatasteel');
