@@ -7,7 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#faf9f5;--card:#ffffff;--ink:#1a1a19;--ink2:#52514e;--ink3:#898781;--line:rgba(0,0,0,.12);--accent:#185FA5;--red:#A32D2D;--redbg:#FCEBEB;--amber:#854F0B;--amberbg:#FAEEDA;--teal:#0F6E56;--tealbg:#E1F5EE}
 @media(prefers-color-scheme:dark){:root{--bg:#1a1a19;--card:#242423;--ink:#f0efec;--ink2:#c3c2b7;--ink3:#898781;--line:rgba(255,255,255,.14);--accent:#85B7EB;--red:#F09595;--redbg:#501313;--amber:#FAC775;--amberbg:#412402;--teal:#9FE1CB;--tealbg:#04342C}}
@@ -122,6 +122,27 @@ select.st{border:none;background:var(--card2)}
 @media(max-width:920px){.tabs{position:sticky;top:0;left:auto;right:auto;bottom:auto;flex-direction:row;width:auto;border-right:none;border-bottom:1px solid var(--line);padding:10px 0;overflow-x:auto}.wrap{margin-left:0}.brand{display:none}body{padding:20px}}
 @media print{.wrap{margin-left:0}.brand,#cmdk{display:none!important}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+:root{--bg:#0B100E;--card:#141B17;--card2:#1C2521;--ink:#ECEAE1;--ink2:#BCBFB3;--ink3:#8E948A;--line:rgba(236,234,225,.09);--accent:#5D8BFF;--redbg:#2B1512;--red:#F49380;--amberbg:#271F0C;--amber:#E8BC66;--tealbg:#10251C;--teal:#86D0A8}
+body{font-family:'Hanken Grotesk',-apple-system,'Segoe UI',sans-serif}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(900px 520px at 12% -8%,rgba(93,139,255,.08),transparent 60%),repeating-linear-gradient(0deg,rgba(236,234,225,.013) 0 1px,transparent 1px 3px)}
+.wrap{position:relative;z-index:1}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:36px;letter-spacing:0}
+.brand{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:20px}
+.kpi b,.mrow b{font-family:'Spline Sans Mono',ui-monospace,monospace;font-weight:600}
+.kpi b{font-size:29px;letter-spacing:-0.02em}
+.kbd,.cmditem .k{font-family:'Spline Sans Mono',ui-monospace,monospace}
+.tabs{border-right-color:var(--line)}
+::selection{background:var(--accent);color:#fff}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--card2);border-radius:6px}
+::-webkit-scrollbar-track{background:transparent}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h1{animation:rise .45s cubic-bezier(.22,1,.36,1) backwards}
+.kpi{animation:rise .5s cubic-bezier(.22,1,.36,1) backwards}
+.kpis .kpi:nth-child(1){animation-delay:.04s}.kpis .kpi:nth-child(2){animation-delay:.09s}.kpis .kpi:nth-child(3){animation-delay:.14s}.kpis .kpi:nth-child(4){animation-delay:.19s}.kpis .kpi:nth-child(5){animation-delay:.24s}.kpis .kpi:nth-child(6){animation-delay:.29s}
+.tabs .tabbtn{animation:rise .4s cubic-bezier(.22,1,.36,1) backwards}
+.tabs .tabbtn:nth-child(1){animation-delay:.02s}.tabs .tabbtn:nth-child(2){animation-delay:.05s}.tabs .tabbtn:nth-child(3){animation-delay:.08s}.tabs .tabbtn:nth-child(4){animation-delay:.11s}.tabs .tabbtn:nth-child(5){animation-delay:.14s}.tabs .tabbtn:nth-child(6){animation-delay:.17s}.tabs .tabbtn:nth-child(7){animation-delay:.2s}.tabs .tabbtn:nth-child(8){animation-delay:.23s}.tabs .tabbtn:nth-child(9){animation-delay:.26s}
+@media print{:root{--bg:#fff;--card:#F5F5F3;--card2:#EBEBE8;--ink:#101013;--ink2:#43434A;--ink3:#6B6B72;--line:rgba(16,16,19,.1);--accent:#002FA7;--redbg:#F7E9E6;--red:#A63A22;--amberbg:#F3ECDC;--amber:#7D591A;--tealbg:#E4EFE8;--teal:#1E5F43}body::before{display:none}}
 </style>
 </head>
 <body>
