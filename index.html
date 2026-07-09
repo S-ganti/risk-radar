@@ -172,6 +172,9 @@ h1{animation:rise .45s cubic-bezier(.22,1,.36,1) backwards}
 <div id="tab-overview">
   <p class="sub" style="margin:0 0 10px">First time here? <a onclick="tab('methodology')">Open the 60-second reader's guide</a> — every term, color, and policy explained in plain English.</p>
   <div class="kpis" id="kpis"></div>
+  <div id="gradestrip"></div>
+  <h2>Risk landscape</h2>
+  <div class="card" style="overflow-x:auto" id="quad"></div>
   <h2>Priority targets</h2>
   <div class="card" style="overflow-x:auto"><table class="t" id="toptargets"></table></div>
   <h2>Next hard dates</h2>
@@ -223,6 +226,7 @@ h1{animation:rise .45s cubic-bezier(.22,1,.36,1) backwards}
 <div id="tab-calendar" style="display:none">
   <h2>Regulatory calendar</h2>
   <p class="sub" style="margin-bottom:10px">Hard dates from official documents; countdowns computed live each time the file opens.</p>
+  <div class="card" style="overflow-x:auto" id="caltl"></div>
   <div class="card" style="overflow-x:auto"><table class="t" id="caltable"></table></div>
 </div>
 
@@ -861,10 +865,12 @@ function show(id) {
   const keys = Object.keys(deps).sort((a,b)=>deps[b]-deps[a]);
   let h = `<div class="card"><span class="no-print" style="float:right;display:flex;gap:6px"><button class="ghost" onclick="goDeep('${id}')">Deep dive</button><button class="ghost" onclick="printBrief()">Print client brief</button></span><div style="font-size:18px;font-weight:600">${c.name}<span class="badge" style="background:${og[1]};color:#fff">overall: ${og[0].toLowerCase()}</span><span class="badge" style="background:transparent;border:1px solid ${g[1]};color:${g[1]}">commodity: ${g[0].toLowerCase()}</span><span class="badge b-${w}">${w==='none'?'no policy impact':'policy: '+w}</span></div><div class="meta">${c.sector}</div>`;
   h += `<div class="lbl">Balanced risk scorecard — ${avg.toFixed(1)} / 5 across six lenses</div>`;
+  h += `<div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap"><div>${radarSVG(id,192)}</div><div style="flex:1;min-width:300px">`;
   ls.forEach((s,i)=>{
     const col = s[0]>=4 ? '#E24B4A' : s[0]>=3 ? '#BA7517' : '#1D9E75';
     h += `<div class="crow"><span class="cn">${LENS[i]}</span><span class="cbar"><span style="width:${s[0]*20}%;background:${col}"></span></span><span style="width:22px;font-weight:600">${s[0]}</span><span class="meta" style="flex:1.4;min-width:200px">${s[1]}</span></div>`;
   });
+  h += `</div></div>`;
   const mit = DATA.mitigants[id]||[];
   if (mit.length) {
     h += `<div class="lbl">Strengths and mitigants</div><ul style="font-size:14px;margin:4px 0 2px">${mit.map(m=>`<li>${m}</li>`).join('')}</ul>`;
@@ -1206,7 +1212,7 @@ function renderDeep(id) {
   const c = DATA.companies.find(x=>x.id===id);
   const deps = DATA.deps[id]||{};
   const g = ograde(oavg(id));
-  let h = `<div class="card"><div style="font-size:18px;font-weight:600">${c.name} <span class="badge" style="background:${g[1]};color:#fff">overall: ${g[0].toLowerCase()}</span></div><div class="meta">${c.sector} · ${DATA.anchors[id]||DATA.anchors._default}</div>`;
+  let h = `<div class="card"><span style="float:right;margin:-6px -6px 4px 10px">${radarSVG(id,152)}</span><div style="font-size:18px;font-weight:600">${c.name} <span class="badge" style="background:${g[1]};color:#fff">overall: ${g[0].toLowerCase()}</span></div><div class="meta">${c.sector} · ${DATA.anchors[id]||DATA.anchors._default}</div>`;
   const keys = Object.keys(deps).sort((a,b)=>deps[b]-deps[a]);
   if (keys.length) {
     h += flowSVG(id);
@@ -1441,6 +1447,70 @@ function renderCorrBox(state, info) {
     <div style="display:flex;gap:8px;margin-top:8px"><button class="tabbtn" onclick="avRefresh()">Refresh now</button><button class="tabbtn" onclick="avForget()">Remove key</button></div>`;
 }
 
+function radarSVG(id, size) {
+  const ls = lensScores(id);
+  const R = size/2 - 28, cx = size/2, cy = size/2 + 2;
+  const P = (i,v) => { const a = -Math.PI/2 + i*Math.PI/3; const r = R*v/5; return [cx + r*Math.cos(a), cy + r*Math.sin(a)]; };
+  const ring = v => Array.from({length:6},(_,i)=>P(i,v).map(n=>n.toFixed(1)).join(',')).join(' ');
+  const val = ls.map((s,i)=>P(i,s[0]).map(n=>n.toFixed(1)).join(',')).join(' ');
+  const SH = ['Cmdty','Policy','FX','Fin','Conc','Trans'];
+  let s = `<svg viewBox="0 0 ${size} ${size}" width="${size}" role="img" aria-label="Six-lens risk radar">`;
+  s += `<polygon points="${ring(5)}" fill="none" stroke="var(--line)"/><polygon points="${ring(2.5)}" fill="none" stroke="var(--line)"/>`;
+  for (let i=0;i<6;i++) { const e = P(i,5), l = P(i,6.4); s += `<line x1="${cx}" y1="${cy}" x2="${e[0].toFixed(1)}" y2="${e[1].toFixed(1)}" stroke="var(--line)" stroke-opacity="0.6"/><text x="${l[0].toFixed(1)}" y="${(l[1]+3).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--ink3)">${SH[i]}</text>`; }
+  s += `<polygon points="${val}" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.6"><title>${ls.map((x,i)=>SH[i]+' '+x[0]+'/5').join(' · ')}</title></polygon>`;
+  ls.forEach((sc,i)=>{ const p = P(i,sc[0]); s += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="var(--accent)"/>`; });
+  return s + `</svg>`;
+}
+function renderGradeStrip() {
+  const G = ['Very high','High','Moderate','Low'], GC = ['#E24B4A','#D85A30','#BA7517','#1D9E75'];
+  const counts = [0,0,0,0];
+  DATA.companies.forEach(c => counts[G.indexOf(ograde(oavg(c.id))[0])]++);
+  document.getElementById('gradestrip').innerHTML =
+    `<div style="display:flex;gap:2px;height:26px;border-radius:8px;overflow:hidden;margin:14px 0 6px;cursor:pointer" onclick="tab('companies')" title="Open companies">` +
+    counts.map((n,i)=> n ? `<div style="width:${(n/DATA.companies.length*100).toFixed(1)}%;background:${GC[i]};opacity:.85;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:11px;font-weight:600;color:#fff">${n}</div>` : '').join('') + `</div>` +
+    `<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--ink3)">` + G.map((g,i)=>`<span><span class="cdot" style="background:${GC[i]}"></span>${g} · ${counts[i]}</span>`).join('') + `</div>`;
+}
+function renderQuad() {
+  const pts = DATA.companies.map(c => {
+    const d = DATA.deps[c.id]||{}; let sw = 0, si = 0;
+    for (const k in d) { sw += d[k]; si += d[k]*DATA.commodities[k][3]; }
+    return { id: c.id, name: c.name, x: sw*100, y: sw ? si/sw : 0, w: worst(DATA.impacts[c.id]||[]) };
+  }).filter(p => p.x > 2);
+  const W = 860, H = 400, L = 56, Rm = 26, T = 26, B = 46, xmax = 62, ymax = 100;
+  const X = v => L + (v/xmax)*(W-L-Rm), Y = v => H-B - (v/ymax)*(H-T-B);
+  const col = { urgent:'#E24B4A', material:'#D85A30', watch:'#BA7517', none:'#8E948A' };
+  let s = `<line x1="${L}" y1="${H-B}" x2="${W-Rm}" y2="${H-B}" stroke="var(--line)"/><line x1="${L}" y1="${T}" x2="${L}" y2="${H-B}" stroke="var(--line)"/>`;
+  s += `<line x1="${X(30)}" y1="${T}" x2="${X(30)}" y2="${H-B}" stroke="var(--line)" stroke-dasharray="3,5"/><line x1="${L}" y1="${Y(50)}" x2="${W-Rm}" y2="${Y(50)}" stroke="var(--line)" stroke-dasharray="3,5"/>`;
+  [0,20,40,60].forEach(v => s += `<text x="${X(v)}" y="${H-B+16}" text-anchor="middle" font-size="9.5" font-family="'Spline Sans Mono',monospace" fill="var(--ink3)">${v}</text>`);
+  [0,50,100].forEach(v => s += `<text x="${L-8}" y="${Y(v)+3}" text-anchor="end" font-size="9.5" font-family="'Spline Sans Mono',monospace" fill="var(--ink3)">${v}</text>`);
+  s += `<text x="${(L+W-Rm)/2}" y="${H-8}" text-anchor="middle" font-size="10" fill="var(--ink3)">commodity share of cost base % →</text>`;
+  s += `<text x="${L}" y="${T-10}" font-size="10" fill="var(--ink3)">import dependence of that basket % ↑</text>`;
+  s += `<text x="${W-Rm}" y="${T-10}" text-anchor="end" font-size="9.5" fill="var(--ink3)">top-right = price-driven and rupee-exposed</text>`;
+  s += pts.map((p,i) => `<g data-co="${p.id}" style="cursor:pointer"><circle cx="${X(p.x).toFixed(1)}" cy="${Y(p.y).toFixed(1)}" r="${p.w==='urgent'?8:7}" fill="${col[p.w]}" fill-opacity="0.9" stroke="var(--bg)" stroke-width="2"/><text x="${X(p.x).toFixed(1)}" y="${(Y(p.y)+(i%2?18:-11)).toFixed(1)}" text-anchor="middle" font-size="9.5" fill="var(--ink3)">${p.name.split(' ')[0]}</text><title>${p.name} — ${Math.round(p.x)}% of cost base is commodity-linked; that basket is ${Math.round(p.y)}% import-dependent · policy status: ${p.w}</title></g>`).join('');
+  document.getElementById('quad').innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:700px" role="img" aria-label="Scatter of companies by commodity intensity and import dependence">${s}</svg>` +
+    `<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--ink3);margin-top:4px">` +
+    [['urgent','#E24B4A'],['material','#D85A30'],['watch','#BA7517'],['no policy impact','#8E948A']].map(x=>`<span><span class="cdot" style="background:${x[1]}"></span>${x[0]}</span>`).join('') +
+    `<span style="margin-left:auto">Financials and IT sit at the origin and are omitted. Click a dot for the company brief.</span></div>`;
+}
+function renderTimeline() {
+  const dated = CAL.filter(e => e.d);
+  const t0 = Date.now(), t1 = new Date('2028-02-01').getTime();
+  const W = 860, H = 168, ax = 88;
+  const X = d => 34 + ((new Date(d).getTime()-t0)/(t1-t0))*(W-68);
+  let s = `<line x1="26" y1="${ax}" x2="${W-26}" y2="${ax}" stroke="var(--line)" stroke-width="1.5"/>`;
+  s += `<circle cx="34" cy="${ax}" r="4" fill="var(--accent)"/><text x="34" y="${ax+18}" text-anchor="middle" font-size="9" font-family="'Spline Sans Mono',monospace" fill="var(--accent)">today</text>`;
+  dated.forEach((e,i) => {
+    const x = X(e.d), days = Math.ceil((new Date(e.d)-t0)/86400000);
+    const c = days<=120 ? '#E24B4A' : days<=300 ? '#BA7517' : '#8E948A';
+    const up = i%2===0, ly = up ? ax-34 : ax+34;
+    const t = e.t.length>34 ? e.t.slice(0,33)+'…' : e.t;
+    s += `<line x1="${x.toFixed(1)}" y1="${ax}" x2="${x.toFixed(1)}" y2="${ly+(up?8:-8)}" stroke="${c}" stroke-opacity="0.5"/><circle cx="${x.toFixed(1)}" cy="${ax}" r="5" fill="${c}"/><text x="${x.toFixed(1)}" y="${up?ly-10:ly+16}" text-anchor="middle" font-size="9" font-family="'Spline Sans Mono',monospace" fill="${c}">${e.d} · ${days}d</text><text x="${x.toFixed(1)}" y="${up?ly+2:ly+28}" text-anchor="middle" font-size="10" fill="var(--ink2)">${t}</text><title>${e.t} — ${e.s}</title>`;
+  });
+  document.getElementById('caltl').innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:720px" role="img" aria-label="Timeline of regulatory deadlines from today to 2028">${s}</svg>`;
+}
+document.getElementById('quad').addEventListener('click', e => { const g = e.target.closest('[data-co]'); if (g) goCompany(g.dataset.co); });
+
 const TLBL = {};
 document.querySelectorAll('.tabs [data-tab]').forEach(b => TLBL[b.dataset.tab] = b.textContent);
 const CMD = [];
@@ -1473,8 +1543,11 @@ document.getElementById('kpis').addEventListener('keydown', e => { if (e.key ===
 drawGrid('');
 show('tatasteel');
 renderOverview();
+renderGradeStrip();
+renderQuad();
 renderPipeline();
 renderCalendar();
+renderTimeline();
 renderComGrid();
 renderMindMap();
 showCom('crude');
