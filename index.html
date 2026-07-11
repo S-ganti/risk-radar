@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commodity &amp; Treasury Risk Radar — India</title>
-<meta name="build" content="2026-07-10-multimodel-v11">
+<meta name="build" content="2026-07-10-phase2-v12">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -327,6 +327,14 @@ h2{color:var(--th)}
   <div class="card" id="scdials" style="margin:10px 0 22px"></div>
   <div class="lbl">Assumption editor — how the shock hits margin</div>
   <div class="card" id="scassume" style="margin:10px 0 22px"></div>
+  <div class="lbl">Saved configurations — freeze this shock + assumptions as a scoreable risk item</div>
+  <div class="card" id="sccfg" style="margin:10px 0 22px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <input id="cfgname" type="text" placeholder="Name this configuration (e.g. FY27 budget stress)" style="flex:1;min-width:220px;padding:8px 12px;border:none;border-radius:10px;background:var(--card2);color:var(--ink);font-size:13px">
+      <button class="btn pri" onclick="saveConfig()">Save configuration</button>
+    </div>
+    <div id="cfglist" style="margin-top:12px"></div>
+  </div>
   <div class="lbl">Combined direct shock applied</div>
   <div id="evchips" style="display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 26px;min-height:26px"></div>
   <h2 style="font-size:15px">Company margin impact — after pass-through, hedge & inventory</h2>
@@ -1338,12 +1346,17 @@ function scCompute() {
 }
 function renderAssume() {
   const passLabel = ASSUME.pass==null ? 'sector default' : ASSUME.pass+'%';
+  const ctl=(label,id,val,min,max,step,disp,note)=>`<div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12.5px;color:var(--ink2)">${label}</span><span id="av-${id}" style="font-family:'Spline Sans Mono',monospace;font-weight:600;font-size:12.5px">${disp}</span></div><input type="range" id="as-${id}" min="${min}" max="${max}" step="${step}" value="${val}" style="width:100%"><div class="meta">${note}</div></div>`;
   document.getElementById('scassume').innerHTML =
     `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 26px">
-      <div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12.5px;color:var(--ink2)">Cost pass-through (retained)</span><span id="av-pass" style="font-family:'Spline Sans Mono',monospace;font-weight:600;font-size:12.5px">${passLabel}</span></div><input type="range" id="as-pass" min="-1" max="100" step="5" value="${ASSUME.pass==null?-1:ASSUME.pass}" style="width:100%"><div class="meta">−1 = sector default (airlines 80% · pharma 70% · FMCG 45% · steel 30%)</div></div>
-      <div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12.5px;color:var(--ink2)">Hedge coverage</span><span id="av-hedge" style="font-family:'Spline Sans Mono',monospace;font-weight:600;font-size:12.5px">${ASSUME.hedge}%</span></div><input type="range" id="as-hedge" min="0" max="100" step="5" value="${ASSUME.hedge}" style="width:100%"><div class="meta">Share of exposure already hedged</div></div>
-      <div><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12.5px;color:var(--ink2)">Inventory buffer</span><span id="av-inv" style="font-family:'Spline Sans Mono',monospace;font-weight:600;font-size:12.5px">${ASSUME.inv}%</span></div><input type="range" id="as-inv" min="0" max="80" step="5" value="${ASSUME.inv}" style="width:100%"><div class="meta">Near-term cover damping the impact</div></div>
-    </div>`;
+      ${ctl('Cost pass-through (retained)','pass',ASSUME.pass==null?-1:ASSUME.pass,-1,100,5,passLabel,'−1 = sector default (airlines 80% · pharma 70% · FMCG 45% · steel 30%)')}
+      ${ctl('Hedge coverage','hedge',ASSUME.hedge,0,100,5,ASSUME.hedge+'%','Share of exposure already hedged')}
+      ${ctl('Hedge horizon','horizon',ASSUME.horizon,3,18,1,ASSUME.horizon+' mo','Longer horizon = hedge protection rolls off (effective cover decays)')}
+      ${ctl('Inventory buffer','inv',ASSUME.inv,0,80,5,ASSUME.inv+'%','Near-term cover damping the first-order impact')}
+      ${ctl('Pricing power','price',ASSUME.price,0,100,5,ASSUME.price+'%','Escalation clauses / repricing recovering up to 60% of the hit')}
+      ${ctl('Demand elasticity','elast',ASSUME.elast,0,60,5,ASSUME.elast+'%','Volume lost when passing prices on — amplifies the EBITDA hit')}
+    </div>
+    <p class="meta" style="margin:12px 0 0">Effective hedge = coverage × roll-off. Cost impact = gross × retained × (1−hedge) × (1−inventory) × (1−0.6·pricing) × (1+0.5·elasticity). Modelled estimate, not a forecast.</p>`;
 }
 function renderComGrid() {
   const ids = Object.keys(DATA.commodities).sort((a,b)=>DATA.commodities[b][2]-DATA.commodities[a][2] || DATA.commodities[a][0].localeCompare(DATA.commodities[b][0]));
@@ -1457,10 +1470,9 @@ document.getElementById('evb').innerHTML = Object.keys(EV).map(id=>`<button clas
 renderDials();
 document.getElementById('scdials').addEventListener('input', e => { const s = e.target.closest('[data-dial]'); if (s) scSetDial(s.dataset.dial, +s.value); });
 document.getElementById('scassume').addEventListener('input', e => {
-  const t = e.target; if (!t.id) return; const v = +t.value;
-  if (t.id==='as-pass') { ASSUME.pass = v<0?null:v; document.getElementById('av-pass').textContent = v<0?'sector default':v+'%'; }
-  else if (t.id==='as-hedge') { ASSUME.hedge = v; document.getElementById('av-hedge').textContent = v+'%'; }
-  else if (t.id==='as-inv') { ASSUME.inv = v; document.getElementById('av-inv').textContent = v+'%'; }
+  const t = e.target; if (!t.id || !t.id.startsWith('as-')) return; const k = t.id.slice(3), v = +t.value;
+  if (k==='pass') { ASSUME.pass = v<0?null:v; document.getElementById('av-pass').textContent = v<0?'sector default':v+'%'; }
+  else { ASSUME[k] = v; const out = document.getElementById('av-'+k); if (out) out.textContent = k==='horizon' ? v+' mo' : v+'%'; }
   scCompute();
 });
 document.getElementById('tab-scenarios').addEventListener('click', e => {
@@ -1853,7 +1865,8 @@ const RISKS = [
     adv:{buyer:'CFO / Treasurer',project:'Refinancing-window and covenant stress review',value:'Medium',status:'identify',talk:'A tighter-for-longer rupee-defence stance raises refinancing risk on your USD-bond wall — a covenant and window stress test is prudent now.'} }
 ];
 const SEVL = ['—','Info','Low','Medium','High','Critical'];
-const RID = id => RISKS.find(r => r.id === id);
+const CUSTOMRISKS = [];
+const RID = id => RISKS.find(r => r.id === id) || CUSTOMRISKS.find(r => r.id === id);
 // Recommended-action playbook
 const PLAY = {
   'hedge-review':['Hedge policy review','Re-paper the FX/commodity hedge programme for compliance and cover ratio.','Urgent','Treasurer','1–2 weeks','High','Hedge policy memo'],
@@ -1908,10 +1921,12 @@ const rkScore = r => priority(r);
 const scoreColor = v => v>=80?'var(--red)':v>=60?'var(--amber)':v>=40?'var(--teal)':'var(--ink3)';
 // ---- Dynamic sector-specific cost pass-through (retained-cost share) replacing flat 50% for company margin impact ----
 const SECRETAIN = { autos:0.5, steel:0.3, metals:0.4, paints:0.6, jewellery:0.65, pharma:0.7, fmcg:0.45, cement:0.55, power:0.2, energy:0.3, infra:0.5, banks:0.1, it:0.15 };
-let ASSUME = { pass:null, hedge:0, inv:0 };  // pass=null → use sector default; hedge/inv are % (0-100)
+let ASSUME = { pass:null, hedge:0, inv:0, price:0, elast:0, horizon:6 };  // pass=null → sector default
 function retainOf(id){ if(ASSUME.pass!=null) return ASSUME.pass/100; const s=secOf(id); return SECRETAIN[s]!=null?SECRETAIN[s]:0.5; }
-function marginImpact(coId, sh){ const gross=netImpact(coId,sh); const h=(1-ASSUME.hedge/100), iv=(1-ASSUME.inv/100);
-  return gross<0 ? gross*h : gross*retainOf(coId)*h*iv; }  // relief passes through hedge only; cost rise damped by retain × hedge × inventory
+function hedgeEff(){ return (ASSUME.hedge/100)*clamp(1-(ASSUME.horizon-6)/18,0.4,1); }  // hedge protection rolls off over longer horizons
+function marginImpact(coId, sh){ const gross=netImpact(coId,sh);
+  const h=1-hedgeEff(), iv=1-ASSUME.inv/100, pp=1-(ASSUME.price/100)*0.6, el=1+(ASSUME.elast/100)*0.5;
+  return gross<0 ? gross*h : gross*retainOf(coId)*h*iv*pp*el; }  // cost rise: retain × hedge × inventory × pricing-power recovery × elasticity amplifier; relief passes through hedge only
 function impactBand(v){ const a=Math.abs(v); return a>=12?'Severe':a>=6?'High':a>=2.5?'Moderate':a>=0.5?'Low':'Minimal'; }
 function bandChip(v){ const b=impactBand(v), c=b==='Severe'?'sev5':b==='High'?'sev4':b==='Moderate'?'sev3':b==='Low'?'sev2':'sev1'; return `<span class="chip ${c}">${b}</span>`; }
 
@@ -2197,7 +2212,8 @@ const SCENLIB={
 function scenDirect(id){ const e=SCENLIB[id]; if(!e)return{}; const d={}; if(e[2]) for(const c in e[2]) d[c]=e[2][c];
   if(e[3]){ for(const c in DATA.commodities) if(DATA.commodities[c][3]>0){ const v=e[3]*DATA.commodities[c][3]/100; if(Math.abs(v)>Math.abs(d[c]||0)) d[c]=v; } } return d; }
 function scenShock(set){ const dir={}; set.forEach(id=>{ const d=scenDirect(id); for(const c in d) if(Math.abs(d[c])>Math.abs(dir[c]||0)) dir[c]=d[c]; }); return propagate(dir); }
-function defaultScen(r){ const s=new Set(['y_oil10','y_inr8']); if(r.commodities.includes('crude'))s.add('h_oil22'); if(r.commodities.includes('metcoal'))s.add('h_coal22'); if(r.commodities.includes('gold'))s.add('h_gold25'); if(r.commodities.includes('api')||r.commodities.includes('lithium'))s.add('y_china'); if(r.commodities.includes('steel')||r.commodities.includes('alum'))s.add('y_cbam'); return s; }
+function defaultScen(r){ if(r._scen) return new Set([r._scen]);
+  const s=new Set(['y_oil10','y_inr8']); if(r.commodities.includes('crude'))s.add('h_oil22'); if(r.commodities.includes('metcoal'))s.add('h_coal22'); if(r.commodities.includes('gold'))s.add('h_gold25'); if(r.commodities.includes('api')||r.commodities.includes('lithium'))s.add('y_china'); if(r.commodities.includes('steel')||r.commodities.includes('alum'))s.add('y_cbam'); return s; }
 // Model 1 — Objective Rules: S = 0.25E + 0.15C + 0.15V + 0.10σ + 0.15L + 0.10W + 0.10P
 function mObjective(r){ const s=rsc(r), E=s.exp,C=s.con,V=s.vel,sig=riskVol(r),W=100-ctrlStrength(r),P=100-(CONFN[r.conf]||60);
   const util=compo(r)/100, L=util>=1?100:util>=0.85?70:util>=0.70?40:0;
@@ -2222,10 +2238,43 @@ function mQualitative(r){ const s=rsc(r);
     ['AHP weights from a seeded pairwise matrix (consistency ratio < 0.10).','FMEA RPN* = Severity × Occurrence × Detectability × Mitigation-weakness, min-max normalized.','Bow-Tie scores cause coverage, barrier and recovery strength, consequence breadth.','Combined = 0.45 AHP + 0.35 FMEA + 0.20 Bow-Tie.'],
     ((CONFN[r.conf]||60)<40?['Thin expert basis — widen judgment panel (Delphi round).']:[]),dataQ(r),
     {AHP:Math.round(AHP),FMEA:Math.round(FMEA),BowTie:Math.round(BOW),FMEA_S:Math.round(S),FMEA_O:Math.round(O),FMEA_D:Math.round(D),FMEA_M:Math.round(M),criteria:Object.keys(AHPW).map(k=>({criterion:k,weight:AHPW[k],rating:Math.round(rt[k]),contribution:Math.round(AHPW[k]*rt[k]*10)/10}))}); }
+// ---- Phase 2 math: GPD peaks-over-threshold fit (method of moments) + Gaussian-copula joint stress ----
+const QCACHE = {};
+function gpdFit(losses){ // losses: return draws, negative = loss; fit GPD to the loss tail above the 90th pct
+  const L = losses.filter(x=>x<0).map(x=>-x).sort((a,b)=>a-b);
+  const n = L.length; if (n < 200) return null;
+  const u = L[Math.floor(n*0.90)];
+  const exc = L.filter(x=>x>u).map(x=>x-u); if (exc.length < 20) return null;
+  const m = exc.reduce((a,b)=>a+b,0)/exc.length;
+  const v = exc.reduce((a,b)=>a+(b-m)*(b-m),0)/exc.length;
+  let xi = clamp(0.5*(1 - m*m/v), -0.4, 0.45);
+  const sg = 0.5*m*(m*m/v + 1);
+  const zeta = exc.length/n, p = 0.995;
+  const varP = u + sg/(xi||0.01)*(Math.pow((1-p)/zeta, -xi) - 1);
+  const es = (varP + sg - xi*u)/(1 - xi);
+  return { xi: Math.round(xi*100)/100, sigma: Math.round(sg*1000)/1000, u: Math.round(u*1000)/1000, ES995: es*100 };
+}
+function pairRho(a,b){ const lr = liveR(a,b); if (lr != null) return clamp(lr, -0.5, 0.9);
+  if (MMCORR.some(p=>(p[0]===a&&p[1]===b)||(p[0]===b&&p[1]===a))) return 0.55; return 0.2; }
+function chol(A){ const n=A.length, L=A.map(r=>r.map(()=>0));
+  for(let i=0;i<n;i++) for(let j=0;j<=i;j++){ let s=A[i][j]; for(let k=0;k<j;k++)s-=L[i][k]*L[j][k];
+    if(i===j){ if(s<=1e-8)return null; L[i][j]=Math.sqrt(s); } else L[i][j]=s/L[j][j]; }
+  return L; }
+function copulaES(r){ const cs=r.commodities.filter(c=>DATA.commodities[c]).slice(0,4); if(!cs.length||!r.companies.length) return null;
+  const n=cs.length, rnd=mulberry(seedOf(r.id+'cop'));
+  const R=[]; for(let i=0;i<n;i++){ R.push([]); for(let j=0;j<n;j++) R[i][j]= i===j?1:pairRho(cs[i],cs[j]); }
+  const Lc=chol(R); if(!Lc) return null;
+  const vols=cs.map(c=>0.05+DATA.commodities[c][1]/5*0.10);
+  const M=800, worstArr=[];
+  for(let k=0;k<M;k++){ const z=cs.map(()=>gaussR(rnd)); const cz=Lc.map(row=>row.reduce((a,l,j)=>a+l*z[j],0));
+    const dir={}; cs.forEach((c,i)=>dir[c]=cz[i]*vols[i]*100); const sh=propagate(dir);
+    let mx=0; r.companies.forEach(co=>{ const im=marginImpact(co,sh); if(im>mx)mx=im; }); worstArr.push(mx); }
+  worstArr.sort((a,b)=>a-b); return worstArr[Math.floor(M*0.99)]; }
 // Model 3 — Quantitative Statistical: Monte Carlo loss distribution + volatility
 function mQuant(r){ const rnd=mulberry(seedOf(r.id)), sigma=0.04+riskVol(r)/100*0.10, N=5000, losses=[];
   for(let i=0;i<N;i++){ let z=gaussR(rnd); if(rnd()<0.10)z*=2.4; losses.push(z*sigma); }
   losses.sort((a,b)=>a-b);
+  QCACHE[r.id]=losses;
   const VaR95=-pctile(losses,5)*100, VaR99=-pctile(losses,1)*100;
   const tl=losses.slice(0,Math.floor(N*0.01)), ES99=(-tl.reduce((a,b)=>a+b,0)/tl.length)*100;
   const thresh=sigma*100*1.5, breach=losses.filter(x=>-x*100>thresh).length/N;
@@ -2236,18 +2285,24 @@ function mQuant(r){ const rnd=mulberry(seedOf(r.id)), sigma=0.04+riskVol(r)/100*
     ['S = 0.25 vol + 0.25 VaR99 + 0.30 ES99 + 0.20 breach probability.','5,000-path Monte Carlo with fat-tailed innovations (≈ Student-t, df 5), deterministic per-risk seed; 10,000+ paths in production.','Volatility seeded from commodity price-volatility ratings — fitted GARCH(1,1) is Phase 2.','Loss expressed as % of exposure.'],
     [],dataQ(r),{VaR95:Math.round(VaR95*10)/10,VaR99:Math.round(VaR99*10)/10,ES99:Math.round(ES99*10)/10,breachProb:Math.round(breach*100)/100}); }
 // Model 4 — Stress & Tail: EVT + copula dependence + scenario library (uses the stacked scenario set)
-function mTail(r,q,set){ const EVT=capPct(q.ES99*1.35,40), nC=r.commodities.length, Copula=capPct(q.ES99*(1+0.12*Math.max(0,nC-1)),45);
+function mTail(r,q,set){ const gpd=gpdFit(QCACHE[r.id]||[]);
+  const EVT=gpd?capPct(gpd.ES995,40):capPct(q.ES99*1.35,40);
+  const copJ=copulaES(r), nC=r.commodities.length;
+  const Copula=copJ!=null?capPct(copJ,18):capPct(q.ES99*(1+0.12*Math.max(0,nC-1)),45);
   let worst=0,worstId=null,mat=0; set.forEach(id=>{ const sh=propagate(scenDirect(id)); let mx=0; r.companies.forEach(co=>mx=Math.max(mx,Math.abs(marginImpact(co,sh)))); if(mx>worst){worst=mx;worstId=id;} if(mx>4)mat++; });
   const ScWorst=capPct(worst,15), Breadth=set.size?100*mat/set.size:0;
   const shAll=scenShock(set), concMod=1+(rsc(r).con/100)*0.5, ctrlMod=1+((100-ctrlStrength(r))/100)*0.3;
   const comps=r.companies.map(co=>({co,imp:marginImpact(co,shAll)*concMod*ctrlMod}));
   const losers=comps.filter(x=>x.imp>0.05).sort((a,b)=>b.imp-a.imp), bens=comps.filter(x=>x.imp<-0.05).sort((a,b)=>a.imp-b.imp);
   const sc=clamp(0.30*EVT+0.25*Copula+0.30*ScWorst+0.15*Breadth,0,100);
-  return std('evt-tail-stress','tail',r,Math.round(sc),dirOf(r),clamp(60+(r.conf==='High'?10:0),0,100),
+  return std('evt-tail-stress','tail',r,Math.round(sc),dirOf(r),clamp(60+(r.conf==='High'?10:0)+(gpd?5:0),0,100),
     [['EVT tail ES',0.30*EVT],['scenario worst loss',0.30*ScWorst],['copula joint stress',0.25*Copula],['scenario breadth',0.15*Breadth]],
-    ['S = 0.30 EVT + 0.25 copula stress + 0.30 scenario worst + 0.15 scenario breadth.','EVT-informed: Monte-Carlo tail ES scaled for peaks-over-threshold (full GPD fit is Phase 2).','Copula tail dependence approximated by joint-stress heaviness × commodity count (vine copula is Phase 2).','Scenario components computed over the selected historical / hypothetical / hybrid set below.'],
+    ['S = 0.30 EVT + 0.25 copula stress + 0.30 scenario worst + 0.15 scenario breadth.',
+     gpd?`EVT: Generalized Pareto fitted by method-of-moments to Monte-Carlo loss exceedances above the 90th percentile (POT): ξ = ${gpd.xi}, σ = ${gpd.sigma}, u = ${gpd.u}. Market-history fit needs price series (backend).`:'EVT fallback: scaled Monte-Carlo tail ES (too few exceedances for a GPD fit).',
+     copJ!=null?'Copula: Gaussian-copula joint simulation (800 draws) of this risk\'s commodities using documented/live pairwise correlations; t-copula tail dependence is the next upgrade.':'Copula fallback: joint-stress heaviness × commodity count.',
+     'Scenario components computed over the selected historical / hypothetical / hybrid set below.'],
     (worst>10?['Severe scenario tail — analyst review recommended.']:[]),dataQ(r),
-    {EVT:Math.round(EVT),copula:Math.round(Copula),worstScenario:worstId?SCENLIB[worstId][0]:'—',scenarioWorstPct:Math.round(worst*10)/10,breadthPct:Math.round(Breadth),
+    {EVT:Math.round(EVT),copula:Math.round(Copula),gpd_xi:gpd?gpd.xi:null,gpd_u:gpd?gpd.u:null,copulaJointES99:copJ!=null?Math.round(copJ*10)/10:null,worstScenario:worstId?SCENLIB[worstId][0]:'—',scenarioWorstPct:Math.round(worst*10)/10,breadthPct:Math.round(Breadth),
      losers:losers.slice(0,6).map(x=>({co:DATA.companies.find(c=>c.id===x.co).name,id:x.co,pct:Math.round(x.imp*10)/10})),
      beneficiaries:bens.slice(0,3).map(x=>({co:DATA.companies.find(c=>c.id===x.co).name,pct:Math.round(x.imp*10)/10}))}); }
 // Model 5 — Network & Contagion: centrality + propagation through the commodity dependency graph
@@ -2263,12 +2318,13 @@ function mNetwork(r){ let cent=0; r.commodities.forEach(c=>{ let n=0; DATA.compa
     [],dataQ(r),{centralityDegree:cent,affectedCompanies:br}); }
 // Model 6 — Forecast: regime-aware logistic → P(breach, 30d) and severity forecast
 function mForecast(r,tailScore,es99){ const s=rsc(r);
-  const z=(compo(r)-60)/12+(s.vel-50)/25+(tailScore-55)/25+(deadlineProx(r)-40)/40-0.4, pB=clamp(sigmoid(z),0.02,0.97);
+  const z=0.5*(compo(r)-70)/15 + 0.3*(s.vel-55)/25 + 0.2*(tailScore-55)/25 + 0.25*(deadlineProx(r)-60)/40 - 0.55;
+  const pB=clamp(sigmoid(z),0.03,0.90);
   const sevF=clamp(0.6*tailScore+0.4*es99*2,0,100), sc=clamp(0.60*pB*100+0.40*sevF,0,100);
   return std('regime-forecast','forecast',r,Math.round(sc),dirOf(r),clamp(50+(r.conf==='High'?12:0),0,100),
     [['P(breach, 30d)',0.60*pB*100],['severity forecast',0.40*sevF]],
-    ['S = 0.60 × P(breach 30d) + 0.40 × severity forecast.','Regime-aware logistic on model scores, velocity, and deadline proximity.','30-day horizon; gradient boosting and the Bayesian updating overlay are Phase 3.'],
-    [],dataQ(r),{breachProb30d:Math.round(pB*100)/100,severityForecast:Math.round(sevF)}); }
+    ['S = 0.60 × P(breach 30d) + 0.40 × severity forecast.','Calibrated logistic: recentred slopes with a 3–90% clamp, so only near-certain in-force breaches approach the cap; Platt-scaling against realized outcomes is the backtest step.','30-day horizon; gradient boosting and the Bayesian updating overlay are Phase 3.'],
+    [],dataQ(r),{breachProb30d:Math.round(pB*100)/100,severityForecast:Math.round(sevF),logit_z:Math.round(z*100)/100}); }
 // Model 7 — Ensemble: PRD base weights × regime multipliers × confidence × data quality, normalized
 const ENS_BASE={objective:0.15,qualitative:0.15,quant:0.20,tail:0.20,network:0.10,forecast:0.20};
 const ENS_REGIME={ normal:{objective:1.10,qualitative:0.95,quant:1.05,tail:0.85,network:0.90,forecast:1.00}, elevated:{objective:1.00,qualitative:1.00,quant:1.00,tail:1.10,network:1.00,forecast:1.05}, stressed:{objective:0.90,qualitative:1.05,quant:0.95,tail:1.25,network:1.10,forecast:1.10}, crisis:{objective:0.80,qualitative:1.10,quant:0.85,tail:1.35,network:1.20,forecast:1.15} };
@@ -2311,7 +2367,7 @@ function modelCard(m){ const b=scoreBand(m.score_0_100), rm=m.raw_metrics;
    <details style="margin-top:10px"><summary class="lab" style="cursor:pointer">Standardized model output (JSON)</summary><pre style="font-size:11px;overflow-x:auto;color:var(--ink2);background:var(--card2);padding:10px;border-radius:8px;margin-top:6px">${JSON.stringify({model_id:m.model_id,model_family:m.model_family,score_0_100:m.score_0_100,confidence_0_100:m.confidence_0_100,direction:m.direction,data_quality_0_100:m.data_quality_0_100,raw_metrics:m.raw_metrics},null,1)}</pre></details></div>`;
   return h; }
 function tailTab(res){ const m=res.models.tail, rm=m.raw_metrics;
-  const kindTag=k=>k==='historical'?'H':k==='hypothetical'?'Hy':'Hb';
+  const kindTag=k=>k==='historical'?'H':k==='hypothetical'?'Hy':k==='custom'?'C':'Hb';
   let h=`<div class="lab">Scenario library — stack historical (H), hypothetical (Hy) and hybrid (Hb) shocks</div><div style="display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 6px">${Object.keys(SCENLIB).map(id=>`<button class="tabbtn" data-scenchip="${id}" title="${SCENLIB[id][1]} scenario" style="${MSCEN.has(id)?'background:var(--th);color:#fff':'background:var(--card2)'};border-radius:999px;padding:6px 13px">${SCENLIB[id][0]} <span style="opacity:.6;font-size:9px">${kindTag(SCENLIB[id][1])}</span></button>`).join('')}</div>
   <p class="meta" style="margin:0 0 16px">Worst scenario in the set: <b style="color:var(--ink)">${rm.worstScenario}</b> (${rm.scenarioWorstPct}% worst company margin) · ${rm.breadthPct}% of the set triggers a material breach.</p>`;
   h+=modelCard(m);
@@ -2328,24 +2384,81 @@ function ensembleView(res){ const e=res.ensemble, b=scoreBand(e.score), r=RID(MD
   h+=`<h2 style="font-size:15px">Model comparison — six lenses on this risk</h2><div class="card">`;
   bars.forEach(x=>{ const bb=scoreBand(x.s); h+=`<div class="crow" data-mgoto="${x.key}" style="cursor:pointer" title="Open the ${x.label} model card"><span class="cn" style="width:120px">${x.label}</span><span class="cbar" style="max-width:300px"><span style="width:${x.s}%;background:${bb[1]}"></span></span><span style="font-family:'Spline Sans Mono',monospace;font-weight:600;width:34px">${x.s}</span><span class="lab" style="width:110px">weight ${Math.round(x.w*100)}%</span></div>`; });
   h+=`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)"><span class="lab">Range band — min ${e.min} · median ${e.median} · max ${e.max} · tick = ensemble</span><div class="crow"><span class="cn" style="width:120px">${e.min} → ${e.max}</span><span class="cbar" style="max-width:300px;position:relative"><span style="position:absolute;left:${e.min}%;width:${Math.max(2,e.max-e.min)}%;background:color-mix(in srgb,var(--th) 45%,transparent)"></span><span style="position:absolute;left:${clamp(e.median,0,99)}%;width:2px;background:var(--ink3)"></span><span style="position:absolute;left:${clamp(e.score,0,99)}%;width:3px;background:var(--ink)"></span></span><span class="lab">σ ${e.dispersion}</span></div><p class="meta" style="margin:6px 0 0">Click any model bar to open its factor decomposition. Wide span = the models see different risks.</p></div></div>`;
-  h+=`<h2 style="font-size:15px">Why scores disagree</h2><div class="card"><p style="font-size:13px;color:var(--ink2)">Weights adapt to the <b>${res.regime}</b> regime and each model's confidence and data quality. ${e.dispersion>25?'Disagreement is <b>high</b> (σ '+e.dispersion+') — itself a signal of structural uncertainty or regime change; treat the range, not the point estimate.':e.dispersion>=12?'Disagreement is <b>moderate</b> (σ '+e.dispersion+') — the lenses broadly align but weight different channels.':'The models <b>agree</b> (σ '+e.dispersion+'), so the ensemble is robust.'} ${e.tag==='judgment-led risk'?'Qualitative judgment leads the statistical models — a strategic, expert-driven risk where data lags.':e.tag==='data-led risk'?'Quantitative and tail models lead judgment — a measurable, data-driven risk.':''}</p></div>`;
+  const dev=bars.map(x=>({l:x.label,d:x.s-e.score})).sort((a,b)=>Math.abs(b.d)-Math.abs(a.d))[0];
+  h+=`<h2 style="font-size:15px">Why scores disagree</h2><div class="card"><p style="font-size:13px;color:var(--ink2)">Weights adapt to the <b>${res.regime}</b> regime and each model's confidence and data quality. ${e.dispersion>25?'Disagreement is <b>high</b> (σ '+e.dispersion+') — itself a signal of structural uncertainty or regime change; treat the range, not the point estimate.':e.dispersion>=12?'Disagreement is <b>moderate</b> (σ '+e.dispersion+') — the lenses broadly align but weight different channels.':'The models <b>agree</b> (σ '+e.dispersion+'), so the ensemble is robust.'} Largest outlier: <b>${dev.l}</b> (${dev.d>0?'+':''}${dev.d} vs the ensemble). ${e.tag==='judgment-led risk'?'Qualitative judgment leads the statistical models — a strategic, expert-driven risk where data lags.':e.tag==='data-led risk'?'Quantitative and tail models lead judgment — a measurable, data-driven risk.':''}</p></div>`;
   const a=ensembleAction(res,r), p=PLAY[a.pk];
   h+=`<h2 style="font-size:15px">Recommended action</h2><div class="card"><div class="act"><div class="acth">${a.t}</div>${a.why?`<div style="font-size:12px;color:var(--ink3);margin-top:3px">${a.why}</div>`:''}<div class="actmeta">${p?`<span>owner <b>${p[3]}</b></span><span>urgency <b>${p[2]}</b></span><span>time <b>${p[4]}</b></span><span>value <b>${p[5]}</b></span><span>output <b>${p[6]}</b></span>`:'<span>owner <b>CFO</b></span>'}</div></div><div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn pri" onclick="briefFor('partner-brief','${MDLRISK}')">Export to brief</button><button class="btn sec" onclick="openRisk('${MDLRISK}')">Evidence & drill-down</button><button class="btn sec" onclick="scenFromRisk('${MDLRISK}')">Run in stress lab</button></div></div>`;
   return h; }
 function renderModels(){
   if(!MDLRISK) MDLRISK = RISKS.slice().sort((a,b)=>priority(b)-priority(a))[0].id;
   if(!MSCEN) MSCEN = defaultScen(RID(MDLRISK));
-  document.getElementById('mdlsel').innerHTML = RISKS.slice().sort((a,b)=>priority(b)-priority(a)).map(r=>`<option value="${r.id}"${r.id===MDLRISK?' selected':''}>${r.title}</option>`).join('');
+  document.getElementById('mdlsel').innerHTML =
+    `<optgroup label="Risk universe">` + RISKS.slice().sort((a,b)=>priority(b)-priority(a)).map(r=>`<option value="${r.id}"${r.id===MDLRISK?' selected':''}>${r.title}</option>`).join('') + `</optgroup>` +
+    (CUSTOMRISKS.length ? `<optgroup label="Saved stress configurations">` + CUSTOMRISKS.map(r=>`<option value="${r.id}"${r.id===MDLRISK?' selected':''}>${r.title}</option>`).join('') + `</optgroup>` : '');
   const res=computeModels(MDLRISK,MSCEN);
   document.getElementById('mdlregime').textContent = 'regime: '+res.regime+' · ensemble '+res.ensemble.score+'/100 · disagreement '+res.ensemble.dispBand+' · P(breach 30d) '+Math.round(res.ensemble.breachProb*100)+'%';
   document.getElementById('mdltabs').innerHTML = MDLTABS.map(t=>`<button class="tabbtn" data-msub="${t[0]}" style="${t[0]===MDLSUB?'background:var(--th);color:#fff':'background:var(--card2)'};border-radius:999px;padding:6px 14px">${t[1]}${res.models[t[0]]?' '+res.models[t[0]].score_0_100:''}</button>`).join('');
   document.getElementById('mdlbody').innerHTML = MDLSUB==='ensemble'?ensembleView(res) : MDLSUB==='tail'?tailTab(res) : MDLSUB==='evidence'?evidenceTab(RID(MDLRISK)) : modelCard(res.models[MDLSUB]);
 }
+// ---- Saved stress configurations → scoreable risk items ----
+let CFGS = [];
+function registerConfig(cfg){
+  SCENLIB['sc_'+cfg.id] = [cfg.name, 'custom', cfg.direct];
+  const keep = {...ASSUME}; Object.assign(ASSUME, cfg.assume);
+  const sh = propagate(cfg.direct);
+  const impacts = DATA.companies.map(co=>({id:co.id, imp:marginImpact(co.id, sh)}));
+  Object.assign(ASSUME, keep);
+  const comps = impacts.filter(x=>Math.abs(x.imp)>0.5).sort((a,b)=>Math.abs(b.imp)-Math.abs(a.imp)).map(x=>x.id);
+  const worst = Math.max(0, ...impacts.map(x=>x.imp));
+  const cs = Object.keys(cfg.direct).filter(c=>DATA.commodities[c]).sort((a,b)=>Math.abs(cfg.direct[b])-Math.abs(cfg.direct[a]));
+  const sev = worst>=12?5:worst>=6?4:worst>=2.5?3:2;
+  const con = cs.length ? Math.round(cs.slice(0,3).reduce((a,c)=>a+DATA.commodities[c][2],0)/Math.min(3,cs.length)/5*100) : 50;
+  const vel = clamp(Math.round(Math.max(0,...Object.values(cfg.direct).map(Math.abs))), 10, 95);
+  const secs = {}; comps.forEach(id=>{ const s=secOf(id); if(s) secs[s]=Math.max(secs[s]||0,2); });
+  const risk = { id:'cfg-'+cfg.id, title:'⚙ '+cfg.name, cat:'custom-scenario', sev, prev:sev, conf:'Medium',
+    detected:cfg.created, updated:cfg.created,
+    whyNow:'User-defined stress built in the Stress lab: '+cs.slice(0,4).map(c=>DATA.commodities[c][0]+' '+(cfg.direct[c]>0?'+':'')+Math.round(cfg.direct[c])+'%').join(', ')+'.',
+    commodities:cs.slice(0,6), fx:[], countries:[], sectors:secs, companies:comps.slice(0,12),
+    channels:['Custom shock vector','Saved pass-through / hedge / inventory assumptions'],
+    impact:'Worst modelled company margin impact ≈ '+(Math.round(worst*10)/10)+'% under the saved assumptions.',
+    thresholds:[], actions:['hedge-review','board-note'], _scen:'sc_'+cfg.id, _cfg:cfg,
+    evidence:[{t:'User-defined stress configuration',ty:'internal-model',d:cfg.created,u:'#',
+      fact:'Shocks: '+cs.map(c=>DATA.commodities[c][0]+' '+(cfg.direct[c]>0?'+':'')+Math.round(cfg.direct[c])+'%').join(', '),
+      assume:'Saved assumptions — pass-through '+(cfg.assume.pass==null?'sector default':cfg.assume.pass+'%')+', hedge '+cfg.assume.hedge+'% ('+cfg.assume.horizon+'mo), inventory '+cfg.assume.inv+'%, pricing power '+cfg.assume.price+'%, elasticity '+cfg.assume.elast+'%.',
+      conf:'Medium', ver:cfg.created, chg:'Created by user in the Stress lab'}] };
+  RSCORE[risk.id] = { vel, exp:clamp(Math.round(capPct(worst,12)),10,95), con, prev:null, dl:null, why:'User-defined configuration — no score history yet.' };
+  CUSTOMRISKS.push(risk);
+}
+function persistCfgs(){ try{ localStorage.setItem('tpm-cfgs', JSON.stringify(CFGS)); }catch(e){} }
+window.saveConfig = () => {
+  const direct = combinedDirect();
+  if (!Object.keys(direct).length) { document.getElementById('cfgname').placeholder = 'Build a shock first — stack presets or drag dials'; return; }
+  const nameEl = document.getElementById('cfgname');
+  const name = nameEl.value.trim() || 'Custom stress '+(CFGS.length+1);
+  const cfg = { id: Date.now().toString(36), name, direct, assume:{...ASSUME}, created: new Date().toISOString().slice(0,10) };
+  CFGS.push(cfg); persistCfgs(); registerConfig(cfg); nameEl.value=''; renderCfgList(); renderModels();
+};
+window.loadConfig = i => { const cfg=CFGS[i]; if(!cfg) return; scReset();
+  for (const c in cfg.direct) if (SCDIALS.includes(c)) scManual[c] = cfg.direct[c];
+  Object.assign(ASSUME, cfg.assume); renderAssume(); scSync(); };
+window.scoreConfig = i => { const cfg=CFGS[i]; if(!cfg) return; MDLRISK='cfg-'+cfg.id; MSCEN=null; MDLSUB='ensemble'; tab('models'); renderModels(); };
+window.delConfig = i => { const cfg=CFGS[i]; if(!cfg) return; CFGS.splice(i,1); persistCfgs();
+  const ri=CUSTOMRISKS.findIndex(r=>r.id==='cfg-'+cfg.id); if(ri>=0)CUSTOMRISKS.splice(ri,1); delete SCENLIB['sc_'+cfg.id]; delete RSCORE['cfg-'+cfg.id];
+  if(MDLRISK==='cfg-'+cfg.id){MDLRISK=null;MSCEN=null;} renderCfgList(); renderModels(); };
+function renderCfgList(){
+  const el = document.getElementById('cfglist');
+  el.innerHTML = CFGS.length ? CFGS.map((c,i)=>{
+    const cs = Object.keys(c.direct).sort((a,b)=>Math.abs(c.direct[b])-Math.abs(c.direct[a])).slice(0,4);
+    return `<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:9px 0;border-top:1px solid var(--line)"><b style="font-size:13px">${c.name}</b><span class="lab">${c.created}</span><span style="font-size:11.5px;color:var(--ink3)">${cs.map(k=>DATA.commodities[k]?DATA.commodities[k][0]+' '+(c.direct[k]>0?'+':'')+Math.round(c.direct[k])+'%':'').join(' · ')}</span><span style="margin-left:auto;display:flex;gap:6px"><button class="ghost" onclick="loadConfig(${i})">Load</button><button class="ghost" onclick="scoreConfig(${i})">Score in Model lab</button><button class="ghost" onclick="delConfig(${i})">Delete</button></span></div>`;
+  }).join('') : `<p class="meta">No saved configurations yet. Stack shocks, tune the assumptions, name it, and save — it becomes a risk item every model can score.</p>`;
+}
+function initConfigs(){ try{ CFGS = JSON.parse(localStorage.getItem('tpm-cfgs')||'[]'); }catch(e){ CFGS=[]; } CFGS.forEach(registerConfig); renderCfgList(); }
 document.getElementById('mdlsel').addEventListener('change',e=>{ MDLRISK=e.target.value; MSCEN=defaultScen(RID(MDLRISK)); renderModels(); });
 document.getElementById('mdltabs').addEventListener('click',e=>{ const b=e.target.closest('[data-msub]'); if(b){ MDLSUB=b.dataset.msub; renderModels(); } });
 document.getElementById('mdlbody').addEventListener('click',e=>{ const c=e.target.closest('[data-scenchip]'); if(c){ MSCEN.has(c.dataset.scenchip)?MSCEN.delete(c.dataset.scenchip):MSCEN.add(c.dataset.scenchip); if(!MSCEN.size)MSCEN.add('y_inr8'); renderModels(); return; } const g=e.target.closest('[data-mgoto]'); if(g){ MDLSUB=g.dataset.mgoto; renderModels(); return; } const dd=e.target.closest('[data-dd]'); if(dd){ goDeep(dd.dataset.dd); } });
 
 renderAssume();
+initConfigs();
 simulate('oil22');
 loadCorr(false);
 loadLive();
