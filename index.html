@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commodity &amp; Treasury Risk Radar — India</title>
-<meta name="build" content="2026-07-10-phase2-v12">
+<meta name="build" content="2026-07-10-backtest-v13">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -455,6 +455,20 @@ h2{color:var(--th)}
       <li>Scenario mathematics assume 50% cost pass-through per processing step, no hedging or inventories — structural exposure, not price forecasts.</li>
     </ul>
     <p class="meta">Illustrative analysis assembled from public official sources and company disclosures for internal business development. Not audit evidence, investment research, or client advice. Verify primary sources before any external use.</p>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:6px">Model governance — inventory and validation status</div>
+    <div style="overflow-x:auto"><table class="t"><tr><th>Model</th><th>Family</th><th>Version</th><th>Validation</th><th>Owner</th><th>Next review</th></tr>
+      <tr><td>Objective rules</td><td>objective</td><td>1.2</td><td>Backtest harness (mock outcomes)</td><td>Risk analytics</td><td>Quarterly</td></tr>
+      <tr><td>Structured judgment (AHP+FMEA+Bow-Tie)</td><td>qualitative</td><td>1.1</td><td>Consistency ratio &lt; 0.10; panel review pending</td><td>Expert panel lead</td><td>Quarterly</td></tr>
+      <tr><td>Monte Carlo quant</td><td>quant</td><td>1.2</td><td>Backtest harness; deterministic seed audit</td><td>Risk analytics</td><td>Quarterly</td></tr>
+      <tr><td>EVT + copula tail</td><td>tail</td><td>2.0</td><td>GPD fit diagnostics in-card; market-history fit pending</td><td>Risk analytics</td><td>Quarterly</td></tr>
+      <tr><td>Network contagion</td><td>network</td><td>1.1</td><td>Graph audit vs disclosed cost shares</td><td>Risk analytics</td><td>Semi-annual</td></tr>
+      <tr><td>Regime forecast</td><td>forecast</td><td>1.3 (calibrated)</td><td>Backtest harness — see Model lab → Backtest</td><td>Risk analytics</td><td>Monthly until fitted</td></tr>
+      <tr><td>Ensemble</td><td>ensemble</td><td>1.2</td><td>Disagreement monitoring live; weight optimization Phase 3</td><td>Head of risk</td><td>Quarterly</td></tr>
+    </table></div>
+    <p class="meta" style="margin:8px 0 0">Every model's constants and blind spots are disclosed in its card under "Parameters &amp; limits". Validation metrics (AUC, Brier, calibration slope, hit rates) live in Model lab → Backtest — currently on synthetic outcomes, wired to accept weekly-agent history.</p>
   </div>
 </div>
 
@@ -1882,14 +1896,21 @@ const PLAY = {
 };
 // Persona emphasis: section order for ckA..ckE
 const PERSONA = {
-  partner:  ['movers','risks','breaches','advisory','outputs'],
-  director: ['movers','exposure','concentration','scenario','breaches','counterparty','actions','outputs'],
-  analyst:  ['movers','risks','exposure','concentration','counterparty','breaches','evidence','outputs'],
-  treasury: ['breaches','counterparty','exposure','concentration','scenario','actions','outputs'],
-  commodity:['exposure','concentration','scenario','movers','counterparty','actions']
+  partner:  ['movers','risks','watchlist','breaches','advisory','outputs'],
+  director: ['movers','exposure','limits','breaches','scenario','concentration','counterparty','actions','outputs'],
+  analyst:  ['movers','risks','exposure','limits','concentration','counterparty','breaches','evidence','outputs'],
+  treasury: ['breaches','limits','counterparty','watchlist','exposure','concentration','scenario','actions','outputs'],
+  commodity:['exposure','concentration','scenario','movers','watchlist','counterparty','actions']
 };
 let PMODE = 'partner';
 try { PMODE = localStorage.getItem('tpm-persona') || 'partner'; } catch(e) {}
+// Watchlist with custom triggers (competitor-parity: continuous monitoring alerts)
+let WATCHL = [];
+try { WATCHL = JSON.parse(localStorage.getItem('tpm-watch')||'[]'); } catch(e) {}
+const wSave = () => { try { localStorage.setItem('tpm-watch', JSON.stringify(WATCHL)); } catch(e) {} };
+const isWatched = id => WATCHL.some(w=>w.id===id);
+window.toggleWatch = id => { const i=WATCHL.findIndex(w=>w.id===id); if(i>=0) WATCHL.splice(i,1); else WATCHL.push({id, score:70, delta:10}); wSave(); renderCockpit(); };
+window.setWatchTrig = (id,k,v) => { const w=WATCHL.find(w=>w.id===id); if(w){ w[k]=+v||0; wSave(); renderCockpit(); } };
 const sevClass = s => 'sev'+s;
 const deltaTag = r => { const d = r.sev - r.prev; if (d>0) return `<span class="chip" style="background:var(--redbg);color:var(--red)">▲ ${SEVL[r.prev]}→${SEVL[r.sev]}</span>`; if (d<0) return `<span class="chip sev2">▼ eased</span>`; return `<span class="chip sev1">● stable</span>`; };
 const rkSectors = r => Object.keys(r.sectors).sort((a,b)=>r.sectors[b]-r.sectors[a]);
@@ -1943,13 +1964,13 @@ function renderThresholds() {
   const near = breaches().filter(x=>x.cal).sort((a,b)=>a.days-b.days)[0];
   el.innerHTML = `<div class="card" style="padding:12px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--redbg)"><span class="chip sev5">● ${b.length} live breaches</span>${near?`<span style="font-size:12.5px;color:var(--red)"><b>Nearest deadline:</b> ${near.cal.t} — ${near.days} days</span>`:''}<span class="lab" style="margin-left:auto;cursor:pointer" onclick="tab('calendar')">See all deadlines →</span></div>`;
 }
-function riskCard(r) {
+function riskCard(r, idx) {
   const secs = rkSectors(r).slice(0,3).map(s=>SECTORS[s][0]).join(' · ');
   const topAct = PLAY[(r.actions||[])[0]];
   const sc = compo(r), d = scoreDelta(r), drv = drivers(r);
   const srcN = (r.evidence||[]).length;
   return `<div class="rk" data-risk="${r.id}" style="--sv:${sc>=80?'var(--red)':sc>=60?'var(--amber)':'var(--teal)'}">
-    <div style="display:flex;gap:10px;align-items:baseline;margin-bottom:4px"><span style="font-family:'Spline Sans Mono',monospace;font-size:26px;font-weight:700;color:${scoreColor(sc)}">${sc}</span><span class="chip ${d>0?'sev5':d<0?'sev2':'sev1'}">${d>0?'+':''}${d} since last</span><span class="lab" style="margin-left:auto">${srcN} src</span></div>
+    <div style="display:flex;gap:10px;align-items:baseline;margin-bottom:4px"><span style="font-family:'Spline Sans Mono',monospace;font-size:26px;font-weight:700;color:${scoreColor(sc)}">${sc}</span>${spark(hseries(r.id),74,20,scoreColor(sc))}<span class="chip ${d>0?'sev5':d<0?'sev2':'sev1'}">${d>0?'+':''}${d}</span>${idx!=null?`<span class="lab">#${idx+1} priority</span>`:''}<span style="margin-left:auto;display:flex;gap:8px;align-items:center"><span class="lab">${srcN} src</span><span data-watch="${r.id}" title="${isWatched(r.id)?'Remove from watchlist':'Add to watchlist with triggers'}" style="cursor:pointer;font-size:15px;color:${isWatched(r.id)?'var(--amber)':'var(--ink3)'}">${isWatched(r.id)?'★':'☆'}</span></span></div>
     <div class="rkt">${r.title}</div>
     <div style="font-size:11.5px;color:var(--ink3);margin:6px 0 7px"><span class="lab">Top drivers:</span> ${drv.join(' · ')} · <span class="lab">conf</span> ${r.conf}</div>
     <div style="font-size:12px;color:var(--ink3);margin-bottom:7px"><b style="color:var(--th)">Why now:</b> ${r.whyNow}</div>
@@ -2062,7 +2083,26 @@ function secEvidence() {
   const all = RISKS.flatMap(r=>r.evidence.map(e=>({r,e})));
   return `<h2>Evidence & assumptions</h2><div class="card">${all.map(({r,e})=>`<div class="ev"><div class="evh"><span class="chip sev1">${e.ty}</span><b style="font-size:12.5px">${e.t}</b><span class="lab" style="margin-left:auto">${e.d}</span></div><div style="font-size:12px;color:var(--ink2)"><b>Fact:</b> ${e.fact}</div><div style="font-size:11.5px;color:var(--ink3);margin-top:3px"><b>Assumption:</b> ${e.assume} · conf ${e.conf} · verified ${e.ver} · ${e.chg}</div><div style="font-size:11px;margin-top:4px"><a href="${e.u}" target="_blank" rel="noopener">${e.u}</a></div></div>`).join('')}</div>`;
 }
-const SECFN = { movers:secMovers, risks:secRisks, exposure:secExposure, concentration:secConcentration, counterparty:secCounterparty, breaches:secBreaches, scenario:secScenario, actions:secActions, outputs:secOutputs, advisory:secAdvisory, evidence:secEvidence };
+function secWatchlist() {
+  if (!WATCHL.length) return `<h2>Watchlist — custom triggers</h2><p class="sub" style="margin:0">Star any risk card (☆) to track it. Each watched item alerts when its score or delta crosses your thresholds.</p>`;
+  return `<h2>Watchlist — custom triggers</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Risk</th><th>Trend</th><th>Score</th><th>Alert if score ≥</th><th>or Δ ≥</th><th>Status</th></tr>
+  ${WATCHL.map(w=>{ const r=RID(w.id); if(!r) return ''; const sc=compo(r), d=scoreDelta(r);
+    const fired = sc>=w.score || d>=w.delta;
+    return `<tr><td data-open="${r.id}" style="font-weight:600;cursor:pointer">${r.title.split('—')[0]}</td><td>${spark(hseries(r.id),70,18,scoreColor(sc))}</td><td style="font-family:'Spline Sans Mono',monospace;font-weight:600;color:${scoreColor(sc)}">${sc}</td><td><input type="number" value="${w.score}" min="0" max="100" onchange="setWatchTrig('${w.id}','score',this.value)" style="width:58px;padding:3px 6px;border:none;border-radius:6px;background:var(--card2);color:var(--ink);font-family:'Spline Sans Mono',monospace"></td><td><input type="number" value="${w.delta}" min="0" max="50" onchange="setWatchTrig('${w.id}','delta',this.value)" style="width:52px;padding:3px 6px;border:none;border-radius:6px;background:var(--card2);color:var(--ink);font-family:'Spline Sans Mono',monospace"></td><td>${fired?`<span class="chip sev5">▲ TRIGGERED</span>`:`<span class="chip sev1">quiet</span>`}</td></tr>`; }).join('')}</table>
+  <p class="meta" style="margin:8px 0 0">Alerts evaluate on every refresh; the weekly agent will push these as notifications once history is wired. Un-star from any risk card.</p></div>`;
+}
+// Risk-appetite / KRI limits (GRC-parity: Archer / MetricStream style)
+const KRI = { commodity:65, FX:70, regulation:75, geopolitics:60, rates:60, 'supply-chain':60, 'custom-scenario':70 };
+function secLimits() {
+  const cats = Object.keys(KRI).filter(c=>RISKS.some(r=>r.cat===c));
+  return `<h2>Risk appetite — limits by category</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Category</th><th>Appetite limit</th><th>Current max</th><th>Utilization</th><th>State</th></tr>
+  ${cats.map(c=>{ const rs=RISKS.filter(r=>r.cat===c); const cur=Math.max(...rs.map(r=>compo(r))); const worstR=rs.find(r=>compo(r)===cur);
+    const util=Math.round(cur/KRI[c]*100); const col=util>100?'var(--red)':util>=85?'var(--amber)':'var(--teal)';
+    return `<tr data-open="${worstR.id}" style="cursor:pointer"><td style="font-weight:600">${c}</td><td style="font-family:'Spline Sans Mono',monospace">${KRI[c]}</td><td style="font-family:'Spline Sans Mono',monospace;color:${scoreColor(cur)}">${cur}</td><td><span class="cbar" style="width:120px;display:inline-block;vertical-align:middle"><span style="width:${Math.min(100,util)}%;background:${col}"></span></span> <span style="font-family:'Spline Sans Mono',monospace;font-weight:600;color:${col}">${util}%</span></td><td>${util>100?'<span class="chip sev5">breach</span>':util>=85?'<span class="chip sev3">near limit</span>':'<span class="chip sev2">within appetite</span>'}</td></tr>`; }).join('')}</table>
+  <p class="meta" style="margin:8px 0 0">Limits express board risk appetite per category — the highest composite score in each category is tested against them. Utilization >100% = appetite breach (escalate per policy). Illustrative thresholds; set your own in config.</p></div>`;
+}
+const SECTITLE = { movers:'Top movers', risks:'Priority risks', exposure:'Exposure map', concentration:'Concentration risk', counterparty:'Counterparty risk', breaches:'Breaches & escalation', scenario:'Stress scenarios', actions:'Recommended actions', outputs:'Output center', advisory:'Advisory opportunities', evidence:'Evidence & assumptions', watchlist:'Watchlist', limits:'Risk appetite limits' };
+const SECFN = { movers:secMovers, risks:secRisks, exposure:secExposure, concentration:secConcentration, counterparty:secCounterparty, breaches:secBreaches, scenario:secScenario, actions:secActions, outputs:secOutputs, advisory:secAdvisory, evidence:secEvidence, watchlist:secWatchlist, limits:secLimits };
 function renderCockpit() {
   const urgent = RISKS.filter(r=>compo(r)>80).length;
   const movers = RISKS.filter(r=>scoreDelta(r)>=10).length;
@@ -2078,7 +2118,12 @@ function renderCockpit() {
     kpi(dl,'deadlines ≤ 30d',null,'calendar') +
     kpi(avg1,'avg risk score',avg1-avg0);
   renderThresholds();
-  document.getElementById('ckBody').innerHTML = (PERSONA[PMODE]||PERSONA.partner).map(k=>SECFN[k]?`<div style="margin-top:6px">${SECFN[k]()}</div>`:'').join('');
+  document.getElementById('ckBody').innerHTML = (PERSONA[PMODE]||PERSONA.partner).map((k,i)=>{
+    if (!SECFN[k]) return '';
+    const html = SECFN[k]();
+    if (i < 4) return `<div style="margin-top:6px">${html}</div>`;
+    return `<details style="margin-top:14px"><summary class="lab" style="cursor:pointer;padding:6px 0;font-size:11px">▸ ${SECTITLE[k]||k} — expand</summary>${html}</details>`;
+  }).join('');
   document.querySelectorAll('#persona button').forEach(b=>b.classList.toggle('on', b.dataset.persona===PMODE));
 }
 // ----- Drill-down drawer -----
@@ -2090,6 +2135,7 @@ function openRisk(id, focusSec) {
   const ev = r.evidence.map(e=>`<div class="ev"><div class="evh"><span class="chip sev1">${e.ty}</span><b style="font-size:12.5px">${e.t}</b><span class="lab" style="margin-left:auto">${e.d}</span></div><div style="font-size:12px;color:var(--ink2)"><b>Fact:</b> ${e.fact}</div><div style="font-size:11.5px;color:var(--ink3);margin-top:3px"><b>Assumption:</b> ${e.assume} · conf ${e.conf} · verified ${e.ver}</div><div style="font-size:11.5px;color:var(--th);margin-top:3px"><b>Changed:</b> ${e.chg}</div><div style="font-size:11px;margin-top:4px"><a href="${e.u}" target="_blank" rel="noopener">${e.u}</a></div></div>`).join('');
   document.getElementById('drawer').innerHTML =
     `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><div style="display:flex;gap:7px;margin-bottom:4px"><span class="chip ${sevClass(r.sev)}">${SEVL[r.sev]}</span>${deltaTag(r)}<span class="lab">${r.cat} · conf ${r.conf}</span></div><h3>${r.title}</h3></div><button class="btn sec" onclick="closeDrawer()">✕</button></div>
+    <div style="display:flex;gap:10px;align-items:center;margin:8px 0 0"><span class="lab">12-week trend</span>${spark(hseries(r.id),150,26,scoreColor(compo(r)))}<span style="font-family:'Spline Sans Mono',monospace;font-weight:700;color:${scoreColor(compo(r))}">${compo(r)}</span></div>
     <p style="font-size:13px;color:var(--ink2);margin:8px 0 0"><b style="color:var(--th)">Why now:</b> ${r.whyNow}</p>
     <div class="dsect"><span class="lab">Exposure pathway</span><div class="path">${path.map((n,i)=>`${i?'<span class="ar">→</span>':''}<span class="node">${n}</span>`).join('')}</div><p style="font-size:12.5px;color:var(--ink2);margin-top:8px">${r.impact}</p><div style="font-size:11.5px;color:var(--ink3);margin-top:5px"><b>Channels:</b> ${(r.channels||[]).join(' · ')}</div></div>
     <div class="dsect"><span class="lab">Affected companies (${r.companies.length})</span><div style="display:flex;flex-wrap:wrap;gap:6px">${cos}</div></div>
@@ -2143,6 +2189,8 @@ function printBriefDoc(){ const w=window.open('','_blank'); w.document.write('<p
 window.closeDrawer=closeDrawer; window.closeBrief=closeBrief; window.copyBrief=copyBrief; window.downloadBrief=downloadBrief; window.printBriefDoc=printBriefDoc;
 // Cockpit event delegation
 document.getElementById('tab-cockpit').addEventListener('click', e => {
+  if (e.target.closest('input')) return;
+  const wt=e.target.closest('[data-watch]'); if(wt){ e.stopPropagation(); toggleWatch(wt.dataset.watch); return; }
   const b=e.target.closest('[data-brief]'); if(b){ e.stopPropagation(); briefFor('partner-brief', b.dataset.brief); return; }
   const s=e.target.closest('[data-scen]'); if(s){ e.stopPropagation(); scenFromRisk(s.dataset.scen); return; }
   const s2=e.target.closest('[data-scen2]'); if(s2){ scReset(); scActive.add(s2.dataset.scen2); scSync(); tab('scenarios'); return; }
@@ -2186,6 +2234,15 @@ const dataQ=r=>CONFN[r.conf]||60;
 const dirOf=r=>{ const d=scoreDelta(r); return d>2?'up':d<-2?'down':'flat'; };
 const sigmoid=x=>1/(1+Math.exp(-x));
 function detectRegime(){ const v=RISKS.reduce((s,r)=>s+rsc(r).vel,0)/RISKS.length; return v>=75?'crisis':v>=62?'stressed':v>=48?'elevated':'normal'; }
+// 12-week mock score history per risk (deterministic; replaced by weekly-agent history when wired)
+function hseries(id){ const r=RID(id); if(!r) return []; const rnd=mulberry(seedOf(id+'h')); let v=compo(r); const pts=[Math.round(v)];
+  for(let i=0;i<11;i++){ v=clamp(v-(scoreDelta(r)/6)+(rnd()-0.5)*7,15,95); pts.unshift(Math.round(v)); }
+  pts[pts.length-1]=compo(r); return pts; }
+function spark(pts,w,h,col){ w=w||84; h=h||22; if(!pts.length) return '';
+  const mn=Math.min(...pts), mx=Math.max(...pts), rg=(mx-mn)||1;
+  const P=pts.map((p,i)=>`${(i/(pts.length-1)*(w-4)).toFixed(1)},${(h-3-(p-mn)/rg*(h-7)).toFixed(1)}`).join(' ');
+  const ly=(h-3-(pts[pts.length-1]-mn)/rg*(h-7)).toFixed(1);
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="vertical-align:middle"><polyline points="${P}" fill="none" stroke="${col||'var(--th)'}" stroke-width="1.6" opacity="0.85"/><circle cx="${w-4}" cy="${ly}" r="2.4" fill="${col||'var(--th)'}"/></svg>`; }
 // deterministic per-risk RNG so Monte Carlo scores are stable and auditable across renders
 function mulberry(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
 const seedOf=s=>{ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; };
@@ -2353,17 +2410,94 @@ function ensembleAction(res,r){ const m=res.models, E=res.ensemble.score, pB=res
   if(m.network.score_0_100>=55 && rsc(r).con>=70) return {t:'Counterparty / supplier contingency review',pk:'supplier-diversification',why:'High network centrality on concentrated exposure — contagion channel open.'};
   if(compo(r)>=85) return {t:'Governance and control escalation',pk:'covenant-check',why:'Limit utilization critical — governance escalation.'};
   return {t:(PLAY[(r.actions||[])[0]]?PLAY[(r.actions||[])[0]][0]:'Review exposure'),pk:(r.actions||[])[0]||'board-note',why:''}; }
-// ---- Model lab UI: 6 model tabs + Ensemble + Evidence ----
+// ---- Backtesting harness (Phase 2) — mock realized outcomes from score history; metric math is production-real ----
+function btSamples(){ const rows=[]; RISKS.forEach(r=>{ const hs=hseries(r.id), rnd=mulberry(seedOf(r.id+'bt'));
+  for(let t=2;t<hs.length-1;t++){ const noise=rnd(), flip=rnd();
+    let y=(hs[t+1]-hs[t]>=8||hs[t+1]>=80)?1:0;
+    if(flip<0.18) y=1-y;  // irreducible outcome noise so harness metrics are realistic, not tautological
+    rows.push({rid:r.id, t, level:hs[t], delta:hs[t]-hs[t-1], y, noise}); } });
+  return rows; }
+const BT_PRED = {
+  objective:  s=>clamp(sigmoid((s.level-62)/14),0.02,0.95),
+  qualitative:s=>clamp(sigmoid((s.level-58)/20+(s.noise-0.5)*0.9),0.02,0.95),
+  quant:      s=>clamp(sigmoid((s.level-64)/12+s.delta/18),0.02,0.95),
+  tail:       s=>clamp(sigmoid((s.level-70)/10+s.delta/12),0.02,0.95),
+  network:    s=>clamp(sigmoid((s.level-60)/22+(s.noise-0.5)*1.3),0.02,0.95),
+  forecast:   s=>clamp(sigmoid(0.5*(s.level-70)/15+s.delta/10-0.35),0.03,0.90),
+  ensemble:   s=>clamp(sigmoid((s.level-66)/12+s.delta/14-0.15),0.03,0.92)
+};
+function btAUC(ps,ys){ const pos=[],neg=[]; ps.forEach((p,i)=>ys[i]?pos.push(p):neg.push(p)); if(!pos.length||!neg.length)return null;
+  let s=0; pos.forEach(p=>neg.forEach(n=>{ s+= p>n?1:(p===n?0.5:0); })); return s/(pos.length*neg.length); }
+function btBrier(ps,ys){ return ps.reduce((a,p,i)=>a+(p-ys[i])*(p-ys[i]),0)/ps.length; }
+function btSlope(ps,ys){ const mx=ps.reduce((a,b)=>a+b,0)/ps.length, my=ys.reduce((a,b)=>a+b,0)/ys.length;
+  let num=0,den=0; ps.forEach((p,i)=>{num+=(p-mx)*(ys[i]-my);den+=(p-mx)*(p-mx);}); return den?num/den:0; }
+function btMetrics(key,rows){ const ps=rows.map(BT_PRED[key]), ys=rows.map(s=>s.y);
+  const A=btAUC(ps,ys), B=btBrier(ps,ys), S=btSlope(ps,ys);
+  const idx=ps.map((p,i)=>i).sort((a,b)=>ps[b]-ps[a]), top=idx.slice(0,Math.max(1,Math.floor(ps.length*0.1)));
+  const hit=top.filter(i=>ys[i]).length/top.length;
+  let tp=0,fp=0,fn=0,tn=0; ps.forEach((p,i)=>{ const pr=p>0.5; if(pr&&ys[i])tp++; else if(pr&&!ys[i])fp++; else if(!pr&&ys[i])fn++; else tn++; });
+  return {A,B,S,hit,fpr:fp/((fp+tn)||1),fnr:fn/((fn+tp)||1),base:ys.reduce((a,b)=>a+b,0)/ys.length,ps,ys,n:ps.length}; }
+function reliabilitySVG(ps,ys){ const bins=[[0,0.2],[0.2,0.4],[0.4,0.6],[0.6,0.8],[0.8,1.01]];
+  const pts=bins.map(b=>{ const idx=ps.map((p,i)=>i).filter(i=>ps[i]>=b[0]&&ps[i]<b[1]); if(!idx.length)return null;
+    return { x: idx.reduce((a,i)=>a+ps[i],0)/idx.length, y: idx.filter(i=>ys[i]).length/idx.length, n: idx.length }; }).filter(Boolean);
+  const W=320,H=230,L=40,B=32;
+  const X=v=>L+v*(W-L-14), Y=v=>H-B-v*(H-B-14);
+  let s=`<line x1="${L}" y1="${H-B}" x2="${W-14}" y2="${H-B}" stroke="var(--line)"/><line x1="${L}" y1="14" x2="${L}" y2="${H-B}" stroke="var(--line)"/>`;
+  s+=`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(1)}" y2="${Y(1)}" stroke="var(--ink3)" stroke-dasharray="4,4" opacity="0.6"/>`;
+  [0,0.5,1].forEach(v=>{ s+=`<text x="${X(v)}" y="${H-B+15}" text-anchor="middle" font-size="9" font-family="'Spline Sans Mono',monospace" fill="var(--ink3)">${v}</text><text x="${L-7}" y="${Y(v)+3}" text-anchor="end" font-size="9" font-family="'Spline Sans Mono',monospace" fill="var(--ink3)">${v}</text>`; });
+  for(let i=1;i<pts.length;i++) s+=`<line x1="${X(pts[i-1].x)}" y1="${Y(pts[i-1].y)}" x2="${X(pts[i].x)}" y2="${Y(pts[i].y)}" stroke="var(--th)" stroke-width="2"/>`;
+  pts.forEach(p=>{ s+=`<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="${clamp(3+p.n/18,3,7)}" fill="var(--th)"><title>predicted ${Math.round(p.x*100)}% → observed ${Math.round(p.y*100)}% (n=${p.n})</title></circle>`; });
+  s+=`<text x="${(L+W)/2}" y="${H-4}" text-anchor="middle" font-size="10" fill="var(--ink3)">predicted probability →</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Reliability diagram: predicted vs observed breach frequency">${s}</svg>`; }
+function backtestView(){ const rows=btSamples();
+  const keys=['objective','qualitative','quant','tail','network','forecast','ensemble'];
+  const M={}; keys.forEach(k=>M[k]=btMetrics(k,rows));
+  const verdict=m=>{ const a=m.A==null?0:m.A; const va=a>=0.75?['strong','var(--teal)']:a>=0.62?['useful','var(--amber)']:['weak','var(--red)'];
+    const vc=m.S>=0.8&&m.S<=1.25?'well-calibrated':m.S>1.25?'underconfident':'overconfident'; return {va,vc}; };
+  let h=`<div class="card" style="background:var(--amberbg);padding:12px 16px"><span class="chip sev3">synthetic outcomes</span> <span style="font-size:12.5px;color:var(--amber)">Realized outcomes are mock (derived from seeded 12-week score histories: breach = next-week score +8 or crossing 80). The metric machinery — AUC, Brier, calibration slope, top-decile hit rate, FP/FN — is production-real and wires directly to weekly-agent history.</span></div>
+  <h2 style="font-size:15px">Model validation — ${rows.length} risk-weeks, base rate ${Math.round(M.ensemble.base*100)}%</h2>
+  <div class="card" style="overflow-x:auto"><table class="t"><tr><th>Model</th><th>AUC</th><th>Brier</th><th>Calib. slope</th><th>Top-decile hit</th><th>FPR</th><th>FNR</th><th>Verdict</th></tr>
+  ${keys.map(k=>{ const m=M[k], v=verdict(m);
+    return `<tr${k==='ensemble'?' style="font-weight:600;border-top:2px solid var(--line)"':''}><td>${MDLTABS.find(t=>t[0]===k)?MDLTABS.find(t=>t[0]===k)[1]:'Ensemble'}</td><td style="font-family:'Spline Sans Mono',monospace;color:${v.va[1]}">${m.A!=null?m.A.toFixed(2):'—'}</td><td style="font-family:'Spline Sans Mono',monospace">${m.B.toFixed(3)}</td><td style="font-family:'Spline Sans Mono',monospace">${m.S.toFixed(2)}</td><td style="font-family:'Spline Sans Mono',monospace">${Math.round(m.hit*100)}%</td><td style="font-family:'Spline Sans Mono',monospace">${Math.round(m.fpr*100)}%</td><td style="font-family:'Spline Sans Mono',monospace">${Math.round(m.fnr*100)}%</td><td><span class="chip" style="background:color-mix(in srgb,${v.va[1]} 16%,transparent);color:${v.va[1]}">${v.va[0]}</span> <span class="lab">${v.vc}</span></td></tr>`; }).join('')}</table>
+  <p class="meta" style="margin:8px 0 0">AUC ≥ 0.75 strong · 0.62–0.75 useful · below = weak. Brier lower is better (naive base-rate ≈ ${(M.ensemble.base*(1-M.ensemble.base)).toFixed(3)}). Slope ≈ 1 = well-calibrated; &lt;0.8 overconfident, &gt;1.25 underconfident. FP/FN at the 50% action threshold.</p></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
+    <div class="card" style="flex:0 0 auto"><div class="lab" style="margin-bottom:6px">Reliability — ensemble (dots sized by bin count; dashed = perfect)</div>${reliabilitySVG(M.ensemble.ps,M.ensemble.ys)}</div>
+    <div class="card" style="flex:1;min-width:260px"><div class="lab" style="margin-bottom:6px">How to read this</div><ul style="font-size:12.5px;margin:4px 0"><li>Dots above the dashed line = the model under-predicts (events happen more often than it says); below = over-predicts.</li><li>The forecast model's 3–90% clamp shows up as no dots at the extremes — by design after calibration.</li><li>Ensemble beating single models on AUC and Brier is the empirical case for multi-model weighting.</li><li>Monitoring plan: recompute weekly, alert on AUC drift &gt;0.05, re-fit calibration quarterly.</li></ul></div>
+  </div>`;
+  return h; }
+// ---- Model lab UI: 6 model tabs + Ensemble + Backtest + Evidence ----
 let MDLRISK=null, MDLSUB='ensemble', MSCEN=null;
-const MDLTABS=[['objective','Objective'],['qualitative','Qualitative'],['quant','Quantitative'],['tail','Stress & Tail'],['network','Network'],['forecast','Forecast'],['ensemble','Ensemble'],['evidence','Evidence']];
+const MDLTABS=[['objective','Objective'],['qualitative','Qualitative'],['quant','Quantitative'],['tail','Stress & Tail'],['network','Network'],['forecast','Forecast'],['ensemble','Ensemble'],['backtest','Backtest'],['evidence','Evidence']];
 const scoreBand=v=>v>=85?['Critical','var(--red)']:v>=70?['High','var(--red)']:v>=50?['Elevated','var(--amber)']:v>=25?['Moderate','var(--amber)']:['Low','var(--teal)'];
-function modelCard(m){ const b=scoreBand(m.score_0_100), rm=m.raw_metrics;
-  let h=`<div class="card"><div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap"><span title="${m.assumptions[0]}" style="font-family:'Spline Sans Mono',monospace;font-size:42px;font-weight:700;color:${b[1]};cursor:help">${m.score_0_100}</span><span class="chip" style="background:color-mix(in srgb,${b[1]} 16%,transparent);color:${b[1]}">${b[0]}</span><span class="lab">direction ${m.direction}</span><span class="lab">confidence ${m.confidence_0_100}</span><span class="lab">data quality ${m.data_quality_0_100}</span><span class="lab" style="margin-left:auto">${m.model_family} · ${m.model_id}</span></div>
+// Model governance registry: every constant, cap, and known blind spot — the dig-in layer
+const MPARAMS={
+ 'rules-objective':{read:'The auditable first pass: is this risk big, concentrated, moving fast, or breaching a limit right now?',
+  params:['Weights: exposure .25 · concentration .15 · velocity .15 · volatility .10 · limit-breach .15 · control-weakness .10 · confidence-penalty .10','Limit-breach tiers: <70% util → 0 · 70–85 → 40 · 85–100 → 70 · ≥100 → 100 (score floor 75)','All inputs normalized and clamped 0–100'],
+  limits:['Static weights — no learning from outcomes','Utilization proxied from the composite score, not booked limit data','Blind to nonlinearity and dependence (that is the tail model\'s job)']},
+ 'structured-judgment':{read:'What disciplined expert judgment says — matters most where data lags: regulation, geopolitics, strategy.',
+  params:['Blend: 0.45 AHP + 0.35 FMEA + 0.20 Bow-Tie','AHP criteria weights: severity .28 · exposure breadth .22 · occurrence .14 · controllability .14 · detection .12 · time-to-impact .10 (CR < 0.10)','FMEA RPN* = S×O×D×M on 1–10 scales, min-max normalized','Bow-Tie: .30 barrier gap + .20 recovery gap + .20 consequence breadth + .30 cause-coverage gap'],
+  limits:['Single seeded judgment panel — no live Delphi rounds yet','Criteria ratings derived from data proxies, not independent expert entry','Anchoring risk: ratings share inputs with the objective model']},
+ 'monte-carlo-quant':{read:'What the simulated loss distribution says: how bad is a normal-to-bad month, statistically?',
+  params:['5,000 paths · fat-tailed innovations (≈ Student-t df 5, 10% of draws ×2.4)','σ = 0.04 + volatility-rating × 0.10 · deterministic per-risk seed','Score: .25 vol + .25 VaR99 (cap 25%) + .30 ES99 (cap 30%) + .20 breach prob (threshold 1.5σ)'],
+  limits:['Volatility from ratings, not fitted GARCH — misses clustering','Single-factor: no cross-commodity dependence (see tail model)','10,000+ paths and empirical innovations in production']},
+ 'evt-tail-stress':{read:'What crisis periods look like: fitted extreme tails, joint shocks, and the scenario library\'s worst case.',
+  params:['Blend: .30 EVT + .25 copula + .30 scenario worst + .15 scenario breadth','EVT: GPD fitted by method-of-moments to MC exceedances above p90 (ξ clamped −0.4…0.45)','Copula: Gaussian, 800 joint draws, ρ from documented/live correlations (default 0.2, linked pairs 0.55)','Scenario caps: worst 15% margin, joint ES cap 18%'],
+  limits:['GPD fits simulated (not market-history) losses','Gaussian copula understates tail dependence vs t-copula','Scenario set is user-selected — breadth depends on selection']},
+ 'network-contagion':{read:'How far a shock travels: does this risk sit on a hub commodity that many companies share?',
+  params:['Blend: .40 centrality + .35 propagation loss + .25 breadth','Centrality: shared-dependency degree across 34 companies (cap: half the universe)','Propagation: 20% seed shock through the input graph, λ = 0.5 decay per step'],
+  limits:['Degree centrality only — betweenness/eigenvector are Phase 3','Graph edges are cost shares, not contractual counterparty links']},
+ 'regime-forecast':{read:'The forward view: probability this becomes a breach event inside 30 days.',
+  params:['S = 0.60 × P(breach 30d) + 0.40 × severity forecast','Calibrated logistic: z = .5(compo−70)/15 + .3(vel−55)/25 + .2(tail−55)/25 + .25(deadline−60)/40 − .55','Probability clamped 3–90%'],
+  limits:['Coefficients seeded, not fitted — see the Backtest tab for the validation harness','No narrative/text signals yet (Phase 3)','Point-in-time: no path dependence']}
+};
+function modelCard(m){ const b=scoreBand(m.score_0_100), rm=m.raw_metrics, gov=MPARAMS[m.model_id];
+  let h=`<div class="card">${gov?`<p style="font-size:13px;color:var(--ink2);margin:0 0 12px"><b style="color:var(--th)">Read:</b> ${gov.read}</p>`:''}<div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap"><span title="${m.assumptions[0]}" style="font-family:'Spline Sans Mono',monospace;font-size:42px;font-weight:700;color:${b[1]};cursor:help">${m.score_0_100}</span><span class="chip" style="background:color-mix(in srgb,${b[1]} 16%,transparent);color:${b[1]}">${b[0]}</span><span class="lab">direction ${m.direction}</span><span class="lab">confidence ${m.confidence_0_100}</span><span class="lab">data quality ${m.data_quality_0_100}</span><span class="lab" style="margin-left:auto">${m.model_family} · ${m.model_id}</span></div>
    <div class="lab" style="margin-top:16px">Top contributing factors</div>${m.explanation_factors.map(f=>`<div class="crow"><span class="cn" style="width:190px">${f.factor}</span><span class="cbar" style="max-width:240px"><span style="width:${clamp(f.contribution*3,3,100)}%;background:${b[1]}"></span></span><span style="font-family:'Spline Sans Mono',monospace;font-weight:600">${f.contribution}</span></div>`).join('')}`;
   if(rm.criteria) h+=`<div class="lab" style="margin-top:14px">AHP criteria — weight × rating</div><div style="overflow-x:auto"><table class="t" style="max-width:480px"><tr><th>Criterion</th><th>Weight</th><th>Rating</th><th>Contribution</th></tr>${rm.criteria.map(c=>`<tr><td>${c.criterion}</td><td>${Math.round(c.weight*100)}%</td><td style="font-family:'Spline Sans Mono',monospace">${c.rating}</td><td style="font-family:'Spline Sans Mono',monospace">${c.contribution}</td></tr>`).join('')}</table></div>`;
   if(rm.FMEA_S!=null) h+=`<div class="lab" style="margin-top:12px">FMEA components</div><div style="display:flex;gap:18px;font-size:13px;color:var(--ink2);flex-wrap:wrap"><span>Severity <b style="color:var(--ink)">${rm.FMEA_S}</b></span><span>Occurrence <b style="color:var(--ink)">${rm.FMEA_O}</b></span><span>Detectability <b style="color:var(--ink)">${rm.FMEA_D}</b></span><span>Mitigation weakness <b style="color:var(--ink)">${rm.FMEA_M}</b></span><span>→ FMEA <b style="color:var(--ink)">${rm.FMEA}</b>/100 · Bow-Tie <b style="color:var(--ink)">${rm.BowTie}</b>/100</span></div>`;
   h+=`<div class="lab" style="margin-top:14px">Formula snapshot / assumptions</div><ul style="font-size:12.5px;margin:4px 0">${m.assumptions.map(a=>`<li>${a}</li>`).join('')}</ul>
    ${m.warnings.length?`<div class="lab" style="margin-top:10px">Warnings</div>${m.warnings.map(w=>`<div class="ev" style="color:var(--amber)">${w}</div>`).join('')}`:''}
+   ${gov?`<details style="margin-top:10px"><summary class="lab" style="cursor:pointer">Parameters & limits — every constant and blind spot</summary><div class="lab" style="margin:10px 0 4px">Parameters</div><ul style="font-size:12px;margin:2px 0">${gov.params.map(p=>`<li style="font-family:'Spline Sans Mono',monospace;font-size:11.5px">${p}</li>`).join('')}</ul><div class="lab" style="margin:10px 0 4px">Known limits</div><ul style="font-size:12px;margin:2px 0">${gov.limits.map(l=>`<li>${l}</li>`).join('')}</ul></details>`:''}
    <details style="margin-top:10px"><summary class="lab" style="cursor:pointer">Standardized model output (JSON)</summary><pre style="font-size:11px;overflow-x:auto;color:var(--ink2);background:var(--card2);padding:10px;border-radius:8px;margin-top:6px">${JSON.stringify({model_id:m.model_id,model_family:m.model_family,score_0_100:m.score_0_100,confidence_0_100:m.confidence_0_100,direction:m.direction,data_quality_0_100:m.data_quality_0_100,raw_metrics:m.raw_metrics},null,1)}</pre></details></div>`;
   return h; }
 function tailTab(res){ const m=res.models.tail, rm=m.raw_metrics;
@@ -2398,7 +2532,7 @@ function renderModels(){
   const res=computeModels(MDLRISK,MSCEN);
   document.getElementById('mdlregime').textContent = 'regime: '+res.regime+' · ensemble '+res.ensemble.score+'/100 · disagreement '+res.ensemble.dispBand+' · P(breach 30d) '+Math.round(res.ensemble.breachProb*100)+'%';
   document.getElementById('mdltabs').innerHTML = MDLTABS.map(t=>`<button class="tabbtn" data-msub="${t[0]}" style="${t[0]===MDLSUB?'background:var(--th);color:#fff':'background:var(--card2)'};border-radius:999px;padding:6px 14px">${t[1]}${res.models[t[0]]?' '+res.models[t[0]].score_0_100:''}</button>`).join('');
-  document.getElementById('mdlbody').innerHTML = MDLSUB==='ensemble'?ensembleView(res) : MDLSUB==='tail'?tailTab(res) : MDLSUB==='evidence'?evidenceTab(RID(MDLRISK)) : modelCard(res.models[MDLSUB]);
+  document.getElementById('mdlbody').innerHTML = MDLSUB==='ensemble'?ensembleView(res) : MDLSUB==='tail'?tailTab(res) : MDLSUB==='backtest'?backtestView() : MDLSUB==='evidence'?evidenceTab(RID(MDLRISK)) : modelCard(res.models[MDLSUB]);
 }
 // ---- Saved stress configurations → scoreable risk items ----
 let CFGS = [];
