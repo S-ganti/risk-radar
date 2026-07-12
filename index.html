@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commodity &amp; Treasury Risk Radar — India</title>
-<meta name="build" content="2026-07-10-backtest-v13">
+<meta name="build" content="2026-07-10-sankey-v14">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -346,6 +346,12 @@ h2{color:var(--th)}
 <div id="tab-commodities" style="display:none">
   <h2>Commodity interdependency map</h2>
   <p class="sub" style="margin-bottom:10px">Click any commodity to trace what it is made from, what it feeds into, where supply comes from, and which companies depend on it — directly or through the chain. Square color = supply concentration.</p>
+  <h2 style="margin-top:8px">Deep-tier supply chain — sector pilot</h2>
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 10px">
+    <select id="sankeysel" style="min-width:260px;padding:8px 12px;border:none;border-radius:10px;background:var(--card);color:var(--ink);font-size:13.5px"><option value="chips">Semiconductors — machines that make the machines</option></select>
+    <span class="lab">more sectors follow this template</span>
+  </div>
+  <div class="card" id="sankeybox" style="overflow-x:auto"></div>
   <div class="card" id="commap" style="overflow-x:auto"></div>
   <div class="card" id="corrbox" style="overflow-x:auto"></div>
   <div class="grid" id="comgrid"></div>
@@ -2211,6 +2217,82 @@ document.addEventListener('keydown', e => { if(e.key==='Escape'){ closeDrawer();
 try { const _n=new Date(); document.getElementById('lastupd').textContent = 'updated ' + _n.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + ', ' + _n.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) + ' · cycle 2026-W28'; } catch(e){}
 try { if (!localStorage.getItem('tpm-seen')) document.getElementById('firsttime').style.display = ''; } catch(e){ document.getElementById('firsttime').style.display=''; }
 
+// ---- Deep-tier sector Sankey (pilot: semiconductors) — weighted by estimated supplier spending ----
+const SK_CHIPS = {
+ tiers:['Materials, components & IP','Equipment & substrates','Fabs & memory','Chip designers'],
+ nodes:{
+  toto:[0,'Toto — ceramic chucks','JP'], ajinomoto:[0,'Ajinomoto — ABF film','JP'], zeiss:[0,'Zeiss SMT — optics','DE'], trumpf:[0,'Trumpf — lasers','DE'], cymer:[0,'Cymer — EUV source','US'], vat:[0,'VAT Group — vacuum valves','CH'], pfeiffer:[0,'Pfeiffer Vacuum','DE'], mks:[0,'MKS Instruments','US'],
+  shinetsu:[0,'Shin-Etsu — wafers','JP'], sumco:[0,'SUMCO — wafers','JP'], jsr:[0,'JSR — photoresist','JP'], entegris:[0,'Entegris — materials','US'], gases:[0,'Air Liquide / Linde — gases','EU'], hoya:[0,'Hoya — mask blanks','JP'],
+  synopsys:[0,'Synopsys — EDA','US'], cadence:[0,'Cadence — EDA','US'], arm:[0,'Arm — IP','UK'],
+  asml:[1,'ASML — lithography','NL'], amat:[1,'Applied Materials','US'], lam:[1,'Lam Research — etch','US'], tel:[1,'Tokyo Electron','JP'], kla:[1,'KLA — metrology','US'], screen:[1,'Screen Holdings','JP'], ibiden:[1,'Ibiden — substrates','JP'], unimicron:[1,'Unimicron — substrates','TW'], shinko:[1,'Shinko Electric','JP'],
+  tsmc:[2,'TSMC','TW'], sfoundry:[2,'Samsung Foundry','KR'], intelf:[2,'Intel Fabs','US'], gf:[2,'GlobalFoundries','US'], smem:[2,'Samsung Memory','KR'], skh:[2,'SK Hynix — HBM','KR'], micron:[2,'Micron','US'],
+  nvidia:[3,'Nvidia','US'], apple:[3,'Apple','US'], amd:[3,'AMD','US'], broadcom:[3,'Broadcom','US'], qualcomm:[3,'Qualcomm','US'], mediatek:[3,'MediaTek','TW'], intelp:[3,'Intel — products','US']
+ },
+ links:[
+  ['zeiss','asml',5.5],['trumpf','asml',2],['cymer','asml',2],
+  ['vat','asml',0.4],['vat','amat',0.3],['vat','lam',0.3],
+  ['pfeiffer','asml',0.4],['pfeiffer','amat',0.4],
+  ['mks','amat',1.2],['mks','lam',0.8],['mks','asml',0.5],
+  ['toto','amat',0.3],['toto','lam',0.2],
+  ['ajinomoto','ibiden',0.5],['ajinomoto','unimicron',0.4],['ajinomoto','shinko',0.3],
+  ['shinetsu','tsmc',5],['shinetsu','smem',2],['shinetsu','skh',1.5],['shinetsu','micron',1],['shinetsu','intelf',0.5],
+  ['sumco','tsmc',1.5],['sumco','micron',0.8],['sumco','skh',0.7],
+  ['jsr','tsmc',1],['jsr','smem',0.5],
+  ['entegris','tsmc',1.5],['entegris','intelf',0.8],['entegris','micron',0.9],
+  ['gases','tsmc',1.5],['gases','smem',1],['gases','skh',1],
+  ['hoya','tsmc',1],['hoya','sfoundry',0.5],
+  ['synopsys','nvidia',1.5],['synopsys','apple',1],['synopsys','amd',1],['synopsys','broadcom',1.5],['synopsys','qualcomm',1.5],['synopsys','mediatek',0.5],
+  ['cadence','nvidia',1],['cadence','apple',0.8],['cadence','amd',0.8],['cadence','broadcom',1],['cadence','qualcomm',1],['cadence','mediatek',0.4],
+  ['arm','apple',1.2],['arm','qualcomm',1],['arm','mediatek',0.8],['arm','nvidia',0.5],
+  ['asml','tsmc',20],['asml','smem',4],['asml','sfoundry',3],['asml','intelf',4],['asml','skh',2],['asml','micron',1],
+  ['amat','tsmc',10],['amat','smem',6],['amat','skh',5],['amat','intelf',3],['amat','micron',3],['amat','gf',1],
+  ['lam','smem',5],['lam','skh',5],['lam','tsmc',4],['lam','micron',3],['lam','intelf',1],
+  ['tel','tsmc',7],['tel','smem',4],['tel','skh',3],['tel','micron',2],['tel','intelf',1],
+  ['kla','tsmc',5],['kla','sfoundry',2],['kla','intelf',2],['kla','skh',1],['kla','micron',1],
+  ['screen','tsmc',2],['screen','sfoundry',1],['screen','skh',1],
+  ['ibiden','tsmc',2],['ibiden','intelf',1.5],
+  ['unimicron','tsmc',3],['unimicron','gf',1.5],
+  ['shinko','intelf',1.2],['shinko','tsmc',0.8],
+  ['tsmc','nvidia',45],['tsmc','apple',17],['tsmc','amd',10],['tsmc','qualcomm',10],['tsmc','broadcom',10],['tsmc','mediatek',8],
+  ['sfoundry','qualcomm',6],['sfoundry','nvidia',3],['sfoundry','broadcom',2],['sfoundry','mediatek',3],
+  ['gf','qualcomm',3],['gf','amd',2],['gf','broadcom',2.5],
+  ['intelf','intelp',18],
+  ['smem','nvidia',20],['smem','apple',15],['smem','qualcomm',12],['smem','amd',10],['smem','broadcom',8],['smem','mediatek',7],
+  ['skh','nvidia',40],['skh','amd',10],['skh','apple',8],['skh','broadcom',5],['skh','qualcomm',5],
+  ['micron','nvidia',14],['micron','apple',8],['micron','amd',5],['micron','qualcomm',5],['micron','broadcom',3],['micron','mediatek',2]
+ ]};
+function skFmt(v){ return v>=1 ? '$'+(Math.round(v*10)/10)+'B' : '$'+Math.round(v*1000)+'M'; }
+function renderSankey(){
+ const D=SK_CHIPS, W=1240, H=880, colX=[70,405,740,1075], NW=13, PADT=46, PADB=20;
+ const inn={}, out={};
+ D.links.forEach(l=>{ out[l[0]]=(out[l[0]]||0)+l[2]; inn[l[1]]=(inn[l[1]]||0)+l[2]; });
+ const nv={}; for(const id in D.nodes) nv[id]=Math.max(inn[id]||0, out[id]||0);
+ const tiers=[[],[],[],[]]; for(const id in D.nodes) tiers[D.nodes[id][0]].push(id);
+ let scale=Infinity;
+ tiers.forEach(t=>{ const s=t.reduce((a,id)=>a+nv[id],0); scale=Math.min(scale,(H-PADT-PADB-(t.length-1)*6)/s); });
+ const pos={};
+ tiers.forEach((t,ti)=>{ const s=t.reduce((a,id)=>a+nv[id],0), used=s*scale;
+   const gap=Math.min(42,(H-PADT-PADB-used)/Math.max(1,t.length-1));
+   let y=PADT+(H-PADT-PADB-used-gap*(t.length-1))/2;
+   t.forEach(id=>{ pos[id]={x:colX[ti], y, h:Math.max(2,nv[id]*scale), ti}; y+=Math.max(2,nv[id]*scale)+gap; }); });
+ const links=D.links.map(l=>({s:l[0],t:l[1],v:l[2]}));
+ const bySrc={}, byTgt={};
+ links.forEach(l=>{ (bySrc[l.s]=bySrc[l.s]||[]).push(l); (byTgt[l.t]=byTgt[l.t]||[]).push(l); });
+ for(const s in bySrc){ bySrc[s].sort((a,b)=>pos[a.t].y-pos[b.t].y); let o=0; bySrc[s].forEach(l=>{ l.sy=o; o+=l.v*scale; }); }
+ for(const t in byTgt){ byTgt[t].sort((a,b)=>pos[a.s].y-pos[b.s].y); let o=0; byTgt[t].forEach(l=>{ l.ty=o; o+=l.v*scale; }); }
+ const COLS=['#9B8CFF','#34C08B','#E0559A','#A7D129'];
+ let rib='', nod='', lab='';
+ links.forEach(l=>{ const s=pos[l.s], t=pos[l.t], th=Math.max(1,l.v*scale);
+  const x0=s.x+NW, x1=t.x, y0=s.y+l.sy, y1=t.y+l.ty, mx=(x0+x1)/2;
+  rib+=`<path d="M ${x0} ${y0.toFixed(1)} C ${mx} ${y0.toFixed(1)}, ${mx} ${y1.toFixed(1)}, ${x1} ${y1.toFixed(1)} L ${x1} ${(y1+th).toFixed(1)} C ${mx} ${(y1+th).toFixed(1)}, ${mx} ${(y0+th).toFixed(1)}, ${x0} ${(y0+th).toFixed(1)} Z" fill="${COLS[s.ti]}" opacity="0.4" style="transition:opacity .15s" onmouseover="this.style.opacity=0.75" onmouseout="this.style.opacity=0.4"><title>${D.nodes[l.s][1]} → ${D.nodes[l.t][1]} — ${skFmt(l.v)} est. annual spend</title></path>`; });
+ for(const id in pos){ const p=pos[id], n=D.nodes[id];
+  nod+=`<rect x="${p.x}" y="${p.y.toFixed(1)}" width="${NW}" height="${p.h.toFixed(1)}" fill="${COLS[p.ti]}" rx="1.5"><title>${n[1]} · ${n[2]} — ${skFmt(nv[id])}</title></rect>`;
+  lab+=`<text x="${p.x+NW+6}" y="${(p.y+Math.max(p.h/2+3.5,8)).toFixed(1)}" font-size="10" font-family="'Spline Sans Mono',monospace" fill="var(--ink2)">${n[1]} <tspan fill="var(--ink3)">${skFmt(nv[id])}</tspan></text>`; }
+ let hdr=''; D.tiers.forEach((t,i)=>{ hdr+=`<text x="${colX[i]}" y="24" font-size="12" font-weight="600" font-family="'Spline Sans Mono',monospace" fill="var(--ink)">${t}</text>`; });
+ document.getElementById('sankeybox').innerHTML =
+  `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:1100px" role="img" aria-label="Semiconductor supply chain Sankey weighted by estimated supplier spending">${hdr}${rib}${nod}${lab}</svg>
+  <p class="meta" style="margin:8px 0 0">Weighted by estimated annual supplier spending. Several of these companies are private, so figures are delayed or inferred by working backwards from listed suppliers among the public companies — a structural picture, not audited numbers. This is the deep-tier expansion of the <a onclick="MM.sel='chips';renderMindMap();showCom('chips')">Semiconductors</a> node below: Toto's electrostatic chucks, Ajinomoto's ABF film, Zeiss optics, SK Hynix HBM, and TSMC packaging are each effective single-source chokepoints. Hover any ribbon for the flow; monopoly power up-chain is offset by monopsony power down-chain — until a shock tests it.</p>`;
+}
 drawGrid('');
 show('tatasteel');
 renderOverview();
@@ -2223,6 +2305,7 @@ window.toggleTheme = () => { const ed = document.body.classList.toggle('editoria
 try { if (localStorage.getItem('tpm-theme') === 'editorial') { document.body.classList.add('editorial'); document.getElementById('themebtn').textContent = 'Editorial'; } } catch(e) {}
 renderComGrid();
 renderMindMap();
+renderSankey();
 showCom('crude');
 renderDeep('titan');
 // ============ Multi-model risk engine — full PRD: 6 model families + regime-aware ensemble ============
