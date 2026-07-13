@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commodity &amp; Treasury Risk Radar — India</title>
-<meta name="build" content="2026-07-10-sankey-v14">
+<meta name="build" content="2026-07-10-sankey6-v15">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -348,8 +348,15 @@ h2{color:var(--th)}
   <p class="sub" style="margin-bottom:10px">Click any commodity to trace what it is made from, what it feeds into, where supply comes from, and which companies depend on it — directly or through the chain. Square color = supply concentration.</p>
   <h2 style="margin-top:8px">Deep-tier supply chain — sector pilot</h2>
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 10px">
-    <select id="sankeysel" style="min-width:260px;padding:8px 12px;border:none;border-radius:10px;background:var(--card);color:var(--ink);font-size:13.5px"><option value="chips">Semiconductors — machines that make the machines</option></select>
-    <span class="lab">more sectors follow this template</span>
+    <select id="sankeysel" style="min-width:260px;padding:8px 12px;border:none;border-radius:10px;background:var(--card);color:var(--ink);font-size:13.5px">
+      <option value="chips">Semiconductors — machines that make the machines</option>
+      <option value="steel">Steel — ore & coking coal to construction</option>
+      <option value="energy">Oil & gas — crude sources to end demand</option>
+      <option value="pharma">Pharma — China KSMs to global generics</option>
+      <option value="battery">EV & battery — mines to vehicles</option>
+      <option value="gold">Gold & jewellery — mines to weddings</option>
+    </select>
+    <span class="lab">six sectors · same template</span>
   </div>
   <div class="card" id="sankeybox" style="overflow-x:auto"></div>
   <div class="card" id="commap" style="overflow-x:auto"></div>
@@ -2217,9 +2224,11 @@ document.addEventListener('keydown', e => { if(e.key==='Escape'){ closeDrawer();
 try { const _n=new Date(); document.getElementById('lastupd').textContent = 'updated ' + _n.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + ', ' + _n.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) + ' · cycle 2026-W28'; } catch(e){}
 try { if (!localStorage.getItem('tpm-seen')) document.getElementById('firsttime').style.display = ''; } catch(e){ document.getElementById('firsttime').style.display=''; }
 
-// ---- Deep-tier sector Sankey (pilot: semiconductors) — weighted by estimated supplier spending ----
-const SK_CHIPS = {
+// ---- Deep-tier sector Sankeys — weighted by estimated supplier spending ----
+const SANKEYS = {};
+SANKEYS.chips = {
  tiers:['Materials, components & IP','Equipment & substrates','Fabs & memory','Chip designers'],
+ note:`This is the deep-tier expansion of the <a onclick="MM.sel='chips';renderMindMap();showCom('chips')">Semiconductors</a> node below: Toto's electrostatic chucks, Ajinomoto's ABF film, Zeiss optics, SK Hynix HBM, and TSMC packaging are each effective single-source chokepoints. Monopoly power up-chain is offset by monopsony power down-chain — until a shock tests it.`,
  nodes:{
   toto:[0,'Toto — ceramic chucks','JP'], ajinomoto:[0,'Ajinomoto — ABF film','JP'], zeiss:[0,'Zeiss SMT — optics','DE'], trumpf:[0,'Trumpf — lasers','DE'], cymer:[0,'Cymer — EUV source','US'], vat:[0,'VAT Group — vacuum valves','CH'], pfeiffer:[0,'Pfeiffer Vacuum','DE'], mks:[0,'MKS Instruments','US'],
   shinetsu:[0,'Shin-Etsu — wafers','JP'], sumco:[0,'SUMCO — wafers','JP'], jsr:[0,'JSR — photoresist','JP'], entegris:[0,'Entegris — materials','US'], gases:[0,'Air Liquide / Linde — gases','EU'], hoya:[0,'Hoya — mask blanks','JP'],
@@ -2261,9 +2270,124 @@ const SK_CHIPS = {
   ['skh','nvidia',40],['skh','amd',10],['skh','apple',8],['skh','broadcom',5],['skh','qualcomm',5],
   ['micron','nvidia',14],['micron','apple',8],['micron','amd',5],['micron','qualcomm',5],['micron','broadcom',3],['micron','mediatek',2]
  ]};
+SANKEYS.steel = {
+ tiers:['Raw materials & mining','Intermediates & energy','Steelmakers (India)','End-use demand'],
+ note:`Deep-tier expansion of the <a onclick="MM.sel='steel';renderMindMap();showCom('steel')">Steel</a> chain: the Australian coking-coal trunk is the chokepoint (~85% import dependence), and captive iron ore is why <a onclick="goDeep('tatasteel')">Tata Steel</a> and <a onclick="goDeep('jswsteel')">JSW</a> carry different risk profiles. EU-bound flows now carry CBAM certificate cost.`,
+ nodes:{
+  oreN:[0,'Iron ore — NMDC & merchant','IN'], oreC:[0,'Iron ore — captive mines','IN'], ccAU:[0,'Coking coal — Australia','AU'], ccOT:[0,'Coking coal — US/Moz/Russia','—'], thc:[0,'Thermal coal — domestic + imports','IN/ID'], scrap:[0,'Scrap — domestic & imported','—'], ferro:[0,'Ferroalloys — Mn/Cr/Si','IN/ZA'], lime:[0,'Limestone & fluxes','IN'], refr:[0,'Refractories & electrodes','IN/EU'],
+  pellet:[1,'Pellets & sinter','IN'], coke:[1,'Coke ovens','IN'], dri:[1,'DRI / sponge iron','IN'], power:[1,'Captive power','IN'],
+  tata:[2,'Tata Steel','IN'], jsw:[2,'JSW Steel','IN'], sail:[2,'SAIL','IN'], jspl:[2,'JSPL','IN'], amns:[2,'AM/NS India','IN'], second:[2,'Secondary / EAF mills','IN'],
+  constr:[3,'Construction & infrastructure','IN'], auto:[3,'Automotive','IN'], rail:[3,'Railways','IN'], capg:[3,'Capital goods & machinery','IN'], pipes:[3,'Pipes, energy & projects','IN'], dur:[3,'Consumer durables','IN'], eu:[3,'EU exports — CBAM','EU']
+ },
+ links:[
+  ['oreN','pellet',3],['oreN','jsw',2.5],['oreN','second',1],['oreC','tata',3],['oreC','sail',2.5],['oreC','jspl',0.8],
+  ['ccAU','coke',8],['ccOT','coke',3],
+  ['thc','power',4],['thc','dri',2],
+  ['pellet','jsw',2],['pellet','amns',1.5],['pellet','tata',1.5],
+  ['coke','jsw',4],['coke','tata',3.5],['coke','sail',2.5],['coke','amns',1.5],['coke','jspl',1],
+  ['power','tata',1],['power','jsw',1.2],['power','sail',1],['power','second',0.8],
+  ['dri','second',3],['dri','jspl',1],
+  ['scrap','second',4],['scrap','jsw',0.8],
+  ['ferro','tata',0.8],['ferro','jsw',0.9],['ferro','sail',0.7],['ferro','second',0.6],
+  ['lime','tata',0.5],['lime','jsw',0.5],['lime','sail',0.4],
+  ['refr','tata',0.4],['refr','jsw',0.4],['refr','sail',0.3],
+  ['tata','constr',6],['tata','auto',4],['tata','capg',2.5],['tata','pipes',1.5],['tata','eu',2],
+  ['jsw','constr',7],['jsw','auto',3.5],['jsw','pipes',2.5],['jsw','capg',2],['jsw','dur',1],['jsw','eu',1],
+  ['sail','constr',5],['sail','rail',3],['sail','capg',2],['sail','pipes',2],
+  ['jspl','constr',3],['jspl','rail',1.5],['jspl','pipes',1.5],
+  ['amns','auto',3],['amns','constr',2.5],['amns','pipes',1.5],['amns','dur',1],
+  ['second','constr',6],['second','dur',2],['second','capg',2]
+ ]};
+SANKEYS.energy = {
+ tiers:['Crude & gas sources','Refiners (India)','Product streams','End-use demand'],
+ note:`Deep-tier expansion of the <a onclick="MM.sel='crude';renderMindMap();showCom('crude')">Crude oil</a> chain — India imports ~89% of crude (Russia ~31%), so the source tier is the rupee-risk tier. <a onclick="goDeep('reliance')">Reliance</a> Jamnagar is the single largest private trunk; export streams hedge some of the FX exposure.`,
+ nodes:{
+  meast:[0,'Middle East crude — Iraq/Saudi/UAE','ME'], rus:[0,'Russian crude — Urals','RU'], usafr:[0,'US, Africa & LatAm crude','—'], dom:[0,'Domestic crude — ONGC/OIL','IN'], lng:[0,'LNG — Qatar/US/UAE','—'], domgas:[0,'Domestic gas — ONGC','IN'],
+  ril:[1,'Reliance — Jamnagar','IN'], ioc:[1,'IOC refineries','IN'], bpcl:[1,'BPCL','IN'], hpcl:[1,'HPCL','IN'], nayara:[1,'Nayara (Rosneft)','IN'],
+  fuels:[2,'Transport fuels — petrol/diesel','IN'], petchem:[2,'Petrochemicals & polymers','IN'], lpg:[2,'LPG & kerosene','IN'], atf:[2,'Aviation fuel (ATF)','IN'], expp:[2,'Refined product exports','—'], citygas:[2,'City gas & power','IN'],
+  transport:[3,'Road transport & freight','IN'], agri:[3,'Agriculture — diesel pumps','IN'], industry:[3,'Industry, plastics & chemicals','IN'], homes:[3,'Households — LPG','IN'], aviation:[3,'Aviation','IN'], global:[3,'Export markets','—'], powerg:[3,'Power & city gas distribution','IN']
+ },
+ links:[
+  ['meast','ioc',25],['meast','ril',20],['meast','bpcl',10],['meast','hpcl',9],
+  ['rus','ril',18],['rus','ioc',10],['rus','nayara',8],
+  ['usafr','ril',8],['usafr','ioc',5],['usafr','bpcl',3],
+  ['dom','ioc',4],['dom','bpcl',2],['dom','hpcl',2],
+  ['ril','fuels',22],['ril','petchem',15],['ril','expp',15],['ril','atf',3],
+  ['ioc','fuels',30],['ioc','lpg',6],['ioc','petchem',4],['ioc','atf',5],
+  ['bpcl','fuels',15],['bpcl','lpg',3],['bpcl','atf',2],
+  ['hpcl','fuels',14],['hpcl','lpg',3],['hpcl','atf',1],
+  ['nayara','fuels',7],['nayara','expp',3],
+  ['lng','citygas',12],['domgas','citygas',6],
+  ['fuels','transport',70],['fuels','agri',10],['fuels','industry',8],
+  ['petchem','industry',19],
+  ['lpg','homes',12],
+  ['atf','aviation',11],
+  ['expp','global',18],
+  ['citygas','powerg',18]
+ ]};
+SANKEYS.pharma = {
+ tiers:['Starting materials & APIs','API manufacturing','Formulators (India)','Markets'],
+ note:`Deep-tier expansion of the <a onclick="MM.sel='api';renderMindMap();showCom('api')">Pharma APIs</a> chain: China supplies ≥70% of many KSMs — the chokepoint the PLI parks are built to break. <a onclick="goDeep('sunpharma')">Sun Pharma's</a> in-house API capability is its structural hedge; the EU-India FTA opens the fourth market column.`,
+ nodes:{
+  cnKSM:[0,'KSMs & intermediates — China','CN'], cnAPI:[0,'Bulk APIs — China','CN'], pli:[0,'Domestic API parks — PLI','IN'], solv:[0,'Solvents & reagents — crude-linked','—'], excip:[0,'Excipients & packaging','IN/EU'], euAPI:[0,'Specialty APIs — EU/CH','EU'],
+  apimk:[1,'Indian API makers — Divi’s, Aurobindo','IN'], sunapi:[1,'Sun Pharma — in-house API','IN'], impapi:[1,'Imported finished APIs','—'],
+  sun:[2,'Sun Pharma','IN'], cipla:[2,'Cipla','IN'], drl:[2,'Dr Reddy’s','IN'], lupin:[2,'Lupin','IN'], others:[2,'Other formulators','IN'],
+  us:[3,'US — generics & specialty','US'], india:[3,'India branded market','IN'], emg:[3,'Emerging markets','—'], eufta:[3,'EU — FTA upside','EU']
+ },
+ links:[
+  ['cnKSM','apimk',3],['cnKSM','sunapi',0.5],['cnAPI','impapi',2.5],
+  ['pli','apimk',1.5],['solv','apimk',1],['excip','others',1],['excip','sun',0.3],['euAPI','sun',0.4],['euAPI','drl',0.3],
+  ['apimk','sun',0.8],['apimk','cipla',0.7],['apimk','drl',0.6],['apimk','lupin',0.5],['apimk','others',2.4],
+  ['sunapi','sun',1.7],
+  ['impapi','others',1.5],['impapi','cipla',0.6],['impapi','lupin',0.4],
+  ['sun','us',2.4],['sun','india',1.9],['sun','emg',1.4],['sun','eufta',0.3],
+  ['cipla','india',1.4],['cipla','us',0.9],['cipla','emg',0.9],
+  ['drl','us',1.5],['drl','india',0.8],['drl','emg',0.9],['drl','eufta',0.2],
+  ['lupin','us',1],['lupin','india',0.9],['lupin','emg',0.6],
+  ['others','india',6],['others','emg',3.5],['others','us',1.5],['others','eufta',1]
+ ]};
+SANKEYS.battery = {
+ tiers:['Mined minerals','Refining & cell materials','Cells & packs','Vehicles & storage'],
+ note:`Deep-tier expansion of the <a onclick="MM.sel='lithium';renderMindMap();showCom('lithium')">Lithium</a> / battery chain: minerals are mined everywhere but ~70% refined in China — the single fattest chokepoint in the diagram. India's PLI cell plants are the thin green shoots; <a onclick="goDeep('tatamotors')">Tata Motors</a> EVs sit at the end of it.`,
+ nodes:{
+  li:[0,'Lithium — Australia/Chile','AU/CL'], co:[0,'Cobalt — DRC','CD'], ni:[0,'Nickel — Indonesia','ID'], gr:[0,'Graphite — China','CN'], mn:[0,'Manganese & rare earths','—'], cual:[0,'Copper & aluminium foils','—'],
+  refcn:[1,'Refining — China (~70%)','CN'], cath:[1,'Cathode makers — CN/KR/JP','—'], an:[1,'Anode — China','CN'], elec:[1,'Electrolyte & separators','CN/KR'],
+  catl:[2,'CATL','CN'], lgbyd:[2,'LG / BYD / Panasonic','KR/CN/JP'], incell:[2,'India cells — PLI (Ola/Exide/ARE)','IN'],
+  tatam:[3,'Tata Motors EVs','IN'], mgm:[3,'M&M EVs','IN'], twow:[3,'2W/3W — Ola/TVS/Bajaj','IN'], stor:[3,'Grid storage & telecom','IN'], gexp:[3,'Global OEMs','—']
+ },
+ links:[
+  ['li','refcn',6],['co','refcn',2.5],['ni','refcn',3],['gr','an',2],['mn','cath',1],
+  ['refcn','cath',5.5],['refcn','elec',1.5],['refcn','an',1],
+  ['cual','catl',1],['cual','lgbyd',0.7],['cual','incell',0.2],
+  ['cath','catl',6],['cath','lgbyd',4],['cath','incell',0.8],
+  ['an','catl',1.5],['an','lgbyd',1],['an','incell',0.3],
+  ['elec','catl',1.2],['elec','lgbyd',0.8],
+  ['catl','gexp',7],['catl','stor',1.5],['catl','tatam',0.8],['catl','twow',0.7],['catl','mgm',0.5],
+  ['lgbyd','gexp',4],['lgbyd','tatam',1],['lgbyd','mgm',0.8],['lgbyd','twow',0.7],['lgbyd','stor',0.5],
+  ['incell','twow',0.8],['incell','stor',0.4],['incell','tatam',0.3]
+ ]};
+SANKEYS.gold = {
+ tiers:['Mining & recycling','Refining & bullion','Trade & fabrication','Demand (India)'],
+ note:`Deep-tier expansion of the <a onclick="MM.sel='gold';renderMindMap();showCom('gold')">Gold</a> chain behind India's record $72B import bill: Swiss refiners and the Dubai hub feed bullion banks, and <a onclick="goDeep('titan')">Titan</a> competes with a vast unorganized fabricator base. The May 2026 duty hike taxes every ribbon on this page.`,
+ nodes:{
+  mines:[0,'Mines — CN/AU/RU/Africa','—'], dore:[0,'Doré imports — Africa/LatAm','—'], recyc:[0,'Recycled gold — domestic','IN'],
+  swiss:[1,'Swiss refiners — Valcambi/PAMP','CH'], uae:[1,'UAE / Dubai bullion hub','AE'], domref:[1,'Indian refiners — MMTC-PAMP','IN'],
+  banks:[2,'Bullion banks & nominated agencies','IN'], titan:[2,'Titan (Tanishq)','IN'], org:[2,'Organized fabricators','IN'], artis:[2,'Artisanal / unorganized','IN'],
+  wed:[3,'Wedding & festive jewellery','IN'], inv:[3,'Bars & coins — investment','IN'], jexp:[3,'Jewellery exports — UAE/US','—'], indl:[3,'Electronics & industrial','—']
+ },
+ links:[
+  ['mines','swiss',30],['mines','uae',15],['dore','domref',6],['recyc','domref',5],
+  ['swiss','banks',28],['swiss','indl',1],['uae','banks',13],['domref','banks',8],
+  ['banks','org',22],['banks','artis',15],['banks','titan',6],['banks','inv',6],
+  ['titan','wed',5],['titan','jexp',0.5],['titan','inv',0.5],
+  ['org','wed',12],['org','jexp',8],['org','inv',2],
+  ['artis','wed',13],['artis','inv',2]
+ ]};
 function skFmt(v){ return v>=1 ? '$'+(Math.round(v*10)/10)+'B' : '$'+Math.round(v*1000)+'M'; }
-function renderSankey(){
- const D=SK_CHIPS, W=1240, H=880, colX=[70,405,740,1075], NW=13, PADT=46, PADB=20;
+function renderSankey(key){
+ const sel=document.getElementById('sankeysel');
+ key = key || (sel?sel.value:'chips');
+ const D=SANKEYS[key]||SANKEYS.chips, W=1340, H=880, colX=[70,415,760,1105], NW=13, PADT=46, PADB=20;
  const inn={}, out={};
  D.links.forEach(l=>{ out[l[0]]=(out[l[0]]||0)+l[2]; inn[l[1]]=(inn[l[1]]||0)+l[2]; });
  const nv={}; for(const id in D.nodes) nv[id]=Math.max(inn[id]||0, out[id]||0);
@@ -2290,9 +2414,10 @@ function renderSankey(){
   lab+=`<text x="${p.x+NW+6}" y="${(p.y+Math.max(p.h/2+3.5,8)).toFixed(1)}" font-size="10" font-family="'Spline Sans Mono',monospace" fill="var(--ink2)">${n[1]} <tspan fill="var(--ink3)">${skFmt(nv[id])}</tspan></text>`; }
  let hdr=''; D.tiers.forEach((t,i)=>{ hdr+=`<text x="${colX[i]}" y="24" font-size="12" font-weight="600" font-family="'Spline Sans Mono',monospace" fill="var(--ink)">${t}</text>`; });
  document.getElementById('sankeybox').innerHTML =
-  `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:1100px" role="img" aria-label="Semiconductor supply chain Sankey weighted by estimated supplier spending">${hdr}${rib}${nod}${lab}</svg>
-  <p class="meta" style="margin:8px 0 0">Weighted by estimated annual supplier spending. Several of these companies are private, so figures are delayed or inferred by working backwards from listed suppliers among the public companies — a structural picture, not audited numbers. This is the deep-tier expansion of the <a onclick="MM.sel='chips';renderMindMap();showCom('chips')">Semiconductors</a> node below: Toto's electrostatic chucks, Ajinomoto's ABF film, Zeiss optics, SK Hynix HBM, and TSMC packaging are each effective single-source chokepoints. Hover any ribbon for the flow; monopoly power up-chain is offset by monopsony power down-chain — until a shock tests it.</p>`;
+  `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:1150px" role="img" aria-label="Deep-tier supply chain Sankey weighted by estimated supplier spending">${hdr}${rib}${nod}${lab}</svg>
+  <p class="meta" style="margin:8px 0 0">Weighted by estimated annual supplier spending. Several of these companies are private, so figures are delayed or inferred by working backwards from listed suppliers among the public companies — a structural picture, not audited numbers. ${D.note||''} Hover any ribbon or node for the flow.</p>`;
 }
+document.getElementById('sankeysel').addEventListener('change', () => renderSankey());
 drawGrid('');
 show('tatasteel');
 renderOverview();
