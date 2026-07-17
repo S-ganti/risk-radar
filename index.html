@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commodity &amp; Treasury Risk Radar — India</title>
-<meta name="build" content="2026-07-16-p0-corrections-v16">
+<meta name="build" content="2026-07-17-p1-live-data-v17">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23002FA7'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='white' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -461,7 +461,16 @@ h2{color:var(--th)}
       <tr><td>Transition</td><td>Qualitative rating: decarbonization exposure, technology shifts, documented competitive disruption.</td></tr>
     </table>
     <div class="lbl">Data pipeline</div>
-    <p style="font-size:14px">A six-agent research cycle (planner → document scout → risk analyst → company mapper → rival monitor → service mapper) scans EUR-Lex, European Commission DGs, Consilium, RBI, DGFT, CBIC, PIB, WTO, USTR, Federal Register, and exchange filings. Reasoning is recorded before conclusions in each cycle JSON. Secondary sources are tagged and queued for primary retrieval. Cycle cadence is currently manual — cycle 2026-W28 (7 Jul 2026) is embedded; scheduled weekly automation ships with the live-data pipeline. Live market data: open.er-api.com / frankfurter.dev (ECB) / gold-api.com, fetched client-side on open with an embedded dated snapshot as fallback. An optional free Alpha Vantage key — entered in the Commodities tab and stored only in the viewer's browser, never in the published file — adds computed 5-year monthly price correlations (EIA/IMF/ECB source series), cached locally for 24 hours to respect the 25-requests/day free limit.</p>
+    <p style="font-size:14px">A six-agent research cycle (planner → document scout → risk analyst → company mapper → rival monitor → service mapper) scans EUR-Lex, European Commission DGs, Consilium, RBI, DGFT, CBIC, PIB, WTO, USTR, Federal Register, and exchange filings. Reasoning is recorded before conclusions in each cycle JSON. Secondary sources are tagged and queued for primary retrieval. Cycle cadence is currently manual — cycle 2026-W28 (7 Jul 2026) is embedded; scheduled weekly automation ships with the live-data pipeline. Live market data: a daily GitHub Actions pipeline (scripts/pipeline.py, 18:30 IST) writes data/latest.json — ECB daily reference FX (frankfurter), EIA Brent/WTI/Henry Hub and IMF PCPS commodity indices (FRED, keyless), the LBMA gold PM fix, spot FX/gold (open.er-api.com / gold-api.com), and EUA plus the official CBAM certificate reference as dated manual marks. The page fetches it same-origin, with the embedded dated snapshot as offline fallback; an optional Alpha Vantage key remains as an analyst override for the correlation matrix.</p>
+    <div class="lbl">Live data pipeline — computed statistics</div>
+    <ul style="font-size:14px">
+      <li><b>Volatility</b> — daily series (Brent, WTI, Henry Hub, LBMA gold, USD/INR): EWMA σ with λ = 0.94 (RiskMetrics), monthly = daily × √21. Monthly series (IMF PCPS): rolling 36-month std of monthly log returns. Feeds the Monte-Carlo model's σ (clamped 2–25%/month) where a real series exists; ratings remain the fallback for steel, coking coal, APIs, TiO2 and lithium, which have no free series.</li>
+      <li><b>Correlations</b> — Pearson on up to 60 overlapping monthly log returns (minimum 24) across ~15 series; drives the commodity-map edges and the copula model's dependence matrix.</li>
+      <li><b>Regime</b> — 0.5 × average 5-year vol percentile (Brent, Henry Hub, gold, USD/INR) + 0.3 × INR 20-day momentum (+3% = max) + 0.2 × breadth (share of series moving &gt;5%); thresholds 45 / 60 / 75 → elevated / stressed / crisis.</li>
+      <li><b>Velocity</b> — |20-day move|, capped (commodities 15%, FX 4%), where a daily series exists (the oil, gold and USD/INR risks); other risks keep curated velocity and are scored accordingly. Exposure and concentration remain curated in P1 — computing them from cost-base data is a P2 item.</li>
+      <li><b>Score history</b> — each pipeline run appends every risk's composite score to data/history.json; sparklines and "what moved" read this real history (first point 17 Jul 2026).</li>
+      <li><b>₹ figures</b> — modelled impact % × FY26 disclosed cost base (revenue − EBITDA) from data/financials.json; each entry carries its source and as-of date. Verified at entry — re-verify before client use.</li>
+    </ul>
     <div class="lbl">Caveats</div>
     <ul style="font-size:14px">
       <li>Company cost-share weights are estimates where issuers do not disclose input-cost breakdowns; anchored figures cite their filing.</li>
@@ -1107,6 +1116,7 @@ async function loadLive() {
   let h = '';
   let inrMove = null;
   if (rates) {
+    window.LASTRATES = rates;
     const usdinr = rates.INR;
     inrMove = (usdinr / snap.usdinr - 1) * 100;
     h += cell('USD/INR', usdinr.toFixed(2), inrMove);
@@ -1117,9 +1127,13 @@ async function loadLive() {
   }
   if (gold) h += cell('Gold $/oz', Math.round(gold).toLocaleString(), (gold/snap.gold-1)*100);
   if (h) {
-    h += cell('Brent $/bbl — snapshot ' + snap.date, snap.brent.toFixed(1), null);
+    const sp = (typeof CDATA !== 'undefined' && CDATA) ? CDATA.spot : null;
+    if (sp && sp.brent) h += cell('Brent $/bbl · EOD ' + sp.brent.asof, sp.brent.v.toFixed(1), null);
+    else h += cell('Brent $/bbl — snapshot ' + snap.date, snap.brent.toFixed(1), null);
+    if (sp && sp.eua) h += cell('EUA €/t · ' + sp.eua.asof, sp.eua.v.toFixed(1), null);
+    if (sp && sp.gold_inr_10g) h += cell('Gold ₹/10g (derived)', sp.gold_inr_10g.v.toLocaleString('en-IN'), null);
     el.innerHTML = h;
-    st.textContent = 'live — ' + src.join(' + ') + ', fetched ' + new Date().toLocaleString();
+    st.textContent = 'live — ' + src.join(' + ') + (sp ? ' + pipeline ' + (CDATA.generated||'').slice(0,10) : '') + ', fetched ' + new Date().toLocaleString();
     if (inrMove != null && Math.abs(inrMove) >= 0.3) {
       const exposed = DATA.companies.map(c => {
         const d = DATA.deps[c.id]||{}; let si = 0;
@@ -1361,11 +1375,11 @@ function scCompute() {
   const costRise = shown.filter(r=>r[2]>0).length >= shown.filter(r=>r[2]<0).length;
   const avgAbs = shown.length ? shown.reduce((s,r)=>s+Math.abs(r[2]),0)/shown.length : 0;
   const dir = (up)=>up?'<b style="color:var(--red)">▲</b>':'<b style="color:var(--teal)">▼</b>';
-  const summary = shown.length ? `<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)"><span>${bandChip(avgAbs*(costRise?1:-1))} portfolio</span><span style="font-size:12px;color:var(--ink3)">COGS ${dir(costRise)} · EBITDA / margin ${dir(!costRise)} · working capital ${dir(costRise)}</span><span style="font-size:12px;color:var(--ink3);margin-left:auto">Most exposed: <b style="color:var(--ink)">${shown[0][1]}</b> ${shown[0][2]>0?'+':'−'}${Math.abs(shown[0][2]).toFixed(1)}%</span></div>` : '';
+  const summary = shown.length ? `<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)"><span>${bandChip(avgAbs*(costRise?1:-1))} portfolio</span><span style="font-size:12px;color:var(--ink3)">COGS ${dir(costRise)} · EBITDA / margin ${dir(!costRise)} · working capital ${dir(costRise)}</span><span style="font-size:12px;color:var(--ink3);margin-left:auto">Most exposed: <b style="color:var(--ink)">${shown[0][1]}</b> ${shown[0][2]>0?'+':'−'}${Math.abs(shown[0][2]).toFixed(1)}% ${typeof inrChip==='function'?inrChip(shown[0][0],shown[0][2]):''}</span></div>` : '';
   document.getElementById('evimp').innerHTML = summary + (shown.length ? shown.map(r=>{
     const neg = r[2]<0, v = Math.abs(r[2]);
-    return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:280px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:66px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap;text-align:right">${neg?'−':'+'}${v.toFixed(1)}%</span>${bandChip(r[2])}</div>`;
-  }).join('') : `<p class="meta">Build a shock above to see company impact.</p>`) + `<p class="meta" style="margin:10px 0 0">Bar = estimated margin/COGS impact after sector pass-through, hedge and inventory. Band: Low / Moderate / High / Severe. Green = tailwind (cost relief, or a producer gaining). * NTPC recovers fuel via regulated tariffs. Modelled estimate, not a forecast — click a company for its deep dive.</p>`;
+    return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:280px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:66px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap;text-align:right">${neg?'−':'+'}${v.toFixed(1)}%</span>${bandChip(r[2])} ${typeof inrChip==='function'?inrChip(r[0],r[2]):''}</div>`;
+  }).join('') : `<p class="meta">Build a shock above to see company impact.</p>`) + `<p class="meta" style="margin:10px 0 0">Bar = estimated margin/COGS impact after sector pass-through, hedge and inventory. Band: Low / Moderate / High / Severe. Green = tailwind (cost relief, or a producer gaining). ₹ figures apply the impact to FY26 disclosed cost bases (revenue − EBITDA, data/financials.json) — companies without verified financials show % only. * NTPC recovers fuel via regulated tariffs. Modelled estimate, not a forecast — click a company for its deep dive.</p>`;
   const rows = [];
   for (const co in DATA.products) DATA.products[co].forEach(p => { let t = 0; for (const k in p.mix) t += p.mix[k] * (sh[k]||0); if (Math.abs(t) > 0.5) rows.push([co, DATA.companies.find(x=>x.id===co).name, p.p, t]); });
   rows.sort((a,b)=>Math.abs(b[3])-Math.abs(a[3]));
@@ -1491,7 +1505,9 @@ function renderDeep(id) {
     h += `<div class="crow"><span class="cn" style="width:230px">${s[0]}</span><span class="cbar" style="max-width:260px"><span style="width:${Math.min(100,Math.round(v/smx*100))}%;background:${neg?'#1D9E75':v<0.05?'var(--line)':'#E24B4A'}"></span></span><span style="font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap">${neg?'tailwind ≈ '+v.toFixed(1)+'%':'+'+v.toFixed(1)+'%'}</span></div>`;
   });
   h += `</div>`;
+  if (window.CBAMCO && window.CBAMCO[id]) h += window.cbamCard(id);
   document.getElementById('ddout').innerHTML = h;
+  if (window.CBAMCO && window.CBAMCO[id] && window.cbamCalc) cbamCalc(id);
 }
 function goDeep(id) { tab('deepdive'); renderDeep(id); }
 document.getElementById('ddsel').innerHTML = DATA.companies.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>`<option value="${c.id}">${c.name} — ${c.sector}</option>`).join('');
@@ -1620,7 +1636,7 @@ function renderMindMap() {
       ${sel?`<button class="tabbtn" style="padding:2px 10px;font-size:12px" onclick="MM.sel=null;renderMindMap()">Clear highlight</button>`:''}
     </div>
     <svg viewBox="0 0 900 625" width="100%" style="min-width:720px" role="img" aria-label="Relationship map of commodities: supply-chain flows, price co-movement, and shared supply origins"><defs><marker id="mmarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink3)"/></marker></defs>${edges}${hubs}${nodes}</svg>
-    <p class="meta" style="margin:6px 0 0">Click any node to isolate its relationships and open its profile below; hover an edge for the linkage; dashed pills are supply-origin chokepoints. Node color = supply concentration; sublabel = India import dependence. Co-movement links are documented market linkages — add a free Alpha Vantage key below to overlay computed 5-year correlations (edge thickness scales with ρ; strong new pairs appear automatically).</p>`;
+    <p class="meta" style="margin:6px 0 0">Click any node to isolate its relationships and open its profile below; hover an edge for the linkage; dashed pills are supply-origin chokepoints. Node color = supply concentration; sublabel = India import dependence. Co-movement links are documented market linkages; computed 5-year monthly correlations from the managed data pipeline overlay automatically (edge thickness scales with ρ; strong new pairs appear on their own).</p>`;
 }
 
 const AVSER = [['crude','BRENT','Brent'],['natgas','NATURAL_GAS','US gas'],['copper','COPPER','Copper'],['alum','ALUMINUM','Aluminum'],['wheat','WHEAT','Wheat'],['sugar','SUGAR','Sugar'],['coffee','COFFEE','Coffee'],['gold',null,'Gold']];
@@ -1945,9 +1961,12 @@ const RSCORE = {
   'gold':   {vel:60, exp:48, con:72, prev:52, dl:null,why:'Import-duty change and a record import bill lifted velocity and severity together.'},
   'rates':  {vel:50, exp:58, con:50, prev:55, dl:null,why:'Tighter-for-longer rupee-defence stance raises refinancing exposure for leveraged names.'}
 };
-function rsc(r){ return RSCORE[r.id] || {vel:50,exp:55,con:55,prev:null,dl:null,why:'No change recorded since last refresh.'}; }
+function rsc(r){ const base = RSCORE[r.id] || {vel:50,exp:55,con:55,prev:null,dl:null,why:'No change recorded since last refresh.'};
+  if (typeof CDATA !== 'undefined' && CDATA && CDATA.velocity && CDATA.velocity[r.id] != null)
+    return Object.assign({}, base, {vel: CDATA.velocity[r.id], velSrc: 'market'});
+  return base; }
 function compo(r){ const s=rsc(r), sevN=r.sev/5*100; return Math.round(0.30*sevN + 0.20*s.vel + 0.25*s.exp + 0.15*s.con + 0.10*(CONFN[r.conf]||60)); }
-function prevCompo(r){ const s=rsc(r); return s.prev!=null ? s.prev : compo(r); }
+function prevCompo(r){ if (typeof CDATA !== 'undefined' && CDATA && CDATA.history && CDATA.history.scores) { const h = CDATA.history.scores[r.id]; if (h && h.length >= 2) return h[h.length-2]; } const s=rsc(r); return s.prev!=null ? s.prev : compo(r); }
 function scoreDelta(r){ return compo(r) - prevCompo(r); }
 function drivers(r){ const s=rsc(r), sevN=r.sev/5*100;
   return [['severity',0.30*sevN],['velocity',0.20*s.vel],['exposure',0.25*s.exp],['concentration',0.15*s.con],['confidence',0.10*(CONFN[r.conf]||60)]]
@@ -2103,7 +2122,7 @@ function secEvidence() {
 }
 function secWatchlist() {
   if (!WATCHL.length) return `<h2>Watchlist — custom triggers</h2><p class="sub" style="margin:0">Star any risk card (☆) to track it. Each watched item alerts when its score or delta crosses your thresholds.</p>`;
-  return `<h2>Watchlist — custom triggers</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Risk</th><th>Trend (illus.)</th><th>Score</th><th>Alert if score ≥</th><th>or Δ ≥</th><th>Status</th></tr>
+  return `<h2>Watchlist — custom triggers</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Risk</th><th>Trend (real)</th><th>Score</th><th>Alert if score ≥</th><th>or Δ ≥</th><th>Status</th></tr>
   ${WATCHL.map(w=>{ const r=RID(w.id); if(!r) return ''; const sc=compo(r), d=scoreDelta(r);
     const fired = sc>=w.score || d>=w.delta;
     return `<tr><td data-open="${r.id}" style="font-weight:600;cursor:pointer">${r.title.split('—')[0]}</td><td>${spark(hseries(r.id),70,18,scoreColor(sc))}</td><td style="font-family:'Spline Sans Mono',monospace;font-weight:600;color:${scoreColor(sc)}">${sc}</td><td><input type="number" value="${w.score}" min="0" max="100" onchange="setWatchTrig('${w.id}','score',this.value)" style="width:58px;padding:3px 6px;border:none;border-radius:6px;background:var(--card2);color:var(--ink);font-family:'Spline Sans Mono',monospace"></td><td><input type="number" value="${w.delta}" min="0" max="50" onchange="setWatchTrig('${w.id}','delta',this.value)" style="width:52px;padding:3px 6px;border:none;border-radius:6px;background:var(--card2);color:var(--ink);font-family:'Spline Sans Mono',monospace"></td><td>${fired?`<span class="chip sev5">▲ TRIGGERED</span>`:`<span class="chip sev1">quiet</span>`}</td></tr>`; }).join('')}</table>
@@ -2154,7 +2173,7 @@ function openRisk(id, focusSec) {
   const ev = r.evidence.map(e=>`<div class="ev"><div class="evh"><span class="chip sev1">${e.ty}</span><b style="font-size:12.5px">${e.t}</b><span class="lab" style="margin-left:auto">${e.d}</span></div><div style="font-size:12px;color:var(--ink2)"><b>Fact:</b> ${e.fact}</div><div style="font-size:11.5px;color:var(--ink3);margin-top:3px"><b>Assumption:</b> ${e.assume} · conf ${e.conf} · verified ${e.ver}</div><div style="font-size:11.5px;color:var(--th);margin-top:3px"><b>Changed:</b> ${e.chg}</div><div style="font-size:11px;margin-top:4px"><a href="${e.u}" target="_blank" rel="noopener">${e.u}</a></div></div>`).join('');
   document.getElementById('drawer').innerHTML =
     `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><div style="display:flex;gap:7px;margin-bottom:4px"><span class="chip ${sevClass(r.sev)}">${SEVL[r.sev]}</span>${deltaTag(r)}<span class="lab">${r.cat} · conf ${r.conf}</span></div><h3>${r.title}</h3></div><button class="btn sec" onclick="closeDrawer()">✕</button></div>
-    <div style="display:flex;gap:10px;align-items:center;margin:8px 0 0"><span class="lab">12-week trend · illustrative</span>${spark(hseries(r.id),150,26,scoreColor(compo(r)))}<span style="font-family:'Spline Sans Mono',monospace;font-weight:700;color:${scoreColor(compo(r))}">${compo(r)}</span></div>
+    <div style="display:flex;gap:10px;align-items:center;margin:8px 0 0"><span class="lab">score history · real</span>${spark(hseries(r.id),150,26,scoreColor(compo(r)))}<span style="font-family:'Spline Sans Mono',monospace;font-weight:700;color:${scoreColor(compo(r))}">${compo(r)}</span></div>
     <p style="font-size:13px;color:var(--ink2);margin:8px 0 0"><b style="color:var(--th)">Why now:</b> ${r.whyNow}</p>
     <div class="dsect"><span class="lab">Exposure pathway</span><div class="path">${path.map((n,i)=>`${i?'<span class="ar">→</span>':''}<span class="node">${n}</span>`).join('')}</div><p style="font-size:12.5px;color:var(--ink2);margin-top:8px">${r.impact}</p><div style="font-size:11.5px;color:var(--ink3);margin-top:5px"><b>Channels:</b> ${(r.channels||[]).join(' · ')}</div></div>
     <div class="dsect"><span class="lab">Affected companies (${r.companies.length})</span><div style="display:flex;flex-wrap:wrap;gap:6px">${cos}</div></div>
@@ -2448,22 +2467,24 @@ showCom('crude');
 renderDeep('titan');
 // ============ Multi-model risk engine — full PRD: 6 model families + regime-aware ensemble ============
 const capPct=(v,cap)=>clamp(100*v/cap,0,100);
-const riskVol=r=>{ const cs=r.commodities.filter(c=>DATA.commodities[c]); return cs.length? cs.reduce((s,c)=>s+DATA.commodities[c][1]/5*100,0)/cs.length : 50; };
+const riskVol=r=>{ if (typeof riskRealVolM === 'function') { const rv = riskRealVolM(r); if (rv != null) return capPct(rv*100, 12); } const cs=r.commodities.filter(c=>DATA.commodities[c]); return cs.length? cs.reduce((s,c)=>s+DATA.commodities[c][1]/5*100,0)/cs.length : 50; };
 const ctrlStrength=r=>clamp(40+(r.actions||[]).length*10+(r.conf==='High'?15:r.conf==='Medium'?5:0),0,100);
 const detectability=r=>clamp(100-(r.conf==='High'?70:r.conf==='Medium'?50:30),0,100);
 const dataQ=r=>CONFN[r.conf]||60;
 const dirOf=r=>{ const d=scoreDelta(r); return d>2?'up':d<-2?'down':'flat'; };
 const sigmoid=x=>1/(1+Math.exp(-x));
-function detectRegime(){ const v=RISKS.reduce((s,r)=>s+rsc(r).vel,0)/RISKS.length; return v>=75?'crisis':v>=62?'stressed':v>=48?'elevated':'normal'; }
-// 12-week mock score history per risk (deterministic; replaced by weekly-agent history when wired)
-function hseries(id){ const r=RID(id); if(!r) return []; const rnd=mulberry(seedOf(id+'h')); let v=compo(r); const pts=[Math.round(v)];
+function detectRegime(){ if (typeof CDATA !== 'undefined' && CDATA && CDATA.regime && CDATA.regime.label) return CDATA.regime.label; const v=RISKS.reduce((s,r)=>s+rsc(r).vel,0)/RISKS.length; return v>=75?'crisis':v>=62?'stressed':v>=48?'elevated':'normal'; }
+// Real score history from the data pipeline (data/history.json, one point per run).
+// hseriesSynthetic remains ONLY for the backtest harness, which is explicitly synthetic.
+function hseries(id){ if (typeof CDATA !== 'undefined' && CDATA && CDATA.history && CDATA.history.scores) { const h = CDATA.history.scores[id]; if (h && h.length >= 2) return h.slice(-12); } return []; }
+function hseriesSynthetic(id){ const r=RID(id); if(!r) return []; const rnd=mulberry(seedOf(id+'h')); let v=compo(r); const pts=[Math.round(v)];
   for(let i=0;i<11;i++){ v=clamp(v-(scoreDelta(r)/6)+(rnd()-0.5)*7,15,95); pts.unshift(Math.round(v)); }
   pts[pts.length-1]=compo(r); return pts; }
-function spark(pts,w,h,col){ w=w||84; h=h||22; if(!pts.length) return '';
+function spark(pts,w,h,col){ w=w||84; h=h||22; if(!pts.length){ const days=(typeof CDATA!=='undefined'&&CDATA&&CDATA.history&&CDATA.history.dates)?CDATA.history.dates.length:0; return days?`<span class="lab" title="Real score history began ${CDATA.history.dates[0]} — the sparkline appears from the second pipeline run">real hist · day ${days}</span>`:''; }
   const mn=Math.min(...pts), mx=Math.max(...pts), rg=(mx-mn)||1;
   const P=pts.map((p,i)=>`${(i/(pts.length-1)*(w-4)).toFixed(1)},${(h-3-(p-mn)/rg*(h-7)).toFixed(1)}`).join(' ');
   const ly=(h-3-(pts[pts.length-1]-mn)/rg*(h-7)).toFixed(1);
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="vertical-align:middle"><title>Illustrative series — real weekly score history lands with the live-data pipeline</title><polyline points="${P}" fill="none" stroke="${col||'var(--th)'}" stroke-width="1.6" opacity="0.85"/><circle cx="${w-4}" cy="${ly}" r="2.4" fill="${col||'var(--th)'}"/></svg>`; }
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="vertical-align:middle"><title>Real composite-score history — one point per pipeline run (data/history.json)</title><polyline points="${P}" fill="none" stroke="${col||'var(--th)'}" stroke-width="1.6" opacity="0.85"/><circle cx="${w-4}" cy="${ly}" r="2.4" fill="${col||'var(--th)'}"/></svg>`; }
 // deterministic per-risk RNG so Monte Carlo scores are stable and auditable across renders
 function mulberry(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
 const seedOf=s=>{ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; };
@@ -2549,7 +2570,7 @@ function copulaES(r){ const cs=r.commodities.filter(c=>DATA.commodities[c]).slic
     let mx=0; r.companies.forEach(co=>{ const im=marginImpact(co,sh); if(im>mx)mx=im; }); worstArr.push(mx); }
   worstArr.sort((a,b)=>a-b); return worstArr[Math.floor(M*0.99)]; }
 // Model 3 — Quantitative Statistical: Monte Carlo loss distribution + volatility
-function mQuant(r){ const rnd=mulberry(seedOf(r.id)), sigma=0.04+riskVol(r)/100*0.10, N=5000, losses=[];
+function mQuant(r){ const rnd=mulberry(seedOf(r.id)); const _rv=(typeof riskRealVolM==='function')?riskRealVolM(r):null; const sigma=_rv!=null?clamp(_rv,0.02,0.25):0.04+riskVol(r)/100*0.10; const N=5000, losses=[];
   for(let i=0;i<N;i++){ let z=gaussR(rnd); if(rnd()<0.10)z*=2.4; losses.push(z*sigma); }
   losses.sort((a,b)=>a-b);
   QCACHE[r.id]=losses;
@@ -2560,7 +2581,7 @@ function mQuant(r){ const rnd=mulberry(seedOf(r.id)), sigma=0.04+riskVol(r)/100*
   const sc=clamp(0.25*VolScore+0.25*VaRScore+0.30*ESScore+0.20*BreachScore,0,100);
   return std('monte-carlo-quant','quant',r,Math.round(sc),dirOf(r),clamp(0.30*70+0.35*72+0.35*68,0,100),
     [['expected shortfall 99%',0.30*ESScore],['VaR 99%',0.25*VaRScore],['volatility',0.25*VolScore],['breach probability',0.20*BreachScore]],
-    ['S = 0.25 vol + 0.25 VaR99 + 0.30 ES99 + 0.20 breach probability.','5,000-path Monte Carlo with fat-tailed innovations (≈ Student-t, df 5), deterministic per-risk seed; 10,000+ paths in production.','Volatility seeded from commodity price-volatility ratings — fitted GARCH(1,1) is Phase 2.','Loss expressed as % of exposure.'],
+    ['S = 0.25 vol + 0.25 VaR99 + 0.30 ES99 + 0.20 breach probability.','5,000-path Monte Carlo with fat-tailed innovations (≈ Student-t, df 5), deterministic per-risk seed; 10,000+ paths in production.',(_rv!=null?('σ = '+(_rv*100).toFixed(1)+'%/month from EWMA(λ=0.94) / rolling-36m vol on real price series (pipeline'+(typeof CDATA!=='undefined'&&CDATA&&CDATA.generated?' as of '+CDATA.generated.slice(0,10):'')+'); fitted GARCH(1,1) is P2.'):'Volatility seeded from ratings — no free price series exists for these commodities; EWMA on real series applies where one does.'),'Loss expressed as % of exposure.'],
     [],dataQ(r),{VaR95:Math.round(VaR95*10)/10,VaR99:Math.round(VaR99*10)/10,ES99:Math.round(ES99*10)/10,breachProb:Math.round(breach*100)/100}); }
 // Model 4 — Stress & Tail: EVT + copula dependence + scenario library (uses the stacked scenario set)
 function mTail(r,q,set){ const gpd=gpdFit(QCACHE[r.id]||[]);
@@ -2632,7 +2653,7 @@ function ensembleAction(res,r){ const m=res.models, E=res.ensemble.score, pB=res
   if(compo(r)>=85) return {t:'Governance and control escalation',pk:'covenant-check',why:'Limit utilization critical — governance escalation.'};
   return {t:(PLAY[(r.actions||[])[0]]?PLAY[(r.actions||[])[0]][0]:'Review exposure'),pk:(r.actions||[])[0]||'board-note',why:''}; }
 // ---- Backtesting harness (Phase 2) — mock realized outcomes from score history; metric math is production-real ----
-function btSamples(){ const rows=[]; RISKS.forEach(r=>{ const hs=hseries(r.id), rnd=mulberry(seedOf(r.id+'bt'));
+function btSamples(){ const rows=[]; RISKS.forEach(r=>{ const hs=hseriesSynthetic(r.id), rnd=mulberry(seedOf(r.id+'bt'));
   for(let t=2;t<hs.length-1;t++){ const noise=rnd(), flip=rnd();
     let y=(hs[t+1]-hs[t]>=8||hs[t+1]>=80)?1:0;
     if(flip<0.18) y=1-y;  // irreducible outcome noise so harness metrics are realistic, not tautological
@@ -2700,7 +2721,7 @@ const MPARAMS={
   limits:['Single seeded judgment panel — no live Delphi rounds yet','Criteria ratings derived from data proxies, not independent expert entry','Anchoring risk: ratings share inputs with the objective model']},
  'monte-carlo-quant':{read:'What the simulated loss distribution says: how bad is a normal-to-bad month, statistically?',
   params:['5,000 paths · fat-tailed innovations (≈ Student-t df 5, 10% of draws ×2.4)','σ = 0.04 + volatility-rating × 0.10 · deterministic per-risk seed','Score: .25 vol + .25 VaR99 (cap 25%) + .30 ES99 (cap 30%) + .20 breach prob (threshold 1.5σ)'],
-  limits:['Volatility from ratings, not fitted GARCH — misses clustering','Single-factor: no cross-commodity dependence (see tail model)','10,000+ paths and empirical innovations in production']},
+  limits:['σ from EWMA(0.94)/rolling-36m vol on real series where one exists (ratings fallback for steel, coking coal, APIs, TiO2, lithium); fitted GARCH(1,1) remains P2','Single-factor: no cross-commodity dependence (see tail model)','10,000+ paths and empirical innovations in production']},
  'evt-tail-stress':{read:'What crisis periods look like: fitted extreme tails, joint shocks, and the scenario library\'s worst case.',
   params:['Blend: .30 EVT + .25 copula + .30 scenario worst + .15 scenario breadth','EVT: GPD fitted by method-of-moments to MC exceedances above p90 (ξ clamped −0.4…0.45)','Copula: Gaussian, 800 joint draws, ρ from documented/live correlations (default 0.2, linked pairs 0.55)','Scenario caps: worst 15% margin, joint ES cap 18%'],
   limits:['GPD fits simulated (not market-history) losses','Gaussian copula understates tail dependence vs t-copula','Scenario set is user-selected — breadth depends on selection']},
@@ -2812,14 +2833,92 @@ document.getElementById('mdlsel').addEventListener('change',e=>{ MDLRISK=e.targe
 document.getElementById('mdltabs').addEventListener('click',e=>{ const b=e.target.closest('[data-msub]'); if(b){ MDLSUB=b.dataset.msub; renderModels(); } });
 document.getElementById('mdlbody').addEventListener('click',e=>{ const c=e.target.closest('[data-scenchip]'); if(c){ MSCEN.has(c.dataset.scenchip)?MSCEN.delete(c.dataset.scenchip):MSCEN.add(c.dataset.scenchip); if(!MSCEN.size)MSCEN.add('y_inr8'); renderModels(); return; } const g=e.target.closest('[data-mgoto]'); if(g){ MDLSUB=g.dataset.mgoto; renderModels(); return; } const dd=e.target.closest('[data-dd]'); if(dd){ goDeep(dd.dataset.dd); } });
 
+// ===== P1: live-data pipeline consumption =====
+let CDATA = null, FIN = null;
+window.LASTRATES = null;
+function fmtD(iso){ try { return new Date(iso + 'T00:00:00').toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'}); } catch(e) { return iso; } }
+function cvol(list){ if (!CDATA || !CDATA.vols) return null; const vs = list.map(c => CDATA.vols[c]).filter(Boolean).map(v => v.monthly); return vs.length ? vs.reduce((a,b)=>a+b,0)/vs.length : null; }
+const riskRealVolM = r => cvol((r.commodities||[]).concat(r.fx && r.fx.includes('USDINR') ? ['usdinr'] : []));
+function finOf(id){ const f = FIN && FIN[id]; return f && f.rev_cr && f.ebitda_cr ? f : null; }
+function inrImpact(id, pct){ const f = finOf(id); if (!f) return null; const costBase = f.rev_cr - f.ebitda_cr; const cr = Math.abs(pct)/100*costBase; return {cr: Math.round(cr), ebPct: Math.round(cr/f.ebitda_cr*1000)/10, fy: f.fy}; }
+const inrChip = (id, pct) => { const x = inrImpact(id, pct); return x ? `<span class="lab" style="white-space:nowrap" title="Cost base = ${x.fy} revenue − EBITDA from data/financials.json (verified against the cited source; re-verify before client use)">≈ ₹${x.cr.toLocaleString('en-IN')} cr · ${x.ebPct}% of ${x.fy} EBITDA</span>` : ''; };
+async function loadData(){
+  try {
+    const r = await fetch('./data/latest.json', {cache:'no-store'});
+    if (r.ok) {
+      CDATA = await r.json();
+      const s = CDATA.spot || {};
+      if (s.usdinr) DATA.snapshot = { date: fmtD(s.usdinr.asof), usdinr: s.usdinr.v,
+        gold: s.gold ? s.gold.v : DATA.snapshot.gold, brent: s.brent ? s.brent.v : DATA.snapshot.brent,
+        note: 'Baseline = last pipeline run (' + (CDATA.generated||'').slice(0,10) + ') — sources and formulas in Methodology → Live data pipeline.' };
+      if (CDATA.corr && Object.keys(CDATA.corr).length) LIVECORR = CDATA.corr;
+    }
+  } catch(e) {}
+  try { const r2 = await fetch('./data/financials.json', {cache:'no-store'}); if (r2.ok) FIN = await r2.json(); } catch(e) {}
+}
+const corrName = id => DATA.commodities[id] ? DATA.commodities[id][0] : id === 'usdinr' ? 'USD/INR' : id === 'wti' ? 'WTI' : id;
+window.restoreManaged = () => { if (CDATA && CDATA.corr) { LIVECORR = CDATA.corr; renderManagedCorr(); renderMindMap(); } };
+function renderManagedCorr(){
+  const el = document.getElementById('corrbox');
+  const ids = [...new Set(Object.keys(LIVECORR).flatMap(k => k.split('|')))].sort((a,b) => corrName(a).localeCompare(corrName(b)));
+  let t = `<table class="t" style="margin-top:8px"><tr><th></th>${ids.map(i=>`<th style="text-align:center">${corrName(i)}</th>`).join('')}</tr>`;
+  ids.forEach(a => {
+    t += `<tr><th style="white-space:nowrap">${corrName(a)}</th>` + ids.map(b => {
+      if (a === b) return `<td style="text-align:center;color:var(--ink3)">—</td>`;
+      const r = liveR(a, b);
+      if (r == null) return `<td style="text-align:center;color:var(--ink3)">·</td>`;
+      const bg = r > 0 ? `rgba(55,138,221,${(Math.abs(r)*0.8).toFixed(2)})` : `rgba(216,90,48,${(Math.abs(r)*0.8).toFixed(2)})`;
+      return `<td style="text-align:center;background:${bg};color:${Math.abs(r)>0.5?'#fff':'var(--ink)'};font-weight:600">${r.toFixed(2)}</td>`;
+    }).join('') + `</tr>`;
+  });
+  t += `</table>`;
+  el.innerHTML = `<div style="font-weight:600">Price correlation matrix — managed data feed <span class="meta">Pearson on up to 60 overlapping monthly log returns · pipeline run ${(CDATA.generated||'').slice(0,10)}</span></div>` + t +
+    `<p class="meta" style="margin:8px 0 0">Sources: ECB reference FX (frankfurter), EIA Brent/WTI/Henry Hub and IMF PCPS commodity indices (FRED), LBMA gold PM fix. Blue = move together, coral = move opposite. Note: gas is US Henry Hub — Asian LNG is oil-indexed. These correlations also drive the dashed edges on the map above and the copula model's dependence matrix.</p>
+    <details style="margin-top:6px"><summary class="lab" style="cursor:pointer">Analyst override — compute from a personal Alpha Vantage key instead</summary><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><input id="avkey" type="text" placeholder="Alpha Vantage key (stored only in this browser)" style="padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:13px;min-width:260px"><button class="tabbtn" onclick="avSave()">Compute</button><button class="tabbtn" onclick="restoreManaged()">Restore managed feed</button></div></details>`;
+}
+// CBAM certificate-cost estimator (simplified, disclosed assumptions)
+window.CBAMCO = {
+  tatasteel: {intensity: 2.5, note: 'Indian BF-BOF route typically ~2.5–2.8 tCO2/t crude steel; EU HRC benchmark ≈1.3'},
+  jswsteel:  {intensity: 2.5, note: 'Indian BF-BOF route typically ~2.5–2.8 tCO2/t crude steel; EU HRC benchmark ≈1.3'},
+  hindalco:  {intensity: 1.6, note: 'smelter direct emissions ~1.5–1.7 tCO2/t Al (electricity/indirect excluded here)'},
+  ultratech: {intensity: 0.62, note: '~0.6 tCO2/t cementitious — EU exports negligible today; precedent monitoring'}
+};
+window.cbamCalc = function(id){
+  const g = k => +((document.getElementById('cb-'+k+'-'+id)||{}).value||0);
+  const eur = g('vol')*1000*g('int')*(g('fac')/100)*g('eua');
+  const eurinr = (window.LASTRATES && window.LASTRATES.INR && window.LASTRATES.EUR) ? (window.LASTRATES.INR/window.LASTRATES.EUR) : 110;
+  const out = document.getElementById('cb-out-'+id);
+  if (out) out.innerHTML = `≈ <b>€${(eur/1e6).toFixed(1)} mn/yr</b> ≈ <b>₹${Math.round(eur*eurinr/1e7).toLocaleString('en-IN')} cr/yr</b> <span class="meta">at EUR/INR ${eurinr.toFixed(1)}</span>`;
+};
+window.cbamCard = function(id){
+  const c = window.CBAMCO[id];
+  const eua = (typeof CDATA!=='undefined' && CDATA && CDATA.spot && CDATA.spot.eua) ? CDATA.spot.eua.v : 79;
+  const cref = (typeof CDATA!=='undefined' && CDATA && CDATA.spot && CDATA.spot.cbam_ref) ? CDATA.spot.cbam_ref : null;
+  const inp = (k,lbl,val,step,note) => `<div><span style="font-size:12px;color:var(--ink2)">${lbl}</span><input id="cb-${k}-${id}" type="number" value="${val}" step="${step}" oninput="cbamCalc('${id}')" style="width:100%;padding:6px 9px;border:none;border-radius:8px;background:var(--card2);color:var(--ink);font-size:13px;margin-top:3px">${note?`<div class="meta">${note}</div>`:''}</div>`;
+  return `<div class="card"><div style="font-weight:600;margin-bottom:2px">CBAM certificate-cost estimator <span class="chip sev3" style="vertical-align:2px">simplified</span></div>
+  <p class="meta" style="margin:2px 0 10px">Cost ≈ EU-bound tonnes × embedded intensity × phase-in factor × EUA price. Ignores the benchmark free-allocation deduction and precursor netting — direction of magnitude, not a compliance number. Official CBAM certificate reference: ${cref?`€${cref.v}/t (${cref.q}, published ${cref.published})`:'€75.28/t (Q2 2026)'}.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px">
+    ${inp('vol','EU-bound volume (kt/yr)',500,50,'illustrative default — enter actual')}
+    ${inp('int','Intensity (tCO2/t)',c.intensity,0.1,c.note)}
+    ${inp('fac','CBAM factor (%)',2.5,0.5,'2026: 2.5% · 2027: 5% · rises to 100% by 2034')}
+    ${inp('eua','EUA €/t',eua,1,(typeof CDATA!=='undefined'&&CDATA&&CDATA.spot&&CDATA.spot.eua)?'pipeline mark '+CDATA.spot.eua.asof:'manual mark')}
+  </div>
+  <div id="cb-out-${id}" style="margin-top:12px;font-size:15px"></div></div>`;
+};
 renderAssume();
 initConfigs();
 simulate('oil22');
-loadCorr(false);
-loadLive();
 renderCockpit();
 renderModels();
 tab('cockpit');
+loadData().then(() => {
+  if (CDATA && CDATA.corr && Object.keys(CDATA.corr).length) { renderManagedCorr(); renderMindMap(); }
+  else loadCorr(false);
+  loadLive();
+  renderCockpit();
+  renderModels();
+  scSync();
+});
 </script>
 </body>
 </html>

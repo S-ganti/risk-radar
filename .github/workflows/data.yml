@@ -1,0 +1,34 @@
+name: data-pipeline
+
+on:
+  schedule:
+    - cron: "0 13 * * *"   # 13:00 UTC = 18:30 IST, after Indian market close
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run pipeline (fetch + compute)
+        run: python scripts/pipeline.py
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name "risk-radar-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/latest.json data/history.json
+          if git diff --cached --quiet; then
+            echo "No data changes."
+          else
+            git commit -m "data: $(date -u +%F) refresh [skip ci]"
+            git push
+          fi

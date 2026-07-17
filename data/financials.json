@@ -1,0 +1,15 @@
+{
+  "_meta": {
+    "note": "FY26 (Apr 2025 - Mar 2026) consolidated figures in INR crore, used only as denominators to express modelled impacts in rupee terms. Verified against the cited source on the asof date. Entries flagged 'derived' compute EBITDA from a disclosed margin. Companies without verified figures are omitted deliberately - the UI then shows percentages only. Verify against the annual report before any client-facing use.",
+    "asof": "2026-07-17"
+  },
+  "reliance":  {"fy": "FY26", "rev_cr": 1175919, "ebitda_cr": 207911, "src": "RIL FY26 results (consolidated revenue Rs 11,75,919 cr; record EBITDA Rs 2,07,911 cr)", "url": "https://www.ril.com/investors/financial-reporting"},
+  "tatasteel": {"fy": "FY26", "rev_cr": 232140, "ebitda_cr": 34848, "src": "Tata Steel press release, twelve months ended 31 Mar 2026", "url": "https://www.tatasteel.com/newsroom/press-releases/india/2026/"},
+  "jswsteel":  {"fy": "FY26", "rev_cr": 185470, "ebitda_cr": 32048, "ebitda_note": "adjusted EBITDA per FY26 earnings call", "src": "JSW Steel Q4/FY26 earnings call", "url": "https://www.jswsteel.in/investors"},
+  "hindalco":  {"fy": "FY26", "rev_cr": 274944, "ebitda_cr": 38097, "src": "Hindalco FY26 press release (record revenue and EBITDA)", "url": "https://www.hindalco.com/media/press-releases/hindalco-results-q4-fy26"},
+  "sunpharma": {"fy": "FY26", "rev_cr": 58220, "ebitda_cr": 17700, "src": "Sun Pharma FY26 results (revenue Rs 582.2 bn, EBITDA Rs 177 bn)", "url": "https://sunpharma.com/investors/"},
+  "hul":       {"fy": "FY26", "rev_cr": 63763, "ebitda_cr": 15048, "ebitda_note": "derived: 23.6% disclosed EBITDA margin x turnover", "src": "HUL March-quarter and FY26 results", "url": "https://www.hul.co.in/news/press-releases/2026/march-quarter-and-financial-year-2026-results/"},
+  "ultratech": {"fy": "FY26", "rev_cr": 87384, "ebitda_cr": 17598, "ebitda_note": "PBIDT as disclosed", "src": "UltraTech Q4FY26 press release (record net sales and PBIDT)", "url": "https://www.ultratechcement.com/corporate/media/press-releases/financial-results-q4fy26"},
+  "maruti":    {"fy": "FY26", "rev_cr": 187673, "ebitda_cr": 23084, "ebitda_note": "derived: 12.3% disclosed EBITDA margin x revenue", "src": "Maruti Suzuki FY2025-26 results press release", "url": "https://www.marutisuzuki.com/corporate/media/press-releases/2026/april/maruti-suzuki-announces-financial-results-for-fy2025-26"},
+  "titan":     {"fy": "FY26", "rev_cr": 76078, "ebitda_cr": null, "ebitda_note": "EBITDA not verified from a primary source yet - rupee conversion disabled", "src": "Titan FY26 total income Rs 76,078 cr", "url": "https://www.titancompany.in/investors"}
+}

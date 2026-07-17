@@ -1,7 +1,7 @@
 # Risk Radar — Partner Review & Go-Ahead Roadmap
 
 **Reviewed:** 16 July 2026 · commit `9f5ab4a` · build `2026-07-10-sankey6-v15` · live check of https://s-ganti.github.io/risk-radar/
-**Status:** ✅ **P0 (items 1–10) implemented and verified locally on 16 July 2026** — partner approved go-ahead. Next: P1 live-data backbone.
+**Status:** ✅ P0 (items 1–10) shipped 16 Jul 2026 · ✅ **P1 live-data backbone (items 11–18) shipped 17 Jul 2026** — daily pipeline (`scripts/pipeline.py` + Actions cron) fetches ECB FX / EIA / IMF PCPS / LBMA series, computes EWMA vols, 105-pair correlation matrix, market regime, market velocities and real score history; dashboard consumes `data/latest.json` with as-of chips, ₹ crore impacts from verified FY26 financials, and a CBAM certificate-cost estimator. Notes: exposure/concentration inputs remain curated (P2 computes them); MCX bhavcopy and EUA are manual/stub feeds pending P3 regwatch. Next: P2 real model calculations.
 **Scope:** what a Big 4 partner (Risk Advisory — commodity & treasury, India) would value; accuracy audit of the embedded facts; gap analysis; and the full go-ahead list to reach live data + MCP servers + real model calculations.
 
 ---
