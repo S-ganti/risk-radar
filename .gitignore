@@ -1,2 +1,6 @@
 data/raw/
 __pycache__/
+# Internal BD brief — kept local so it can't ship to the public Pages site
+PARTNER-BRIEF.html
+# Build artefact: the DATA.commodities literal emitted by build_commodities.py
+data/_commodities_block.js
