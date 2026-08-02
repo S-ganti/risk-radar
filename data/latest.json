@@ -1,34 +1,34 @@
 {
- "generated": "2026-08-01T16:32:05+00:00",
+ "generated": "2026-08-02T16:29:57+00:00",
  "spot": {
   "usdinr": {
-   "v": 95.52,
-   "asof": "2026-08-01",
+   "v": 95.5,
+   "asof": "2026-08-02",
    "src": "open.er-api.com"
   },
   "eurinr": {
-   "v": 109.96,
-   "asof": "2026-08-01",
+   "v": 109.95,
+   "asof": "2026-08-02",
    "src": "open.er-api.com"
   },
   "gbpinr": {
-   "v": 128.51,
-   "asof": "2026-08-01",
+   "v": 128.53,
+   "asof": "2026-08-02",
    "src": "open.er-api.com"
   },
   "jpyinr": {
    "v": 0.6,
-   "asof": "2026-08-01",
+   "asof": "2026-08-02",
    "src": "open.er-api.com"
   },
   "chfinr": {
-   "v": 118.19,
-   "asof": "2026-08-01",
+   "v": 118.18,
+   "asof": "2026-08-02",
    "src": "open.er-api.com"
   },
   "gold": {
    "v": 4043.7,
-   "asof": "2026-08-01",
+   "asof": "2026-08-02",
    "src": "gold-api.com"
   },
   "brent": {
@@ -50,8 +50,8 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 124184,
-   "asof": "2026-08-01",
+   "v": 124158,
+   "asof": "2026-08-02",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
  },
@@ -60,9 +60,9 @@
    "freq": "D",
    "monthly": 0.0145,
    "annual": 0.0503,
-   "pct5y": 77.1,
+   "pct5y": 77.2,
    "asof": "2026-07-31",
-   "n": 1357,
+   "n": 1356,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
   },
@@ -72,7 +72,7 @@
    "annual": 0.7994,
    "pct5y": 97.2,
    "asof": "2026-07-27",
-   "n": 1334,
+   "n": 1333,
    "src": "Brent (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -80,9 +80,9 @@
    "freq": "D",
    "monthly": 0.1776,
    "annual": 0.6152,
-   "pct5y": 92.6,
+   "pct5y": 92.5,
    "asof": "2026-07-27",
-   "n": 1318,
+   "n": 1317,
    "src": "WTI (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -90,9 +90,9 @@
    "freq": "D",
    "monthly": 0.2,
    "annual": 0.6927,
-   "pct5y": 16.7,
+   "pct5y": 16.6,
    "asof": "2026-07-27",
-   "n": 1318,
+   "n": 1317,
    "src": "Henry Hub (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -102,7 +102,7 @@
    "annual": 0.2554,
    "pct5y": 90.4,
    "asof": "2026-07-31",
-   "n": 1326,
+   "n": 1325,
    "src": "LBMA gold PM fix",
    "method": "EWMA(0.94) daily"
   },
@@ -340,7 +340,7 @@
   "label": "elevated",
   "score": 49.1,
   "components": {
-   "avg_vol_pct5y": 70.3,
+   "avg_vol_pct5y": 70.4,
    "inr_mom20_component": 6.3,
    "breadth": 60.0
   }
@@ -367,10 +367,12 @@
    "2026-07-29",
    "2026-07-30",
    "2026-07-31",
-   "2026-08-01"
+   "2026-08-01",
+   "2026-08-02"
   ],
   "scores": {
    "rbi-fx": [
+    86,
     86,
     86,
     86,
@@ -404,6 +406,7 @@
     71,
     71,
     71,
+    71,
     71
    ],
    "oil": [
@@ -422,6 +425,7 @@
     75,
     75,
     69,
+    75,
     75
    ],
    "usdinr": [
@@ -440,9 +444,11 @@
     65,
     65,
     64,
+    64,
     64
    ],
    "china": [
+    69,
     69,
     69,
     69,
@@ -476,6 +482,7 @@
     58,
     58,
     58,
+    58,
     58
    ],
    "gold": [
@@ -494,9 +501,11 @@
     50,
     53,
     50,
+    54,
     54
    ],
    "rates": [
+    56,
     56,
     56,
     56,
