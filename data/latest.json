@@ -1,34 +1,34 @@
 {
- "generated": "2026-08-20T13:50:28+00:00",
+ "generated": "2026-08-21T13:49:27+00:00",
  "spot": {
   "usdinr": {
-   "v": 95.75,
-   "asof": "2026-08-20",
+   "v": 95.77,
+   "asof": "2026-08-21",
    "src": "open.er-api.com"
   },
   "eurinr": {
-   "v": 111.54,
-   "asof": "2026-08-20",
+   "v": 111.88,
+   "asof": "2026-08-21",
    "src": "open.er-api.com"
   },
   "gbpinr": {
-   "v": 130.12,
-   "asof": "2026-08-20",
+   "v": 130.57,
+   "asof": "2026-08-21",
    "src": "open.er-api.com"
   },
   "jpyinr": {
    "v": 0.6,
-   "asof": "2026-08-20",
+   "asof": "2026-08-21",
    "src": "open.er-api.com"
   },
   "chfinr": {
-   "v": 119.24,
-   "asof": "2026-08-20",
+   "v": 119.78,
+   "asof": "2026-08-21",
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4484.2,
-   "asof": "2026-08-20",
+   "v": 4590.4,
+   "asof": "2026-08-21",
    "src": "gold-api.com"
   },
   "brent": {
@@ -50,18 +50,18 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 138043,
-   "asof": "2026-08-20",
+   "v": 141342,
+   "asof": "2026-08-21",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
  },
  "vols": {
   "usdinr": {
    "freq": "D",
-   "monthly": 0.0105,
-   "annual": 0.0365,
-   "pct5y": 42.8,
-   "asof": "2026-08-19",
+   "monthly": 0.0102,
+   "annual": 0.0354,
+   "pct5y": 40.0,
+   "asof": "2026-08-20",
    "n": 1357,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
@@ -72,7 +72,7 @@
    "annual": 0.6715,
    "pct5y": 92.6,
    "asof": "2026-08-18",
-   "n": 1338,
+   "n": 1337,
    "src": "Brent (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -82,7 +82,7 @@
    "annual": 0.5275,
    "pct5y": 86.4,
    "asof": "2026-08-18",
-   "n": 1321,
+   "n": 1320,
    "src": "WTI (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -92,16 +92,16 @@
    "annual": 0.5727,
    "pct5y": 6.4,
    "asof": "2026-08-18",
-   "n": 1321,
+   "n": 1320,
    "src": "Henry Hub (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
   "gold": {
    "freq": "D",
-   "monthly": 0.0642,
-   "annual": 0.2225,
-   "pct5y": 84.7,
-   "asof": "2026-08-19",
+   "monthly": 0.0625,
+   "annual": 0.2166,
+   "pct5y": 84.0,
+   "asof": "2026-08-20",
    "n": 1327,
    "src": "LBMA gold PM fix",
    "method": "EWMA(0.94) daily"
@@ -208,11 +208,11 @@
   }
  },
  "moves": {
-  "usdinr": -0.84,
+  "usdinr": -0.91,
   "crude": 1.53,
   "wti": 0.51,
   "natgas": 0.71,
-  "gold": 7.35,
+  "gold": 10.83,
   "copper": -0.07,
   "alum": -8.16,
   "wheat": 14.57,
@@ -295,11 +295,11 @@
   "crude|wheat": 0.22,
   "crude|wti": 0.95,
   "gold|ironore": 0.13,
-  "gold|natgas": -0.05,
+  "gold|natgas": -0.04,
   "gold|natrub": 0.07,
   "gold|palm": 0.19,
   "gold|sugar": -0.16,
-  "gold|usdinr": -0.3,
+  "gold|usdinr": -0.31,
   "gold|wheat": -0.01,
   "gold|wti": -0.14,
   "ironore|natgas": -0.14,
@@ -332,27 +332,26 @@
   "wheat|wti": 0.19
  },
  "inr": {
-  "mom20": -0.84,
-  "mom60": 0.07
+  "mom20": -0.91,
+  "mom60": 0.01
  },
  "breadth": 46.7,
  "regime": {
   "label": "normal",
-  "score": 37.7,
+  "score": 37.2,
   "components": {
-   "avg_vol_pct5y": 56.6,
+   "avg_vol_pct5y": 55.8,
    "inr_mom20_component": 0,
    "breadth": 46.7
   }
  },
  "velocity": {
   "oil": 10,
-  "gold": 49,
-  "usdinr": 21
+  "gold": 72,
+  "usdinr": 23
  },
  "history": {
   "dates": [
-   "2026-07-25",
    "2026-07-26",
    "2026-07-27",
    "2026-07-28",
@@ -377,7 +376,8 @@
    "2026-08-17",
    "2026-08-18",
    "2026-08-19",
-   "2026-08-20"
+   "2026-08-20",
+   "2026-08-21"
   ],
   "scores": {
    "rbi-fx": [
@@ -440,7 +440,6 @@
     74,
     74,
     74,
-    74,
     75,
     75,
     69,
@@ -462,10 +461,10 @@
     70,
     70,
     70,
+    57,
     57
    ],
    "usdinr": [
-    74,
     74,
     70,
     70,
@@ -490,7 +489,8 @@
     68,
     68,
     66,
-    67
+    67,
+    68
    ],
    "china": [
     69,
@@ -549,7 +549,6 @@
     58
    ],
    "gold": [
-    50,
     62,
     50,
     51,
@@ -574,7 +573,8 @@
     63,
     63,
     61,
-    60
+    60,
+    64
    ],
    "rates": [
     56,
