@@ -1,34 +1,34 @@
 {
- "generated": "2026-08-23T13:34:29+00:00",
+ "generated": "2026-08-24T13:54:18+00:00",
  "spot": {
   "usdinr": {
-   "v": 95.74,
-   "asof": "2026-08-23",
+   "v": 95.79,
+   "asof": "2026-08-24",
    "src": "open.er-api.com"
   },
   "eurinr": {
-   "v": 111.85,
-   "asof": "2026-08-23",
+   "v": 111.88,
+   "asof": "2026-08-24",
    "src": "open.er-api.com"
   },
   "gbpinr": {
-   "v": 130.62,
-   "asof": "2026-08-23",
+   "v": 130.7,
+   "asof": "2026-08-24",
    "src": "open.er-api.com"
   },
   "jpyinr": {
    "v": 0.6,
-   "asof": "2026-08-23",
+   "asof": "2026-08-24",
    "src": "open.er-api.com"
   },
   "chfinr": {
-   "v": 119.55,
-   "asof": "2026-08-23",
+   "v": 119.62,
+   "asof": "2026-08-24",
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4604.4,
-   "asof": "2026-08-23",
+   "v": 4665.6,
+   "asof": "2026-08-24",
    "src": "gold-api.com"
   },
   "brent": {
@@ -50,8 +50,8 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 141729,
-   "asof": "2026-08-23",
+   "v": 143687,
+   "asof": "2026-08-24",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
  },
@@ -72,7 +72,7 @@
    "annual": 0.6715,
    "pct5y": 92.6,
    "asof": "2026-08-18",
-   "n": 1335,
+   "n": 1334,
    "src": "Brent (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -82,7 +82,7 @@
    "annual": 0.5275,
    "pct5y": 86.3,
    "asof": "2026-08-18",
-   "n": 1318,
+   "n": 1317,
    "src": "WTI (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -90,9 +90,9 @@
    "freq": "D",
    "monthly": 0.1653,
    "annual": 0.5727,
-   "pct5y": 6.2,
+   "pct5y": 6.1,
    "asof": "2026-08-18",
-   "n": 1318,
+   "n": 1317,
    "src": "Henry Hub (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -102,7 +102,7 @@
    "annual": 0.2266,
    "pct5y": 85.3,
    "asof": "2026-08-21",
-   "n": 1326,
+   "n": 1325,
    "src": "LBMA gold PM fix",
    "method": "EWMA(0.94) daily"
   },
@@ -340,7 +340,7 @@
   "label": "normal",
   "score": 37.1,
   "components": {
-   "avg_vol_pct5y": 55.5,
+   "avg_vol_pct5y": 55.4,
    "inr_mom20_component": 0,
    "breadth": 46.7
   }
@@ -352,7 +352,6 @@
  },
  "history": {
   "dates": [
-   "2026-07-28",
    "2026-07-29",
    "2026-07-30",
    "2026-07-31",
@@ -377,7 +376,8 @@
    "2026-08-20",
    "2026-08-21",
    "2026-08-22",
-   "2026-08-23"
+   "2026-08-23",
+   "2026-08-24"
   ],
   "scores": {
    "rbi-fx": [
@@ -437,7 +437,6 @@
     71
    ],
    "oil": [
-    74,
     75,
     75,
     69,
@@ -462,10 +461,10 @@
     57,
     57,
     57,
+    57,
     57
    ],
    "usdinr": [
-    70,
     65,
     65,
     64,
@@ -488,6 +487,7 @@
     68,
     66,
     67,
+    68,
     68,
     68,
     68
@@ -549,7 +549,6 @@
     58
    ],
    "gold": [
-    51,
     50,
     53,
     50,
@@ -574,6 +573,7 @@
     60,
     64,
     62,
+    67,
     67
    ],
    "rates": [
