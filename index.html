@@ -175,14 +175,13 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border:none;border-ra
 input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 24%,transparent)}
 input[type=range]:active::-webkit-slider-thumb{box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 28%,transparent)}
 /* Editorial theme — units.gr-inspired bright minimalism: true off-white, charcoal ink, generous air, one confident accent */
-body.editorial{--bg:#FBFBFA;--card:#F3F3F1;--card2:#EAEAE7;--ink:#16171A;--ink2:#54555B;--ink3:#87888E;--line:rgba(20,22,26,.09);--accent:#1B3BB3;--redbg:#F7E9E6;--red:#A3341C;--amberbg:#F3ECDA;--amber:#7A5410;--tealbg:#E2EFE7;--teal:#1B5E40}
+body.editorial{--bg:#FBFBFA;--card:#F3F3F1;--card2:#EAEAE7;--ink:#16171A;--ink2:#4E5056;--ink3:#666970;--line:rgba(20,22,26,.12);--accent:#1B3BB3;--redbg:#F7E9E6;--red:#A3341C;--amberbg:#F3ECDA;--amber:#704A08;--tealbg:#E2EFE7;--teal:#155437}
 body.editorial::before{background:radial-gradient(760px 440px at 88% -6%,rgba(27,59,179,.05),transparent 62%)}
 body.editorial h1{letter-spacing:-0.035em}
 body.editorial .card{box-shadow:0 1px 2px rgba(16,16,19,.05)}
 body.editorial ::selection{background:var(--accent);color:#fff}
 .themebtn{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.06em;color:var(--ink3);border:1px solid var(--line);border-radius:6px;padding:3px 9px;cursor:pointer;background:var(--card);text-transform:uppercase}
 .themebtn:hover{color:var(--accent);border-color:var(--accent)}
-body.client .bd{display:none!important}
 /* Per-tab hue, glass surfaces, hero cover art */
 :root{--th:#5D8BFF}
 #tabhero{position:relative;border-radius:16px;overflow:hidden;padding:24px 28px;margin:0 0 24px;min-height:96px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(115deg,color-mix(in srgb,var(--th) 20%,transparent),transparent 60%),color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:rise .5s cubic-bezier(.22,1,.36,1) backwards}
@@ -211,7 +210,7 @@ h2{color:var(--th)}
 .rk .rkt{font-size:15px;font-weight:600;color:var(--ink);line-height:1.25;font-family:'Spline Sans Mono',ui-monospace,monospace}
 .chip{display:inline-flex;align-items:center;gap:4px;font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:6px}
 .sev5{background:var(--redbg);color:var(--red)}.sev4{background:color-mix(in srgb,var(--red) 16%,transparent);color:var(--red)}.sev3{background:var(--amberbg);color:var(--amber)}.sev2{background:var(--tealbg);color:var(--teal)}.sev1{background:var(--card2);color:var(--ink3)}
-.lab{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+.lab{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-weight:600}
 .hx{border-collapse:separate;border-spacing:3px;font-size:11px}
 .hx th{font-weight:500;color:var(--ink3);font-size:10px;padding:3px;text-align:center;white-space:nowrap}
 .hx th.rw{text-align:right;padding-right:8px;max-width:130px}
@@ -248,47 +247,59 @@ h2{color:var(--th)}
 .mbody p,.mbody li{font-family:'Hanken Grotesk',sans-serif;font-size:13.5px;line-height:1.6;color:var(--ink2)}
 .mbody .doc-h1{font-family:'Instrument Serif',Georgia,serif;font-size:26px;color:var(--ink);margin:6px 0 2px}
 @media(max-width:920px){.drawer{width:100%;padding:22px}}
+.viewtabs{display:flex;gap:6px;flex-wrap:wrap;margin:-12px 0 18px;padding:8px 0;border-bottom:1px solid var(--line)}
+.viewtabs .tabbtn{border:none;background:transparent;color:var(--ink3);padding:7px 11px;border-radius:8px;cursor:pointer;font:500 11px 'Spline Sans Mono',ui-monospace,monospace}
+.viewtabs .tabbtn.on{background:var(--card2);color:var(--th)}
+.linkbtn{border:0;background:transparent;color:var(--th);padding:0;text-decoration:underline;cursor:pointer;font:inherit}
+textarea{box-sizing:border-box;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--card2);color:var(--ink);font:12px 'Spline Sans Mono',ui-monospace,monospace;resize:vertical}
+@media(max-width:560px){
+  body{padding:12px;overflow-x:hidden}
+  .wrap{min-width:0}
+  .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible;gap:2px;padding:8px 0}
+  .tabs .tabbtn{padding:8px 4px;text-align:center;font-size:10.5px}
+  .viewtabs{flex-wrap:nowrap;overflow-x:auto;margin-top:-14px}
+  .viewtabs .tabbtn{white-space:nowrap;min-height:40px}
+  .card,.rk,.oc{padding-left:13px;padding-right:13px}
+  #live .mrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .persona{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .persona button{padding:7px 4px}
+  select,input[type=search],input[type=text],input[type=number]{max-width:100%;min-width:0!important}
+  #tabhero{padding:19px 18px}
+  #tabhero .ht{font-size:25px}
+}
 </style>
 </head>
 <body>
-<div class="brand no-print"><span>Risk Radar</span><span class="brow"><button class="kbd" onclick="cmdOpen()" title="Open command menu">Ctrl K</button><button class="themebtn" id="themebtn" onclick="toggleTheme()" title="Switch visual theme">Terminal</button><button class="themebtn" id="clientbtn" onclick="toggleClient()" title="Client-safe mode hides the pipeline, pursuit statuses, talking points and rival activity">Internal</button></span></div>
+<div class="brand no-print"><span>Risk Radar</span><span class="brow"><button class="kbd" onclick="cmdOpen()" title="Open command menu">Ctrl K</button><button class="themebtn" id="themebtn" onclick="toggleTheme()" title="Switch visual theme">Terminal</button></span></div>
 <div class="wrap">
 <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
   <div>
     <h1>Risk Radar</h1>
-    <p class="sub" style="margin:2px 0 0">Consulting-grade risk intelligence cockpit — signal to decision to client-ready output. India large caps, official sources only.</p>
+    <p class="sub" style="margin:2px 0 0">Evidence-led risk decision support for Indian companies. Public sources, dated market data, and clearly labelled estimates.</p>
   </div>
   <div class="no-print" style="display:flex;flex-direction:column;align-items:flex-end;gap:7px">
     <div class="persona" id="persona">
       <button data-persona="partner" class="on">Partner</button>
-      <button data-persona="director">Director</button>
-      <button data-persona="analyst">Analyst</button>
       <button data-persona="treasury">Treasury</button>
-      <button data-persona="commodity">Commodity</button>
+      <button data-persona="analyst">Analyst</button>
     </div>
     <span class="lab" id="lastupd">updated —</span>
   </div>
 </div>
 
 <div class="card" id="live">
-  <div style="font-weight:600">Live market tracking <span class="meta" id="livestatus">connecting…</span></div>
+  <div style="font-weight:600">Data health <span class="meta" id="livestatus">connecting…</span></div>
   <div class="mrow" id="liverates"></div>
   <div id="livesignal" style="font-size:13px;color:var(--ink2)"></div>
 </div>
 
-<div class="tabs no-print">
-  <button class="tabbtn on" data-tab="cockpit">Cockpit</button>
-  <button class="tabbtn" data-tab="models">Model lab</button>
-  <button class="tabbtn" data-tab="companies">Who is exposed</button>
-  <button class="tabbtn" data-tab="deepdive">Company deep dive</button>
-  <button class="tabbtn" data-tab="scenarios">Stress lab</button>
-  <button class="tabbtn" data-tab="commodities">Commodity map</button>
-  <button class="tabbtn bd" data-tab="pipeline">Advisory pipeline</button>
-  <button class="tabbtn" data-tab="calendar">Deadlines</button>
-  <button class="tabbtn" data-tab="overview">Risk landscape</button>
-  <button class="tabbtn bd" data-tab="cycles">Evidence log</button>
-  <button class="tabbtn" data-tab="methodology">Methodology</button>
+<div class="tabs no-print" aria-label="Primary workspaces">
+  <button class="tabbtn on" data-workspace="radar">Radar</button>
+  <button class="tabbtn" data-workspace="explore">Explore</button>
+  <button class="tabbtn" data-workspace="scenarios">Scenarios</button>
+  <button class="tabbtn" data-workspace="trust">Trust</button>
 </div>
+<div class="viewtabs no-print" id="viewtabs" aria-label="Workspace views"></div>
 
 <div id="tabhero" class="no-print"></div>
 
@@ -300,22 +311,22 @@ h2{color:var(--th)}
 
 <div id="tab-models" style="display:none">
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 14px">
-    <label class="lab">Risk item</label>
+    <label class="lab" for="mdlsel">Risk item</label>
     <select id="mdlsel" style="min-width:280px;padding:8px 12px;border:none;border-radius:10px;background:var(--card);color:var(--ink);font-size:14px"></select>
     <span class="lab" id="mdlregime"></span>
   </div>
   <div id="mdltabs" style="display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px"></div>
-  <div id="mdlbody"></div>
+  <div id="mdlbody" aria-live="polite"></div>
 </div>
 
 <div id="tab-overview" style="display:none">
-  <p class="sub" id="firsttime" style="margin:0 0 10px;display:none">First time here? <a onclick="tab('methodology')">Open the 60-second reader's guide</a> — every term, color, and policy explained in plain English. <span class="lab" style="cursor:pointer" onclick="document.getElementById('firsttime').style.display='none';try{localStorage.setItem('tpm-seen','1')}catch(e){}">dismiss ✕</span></p>
+  <p class="sub" id="firsttime" style="margin:0 0 10px;display:none">First time here? <button class="linkbtn" type="button" onclick="tab('methodology')">Open the 60-second reader's guide</button> — every term, color, and policy explained in plain English. <button class="linkbtn lab" type="button" onclick="document.getElementById('firsttime').style.display='none';try{localStorage.setItem('tpm-seen','1')}catch(e){}">dismiss ✕</button></p>
   <div class="kpis" id="kpis"></div>
   <div id="gradestrip"></div>
   <h2>Risk landscape</h2>
   <div class="card" style="overflow-x:auto" id="quad"></div>
-  <h2 class="bd">Priority targets</h2>
-  <div class="card bd" style="overflow-x:auto"><table class="t" id="toptargets"></table></div>
+  <h2>Highest mapped exposure</h2>
+  <div class="card" style="overflow-x:auto"><table class="t" id="toptargets"></table></div>
   <h2>Next hard dates</h2>
   <div class="card" id="minical"></div>
 </div>
@@ -364,9 +375,22 @@ h2{color:var(--th)}
   <div class="lbl">Combined direct shock applied</div>
   <div id="evchips" style="display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 26px;min-height:26px"></div>
   <h2 style="font-size:15px">Company margin impact — after pass-through, hedge & inventory</h2>
-  <div class="card" id="evimp"></div>
+  <div class="card" id="evimp" aria-live="polite"></div>
   <h2 style="font-size:15px">Most exposed products</h2>
-  <div class="card" id="evprod"></div>
+  <div class="card" id="evprod" aria-live="polite"></div>
+  <h2 style="font-size:15px">Portfolio cash-flow-at-risk</h2>
+  <div class="card">
+    <p class="sub" style="margin-top:0">Import a local CSV with columns <code>name,factor,amount_inr,sensitivity_sign,hedge_coverage_pct</code>. The file is processed only in this browser; it is not uploaded. CFaR is a variance–covariance estimate based on available volatilities and correlations, with assumptions shown alongside the result.</p>
+    <label style="display:block;margin:8px 0" for="portfolioown"><input id="portfolioown" type="checkbox"> I am authorised to use these positions on this device</label>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label class="btn sec" for="portfoliofile">Choose portfolio CSV</label><input id="portfoliofile" type="file" accept=".csv,text/csv" disabled><button class="ghost" type="button" id="portfolioexample">Download example</button><button class="ghost" type="button" id="portfolioclear">Clear local portfolio</button></div>
+    <div id="portfolioout" aria-live="polite" style="margin-top:12px"></div>
+  </div>
+  <h2 style="font-size:15px">Hedge relationship diagnostics</h2>
+  <div class="card">
+    <p class="sub" style="margin-top:0">Paste matched exposure and hedging-instrument returns, one number per line. This computes correlation, regression slope, R² and dollar offset as diagnostics. It does not issue an Ind AS 109 accounting conclusion or apply a legacy bright-line pass/fail rule.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px"><div><label for="hedgeexp">Exposure returns</label><textarea id="hedgeexp" rows="6" style="width:100%;margin-top:5px" placeholder="0.012&#10;-0.008&#10;0.004"></textarea></div><div><label for="hedgeinst">Hedge returns</label><textarea id="hedgeinst" rows="6" style="width:100%;margin-top:5px" placeholder="-0.011&#10;0.007&#10;-0.003"></textarea></div></div>
+    <button class="btn pri" type="button" id="hedgerun" style="margin-top:10px">Run diagnostics</button> <button class="ghost" type="button" id="hedgeclear">Clear local series</button><div id="hedgeout" aria-live="polite" style="margin-top:12px"></div>
+  </div>
 </div>
 
 <div id="tab-commodities" style="display:none">
@@ -403,22 +427,11 @@ h2{color:var(--th)}
 </div>
 
 
-<div id="tab-pipeline" class="bd" style="display:none">
-  <h2>Engagement pipeline</h2>
-  <p class="sub" style="margin-bottom:10px">Opportunities generated by the service-mapper agent from the latest cycle. Pursuit status is saved locally in this browser and survives regeneration.</p>
-  <div class="card" style="overflow-x:auto"><table class="t" id="pipetable"></table></div>
-</div>
-
 <div id="tab-calendar" style="display:none">
   <h2>Regulatory calendar</h2>
   <p class="sub" style="margin-bottom:10px">Hard dates from official documents; countdowns computed live each time the file opens.</p>
   <div class="card" style="overflow-x:auto" id="caltl"></div>
   <div class="card" style="overflow-x:auto"><table class="t" id="caltable"></table></div>
-</div>
-
-<div id="tab-cycles" class="bd" style="display:none">
-<h2>Cycle reports</h2>
-<div id="cycles"></div>
 </div>
 
 <div id="tab-methodology" style="display:none">
@@ -433,7 +446,6 @@ h2{color:var(--th)}
       <li><b>Company deep dive</b> — one company end to end: where every input physically comes from, product-by-product vulnerability, and its sensitivity to every shock.</li>
       <li><b>Stress lab</b> — stack real or custom shocks in either direction, edit sector pass-through / hedge / inventory assumptions, and rank company margin impact by band.</li>
       <li><b>Commodity map</b> — the relationship map: what is made from what, whose prices move together, and which countries control supply.</li>
-      <li><b>Advisory pipeline</b> — the resulting engagement opportunities with deadlines and a pursuit tracker.</li>
       <li><b>Deadlines</b> — dated regulatory obligations with live countdowns.</li>
       <li><b>Risk landscape / Evidence log</b> — the analytical quadrant, and the raw weekly research reports with every source cited.</li>
     </ul></details>
@@ -491,14 +503,14 @@ h2{color:var(--th)}
     <table class="t">
       <tr><th>Lens</th><th>How it is scored</th></tr>
       <tr><td>Commodity</td><td>Computed: Σ (cost-base weight × 0.4 supply concentration + 0.4 India import share + 0.2 price volatility). Weights from annual reports where disclosed, otherwise labeled estimates; concentration and import shares from USGS, PPAC, IEA, USDA, ICCO, Ministry of Steel.</td></tr>
-      <tr><td>Policy</td><td>Computed from the latest weekly cycle's impact status (urgent 5, material 4, watch 3, none 1). Official documents only.</td></tr>
+      <tr><td>Policy</td><td>Computed from the latest curated impact status (urgent 5, material 4, watch 3, none 1). Source type and confidence are retained; secondary sources require primary verification.</td></tr>
       <tr><td>Currency</td><td>Qualitative rating from disclosed FX structures: foreign-currency debt, royalty flows, revenue/cost currency mismatch.</td></tr>
       <tr><td>Financial</td><td>Qualitative rating from disclosed balance-sheet posture (net cash vs capex leverage vs refinancing dependence).</td></tr>
       <tr><td>Concentration</td><td>Qualitative rating: product, customer, geography, or single-segment profit dependence per segment disclosures.</td></tr>
       <tr><td>Transition</td><td>Qualitative rating: decarbonization exposure, technology shifts, documented competitive disruption.</td></tr>
     </table>
     <div class="lbl">Data pipeline</div>
-    <p style="font-size:14px">A six-agent research cycle (planner → document scout → risk analyst → company mapper → rival monitor → service mapper) scans EUR-Lex, European Commission DGs, Consilium, RBI, DGFT, CBIC, PIB, WTO, USTR, Federal Register, and exchange filings. Reasoning is recorded before conclusions in each cycle JSON. Secondary sources are tagged and queued for primary retrieval. Cycle cadence is currently manual — cycle 2026-W28 (7 Jul 2026) is embedded; scheduled weekly automation ships with the live-data pipeline. Live market data: a daily GitHub Actions pipeline (scripts/pipeline.py, 18:30 IST) writes data/latest.json — ECB daily reference FX (frankfurter), EIA Brent/WTI/Henry Hub and IMF PCPS commodity indices (FRED, keyless), the LBMA gold PM fix, spot FX/gold (open.er-api.com / gold-api.com), and EUA plus the official CBAM certificate reference as dated manual marks. The page fetches it same-origin, with the embedded dated snapshot as offline fallback; an optional Alpha Vantage key remains as an analyst override for the correlation matrix.</p>
+    <p style="font-size:14px">A daily GitHub Actions job runs <code>scripts/pipeline.py</code>, writes dated market observations to <code>data/latest.json</code>, appends score history, and executes a publication gate. Market sources and their states (live, delayed, manual, or stale) are recorded in <code>data/health.json</code>. Regulatory and company evidence is curated separately in the evidence registry with URL, date, source type, confidence, and verification status. If validation fails, the pipeline stops before publication.</p>
     <div class="lbl">Live data pipeline — computed statistics</div>
     <ul style="font-size:14px">
       <li><b>Volatility</b> — daily series (Brent, WTI, Henry Hub, LBMA gold, USD/INR): EWMA σ with λ = 0.94 (RiskMetrics), monthly = daily × √21. Monthly series (IMF PCPS): rolling 36-month std of monthly log returns. Feeds the Monte-Carlo model's σ (clamped 2–25%/month) where a real series exists; ratings remain the fallback for steel, coking coal, APIs, TiO2 and lithium, which have no free series.</li>
@@ -512,34 +524,30 @@ h2{color:var(--th)}
     <ul style="font-size:14px">
       <li>Company cost-share weights are estimates where issuers do not disclose input-cost breakdowns; anchored figures cite their filing.</li>
       <li>Qualitative lens scores are structured judgments from public facts — a prioritization layer, not measurements.</li>
-      <li>Scenario mathematics assume 50% cost pass-through per processing step, no hedging or inventories — structural exposure, not price forecasts.</li>
+      <li>Scenario propagation carries 50% of an upstream price move to each downstream step. Cost pass-through, hedge cover, inventory, pricing power and elasticity are explicit user-adjustable assumptions; producer revenue is calculated as a separate channel.</li>
     </ul>
-    <p class="meta">Illustrative analysis assembled from public official sources and company disclosures for internal business development. Not audit evidence, investment research, or client advice. Verify primary sources before any external use.</p>
+    <p class="meta">Illustrative analysis assembled from public sources and company disclosures. Not audit evidence, investment research, or client advice. Verify current primary sources before use.</p>
   </div>
 
   <div class="card">
     <div style="font-weight:600;margin-bottom:6px">Model governance — inventory and validation status</div>
-    <div style="overflow-x:auto"><table class="t"><tr><th>Model</th><th>Family</th><th>Version</th><th>Validation</th><th>Owner</th><th>Next review</th></tr>
-      <tr><td>Objective rules</td><td>objective</td><td>1.2</td><td>Not yet validated — see Model lab → Validation</td><td>Risk analytics</td><td>Quarterly</td></tr>
-      
-      <tr><td>Monte Carlo quant</td><td>quant</td><td>1.2</td><td>Backtest harness; deterministic seed audit</td><td>Risk analytics</td><td>Quarterly</td></tr>
-      <tr><td>EVT + copula tail</td><td>tail</td><td>2.0</td><td>GPD fit diagnostics in-card; market-history fit pending</td><td>Risk analytics</td><td>Quarterly</td></tr>
-      <tr><td>Network contagion</td><td>network</td><td>1.1</td><td>Graph audit vs disclosed cost shares</td><td>Risk analytics</td><td>Semi-annual</td></tr>
-      <tr><td>Regime forecast</td><td>forecast</td><td>1.3 (calibrated)</td><td>Backtest harness — see Model lab → Backtest</td><td>Risk analytics</td><td>Monthly until fitted</td></tr>
-      <tr><td>Ensemble</td><td>ensemble</td><td>1.2</td><td>Disagreement monitoring live; weight optimization Phase 3</td><td>Head of risk</td><td>Quarterly</td></tr>
-    </table></div>
-    <p class="meta" style="margin:8px 0 0">Every model's constants and blind spots are disclosed in its card under "Parameters &amp; limits". No validation metrics exist yet: backtesting needs realised outcomes and the tool has not run long enough to have any. Model lab → Validation reports the real score history accumulating in data/history.json and states what is still missing. The previous synthetic-outcome backtest was removed because its mock was constructed so the ensemble won.</p>
+    <div id="modelregistry"><p class="meta">Loading the model registry…</p></div>
+  </div>
+  <div class="card" id="benchmarkcard">
+    <div style="font-weight:600;margin-bottom:6px">Market capability benchmark</div>
+    <p class="meta">Loading the dated benchmark registry…</p>
   </div>
 </div>
 
-<p class="meta no-print" style="margin-top:28px;border-top:1px solid var(--line);padding-top:12px">Internal working tool — illustrative analysis from public sources. Not client advice. Pursuit statuses are stored only in this browser.</p>
+<p class="meta no-print" style="margin-top:28px;border-top:1px solid var(--line);padding-top:12px">Public decision-support demonstration. Market data may be delayed or manually maintained; estimates are not audit evidence, investment research, or client advice.</p>
 
-<div id="cmdk" role="dialog" aria-label="Command menu"><div class="cmdbox"><input id="cmdq" placeholder="Jump to a company, commodity, scenario, or view…" autocomplete="off"><div class="cmdlist" id="cmdlist"></div></div></div>
+<div id="cmdk" role="dialog" aria-modal="true" aria-label="Command menu"><div class="cmdbox"><input id="cmdq" aria-label="Search commands" placeholder="Jump to a company, commodity, scenario, or view…" autocomplete="off"><div class="cmdlist" id="cmdlist"></div></div></div>
 
 <div id="scrim" onclick="closeDrawer()"></div>
-<aside class="drawer" id="drawer" role="dialog" aria-label="Risk detail"></aside>
-<div class="modal" id="briefmodal" role="dialog" aria-label="Generated brief"><div class="mbox"><div class="mh"><span class="lab" id="briefkind">brief</span><span style="flex:1"></span><button class="btn sec" onclick="copyBrief()">Copy</button><button class="btn sec" onclick="downloadBrief()">Download .md</button><button class="btn sec" onclick="printBriefDoc()">Print</button><button class="btn sec" onclick="closeBrief()">Close</button></div><div class="mbody" id="briefbody"></div></div></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Risk detail"></aside>
+<div class="modal" id="briefmodal" role="dialog" aria-modal="true" aria-label="Generated brief"><div class="mbox"><div class="mh"><span class="lab" id="briefkind">brief</span><span style="flex:1"></span><button class="btn sec" onclick="copyBrief()">Copy</button><button class="btn sec" onclick="downloadBrief()">Download .md</button><button class="btn sec" onclick="printBriefDoc()">Print</button><button class="btn sec" onclick="closeBrief()">Close</button></div><div class="mbody" id="briefbody"></div></div></div>
 
+<script src="app/models/core.js"></script>
 <script>
 const DATA = {
   companies: [
@@ -1347,82 +1355,22 @@ const DATA = {
 </script>
 <script>
 DATA.impacts = {
-  "tatasteel": [{"cycle":"2026-W28","policies":["CBAM","Section 232","RBI FX rules (Apr–Jun 2026)"],"exposure":"EU is a core market (incl. own EU operations); CBAM liability accrues on Indian-origin exports from Jan 2026; coking coal ~85% imported adds INR cost risk under rupee pressure.","risk":"urgent","services":["CBAM cost quantification and EUA exposure advisory","Hedge-policy redesign under RBI April 2026 FX rules","Combined commodity + currency stress testing"]}],
-  "jswsteel": [{"cycle":"2026-W28","policies":["CBAM","Section 232","RBI FX rules (Apr–Jun 2026)"],"exposure":"Exports to EU face certificate liability; US derivatives tariffs push diversion; large USD borrowing base affected by hedging-rule changes.","risk":"urgent","services":["CBAM cost quantification and EUA exposure advisory","Hedge-policy redesign under RBI April 2026 FX rules","Combined commodity + currency stress testing"]}],
-  "hindalco": [{"cycle":"2026-W28","policies":["CBAM","Section 232"],"exposure":"Aluminum in CBAM scope; Novelis straddles US/EU tariff regimes; energy-intensive smelting sensitive to carbon-cost signals.","risk":"material","services":["CBAM cost quantification and EUA exposure advisory"]}],
-  "reliance": [{"cycle":"2026-W28","policies":["RBI FX rules (Apr–Jun 2026)","EU-India FTA"],"exposure":"Largest corporate FX book in the universe (crude imports, USD debt); forwards cancel/rebook bar forces hedge-program redesign; petchem exports gain under FTA.","risk":"material","services":["Hedge-policy redesign under RBI April 2026 FX rules"]}],
-  "titan": [{"cycle":"2026-W28","policies":["Gold duty hike May 2026","RBI FX rules (Apr–Jun 2026)"],"exposure":"Gold ~55% of cost base, ~99% imported; duty hike raises landed cost directly; INR pressure compounds; gold-lease hedging structures touched by derivative rules.","risk":"urgent","services":["Hedge-policy redesign under RBI April 2026 FX rules","Combined commodity + currency stress testing (gold+INR)"]}],
-  "sunpharma": [{"cycle":"2026-W28","policies":["EU-India FTA","RBI FX rules (Apr–Jun 2026)"],"exposure":"Pharma is a headline FTA winner — EU revenue share set to grow, expanding EUR exposure beyond current hedge sizing.","risk":"material","services":["EUR-INR exposure build-out planning for FTA winners"]}],
-  "maruti": [{"cycle":"2026-W28","policies":["EU-India FTA","RBI FX rules (Apr–Jun 2026)"],"exposure":"EU auto tariff dismantling raises import competition; JPY royalty and import exposure meets new hedging constraints.","risk":"watch","services":["Hedge-policy redesign under RBI April 2026 FX rules"]}],
-  "tatamotors": [{"cycle":"2026-W28","policies":["EU-India FTA","CBAM","RBI FX rules (Apr–Jun 2026)"],"exposure":"JLR gives direct EU/UK revenue exposure; group steel/battery inputs; multi-currency book under new RBI rules.","risk":"material","services":["Hedge-policy redesign under RBI April 2026 FX rules","EUR-INR exposure build-out planning for FTA winners"]}],
-  "mm": [{"cycle":"2026-W28","policies":["EU-India FTA","RBI FX rules (Apr–Jun 2026)"],"exposure":"EU competition in SUVs/tractors post-FTA; moderate import book.","risk":"watch","services":["Hedge-policy redesign under RBI April 2026 FX rules"]}],
-  "hul": [{"cycle":"2026-W28","policies":["EUDR","RBI FX rules (Apr–Jun 2026)"],"exposure":"Palm derivatives ~96% import-linked; EUDR traceability flows through Unilever group sourcing; INR pressure on the palm bill.","risk":"material","services":["Combined commodity + currency stress testing (palm+INR)","EUDR sourcing-shift cost modeling with FX overlay","Hedge-policy redesign under RBI April 2026 FX rules"]}],
-  "itc": [{"cycle":"2026-W28","policies":["EUDR"],"exposure":"Paperboard (wood), coffee and agri exports to EU require due-diligence statements from 30 Dec 2026.","risk":"watch","services":["EUDR sourcing-shift cost modeling with FX overlay"]}],
-  "nestleindia": [{"cycle":"2026-W28","policies":["EUDR","RBI FX rules (Apr–Jun 2026)"],"exposure":"Cocoa and coffee inputs are EUDR commodities; import-cost INR risk on cocoa (75% imported).","risk":"watch","services":["EUDR sourcing-shift cost modeling with FX overlay"]}],
-  "ongc": [{"cycle":"2026-W28","policies":["RBI FX rules (Apr–Jun 2026)"],"exposure":"PSU ECB concessional swap facility is a direct funding-cost opportunity; USD revenue partially natural-hedges.","risk":"watch","services":["FCNR(B)/ECB funding-cost optimization"]}],
-  "ultratech": [{"cycle":"2026-W28","policies":["CBAM"],"exposure":"Cement is CBAM-covered — relevant only for any EU-bound clinker/cement volumes (small today), but sets carbon-cost precedent for domestic pricing.","risk":"watch","services":["CBAM cost quantification (precedent monitoring)"]}]
+  "tatasteel": [{"cycle":"2026-W28","policies":["CBAM","Section 232","RBI FX rules (Apr–Jun 2026)"],"exposure":"EU is a core market (incl. own EU operations); CBAM liability accrues on Indian-origin exports from Jan 2026; coking coal ~85% imported adds INR cost risk under rupee pressure.","risk":"urgent","responses":["Quantify CBAM and EUA exposure","Review hedge-policy compliance","Run combined commodity and currency stress"]}],
+  "jswsteel": [{"cycle":"2026-W28","policies":["CBAM","Section 232","RBI FX rules (Apr–Jun 2026)"],"exposure":"Exports to EU face certificate liability; US derivatives tariffs push diversion; large USD borrowing base affected by hedging-rule changes.","risk":"urgent","responses":["Quantify CBAM and EUA exposure","Review hedge-policy compliance","Run combined commodity and currency stress"]}],
+  "hindalco": [{"cycle":"2026-W28","policies":["CBAM","Section 232"],"exposure":"Aluminum in CBAM scope; Novelis straddles US/EU tariff regimes; energy-intensive smelting sensitive to carbon-cost signals.","risk":"material","responses":["Quantify CBAM and EUA exposure"]}],
+  "reliance": [{"cycle":"2026-W28","policies":["RBI FX rules (Apr–Jun 2026)","EU-India FTA"],"exposure":"Largest corporate FX book in the universe (crude imports, USD debt); forwards cancel/rebook bar forces hedge-program redesign; petchem exports gain under FTA.","risk":"material","responses":["Review hedge-policy compliance"]}],
+  "titan": [{"cycle":"2026-W28","policies":["Gold duty hike May 2026","RBI FX rules (Apr–Jun 2026)"],"exposure":"Gold ~55% of cost base, ~99% imported; duty hike raises landed cost directly; INR pressure compounds; gold-lease hedging structures touched by derivative rules.","risk":"urgent","responses":["Review hedge-policy compliance","Run combined gold and INR stress"]}],
+  "sunpharma": [{"cycle":"2026-W28","policies":["EU-India FTA","RBI FX rules (Apr–Jun 2026)"],"exposure":"Pharma is a headline FTA winner — EU revenue share set to grow, expanding EUR exposure beyond current hedge sizing.","risk":"material","responses":["Review EUR-INR exposure sizing"]}],
+  "maruti": [{"cycle":"2026-W28","policies":["EU-India FTA","RBI FX rules (Apr–Jun 2026)"],"exposure":"EU auto tariff dismantling raises import competition; JPY royalty and import exposure meets new hedging constraints.","risk":"watch","responses":["Review hedge-policy compliance"]}],
+  "tatamotors": [{"cycle":"2026-W28","policies":["EU-India FTA","CBAM","RBI FX rules (Apr–Jun 2026)"],"exposure":"JLR gives direct EU/UK revenue exposure; group steel/battery inputs; multi-currency book under new RBI rules.","risk":"material","responses":["Review hedge-policy compliance","Review EUR-INR exposure sizing"]}],
+  "mm": [{"cycle":"2026-W28","policies":["EU-India FTA","RBI FX rules (Apr–Jun 2026)"],"exposure":"EU competition in SUVs/tractors post-FTA; moderate import book.","risk":"watch","responses":["Review hedge-policy compliance"]}],
+  "hul": [{"cycle":"2026-W28","policies":["EUDR","RBI FX rules (Apr–Jun 2026)"],"exposure":"Palm derivatives ~96% import-linked; EUDR traceability flows through Unilever group sourcing; INR pressure on the palm bill.","risk":"material","responses":["Run combined palm and INR stress","Model EUDR sourcing costs","Review hedge-policy compliance"]}],
+  "itc": [{"cycle":"2026-W28","policies":["EUDR"],"exposure":"Paperboard (wood), coffee and agri exports to EU require due-diligence statements from 30 Dec 2026.","risk":"watch","responses":["Model EUDR sourcing costs"]}],
+  "nestleindia": [{"cycle":"2026-W28","policies":["EUDR","RBI FX rules (Apr–Jun 2026)"],"exposure":"Cocoa and coffee inputs are EUDR commodities; import-cost INR risk on cocoa (75% imported).","risk":"watch","responses":["Model EUDR sourcing costs"]}],
+  "ongc": [{"cycle":"2026-W28","policies":["RBI FX rules (Apr–Jun 2026)"],"exposure":"PSU ECB concessional swap facility may affect funding costs; USD revenue partially natural-hedges.","risk":"watch","responses":["Review funding and natural-hedge position"]}],
+  "ultratech": [{"cycle":"2026-W28","policies":["CBAM"],"exposure":"Cement is CBAM-covered — relevant only for any EU-bound clinker/cement volumes (small today), but sets carbon-cost precedent for domestic pricing.","risk":"watch","responses":["Monitor CBAM exposure precedent"]}]
 };
-DATA.cycles = [
-  {
-    "cycle":"2026-W28","dated":"2026-07-07",
-    "planning_questions":[
-      "Scope confirmed with user 2026-07-07: treasury & FX advisory services, all commodity classes, India large- and mid-cap universe (expanded from the original top-34 to 87 names, adding those with material input exposure below the large-cap line), weekly cloud automation.",
-      "Open: should banks be treated as prospects for the FCNR(B) window advisory, or only as distribution channel? Currently marked 'channel'.",
-      "Open: track EU-India FTA chapter-level tariff schedules when the legal text publishes in the Official Journal?",
-      "Open: add Tier-2 CBAM exposure (Indian suppliers of EU manufacturers) from cycle 2?",
-      "Open: gold duty hike currently cited to CNBC — primary CBIC notification to be pulled next cycle."
-    ],
-    "document_summary":[
-      {"item":"EU-India FTA — negotiations concluded 27 Jan 2026 (New Delhi summit); largest deal either side has concluded; pending legal scrubbing, Council decision, EP consent, Indian Cabinet approval.","citations":["https://ec.europa.eu/commission/presscorner/detail/en/ip_26_184","https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/india/eu-india-agreements/memo-eu-india-free-trade-agreement-chapter-chapter-summary_en"]},
-      {"item":"CBAM definitive regime in force 1 Jan 2026; 9 implementing/delegated acts adopted 17 Dec 2025; certificate sales open 1 Feb 2027; first surrender 30 Sep 2027 for 2026 imports; 50 t/yr de-minimis; downstream scope extension proposed.","citations":["https://taxation-customs.ec.europa.eu/news/cbam-successfully-entered-force-1-january-2026-2026-01-14_en","https://trade.ec.europa.eu/access-to-markets/en/news/start-definitive-period-cbam-eu"]},
-      {"item":"EUDR postponed to 30 Dec 2026 for large operators via Regulation (EU) 2025/2650 (OJ 23 Dec 2025); simplification package (May 2026) claims ~75% compliance-cost cut. Covers cattle, cocoa, coffee, palm oil, rubber, soya, wood.","citations":["https://www.consilium.europa.eu/en/press/press-releases/2025/12/18/deforestation-council-signs-off-targeted-revision-to-simplify-and-postpone-the-regulation/","https://trade.ec.europa.eu/access-to-markets/en/news/delay-until-december-2026-and-other-developments-implementation-eudr-regulation"]},
-      {"item":"RBI FX regime moved in two steps — (i) 1 Apr 2026, A.P. (DIR Series) Circular No. 03: INR NDFs barred for residents and non-residents; rebooking of cancelled INR derivatives banned; related-party INR derivatives barred. (ii) 5-8 Jun 2026 package: RBI absorbs ~280-300bp hedging cost on fresh 3-5y FCNR(B) deposits (deposit window to 30 Sep 2026; CRR/SLR exempt; rate ceiling withdrawn 17 Jun); concessional FX swaps for PSU ECBs. [Corrected 2026-07-16: earlier text misdated the April rules into the June package, and the prior RBI citation resolved to a withdrawn 2011 Master Circular]","citations":["https://worldtradescanner.com/03-RBI%20Circular-01.04.2026.htm","https://www.business-standard.com/finance/news/rbi-opens-fcnr-b-swap-window-to-attract-foreign-currency-deposits-126060900723_1.html","https://www.mufgresearch.com/fx/india-shoring-up-the-indian-rupee-rbi-june-2026-measures-8-june-2026/"]},
-      {"item":"US Section 232 restructuring: 2 Apr 2026 proclamation (50%/25%/15% tiers, sub-15% metal content exempt); further adjustment 1 Jun 2026 effective 8 Jun 2026.","citations":["https://www.whitehouse.gov/fact-sheets/2026/04/fact-sheet-president-donald-j-trump-strengthens-tariffs-on-steel-aluminum-and-copper-imports/","https://www.whitecase.com/insight-alert/united-states-modifies-steel-aluminum-and-copper-section-232-tariffs"]},
-      {"item":"India raised bullion import duty 6%→15% (BCD 10% + AIDC 5%, silver included) effective 13 May 2026 to arrest the rupee slide; gold imports a record USD 71.98 bn in FY2025-26. [secondary — CBIC notification to be pulled]","citations":["https://www.cnbc.com/2026/05/13/india-hikes-bullion-import-duties-to-arrest-rupee-slide.html","https://www.gold.org/goldhub/gold-focus/2026/05/india-gold-market-update-import-tightening"]}
-    ],
-    "risk_and_impact_analysis":[
-      "Step 1 — CBAM: certificate liability accrues on 2026 EU imports of steel/aluminum/cement etc., cash-settled from Sep 2027 and priced off EUA auctions. Creates a new cost line AND a new hedgeable risk (EUA price) for Indian metal exporters; accrual starts now, settlement later — a classic deferred-P&L trap.",
-      "Step 2 — FTA: concluded, unratified. On entry into force, EUR revenue share grows for pharma/textiles/auto components (EUR hedging undersized) while EU autos gain Indian access (domestic pricing pressure). Trigger to watch: ratification steps, not the announcement.",
-      "Step 3 — EUDR: from 30 Dec 2026 large operators placing cocoa, coffee, palm, rubber, wood products on the EU market need geolocation-verified due diligence; Indian FMCG and paper exporters face traceability and sourcing-shift costs.",
-      "Step 4 — RBI FX rules: the 1 Apr 2026 circular's rebooking bar breaks the default Indian corporate forward-rolling playbook and its NDF bar forces flows onshore (non-compliance runs from April, not June); the June FCNR(B) subsidized window (to 30 Sep 2026) is a dated funding arbitrage. Demand shock for hedge-policy redesign across all importers.",
-      "Step 5 — Section 232: US market stays penalized for metal derivatives, diverting Indian volumes toward the EU (where CBAM waits) and home market; export currency mix and margin volatility shift.",
-      "Step 6 — Rupee: duty hikes and the RBI package are officially framed as rupee defense — policy signals sustained INR pressure on import-heavy cost bases (crude 88.6% import-dependent per PPAC; gold ~99%; palm ~96%)."
-    ],
-    "rival_activity_analysis":[
-      "IBSFINtech named Leader in IDC MarketScape for AI-enabled embedded trade financing (Feb 2026); 400+ entities, USD 1tn+ processed — deepening reach into target treasury offices.",
-      "Kyriba pushing 'AI-orchestrated treasury' (KyribaLive 2026) with embedded FX/rates data — TMS vendors moving from execution toward analytics.",
-      "So-what: software rivals automate execution, not policy interpretation. RBI-2026 hedge-policy redesign and CBAM/EUA advisory are whitespace before vendors ship compliance modules."
-    ],
-    "affected_companies":["Tata Steel (urgent)","JSW Steel (urgent)","Titan (urgent)","Hindalco (material)","Reliance Industries (material)","Sun Pharma (material)","Tata Motors (material)","Hindustan Unilever (material)","Maruti Suzuki (watch)","Mahindra & Mahindra (watch)","ITC (watch)","Nestlé India (watch)","ONGC (watch)","UltraTech Cement (watch)"],
-    "suggested_services":[
-      "1. Hedge-policy redesign under RBI April 2026 FX rules — Reliance, Titan, Tata Motors, Maruti, JSW, Tata Steel, HUL (rules already in force; highest urgency).",
-      "2. FCNR(B)/ECB funding-cost optimization — ONGC, large USD borrowers, banks as channel (window closes 30 Sep 2026).",
-      "3. CBAM cost quantification and EUA exposure advisory — Tata Steel, JSW Steel, Hindalco (before FY27 audit planning; certificates sell from Feb 2027).",
-      "4. EUR-INR exposure build-out planning for FTA winners — Sun Pharma, Tata Motors, auto-component exporters (pre-ratification window).",
-      "5. Combined commodity + currency stress testing — Titan (gold+INR), HUL (palm+INR), steelmakers (coking coal+INR).",
-      "6. EUDR sourcing-shift cost modeling with FX overlay — HUL, ITC, Nestlé India (H2 2026 budgeting)."
-    ],
-    "sources":[
-      "https://ec.europa.eu/commission/presscorner/detail/en/ip_26_184",
-      "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/india/eu-india-agreements/memo-eu-india-free-trade-agreement-chapter-chapter-summary_en",
-      "https://taxation-customs.ec.europa.eu/news/cbam-successfully-entered-force-1-january-2026-2026-01-14_en",
-      "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
-      "https://trade.ec.europa.eu/access-to-markets/en/news/start-definitive-period-cbam-eu",
-      "https://www.consilium.europa.eu/en/press/press-releases/2025/12/18/deforestation-council-signs-off-targeted-revision-to-simplify-and-postpone-the-regulation/",
-      "https://trade.ec.europa.eu/access-to-markets/en/news/delay-until-december-2026-and-other-developments-implementation-eudr-regulation",
-      "https://environment.ec.europa.eu/topics/forests/deforestation/regulation-deforestation-free-products_en",
-      "https://www.mufgresearch.com/fx/india-shoring-up-the-indian-rupee-rbi-june-2026-measures-8-june-2026/",
-      "https://worldtradescanner.com/03-RBI%20Circular-01.04.2026.htm",
-      "https://www.business-standard.com/finance/news/rbi-opens-fcnr-b-swap-window-to-attract-foreign-currency-deposits-126060900723_1.html",
-      "https://www.whitehouse.gov/fact-sheets/2026/04/fact-sheet-president-donald-j-trump-strengthens-tariffs-on-steel-aluminum-and-copper-imports/",
-      "https://www.whitecase.com/insight-alert/united-states-modifies-steel-aluminum-and-copper-section-232-tariffs",
-      "https://www.cnbc.com/2026/05/13/india-hikes-bullion-import-duties-to-arrest-rupee-slide.html",
-      "https://www.gold.org/goldhub/gold-focus/2026/05/india-gold-market-update-import-tightening",
-      "https://www.ibsfintech.com/",
-      "https://www.kyriba.com/news/kyribalive-2026-ai-orchestrated-treasury/"
-    ]
-  }
-];
+DATA.cycles = [];
 
 const worst = im => im.some(x=>x.risk==='urgent') ? 'urgent' : im.some(x=>x.risk==='material') ? 'material' : im.some(x=>x.risk==='watch') ? 'watch' : 'none';
 const order = {urgent:0, material:1, watch:2, none:3};
@@ -1438,7 +1386,6 @@ function lensScores(id) {
 }
 const oavg = id => lensScores(id).reduce((t,x)=>t+x[0],0)/6;
 const ograde = a => a>=3.75 ? ['Very high','#E24B4A'] : a>=3 ? ['High','#D85A30'] : a>=2.25 ? ['Moderate','#BA7517'] : ['Low','#1D9E75'];
-{ const _lc = document.getElementById('lastcycle'); if (_lc) _lc.textContent = DATA.cycles[DATA.cycles.length-1].cycle; }
 const grid = document.getElementById('cogrid'), panel = document.getElementById('panel');
 let current = null;
 
@@ -1498,7 +1445,7 @@ function show(id) {
   if (wt.length) {
     h += `<div class="lbl">Risk factors and action openings</div>`;
     wt.forEach(r=>{
-      h += `<div style="margin:10px 0"><span class="pill">${r.t}</span><p style="font-size:14px;margin:6px 0 4px">${r.w}</p><div class="svc bd">Act: ${r.a}</div></div>`;
+      h += `<div style="margin:10px 0"><span class="pill">${r.t}</span><p style="font-size:14px;margin:6px 0 4px">${r.w}</p><div class="svc">Response: ${r.a}</div></div>`;
     });
   }
   if (!im.length) {
@@ -1508,8 +1455,8 @@ function show(id) {
       h += `<div class="lbl">Policy impact — cycle ${f.cycle}</div>
       <div>${f.policies.map(p=>`<span class="pill">${p}</span>`).join('')}</div>
       <p style="font-size:14px;margin:8px 0">${f.exposure}</p>
-      <div class="bd"><div class="lbl">Suggested services</div>
-      ${f.services.map(s=>`<div class="svc">${s}</div>`).join('')}</div>`;
+      <div><div class="lbl">Suggested responses</div>
+      ${(f.responses||[]).map(s=>`<div class="svc">${s}</div>`).join('')}</div>`;
     });
     h += `</div>`;
   }
@@ -1520,83 +1467,35 @@ function show(id) {
 grid.addEventListener('click', e=>{ const b=e.target.closest('[data-id]'); if(b) show(b.dataset.id); });
 document.getElementById('q').addEventListener('input', e=>drawGrid(e.target.value));
 
-document.getElementById('cycles').innerHTML = DATA.cycles.slice().reverse().map(cy=>`
-  <div class="card">
-    <div style="font-weight:600">${cy.cycle} <span class="meta">— ${cy.dated}</span></div>
-    <details open><summary>Planning and open questions</summary><ul>${cy.planning_questions.map(x=>`<li>${x}</li>`).join('')}</ul></details>
-    <details><summary>Document summary (${cy.document_summary.length})</summary><ul>${cy.document_summary.map(d=>`<li>${d.item}<br><span class="cite">${d.citations.map(u=>`<a href="${u}" target="_blank" rel="noopener">${u}</a>`).join(' · ')}</span></li>`).join('')}</ul></details>
-    <details><summary>Risk and impact analysis (step-by-step)</summary><ol>${cy.risk_and_impact_analysis.map(x=>`<li>${x.replace(/^Step \d+ — /,'')}</li>`).join('')}</ol></details>
-    <details><summary>Rival activity</summary><ul>${cy.rival_activity_analysis.map(x=>`<li>${x}</li>`).join('')}</ul></details>
-    <details><summary>Affected companies</summary><div style="margin-top:6px">${cy.affected_companies.map(x=>`<span class="pill">${x}</span>`).join('')}</div></details>
-    <details><summary>Suggested services (ranked)</summary><ul>${cy.suggested_services.map(x=>`<li>${x}</li>`).join('')}</ul></details>
-    <details><summary>Sources (${cy.sources.length})</summary><ul>${cy.sources.map(u=>`<li><a href="${u}" target="_blank" rel="noopener">${u}</a></li>`).join('')}</ul></details>
-  </div>`).join('');
-
-async function loadLive() {
+function loadLive() {
   const el = document.getElementById('liverates'), st = document.getElementById('livestatus'), sig = document.getElementById('livesignal');
-  const snap = DATA.snapshot;
-  const cell = (l,v,d) => `<span>${l}<br><b>${v}</b>${d!=null?`<br><span class="meta" style="color:${d>=0?'#E24B4A':'#1D9E75'}">${d>=0?'+':''}${d.toFixed(2)}% vs ${snap.date}</span>`:''}</span>`;
-  let rates = null, gold = null, src = [];
-  try { const r = await fetch('https://open.er-api.com/v6/latest/USD'); const j = await r.json(); if (j && j.rates && j.rates.INR) { rates = j.rates; src.push('open.er-api.com'); } } catch(e) {}
-  if (!rates) { try { const r = await fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=INR,EUR,GBP,JPY,CHF'); const j = await r.json(); if (j && j.rates) { rates = j.rates; rates.USD = 1; src.push('frankfurter.dev (ECB)'); } } catch(e) {} }
-  try { const r = await fetch('https://api.gold-api.com/price/XAU'); const j = await r.json(); if (j && j.price) { gold = j.price; src.push('gold-api.com'); } } catch(e) {}
-  let h = '';
-  let inrMove = null;
-  if (rates) {
-    window.LASTRATES = rates;
-    const usdinr = rates.INR;
-    inrMove = (usdinr / snap.usdinr - 1) * 100;
-    h += cell('USD/INR', usdinr.toFixed(2), inrMove);
-    if (rates.EUR) h += cell('EUR/INR', (usdinr/rates.EUR).toFixed(2), null);
-    if (rates.GBP) h += cell('GBP/INR', (usdinr/rates.GBP).toFixed(2), null);
-    if (rates.JPY) h += cell('JPY/INR ×100', (usdinr/rates.JPY*100).toFixed(2), null);
-    if (rates.CHF) h += cell('CHF/INR', (usdinr/rates.CHF).toFixed(2), null);
-  }
-  if (gold) h += cell('Gold $/oz', Math.round(gold).toLocaleString(), (gold/snap.gold-1)*100);
-  if (h) {
-    const sp = (typeof CDATA !== 'undefined' && CDATA) ? CDATA.spot : null;
-    if (sp && sp.brent) h += cell('Brent $/bbl · EOD ' + sp.brent.asof, sp.brent.v.toFixed(1), null);
-    else h += cell('Brent $/bbl — snapshot ' + snap.date, snap.brent.toFixed(1), null);
-    if (sp && sp.eua) h += cell('EUA €/t · ' + sp.eua.asof, sp.eua.v.toFixed(1), null);
-    if (sp && sp.gold_inr_10g) h += cell('Gold ₹/10g (derived)', sp.gold_inr_10g.v.toLocaleString('en-IN'), null);
-    el.innerHTML = h;
-    st.textContent = 'live — ' + src.join(' + ') + (sp ? ' + pipeline ' + (CDATA.generated||'').slice(0,10) : '') + ', fetched ' + new Date().toLocaleString();
-    if (inrMove != null && Math.abs(inrMove) >= 0.3) {
-      const exposed = DATA.companies.map(c => {
-        const d = DATA.deps[c.id]||{}; let si = 0;
-        for (const k in d) si += d[k] * DATA.commodities[k][3];
-        return [c.id, c.name, si];
-      }).filter(x => x[2] > 5).sort((a,b) => b[2]-a[2]).slice(0,6);
-      const dir = inrMove > 0 ? 'weaker' : 'stronger';
-      sig.innerHTML = `Rupee is ${Math.abs(inrMove).toFixed(1)}% ${dir} than the ${snap.date} baseline. ` +
-        (inrMove > 0 ? 'Estimated import-cost pressure if this holds: ' : 'Import-cost relief for: ') +
-        exposed.map(x => `<span class="pill" data-id="${x[0]}" style="cursor:pointer">${x[1]} ${inrMove>0?'+':''}${(x[2]*inrMove/10000*100).toFixed(2)}%</span>`).join(' ');
-      sig.addEventListener('click', e => { const p = e.target.closest('[data-id]'); if (p) show(p.dataset.id); });
-    } else if (inrMove != null) {
-      sig.textContent = 'Rupee within 0.3% of the ' + snap.date + ' baseline — no acute import-cost signal.';
-    }
-  } else {
-    st.textContent = 'offline — showing ' + snap.date + ' snapshot';
-    el.innerHTML = cell('USD/INR', snap.usdinr.toFixed(2), null) + cell('Gold $/oz', snap.gold.toLocaleString(), null) + cell('Brent $/bbl', snap.brent.toFixed(1), null);
-    sig.textContent = snap.note;
-  }
+  const cell = (l,o) => `<span>${l}<br><b>${o.v.toLocaleString('en-IN')}</b><br><span class="meta">as of ${o.asof} · ${o.src}</span></span>`;
+  const sp=CDATA&&CDATA.spot;
+  if(!sp){ st.textContent='offline fallback'; el.innerHTML=''; sig.textContent=DATA.snapshot.note; return; }
+  window.LASTRATES={USD:1,INR:sp.usdinr.v,EUR:sp.eurinr?sp.usdinr.v/sp.eurinr.v:null,GBP:sp.gbpinr?sp.usdinr.v/sp.gbpinr.v:null};
+  const series=[['USD/INR',sp.usdinr],['EUR/INR',sp.eurinr],['Gold $/oz',sp.gold],['Brent $/bbl',sp.brent],['EUA €/t',sp.eua]].filter(x=>x[1]);
+  el.innerHTML=series.map(x=>cell(x[0],x[1])).join('');
+  const failures=HEALTH?Number(HEALTH.error_count||0):0, warnings=HEALTH?Number(HEALTH.warning_count||0):0;
+  st.textContent=`pipeline ${(CDATA.generated||'').slice(0,16).replace('T',' ')} · ${failures} ${failures===1?'error':'errors'} · ${warnings} ${warnings===1?'warning':'warnings'}`;
+  const states=HEALTH&&Array.isArray(HEALTH.sources)?HEALTH.sources.map(v=>`${v.id}: ${v.state}`).join(' · '):'source-state file unavailable';
+  sig.textContent='Publication gate: '+(failures?'failed':'passed')+' · '+states;
 }
-const TABS = ['cockpit','models','overview','companies','deepdive','scenarios','commodities','pipeline','calendar','cycles','methodology'];
-const THUE = { cockpit:'#5D8BFF', models:'#C99BE0', overview:'#7FA8FF', companies:'#E8A24A', deepdive:'#86D0A8', scenarios:'#F49380', commodities:'#B39DFF', pipeline:'#5DBE9E', calendar:'#E8BC66', cycles:'#7FA8FF', methodology:'#9CA3AF' };
+const TABS = ['cockpit','overview','calendar','companies','deepdive','commodities','scenarios','models','methodology'];
+const WORKSPACES = { radar:['cockpit','calendar'], explore:['companies','deepdive','commodities','overview'], scenarios:['scenarios','models'], trust:['methodology'] };
+const VIEW_LABELS = { cockpit:'Priority radar', calendar:'Actions & deadlines', companies:'Companies', deepdive:'Company detail', commodities:'Commodities', overview:'Landscape', scenarios:'Stress & portfolio', models:'Advanced models', methodology:'Evidence & governance' };
+const THUE = { cockpit:'#5D8BFF', models:'#C99BE0', overview:'#7FA8FF', companies:'#E8A24A', deepdive:'#86D0A8', scenarios:'#F49380', commodities:'#B39DFF', calendar:'#E8BC66', methodology:'#9CA3AF' };
 const THERO = {
   cockpit:['Risk cockpit','What changed, who is exposed, how bad it gets under stress, and what to do next — one screen from signal to client-ready action.'],
-  models:['Model lab','Six independent model families plus a regime-aware ensemble on one risk — compare lenses, see where they disagree, and read the combined forecast.'],
+  models:['Advanced models','Five related experimental lenses on one risk — compare their range and disagreement without treating the result as an independent forecast.'],
   overview:['Risk landscape','The analytical picture across the full company universe — quadrant, grade mix, and the priority table.'],
   companies:['Company briefs','Six-lens risk assessment, commodity dependencies, product vulnerability, and policy exposure for every name.'],
   deepdive:['Company deep dive','One company end to end — supply chain traced to source, product flowchart, and sensitivity to every shock.'],
   scenarios:['Stress lab','Stack real events and dial custom moves in either direction; watch the impact cascade through the supply chain live.'],
   commodities:['Commodity intelligence','How inputs connect, whose prices move together, and which country chokepoints control supply.'],
-  pipeline:['Engagement pipeline','Every advisory opportunity the analysis surfaces, deadline-ranked, with a live pursuit tracker.'],
   calendar:['Regulatory calendar','Hard dates and live countdowns drawn from official documents.'],
-  cycles:['Research cycles','The raw research-cycle reports — reasoning first, every claim cited to an official source.'],
-  methodology:['Methodology & reader’s guide','How every number is built, plus a plain-English guide to the terms, colors, and policies.']
+  methodology:['Evidence & governance','How every number is built, its source and freshness, plus current model validation status.']
 };
-const TMOTIF = { cockpit:'wave', models:'net', overview:'bars', companies:'bars', pipeline:'bars', scenarios:'wave', cycles:'wave', commodities:'net', deepdive:'net', calendar:'grid', methodology:'grid' };
+const TMOTIF = { cockpit:'wave', models:'net', overview:'bars', companies:'bars', scenarios:'wave', commodities:'net', deepdive:'net', calendar:'grid', methodology:'grid' };
 function motif(kind) {
   const s = 'var(--th)';
   if (kind === 'bars') { let b=''; [30,55,40,70,50,85,60,95,72,58].forEach((h,i)=>b+=`<rect x="${i*28+8}" y="${100-h}" width="15" height="${h}" rx="3" fill="${s}" opacity="${(0.22+i*0.045).toFixed(2)}"/>`); return `<svg viewBox="0 0 290 100" preserveAspectRatio="xMaxYMid slice" width="100%" height="100%">${b}</svg>`; }
@@ -1610,40 +1509,19 @@ function updateHero(t) {
   h.innerHTML = `<div class="hmotif">${motif(TMOTIF[t]||'grid')}</div><div class="ht">${info[0]}</div><div class="hs">${info[1]}</div>`;
 }
 function tab(t) {
+  if (!TABS.includes(t)) return;
   TABS.forEach(x => {
     document.getElementById('tab-'+x).style.display = x===t ? '' : 'none';
-    document.querySelector(`[data-tab="${x}"]`).classList.toggle('on', x===t);
   });
+  const workspace = Object.keys(WORKSPACES).find(key => WORKSPACES[key].includes(t)) || 'radar';
+  document.querySelectorAll('[data-workspace]').forEach(button => button.classList.toggle('on', button.dataset.workspace === workspace));
+  document.getElementById('viewtabs').innerHTML = WORKSPACES[workspace].map(view => `<button class="tabbtn${view===t?' on':''}" data-subtab="${view}">${VIEW_LABELS[view]}</button>`).join('');
   document.documentElement.style.setProperty('--th', THUE[t] || '#5D8BFF');
   updateHero(t);
 }
-document.querySelector('.tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (b) tab(b.dataset.tab); });
+document.querySelector('.tabs').addEventListener('click', e => { const b = e.target.closest('[data-workspace]'); if (b) tab(WORKSPACES[b.dataset.workspace][0]); });
+document.getElementById('viewtabs').addEventListener('click', e => { const b = e.target.closest('[data-subtab]'); if (b) tab(b.dataset.subtab); });
 function goCompany(id) { tab('companies'); show(id); }
-
-const SVCMAP = [['RBI April 2026','In force since 1 Apr 2026',1],['FCNR','Closes 30 Sep 2026',1],['CBAM','Certificates Feb 2027; surrender Sep 2027',2],['EUR-INR','FTA in force expected early 2027',3],['stress testing','Risk-committee cycle',3],['EUDR','Applies 30 Dec 2026',4]];
-const svcMeta = s => { for (const m of SVCMAP) if (s.includes(m[0])) return m; return ['','Ongoing',3]; };
-function pipeRows() {
-  const rows = [];
-  for (const id in DATA.impacts) DATA.impacts[id].forEach(f => f.services.forEach(s => {
-    const m = svcMeta(s);
-    rows.push({id: id, co: DATA.companies.find(c=>c.id===id).name, svc: s, trig: f.policies.join(', '), win: m[1], u: m[2], risk: f.risk});
-  }));
-  rows.sort((a,b) => a.u-b.u || (order[a.risk]-order[b.risk]) || a.co.localeCompare(b.co));
-  return rows;
-}
-const STAT = ['New','Pitched','In discussion','Won','Parked'];
-function renderPipeline() {
-  const rows = pipeRows();
-  document.getElementById('pipetable').innerHTML =
-    `<tr><th>#</th><th>Company</th><th>Opportunity</th><th>Trigger</th><th>Window</th><th>Status</th></tr>` +
-    rows.map((r,i) => {
-      const key = 'tpm:' + r.id + ':' + r.svc.slice(0,40);
-      let cur = 'New'; try { cur = localStorage.getItem(key) || 'New'; } catch(e) {}
-      return `<tr><td>${i+1}</td><td data-go="${r.id}" style="font-weight:600;white-space:nowrap">${r.co}</td><td>${r.svc}</td><td class="meta">${r.trig}</td><td style="white-space:nowrap">${r.win}</td><td><select class="st" data-key="${key}">${STAT.map(s=>`<option${s===cur?' selected':''}>${s}</option>`).join('')}</select></td></tr>`;
-    }).join('');
-}
-document.getElementById('pipetable').addEventListener('change', e => { const s = e.target.closest('select.st'); if (s) try { localStorage.setItem(s.dataset.key, s.value); } catch(err) {} });
-document.getElementById('pipetable').addEventListener('click', e => { const r = e.target.closest('[data-go]'); if (r) goCompany(r.dataset.go); });
 
 const CAL = [
   {d:'2026-09-30', t:'RBI subsidized FCNR(B) hedging window closes', s:'RBI June 2026 package', a:'Funding-cost optimization pitches must land before this'},
@@ -1669,25 +1547,21 @@ function renderCalendar() {
 function renderOverview() {
   let urgent = 0, material = 0, watch = 0;
   for (const id in DATA.impacts) { const w = worst(DATA.impacts[id]); if (w==='urgent') urgent++; else if (w==='material') material++; else if (w==='watch') watch++; }
-  let openings = 0; for (const id in DATA.watch) openings += DATA.watch[id].length;
-  const pr = pipeRows().length;
   const days = Math.ceil((new Date('2026-09-30') - Date.now())/86400000);
   const kpi = (v,l,cap,go,cls) => `<div class="kpi${cls?' '+cls:''}"${go?` data-goto="${go}" role="button" tabindex="0"`:''}><b>${v}</b><span>${l}</span>${cap?`<div class="kcap">${cap}</div>`:''}</div>`;
   document.getElementById('kpis').innerHTML =
-    kpi(DATA.companies.length,'companies tracked','The 34 largest listed names — any top-25 cut is a subset','companies') +
+    kpi(DATA.companies.length,'companies tracked','Public-company exposure universe','companies') +
     kpi(urgent,'urgent policy impacts','Rules already in force that compel action now','companies') +
     kpi(material,'material impacts','Significant exposure with an open action window','companies') +
-    kpi(openings,'action openings','Documented weaknesses mapped to a sellable service','companies','bd') +
-    kpi(pr,'pipeline opportunities','Deadline-ranked in the Pipeline tab','pipeline','bd') +
     kpi(days + 'd','to FCNR window close','Hard RBI deadline — subsidized hedging ends 30 Sep 2026','calendar');
   const score = id => { const w = worst(DATA.impacts[id]||[]); return (w==='urgent'?3:w==='material'?2:w==='watch'?1:0)*2 + oavg(id); };
   const top = DATA.companies.slice().sort((a,b)=>score(b.id)-score(a.id)).slice(0,6);
   document.getElementById('toptargets').innerHTML =
-    `<tr><th>Company</th><th>Overall risk</th><th>Policy status</th><th>Openings</th><th>Lead opportunity</th></tr>` +
+    `<tr><th>Company</th><th>Overall risk</th><th>Policy status</th><th>Mapped issues</th><th>First response</th></tr>` +
     top.map(c => {
       const g = ograde(oavg(c.id)), w = worst(DATA.impacts[c.id]||[]);
-      const svc = (DATA.impacts[c.id] && DATA.impacts[c.id][0].services[0]) || '—';
-      return `<tr data-go="${c.id}"><td style="font-weight:600;white-space:nowrap"><span class="cdot" style="background:${g[1]}"></span>${c.name}</td><td style="color:${g[1]};font-weight:600">${g[0]}</td><td>${w==='none'?'—':w}</td><td>${(DATA.watch[c.id]||[]).length}</td><td>${svc}</td></tr>`;
+      const response = (DATA.impacts[c.id] && DATA.impacts[c.id][0].responses && DATA.impacts[c.id][0].responses[0]) || 'Review evidence and exposure';
+      return `<tr data-go="${c.id}"><td style="font-weight:600;white-space:nowrap"><span class="cdot" style="background:${g[1]}"></span>${c.name}</td><td style="color:${g[1]};font-weight:600">${g[0]}</td><td>${w==='none'?'—':w}</td><td>${(DATA.watch[c.id]||[]).length}</td><td>${response}</td></tr>`;
     }).join('');
   document.getElementById('toptargets').addEventListener('click', e => { const r = e.target.closest('[data-go]'); if (r) goCompany(r.dataset.go); });
 }
@@ -1752,13 +1626,14 @@ function propagate(direct) {
   }
   return sh;
 }
-function netImpact(coId, sh) {
+function rawImpactChannels(coId, sh) {
   const d = DATA.deps[coId]||{}, pr = DATA.prod[coId]||{};
-  let t = 0;
-  for (const k in d) t += d[k] * (sh[k]||0);
-  for (const k in pr) t -= pr[k] * (sh[k]||0);
-  return t;
+  let cost = 0, revenue = 0;
+  for (const k in d) cost += d[k] * (sh[k]||0);
+  for (const k in pr) revenue += pr[k] * (sh[k]||0);
+  return {costPct:cost,revenuePct:revenue};
 }
+function netImpact(coId, sh) { const c=rawImpactChannels(coId,sh); return c.costPct-c.revenuePct; }
 const SCDIALS = ['crude','natgas','coal','metcoal','ironore','steel','alum','copper','gold','lithium','chips','pallad','api','tio2','palm','cocoa','coffee','natrub','wheat','sugar'];
 let scActive = new Set(), scManual = {};
 function presetVec() { const v = {}; scActive.forEach(id => { const d = evDirect(id); for (const c in d) if (Math.abs(d[c]) > Math.abs(v[c]||0)) v[c] = d[c]; }); return v; }
@@ -1769,7 +1644,7 @@ window.scClearManual = () => { scManual = {}; scSync(); };
 function scSetDial(c, v) { scManual[c] = v; scSync(); }
 function simulate(id) { scActive = new Set([id]); scManual = {}; scSync(); }
 function renderDials() {
-  document.getElementById('scdials').innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4px 26px">` + SCDIALS.map(c => {
+  document.getElementById('scdials').innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:4px 26px">` + SCDIALS.map(c => {
     const m = DATA.commodities[c];
     return `<div style="display:flex;align-items:center;gap:12px;margin:6px 0"><span style="width:104px;font-size:12.5px;color:var(--ink2)">${m[0]}</span><input type="range" id="dial-${c}" min="-100" max="150" step="5" value="0" data-dial="${c}" style="flex:1;min-width:80px"><span id="dialv-${c}" style="width:52px;text-align:right;font-family:'Spline Sans Mono',ui-monospace,monospace;font-weight:600;font-size:12.5px;color:var(--ink3)">0%</span></div>`;
   }).join('') + `</div>`;
@@ -1796,17 +1671,17 @@ function scCompute() {
   document.getElementById('evchips').innerHTML = keys.length
     ? keys.slice(0,10).map(c=>`<span class="pill" data-com="${c}" style="cursor:pointer${sh[c]<0?';color:var(--teal)':''}">${DATA.commodities[c][0]} ${sgn(sh[c])}%</span>`).join('')
     : `<span class="meta">No shock applied yet.</span>`;
-  const arr = DATA.companies.map(c => [c.id, c.name, marginImpact(c.id, sh), netImpact(c.id, sh)]).sort((a,b)=>b[2]-a[2]);
+  const arr = DATA.companies.map(c => { const ch=marginChannels(c.id,sh); return [c.id,c.name,ch.netPct,ch]; }).sort((a,b)=>b[2]-a[2]);
   const mx = Math.max(Math.abs(arr[0][2]), Math.abs(arr[arr.length-1][2]), 0.1);
   const shown = arr.filter((r,i)=>(i<12 && r[2]>0.05) || r[2]<-0.05);
   const costRise = shown.filter(r=>r[2]>0).length >= shown.filter(r=>r[2]<0).length;
   const avgAbs = shown.length ? shown.reduce((s,r)=>s+Math.abs(r[2]),0)/shown.length : 0;
   const dir = (up)=>up?'<b style="color:var(--red)">▲</b>':'<b style="color:var(--teal)">▼</b>';
-  const summary = shown.length ? `<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)"><span>${bandChip(avgAbs*(costRise?1:-1))} portfolio</span><span style="font-size:12px;color:var(--ink3)">COGS ${dir(costRise)} · EBITDA / margin ${dir(!costRise)} · working capital ${dir(costRise)}</span><span style="font-size:12px;color:var(--ink3);margin-left:auto">Most exposed: <b style="color:var(--ink)">${shown[0][1]}</b> ${shown[0][2]>0?'+':'−'}${Math.abs(shown[0][2]).toFixed(1)}% ${typeof inrChip==='function'?inrChip(shown[0][0],shown[0][2]):''}</span></div>` : '';
+  const summary = shown.length ? `<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)"><span>${bandChip(avgAbs*(costRise?1:-1))} net sensitivity</span><span style="font-size:12px;color:var(--ink3)">Cost and producer-revenue channels are calculated separately; the net sign is adverse (+) or favourable (−) for the mapped company exposure.</span><span style="font-size:12px;color:var(--ink3);margin-left:auto">Most exposed: <b style="color:var(--ink)">${shown[0][1]}</b> ${shown[0][2]>0?'+':'−'}${Math.abs(shown[0][2]).toFixed(1)}%</span></div>` : '';
   document.getElementById('evimp').innerHTML = summary + (shown.length ? shown.map(r=>{
     const neg = r[2]<0, v = Math.abs(r[2]);
-    return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:280px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:66px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap;text-align:right">${neg?'−':'+'}${v.toFixed(1)}%</span>${bandChip(r[2])} ${typeof inrChip==='function'?inrChip(r[0],r[2]):''}</div>`;
-  }).join('') : `<p class="meta">Build a shock above to see company impact.</p>`) + `<p class="meta" style="margin:10px 0 0">Bar = estimated margin/COGS impact after sector pass-through, hedge and inventory. Band: Low / Moderate / High / Severe. Green = tailwind (cost relief, or a producer gaining). ₹ figures apply the impact to FY26 disclosed cost bases (revenue − EBITDA, data/financials.json) — companies without verified financials show % only. * NTPC recovers fuel via regulated tariffs. Modelled estimate, not a forecast — click a company for its deep dive.</p>`;
+    return `<div class="crow"><span class="cn" data-dd="${r[0]}" style="cursor:pointer">${r[1]}${r[0]==='ntpc'?'*':''}</span><span class="cbar" style="max-width:240px"><span style="width:${Math.min(100,Math.round(v/mx*100))}%;background:${neg?'#1D9E75':'#E24B4A'}"></span></span><span style="width:66px;font-weight:600;color:${neg?'#1D9E75':'var(--ink)'};white-space:nowrap;text-align:right">${neg?'−':'+'}${v.toFixed(1)}%</span><span class="lab">cost ${r[3].costPct>=0?'+':''}${r[3].costPct.toFixed(1)} · revenue benefit ${r[3].revenuePct>=0?'+':''}${r[3].revenuePct.toFixed(1)}</span></div>`;
+  }).join('') : `<p class="meta">Build a shock above to see company impact.</p>`) + `<p class="meta" style="margin:10px 0 0">Cost channel applies pass-through, hedge, inventory, pricing-power and elasticity assumptions. Producer revenue uses a separately disclosed 80% realisation factor and hedge cover. Net = cost drag − producer benefit, in directional percent-sensitivity units based on public-company mappings—not a margin forecast or accounting measure. * NTPC tariff recovery is not fully modelled.</p>`;
   const rows = [];
   for (const co in DATA.products) DATA.products[co].forEach(p => { let t = 0; for (const k in p.mix) t += p.mix[k] * (sh[k]||0); if (Math.abs(t) > 0.5) rows.push([co, DATA.companies.find(x=>x.id===co).name, p.p, t]); });
   rows.sort((a,b)=>Math.abs(b[3])-Math.abs(a[3]));
@@ -2042,7 +1917,7 @@ const HB_KEYS = ['none', 'contract', 'proxy', 'offshore', 'onshore'];
 const HB_META = {
   onshore:  { l: 'Onshore INR contract', c: 'var(--teal)',   d: 'MCX or NCDEX listed. Hedge in rupees, no currency leg, lightest permission burden.' },
   offshore: { l: 'Offshore USD/EUR only', c: 'var(--accent)', d: 'Liquid contract exists but only abroad. Needs an offshore commodity derivative under the RBI Master Direction plus a currency leg — and that leg sits under the April 2026 NDF prohibition.' },
-  proxy:    { l: 'Proxy hedge only',      c: 'var(--amber)',  d: 'Only a correlated contract is available. Material basis risk; Ind AS 109 effectiveness at 80–125% is hard to sustain.' },
+  proxy:    { l: 'Proxy hedge only',      c: 'var(--amber)',  d: 'Only a correlated contract is available. Material basis risk requires evidence of an economic relationship, a documented hedge ratio, and ongoing review under Ind AS 109.' },
   contract: { l: 'OTC / index-linked',    c: '#B4541F',       d: 'No exchange. Manageable through formula pricing or a bilateral swap, with counterparty credit attached.' },
   none:     { l: 'No hedge exists',       c: 'var(--red)',    d: 'No financial instrument anywhere. Contractual and operational levers only: pass-through clauses, indexation, inventory, dual sourcing.' }
 };
@@ -2284,8 +2159,9 @@ DATA.companies.forEach(c => {
 Object.keys(DATA.commodities).forEach(k => CMD.push({ l: DATA.commodities[k][0], k: 'commodity', run: () => { tab('commodities'); showCom(k); } }));
 Object.keys(EV).forEach(e => CMD.push({ l: EV[e][0], k: 'scenario', run: () => { tab('scenarios'); simulate(e); } }));
 let cmdSel = 0, cmdF = [];
-function cmdOpen() { document.getElementById('cmdk').classList.add('open'); const i = document.getElementById('cmdq'); i.value = ''; cmdFilter(''); i.focus(); }
-function cmdClose() { document.getElementById('cmdk').classList.remove('open'); }
+let LAST_FOCUS = null;
+function cmdOpen() { LAST_FOCUS=document.activeElement; document.getElementById('cmdk').classList.add('open'); const i = document.getElementById('cmdq'); i.value = ''; cmdFilter(''); i.focus(); }
+function cmdClose() { document.getElementById('cmdk').classList.remove('open'); if(LAST_FOCUS&&LAST_FOCUS.focus)LAST_FOCUS.focus(); }
 function cmdFilter(q) { q = q.toLowerCase(); const hideBD = document.body.classList.contains('client'); cmdF = CMD.filter(c => c.l.toLowerCase().includes(q)).filter(c => !(hideBD && (c.l === TLBL['pipeline'] || c.l === TLBL['cycles']))).slice(0, 12); cmdSel = 0; cmdRender(); }
 function cmdRender() { document.getElementById('cmdlist').innerHTML = cmdF.map((c, i) => `<div class="cmditem${i === cmdSel ? ' sel' : ''}" data-ci="${i}">${c.l}<span class="k">${c.k}</span></div>`).join('') || `<div class="cmditem" style="color:var(--ink3);cursor:default">No matches</div>`; }
 document.addEventListener('keydown', e => {
@@ -2319,7 +2195,7 @@ const SECTORS = {
   it:['IT/Telecom',['tcs','infosys','hcltech','wipro','bhartiairtel']]
 };
 const secOf = id => { for (const k in SECTORS) if (SECTORS[k][1].includes(id)) return k; return null; };
-// RiskSignal: signal → commodity/FX/reg → sector → company → channel → impact → action → evidence → advisory
+// RiskSignal: signal → commodity/FX/reg → sector → company → channel → impact → action → evidence
 const RISKS = [
   { id:'rbi-fx', title:'RBI 2026 FX derivative rules — hedging regime overhaul', cat:'regulation', sev:5, prev:3, conf:'High', detected:'2026-04-01', updated:'2026-07-16',
     whyNow:'The 1 Apr 2026 circular barred INR NDFs (residents and non-residents), rebooking of cancelled INR forwards, and related-party INR derivatives — the default corporate forward-rolling playbook has been non-compliant since April. The June FCNR(B) swap window (RBI absorbs ~280–300 bp of hedging cost) closes 30 Sep 2026.',
@@ -2330,8 +2206,7 @@ const RISKS = [
     actions:['hedge-review','funding-window','board-note'],
     evidence:[
       {t:'RBI A.P. (DIR Series) Circular No. 03 — Risk Management and Inter-Bank Dealings (Revised)',ty:'official',d:'2026-04-01',u:'https://worldtradescanner.com/03-RBI%20Circular-01.04.2026.htm',fact:'ADs barred from offering INR NDFs to residents or non-residents; rebooking of cancelled INR derivative contracts prohibited; related-party INR derivatives barred; deliverable hedges permitted only without offsetting NDF positions. Effective immediately.',assume:'Full-text reproduction; pin the rbi.org.in notification URL next cycle.',conf:'High',ver:'2026-07-16',chg:'Corrected 2026-07-16 — previously misdated to the June package; prior citation resolved to a withdrawn 2011 Master Circular'},
-      {t:'RBI FCNR(B) swap facility — June 2026 funding package',ty:'official',d:'2026-06-08',u:'https://www.business-standard.com/finance/news/rbi-opens-fcnr-b-swap-window-to-attract-foreign-currency-deposits-126060900723_1.html',fact:'RBI runs USD-INR swaps absorbing ~280–300 bp hedging cost on fresh 3–5y FCNR(B) deposits mobilised 8 Jun–30 Sep 2026 (facility open to 16 Oct); CRR/SLR exempt; deposit-rate ceiling withdrawn 17 Jun.',assume:'Announced at the 5 Jun MPC; operational guidelines 8 Jun. Primary RBI press-release link to be pinned.',conf:'High',ver:'2026-07-16',chg:'Split into its own entry from the April rules'} ],
-    adv:{buyer:'Group CFO / Treasurer',project:'Hedge-policy redesign and FCNR(B) funding-cost optimization',value:'High',status:'pursue',talk:'Your forward-rolling programme has been non-compliant since the 1 April RBI circular, and the subsidised FCNR(B) window shuts 30 Sep — worth a 2-week policy re-paper before quarter-end.'} },
+      {t:'RBI FCNR(B) swap facility — June 2026 funding package',ty:'secondary',d:'2026-06-08',u:'https://www.business-standard.com/finance/news/rbi-opens-fcnr-b-swap-window-to-attract-foreign-currency-deposits-126060900723_1.html',fact:'RBI runs USD-INR swaps absorbing ~280–300 bp hedging cost on fresh 3–5y FCNR(B) deposits mobilised 8 Jun–30 Sep 2026 (facility open to 16 Oct); CRR/SLR exempt; deposit-rate ceiling withdrawn 17 Jun.',assume:'Secondary report. Pin and verify the primary RBI notice before external use.',conf:'Medium',ver:'2026-07-16',chg:'Split into its own entry from the April rules'} ] },
   { id:'cbam', title:'CBAM definitive regime live — EU carbon border cost', cat:'regulation', sev:4, prev:4, conf:'High', detected:'2026-01-01', updated:'2026-07-01',
     whyNow:'Certificate liability accrues on 2026 EU-bound steel and aluminium now; certificates go on sale 1 Feb 2027 and first surrender is 30 Sep 2027 — a P&L item and a brand-new EUA price exposure Indian treasuries have never carried.',
     commodities:['steel','alum'], fx:['EURINR'], countries:['EU','India'],
@@ -2339,8 +2214,7 @@ const RISKS = [
     channels:['Embedded-emissions certificate cost','EUA price exposure','Export margin'], impact:'New cost line on EU exports plus an unhedged carbon-price risk; unmanaged 2026 accrual becomes a 2027 surprise.',
     thresholds:['Regulation in force','Deadline within 12 months'],
     actions:['cbam-diagnostic','hedge-review','board-note'],
-    evidence:[ {t:'European Commission — CBAM entered definitive phase',ty:'official',d:'2026-01-14',u:'https://taxation-customs.ec.europa.eu/news/cbam-successfully-entered-force-1-january-2026-2026-01-14_en',fact:'Definitive regime in force 1 Jan 2026; certificate sales open 1 Feb 2027; first surrender 30 Sep 2027; 50t de-minimis; quarterly certificate-holding requirement cut 80%→50% (Omnibus).',assume:'Indian mills’ EU volumes carry the liability pro-rata to embedded emissions.',conf:'High',ver:'2026-07-01',chg:'Stable — monitoring 9 implementing acts for OJ publication'} ],
-    adv:{buyer:'CFO / Head of Exports',project:'CBAM cost quantification and EUA hedging design',value:'High',status:'qualify',talk:'Your 2026 EU shipments are already accruing CBAM liability priced off EUAs — a quantification and hedge-design sprint now avoids a 2027 P&L shock.'} },
+    evidence:[ {t:'European Commission — CBAM entered definitive phase',ty:'official',d:'2026-01-14',u:'https://taxation-customs.ec.europa.eu/news/cbam-successfully-entered-force-1-january-2026-2026-01-14_en',fact:'Definitive regime in force 1 Jan 2026; certificate sales open 1 Feb 2027; first surrender 30 Sep 2027; 50t de-minimis; quarterly certificate-holding requirement cut 80%→50% (Omnibus).',assume:'Indian mills’ EU volumes carry the liability pro-rata to embedded emissions.',conf:'High',ver:'2026-07-01',chg:'Stable — monitoring 9 implementing acts for OJ publication'} ] },
   { id:'oil', title:'Brent crude +10% move — COGS pressure across the chain', cat:'commodity', sev:4, prev:3, conf:'Medium', detected:'2026-07-02', updated:'2026-07-07',
     whyNow:'OPEC+ supply signalling plus geopolitical risk premium; India imports ~89% of its crude, so a move transmits straight into diesel, packaging, paints and freight.',
     commodities:['crude','diesel','plastics'], fx:['USDINR'], countries:['India','Saudi Arabia','Russia'],
@@ -2348,8 +2222,7 @@ const RISKS = [
     channels:['Crude-derivative input cost','Diesel/freight','Packaging resin'], impact:'Directional COGS pressure for paints and FMCG; net beneficiary is upstream (ONGC, Reliance O2C).',
     thresholds:['Commodity move >10%'],
     actions:['pricing-review','hedge-review','procurement'],
-    evidence:[ {t:'PPAC — India crude import dependence',ty:'official',d:'2026-05-31',u:'https://ppac.gov.in/import-export',fact:'Import dependence 88.6% (FY2025-26); Russia ~31% of imports.',assume:'10% Brent move passes ~50% into first-order derivatives per processing step.',conf:'Medium',ver:'2026-07-07',chg:'Severity 3→4 on renewed supply risk'} ],
-    adv:{buyer:'CFO / Procurement head',project:'Input-cost pass-through and hedge review for paints/FMCG',value:'Medium',status:'identify',talk:'A sustained 10% crude move erodes paints and FMCG gross margin through resin and freight — a pricing and hedge review protects the quarter.'} },
+    evidence:[ {t:'PPAC — India crude import dependence',ty:'official-homepage',d:'2026-05-31',u:'https://ppac.gov.in/import-export',fact:'Import dependence 88.6% (FY2025-26); Russia ~31% of imports.',assume:'10% Brent move passes ~50% into first-order derivatives per processing step. Pin the exact PPAC table before external use.',conf:'Medium',ver:'2026-07-07',chg:'Severity 3→4 on renewed supply risk'} ] },
   { id:'usdinr', title:'USD/INR depreciation — import-heavy cost inflation', cat:'FX', sev:4, prev:3, conf:'High', detected:'2026-06-20', updated:'2026-07-16',
     whyNow:'Rupee at record lows (~96.3/$, from 89.9 in Jan); the gold-duty hike and the RBI April/June measures are explicit rupee defence, signalling sustained pressure on import bills.',
     commodities:['crude','gold','palm','lithium','api'], fx:['USDINR'], countries:['India'],
@@ -2357,8 +2230,7 @@ const RISKS = [
     channels:['Landed cost of imports','USD debt service','Working capital'], impact:'Every import-heavy cost base inflates in rupee terms; gold (~99% imported) and crude (~89%) worst hit.',
     thresholds:['USDINR moved >3% in quarter','Exposure score >4/5'],
     actions:['hedge-review','working-capital','pricing-review'],
-    evidence:[ {t:'FBIL/RBI FX reference rate history / market data',ty:'market-data',d:'2026-07-16',u:'https://www.fbil.org.in/',fact:'USD/INR ~96.3 (16 Jul 2026), 2026 range 89.9–96.6.',assume:'A 10% depreciation applied pro-rata to each commodity’s import share.',conf:'High',ver:'2026-07-16',chg:'Severity 3→4 as rupee breaks prior range'} ],
-    adv:{buyer:'Treasurer',project:'Import-basket FX exposure map and layered hedge',value:'High',status:'pursue',talk:'With the rupee in policy-defended territory, your import basket carries un-sized FX risk — a two-week exposure map and hedge ladder is timely.'} },
+    evidence:[ {t:'FBIL/RBI FX reference rate history / market data',ty:'market-data-homepage',d:'2026-07-16',u:'https://www.fbil.org.in/',fact:'USD/INR ~96.3 (16 Jul 2026), 2026 range 89.9–96.6.',assume:'A 10% depreciation applied pro-rata to each commodity’s import share. Pin the exact series link before external use.',conf:'Medium',ver:'2026-07-16',chg:'Severity 3→4 as rupee breaks prior range'} ] },
   { id:'china', title:'China export controls — API, battery and rare-earth risk', cat:'geopolitics', sev:4, prev:3, conf:'Medium', detected:'2026-05-15', updated:'2026-07-01',
     whyNow:'China licenses exports of graphite, rare earths and specialty inputs, and supplies ≥70% of many Indian pharma APIs — a supply-security risk no hedge fixes, only dual sourcing.',
     commodities:['api','lithium','tio2'], fx:[], countries:['China','India'],
@@ -2366,8 +2238,7 @@ const RISKS = [
     channels:['API/KSM sourcing','Battery-metal refining','TiO2 imports'], impact:'Availability and cost risk on pharma inputs and EV battery chain; margin and continuity exposure.',
     thresholds:['Single-country dependence >70%'],
     actions:['supplier-diversification','procurement','board-note'],
-    evidence:[ {t:'Dept of Pharmaceuticals — API import dependence tabled in Parliament',ty:'official',d:'2026-03-01',u:'https://www.policycircle.org/industry/bulk-drugs-india-api-dependence/',fact:'China ≥70% of Indian imports for many APIs/KSMs in FY24 and FY25.',assume:'IEA: China refines ~65–70% of lithium, ~90% of graphite.',conf:'Medium',ver:'2026-07-01',chg:'Severity 3→4 on widened control list'} ],
-    adv:{buyer:'COO / Head of Supply Chain',project:'Dual-sourcing diagnostic with FX overlay (PLI vs China)',value:'Medium',status:'qualify',talk:'Your API supply is a single-country dependence the government is now flagging — a dual-sourcing and cost diagnostic de-risks continuity.'} },
+    evidence:[ {t:'API import dependence — secondary analysis of Parliamentary data',ty:'secondary-analysis',d:'2026-03-01',u:'https://www.policycircle.org/industry/bulk-drugs-india-api-dependence/',fact:'China ≥70% of Indian imports for many APIs/KSMs in FY24 and FY25.',assume:'Secondary source; retrieve the Parliamentary answer and exact IEA tables before external use.',conf:'Low',ver:'2026-07-01',chg:'Severity 3→4 on widened control list'} ] },
   { id:'coal', title:'Coking coal supply/price risk — Australia concentration', cat:'supply-chain', sev:3, prev:3, conf:'Medium', detected:'2026-06-10', updated:'2026-07-05',
     whyNow:'India imports ~85% of coking coal, concentrated in Australia; weather or freight disruption transmits directly to steelmaking cash cost.',
     commodities:['metcoal','steel'], fx:['USDINR'], countries:['Australia','India'],
@@ -2375,8 +2246,7 @@ const RISKS = [
     channels:['Coking-coal cash cost','USD import bill'], impact:'Steel cash-cost pressure; JSW more exposed (limited captive ore), Tata cushioned by captive iron ore.',
     thresholds:['Single-country dependence >80%'],
     actions:['procurement','hedge-review'],
-    evidence:[ {t:'Ministry of Steel — coking coal import reliance',ty:'official',d:'2026-04-01',u:'https://steel.gov.in',fact:'~85% coking-coal import dependence; Australia dominant supplier.',assume:'Spot proxy; contracts smooth transmission.',conf:'Medium',ver:'2026-07-05',chg:'Stable'} ],
-    adv:{buyer:'CFO — steel',project:'Coking-coal + INR combined hedge and sourcing review',value:'Medium',status:'identify',talk:'Coking-coal concentration plus rupee weakness is a compound cash-cost risk worth a combined hedge and sourcing look.'} },
+    evidence:[ {t:'Ministry of Steel — coking coal import reliance',ty:'official-homepage',d:'2026-04-01',u:'https://steel.gov.in',fact:'~85% coking-coal import dependence; Australia dominant supplier.',assume:'Homepage citation; pin the exact report/table. Spot proxy; contracts smooth transmission.',conf:'Medium',ver:'2026-07-05',chg:'Stable'} ] },
   { id:'gold', title:'Gold rally + import-duty hike — jewellery margin & funding', cat:'commodity', sev:3, prev:2, conf:'High', detected:'2026-05-13', updated:'2026-07-06',
     whyNow:'Gold around $4,000/oz and a record $72bn Indian import bill (FY26) prompted the 13 May 2026 duty hike (6%→15%); jewellers face landed-cost and gold-lease funding pressure.',
     commodities:['gold'], fx:['USDINR'], countries:['India'],
@@ -2384,8 +2254,7 @@ const RISKS = [
     channels:['Landed gold cost','Gold-on-lease funding','Duty'], impact:'Direct COGS and working-capital pressure for Titan; largely passed to consumers but funding structure exposed.',
     thresholds:['Commodity move >10%','Policy change in force'],
     actions:['hedge-review','working-capital'],
-    evidence:[ {t:'CNBC / WGC — India gold duty and import bill',ty:'news',d:'2026-05-13',u:'https://www.cnbc.com/2026/05/13/india-hikes-bullion-import-duties-to-arrest-rupee-slide.html',fact:'Bullion duty raised 6%→15% (BCD 10% + AIDC 5%, silver included) w.e.f. 13 May 2026; imports a record $71.98bn FY26.',assume:'Gold ~99% imported; ~55% of Titan cost base.',conf:'High',ver:'2026-07-16',chg:'Severity 2→3 on duty change'} ],
-    adv:{buyer:'CFO — Titan',project:'Gold hedging architecture and duty-shock playbook',value:'Medium',status:'identify',talk:'The duty change makes gold-lease vs futures hedging a live board question — a short architecture review pays for itself.'} },
+    evidence:[ {t:'CNBC — India gold duty and import bill',ty:'secondary-news',d:'2026-05-13',u:'https://www.cnbc.com/2026/05/13/india-hikes-bullion-import-duties-to-arrest-rupee-slide.html',fact:'Bullion duty reported raised 6%→15% (BCD 10% + AIDC 5%, silver included) w.e.f. 13 May 2026; imports reported at $71.98bn FY26.',assume:'Retrieve the CBIC notification before external use. Gold ~99% imported; ~55% of Titan cost base is an estimate.',conf:'Medium',ver:'2026-07-16',chg:'Severity 2→3 on duty change'} ] },
   { id:'rates', title:'Rate path & leverage risk — NBFCs and capex-heavy names', cat:'rates', sev:3, prev:3, conf:'Medium', detected:'2026-06-05', updated:'2026-07-04',
     whyNow:'Rupee-defence measures constrain policy easing; funding-cost and refinancing risk rises for leveraged, capex-heavy and wholesale-funded balance sheets.',
     commodities:[], fx:['USDINR'], countries:['India'],
@@ -2393,8 +2262,7 @@ const RISKS = [
     channels:['Funding cost','Refinancing wall','Covenant headroom'], impact:'Margin and covenant pressure for wholesale-funded NBFCs and USD-bond-reliant capex names.',
     thresholds:['Refinancing within 12 months','Leverage above sector norm'],
     actions:['covenant-check','working-capital','board-note'],
-    evidence:[ {t:'RBI monetary policy / MUFG rate commentary',ty:'analyst-estimate',d:'2026-06-08',u:'https://www.mufgresearch.com',fact:'Rupee-defence package limits near-term easing room.',assume:'Directional; no company-specific rate model applied.',conf:'Medium',ver:'2026-07-04',chg:'Stable'} ],
-    adv:{buyer:'CFO / Treasurer',project:'Refinancing-window and covenant stress review',value:'Medium',status:'identify',talk:'A tighter-for-longer rupee-defence stance raises refinancing risk on your USD-bond wall — a covenant and window stress test is prudent now.'} }
+    evidence:[ {t:'MUFG rate commentary',ty:'analyst-commentary-homepage',d:'2026-06-08',u:'https://www.mufgresearch.com',fact:'Rupee-defence package may limit near-term easing room.',assume:'Directional and unverified against a specific report; no company-specific rate model applied.',conf:'Low',ver:'2026-07-04',chg:'Stable'} ] }
 ];
 const SEVL = ['—','Info','Low','Medium','High','Critical'];
 const CUSTOMRISKS = [];
@@ -2414,7 +2282,7 @@ const PLAY = {
 };
 // Persona emphasis: section order for ckA..ckE
 const PERSONA = {
-  partner:  ['movers','risks','watchlist','breaches','advisory','outputs'],
+  partner:  ['movers','risks','watchlist','breaches','actions','outputs'],
   director: ['movers','exposure','limits','breaches','scenario','concentration','actions','outputs'],
   analyst:  ['movers','risks','exposure','limits','concentration','breaches','evidence','outputs'],
   treasury: ['breaches','limits','watchlist','exposure','concentration','scenario','actions','outputs'],
@@ -2449,16 +2317,15 @@ function rsc(r){ const base = RSCORE[r.id] || {vel:50,exp:55,con:55,prev:null,dl
   if (typeof CDATA !== 'undefined' && CDATA && CDATA.velocity && CDATA.velocity[r.id] != null)
     return Object.assign({}, base, {vel: CDATA.velocity[r.id], velSrc: 'market'});
   return base; }
-function compo(r){ const s=rsc(r), sevN=r.sev/5*100; return Math.round(0.30*sevN + 0.20*s.vel + 0.25*s.exp + 0.15*s.con + 0.10*(CONFN[r.conf]||60)); }
+function compo(r){ const s=rsc(r); return RiskModels.compositeRisk({severity:r.sev,velocity:s.vel,exposure:s.exp,concentration:s.con,confidence:r.conf}); }
 function prevCompo(r){ if (typeof CDATA !== 'undefined' && CDATA && CDATA.history && CDATA.history.scores) { const h = CDATA.history.scores[r.id]; if (h && h.length >= 2) return h[h.length-2]; } const s=rsc(r); return s.prev!=null ? s.prev : compo(r); }
 function scoreDelta(r){ return compo(r) - prevCompo(r); }
 function drivers(r){ const s=rsc(r), sevN=r.sev/5*100;
   return [['severity',0.30*sevN],['velocity',0.20*s.vel],['exposure',0.25*s.exp],['concentration',0.15*s.con],['confidence',0.10*(CONFN[r.conf]||60)]]
     .sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]); }
 const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
-function actionability(r){ return clamp((r.actions||[]).length*25 + (r.conf==='High'?20:0), 0, 100); }
 function deadlineProx(r){ const dl=rsc(r).dl; return dl==null ? 20 : clamp(100 - dl/3.65, 0, 100); }
-function priority(r){ return 0.40*compo(r) + 0.25*clamp(scoreDelta(r)*4,0,100) + 0.20*deadlineProx(r) + 0.15*actionability(r); }
+function priority(r){ return RiskModels.attentionPriority({score:compo(r),deadlineDays:rsc(r).dl,evidenceConfidence:r.conf}); }
 const rkScore = r => priority(r);
 const scoreColor = v => v>=80?'var(--red)':v>=60?'var(--amber)':v>=40?'var(--teal)':'var(--ink3)';
 // ---- Dynamic sector-specific cost pass-through (retained-cost share) replacing flat 50% for company margin impact ----
@@ -2466,24 +2333,29 @@ const SECRETAIN = { autos:0.5, steel:0.3, metals:0.4, paints:0.6, jewellery:0.65
 let ASSUME = { pass:null, hedge:0, inv:0, price:0, elast:0, horizon:6 };  // pass=null → sector default
 function retainOf(id){ if(ASSUME.pass!=null) return ASSUME.pass/100; const s=secOf(id); return SECRETAIN[s]!=null?SECRETAIN[s]:0.5; }
 function hedgeEff(){ return (ASSUME.hedge/100)*clamp(1-(ASSUME.horizon-6)/18,0.4,1); }  // hedge protection rolls off over longer horizons
-function marginImpact(coId, sh){ const gross=netImpact(coId,sh);
+function marginChannels(coId, sh){ const raw=rawImpactChannels(coId,sh);
   const h=1-hedgeEff(), iv=1-ASSUME.inv/100, pp=1-(ASSUME.price/100)*0.6, el=1+(ASSUME.elast/100)*0.5;
-  return gross<0 ? gross*h : gross*retainOf(coId)*h*iv*pp*el; }  // cost rise: retain × hedge × inventory × pricing-power recovery × elasticity amplifier; relief passes through hedge only
+  const cost=raw.costPct<0?raw.costPct*h:raw.costPct*retainOf(coId)*h*iv*pp*el;
+  const revenue=raw.revenuePct*h*0.8;
+  return {costPct:cost,revenuePct:revenue,netPct:cost-revenue,denominator:'directional percent sensitivity from public-company exposure weights'}; }
+function marginImpact(coId, sh){ return marginChannels(coId,sh).netPct; }
 function impactBand(v){ const a=Math.abs(v); return a>=12?'Severe':a>=6?'High':a>=2.5?'Moderate':a>=0.5?'Low':'Minimal'; }
 function bandChip(v){ const b=impactBand(v), c=b==='Severe'?'sev5':b==='High'?'sev4':b==='Moderate'?'sev3':b==='Low'?'sev2':'sev1'; return `<span class="chip ${c}">${b}</span>`; }
 
-function breaches() {
-  const now = Date.now(), out = [];
-  RISKS.forEach(r => (r.thresholds||[]).forEach(t => out.push({r:r.id, t, sev:r.sev})));
-  CAL.forEach(e => { if (e.d) { const dd = Math.ceil((new Date(e.d)-now)/86400000); if (dd>0 && dd<=45) out.push({cal:e, t:'Regulatory deadline within 45 days', days:dd}); } });
-  return out;
+function evaluatedBreaches() {
+  return RiskModels.evaluateBreaches(
+    RISKS.map(r=>({id:r.id,score:compo(r),delta:scoreDelta(r),severity:r.sev,confidence:r.conf,scoreLimit:80,deltaLimit:10})),
+    CAL.map((e,i)=>({id:'cal-'+i,date:e.d,source:e.s,warningDays:30})).filter(e=>e.date),
+    Date.now()
+  );
 }
 function renderThresholds() {
-  const b = breaches().filter(x=>x.cal || x.sev>=4);
+  const b = evaluatedBreaches();
   const el = document.getElementById('ckThresholds');
   if (!b.length) { el.innerHTML=''; return; }
-  const near = breaches().filter(x=>x.cal).sort((a,b)=>a.days-b.days)[0];
-  el.innerHTML = `<div class="card" style="padding:12px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--redbg)"><span class="chip sev5">● ${b.length} live breaches</span>${near?`<span style="font-size:12.5px;color:var(--red)"><b>Nearest deadline:</b> ${near.cal.t} — ${near.days} days</span>`:''}<span class="lab" style="margin-left:auto;cursor:pointer" onclick="tab('calendar')">See all deadlines →</span></div>`;
+  const near = b.filter(x=>x.rule==='deadline').sort((a,b)=>a.observed-b.observed)[0];
+  const event = near ? CAL[Number(String(near.eventId).replace('cal-',''))] : null;
+  el.innerHTML = `<div class="card" style="padding:12px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--redbg)"><span class="chip sev5">● ${b.length} evaluated triggers</span>${event?`<span style="font-size:12.5px;color:var(--red)"><b>Nearest deadline:</b> ${event.t} — ${near.observed} days</span>`:''}<button class="linkbtn lab" style="margin-left:auto" type="button" onclick="tab('calendar')">See all deadlines →</button></div>`;
 }
 function riskCard(r, idx) {
   const secs = rkSectors(r).slice(0,3).map(s=>SECTORS[s][0]).join(' · ');
@@ -2503,7 +2375,7 @@ function riskCard(r, idx) {
 function secRisks() {
   const ranked = RISKS.slice().sort((a,b)=>priority(b)-priority(a));
   const n = (PMODE==='partner')?5:RISKS.length;
-  return `<h2>Priority risks — ranked by composite score</h2><p class="sub" style="margin:0 0 10px">Priority = 0.40 score + 0.25 severity delta + 0.20 deadline proximity + 0.15 actionability. Score = 0.30 severity + 0.20 velocity + 0.25 exposure + 0.15 concentration + 0.10 confidence, all 0–100.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">${ranked.slice(0,n).map(riskCard).join('')}</div>`;
+  return `<h2>Priority risks — ranked for attention</h2><p class="sub" style="margin:0 0 10px">Attention priority = 0.65 composite score + 0.20 deadline proximity + 0.15 evidence gap. Recommended actions are outputs, not scoring inputs. Composite score = 0.30 severity + 0.20 velocity + 0.25 exposure + 0.15 concentration + 0.10 evidence confidence.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:12px">${ranked.slice(0,n).map(riskCard).join('')}</div>`;
 }
 function secMovers() {
   const moved = RISKS.filter(r=>Math.abs(scoreDelta(r))>=1).sort((a,b)=>Math.abs(scoreDelta(b))-Math.abs(scoreDelta(a))).slice(0,4);
@@ -2525,23 +2397,21 @@ function secConcentration() {
   <p class="meta" style="margin:8px 0 0">Index = 0.40 top-1 share + 0.30 top-3 share + 0.20 substitution difficulty + 0.10 data confidence. Red ≥70 critical · amber ≥50 concentrated · green diversified.</p></div>`;
 }
 // ---- Threshold breach & escalation queue ----
-function allBreaches(){ const now=Date.now(), out=[];
-  RISKS.forEach(r=>{ const sc=compo(r), d=scoreDelta(r);
-    if(sc>80) out.push({sev:'urgent',type:'Risk score > 80',trig:r.title.split('—')[0]+' ('+sc+')',ent:rkSectors(r).map(s=>SECTORS[s][0]).slice(0,2).join(', '),act:PLAY[(r.actions||[])[0]]?PLAY[(r.actions||[])[0]][0]:'Review',owner:PLAY[(r.actions||[])[0]]?PLAY[(r.actions||[])[0]][3]:'CFO',dl:'This week',rid:r.id});
-    if(d>10) out.push({sev:'warning',type:'Score moved > 10',trig:r.title.split('—')[0]+' (+'+d+')',ent:rkSectors(r).slice(0,1).map(s=>SECTORS[s][0]).join(''),act:'Validate & brief',owner:'Analyst',dl:'48h',rid:r.id});
-    if(r.conf==='Low'&&r.sev>=4) out.push({sev:'warning',type:'Low confidence + high impact',trig:r.title.split('—')[0],ent:'—',act:'Data validation request',owner:'Analyst',dl:'This week',rid:r.id}); });  CAL.forEach(e=>{ if(e.d){const dd=Math.ceil((new Date(e.d)-now)/86400000); if(dd>0&&dd<=30) out.push({sev:'urgent',type:'Deadline within 30 days',trig:e.t+' ('+dd+'d)',ent:e.s,act:e.a,owner:'CFO',dl:e.d});} });
-  const rank={urgent:0,warning:1}; return out.sort((a,b)=>(rank[a.sev]-rank[b.sev])); }
+function allBreaches(){ return evaluatedBreaches().map(x=>{
+  if(x.riskId){ const r=RID(x.riskId), p=PLAY[(r.actions||[])[0]]; return {sev:x.severity,type:x.label,trig:`${r.title.split('—')[0].trim()}: ${x.observed} ${x.unit} (limit ${x.limit})`,ent:rkSectors(r).map(s=>SECTORS[s][0]).slice(0,2).join(', ')||'—',act:x.rule==='evidence-gap'?'Verify primary evidence':(p?p[0]:'Review'),owner:x.rule==='evidence-gap'?'Analyst':(p?p[3]:'CFO'),dl:x.rule==='score-move'?'48h':'This week',rid:r.id,source:x.source}; }
+  const i=Number(String(x.eventId).replace('cal-','')), e=CAL[i]; return {sev:x.severity,type:x.label,trig:`${e.t}: ${x.observed} days (window ${x.limit})`,ent:e.s,act:e.a,owner:'CFO',dl:e.d,source:x.source};
+}); }
 function secBreaches() {
   const b = allBreaches();
-  return `<h2>Breaches & escalation queue — what tripped</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Sev</th><th>Breach type</th><th>Trigger</th><th>Affected entity</th><th>Required action</th><th>Owner</th><th>By</th></tr>
+  return `<h2>Evaluated triggers — what crossed a stated rule</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Sev</th><th>Rule</th><th>Observed vs limit</th><th>Affected entity</th><th>Required action</th><th>Owner</th><th>By</th></tr>
   ${b.map(x=>{const c=x.sev==='urgent'?'var(--red)':'var(--amber)';return `<tr${x.rid?` data-open="${x.rid}" style="cursor:pointer"`:''}><td><span class="chip" style="background:color-mix(in srgb,${c} 16%,transparent);color:${c}">${x.sev}</span></td><td style="font-weight:600;font-size:12px">${x.type}</td><td style="font-size:11.5px">${x.trig}</td><td style="font-size:11.5px">${x.ent}</td><td style="font-size:11.5px">${x.act}</td><td class="lab">${x.owner}</td><td class="lab">${x.dl}</td></tr>`;}).join('')}</table>
-  <p class="meta" style="margin:8px 0 0">Red = breach/urgent · amber = warning. Click a row to drill into the underlying risk.</p></div>`;
+  <p class="meta" style="margin:8px 0 0">Every row is generated by a rule with an observed value, limit, unit, and source. These demonstration thresholds are not a client's approved risk appetite. Click a row to drill into the underlying risk.</p></div>`;
 }
 // ---- Recommended action queue (aggregated across risks) ----
 function secActions() {
   const seen={}, rows=[];
   RISKS.slice().sort((a,b)=>priority(b)-priority(a)).forEach(r=>(r.actions||[]).forEach(a=>{const p=PLAY[a];if(p&&!seen[a]){seen[a]=1;rows.push({p,r});}}));
-  return `<h2>Recommended actions — what to do next</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">${rows.slice(0,6).map(({p,r})=>`<div class="rk" data-open="${r.id}" style="--sv:${p[2]==='Urgent'?'var(--red)':p[2]==='High'?'var(--amber)':'var(--teal)'}"><div style="display:flex;gap:8px;align-items:center"><span class="chip ${p[2]==='Urgent'?'sev5':p[2]==='High'?'sev3':'sev2'}">${p[2]}</span><span class="lab" style="margin-left:auto">${p[5]} value</span></div><div class="rkt" style="font-size:14px;margin-top:6px">${p[0]}</div><div style="font-size:11.5px;color:var(--ink3);margin:5px 0 7px">${p[1]}</div><div class="actmeta"><span>owner <b>${p[3]}</b></span><span>time <b>${p[4]}</b></span><span>output <b>${p[6]}</b></span></div><div style="font-size:11px;color:var(--ink3);margin-top:6px"><span class="lab">Trigger:</span> ${r.title.split('—')[0]}</div></div>`).join('')}</div>`;
+  return `<h2>Recommended actions — what to do next</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:12px">${rows.slice(0,6).map(({p,r})=>`<div class="rk" data-open="${r.id}" style="--sv:${p[2]==='Urgent'?'var(--red)':p[2]==='High'?'var(--amber)':'var(--teal)'}"><div style="display:flex;gap:8px;align-items:center"><span class="chip ${p[2]==='Urgent'?'sev5':p[2]==='High'?'sev3':'sev2'}">${p[2]}</span><span class="lab" style="margin-left:auto">${p[5]} value</span></div><div class="rkt" style="font-size:14px;margin-top:6px">${p[0]}</div><div style="font-size:11.5px;color:var(--ink3);margin:5px 0 7px">${p[1]}</div><div class="actmeta"><span>owner <b>${p[3]}</b></span><span>time <b>${p[4]}</b></span><span>output <b>${p[6]}</b></span></div><div style="font-size:11px;color:var(--ink3);margin-top:6px"><span class="lab">Trigger:</span> ${r.title.split('—')[0]}</div></div>`).join('')}</div>`;
 }
 function exposureLevel(riskRow, secKey) { return riskRow.sectors[secKey]||0; }
 function secExposure() {
@@ -2569,17 +2439,10 @@ const OUTPUTS = [
   ['director-note','Director action note','Exposure, breaches, scenario impact, actions with owners'],
   ['analyst-pack','Analyst evidence pack','Sources, assumptions, methodology, change log'],
   ['treasury-note','Treasury risk note','FX / hedge / funding actions, limits, deadlines'],
-  ['client-talking','Client talking points','Punchy why-now points to open a client conversation']
+  ['client-talking','Stakeholder discussion note','Evidence-led why-now points and open questions']
 ];
 function secOutputs() {
-  return `<h2>What to send — output center</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px">${OUTPUTS.map(o=>`<div class="oc${o[0]==='client-talking'?' bd':''}" data-out="${o[0]}"><div style="font-weight:600;font-size:14px;color:var(--ink);margin-bottom:5px">${o[1]}</div><div style="font-size:11.5px;color:var(--ink3)">${o[2]}</div><div class="btn pri" style="display:inline-block;margin-top:11px">Generate ↗</div></div>`).join('')}</div>`;
-}
-function secAdvisory() {
-  const ranked = RISKS.filter(r=>r.adv).sort((a,b)=>rkScore(b)-rkScore(a)).slice(0, PMODE==='partner'?6:4);
-  const vC = v => v==='High'?'sev5':v==='Medium'?'sev3':'sev2';
-  return `<h2>Advisory opportunities — top clients to call</h2><div class="card" style="overflow-x:auto"><table class="t"><tr><th>Trigger</th><th>Likely buyer</th><th>Possible project</th><th>Value</th><th>Status</th></tr>
-  ${ranked.map(r=>`<tr data-open="${r.id}" style="cursor:pointer"><td style="font-weight:600">${r.title.split('—')[0]}</td><td>${r.adv.buyer}</td><td>${r.adv.project}</td><td><span class="chip ${vC(r.adv.value)}">${r.adv.value}</span></td><td class="lab">${r.adv.status}</td></tr>`).join('')}</table>
-  <p class="meta" style="margin:8px 0 0">Click a row for the drill-down, evidence, and a first talking point.</p></div>`;
+  return `<h2>What to send — output center</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px">${OUTPUTS.map(o=>`<div class="oc" data-out="${o[0]}"><div style="font-weight:600;font-size:14px;color:var(--ink);margin-bottom:5px">${o[1]}</div><div style="font-size:11.5px;color:var(--ink3)">${o[2]}</div><div class="btn pri" style="display:inline-block;margin-top:11px">Generate ↗</div></div>`).join('')}</div>`;
 }
 function secEvidence() {
   const all = RISKS.flatMap(r=>r.evidence.map(e=>({r,e})));
@@ -2603,8 +2466,8 @@ function secLimits() {
     return `<tr data-open="${worstR.id}" style="cursor:pointer"><td style="font-weight:600">${c}</td><td style="font-family:'Spline Sans Mono',monospace">${KRI[c]}</td><td style="font-family:'Spline Sans Mono',monospace;color:${scoreColor(cur)}">${cur}</td><td><span class="cbar" style="width:120px;display:inline-block;vertical-align:middle"><span style="width:${Math.min(100,util)}%;background:${col}"></span></span> <span style="font-family:'Spline Sans Mono',monospace;font-weight:600;color:${col}">${util}%</span></td><td>${util>100?'<span class="chip sev5">breach</span>':util>=85?'<span class="chip sev3">near limit</span>':'<span class="chip sev2">within appetite</span>'}</td></tr>`; }).join('')}</table>
   <p class="meta" style="margin:8px 0 0">Limits express board risk appetite per category — the highest composite score in each category is tested against them. Utilization >100% = appetite breach (escalate per policy). Illustrative thresholds; set your own in config.</p></div>`;
 }
-const SECTITLE = { movers:'Top movers', risks:'Priority risks', exposure:'Exposure map', concentration:'Concentration risk', breaches:'Breaches & escalation', scenario:'Stress scenarios', actions:'Recommended actions', outputs:'Output center', advisory:'Advisory opportunities', evidence:'Evidence & assumptions', watchlist:'Watchlist', limits:'Risk appetite limits' };
-const SECFN = { movers:secMovers, risks:secRisks, exposure:secExposure, concentration:secConcentration, breaches:secBreaches, scenario:secScenario, actions:secActions, outputs:secOutputs, advisory:secAdvisory, evidence:secEvidence, watchlist:secWatchlist, limits:secLimits };
+const SECTITLE = { movers:'Top movers', risks:'Priority risks', exposure:'Exposure map', concentration:'Concentration risk', breaches:'Breaches & escalation', scenario:'Stress scenarios', actions:'Recommended actions', outputs:'Output center', evidence:'Evidence & assumptions', watchlist:'Watchlist', limits:'Risk appetite limits' };
+const SECFN = { movers:secMovers, risks:secRisks, exposure:secExposure, concentration:secConcentration, breaches:secBreaches, scenario:secScenario, actions:secActions, outputs:secOutputs, evidence:secEvidence, watchlist:secWatchlist, limits:secLimits };
 function renderCockpit() {
   const urgent = RISKS.filter(r=>compo(r)>80).length;
   const movers = RISKS.filter(r=>scoreDelta(r)>=10).length;
@@ -2616,22 +2479,22 @@ function renderCockpit() {
   document.getElementById('ckHero').innerHTML =
     kpi(urgent,'urgent risks (score > 80)',urgent-RISKS.filter(r=>prevCompo(r)>80).length) +
     kpi(movers,'top movers (Δ ≥ 10)',null) +
-    kpi(brc,'live breaches',null) +
+    kpi(brc,'evaluated triggers',null) +
     kpi(dl,'deadlines ≤ 30d',null,'calendar') +
     kpi(avg1,'avg risk score',avg1-avg0);
   renderThresholds();
   document.getElementById('ckBody').innerHTML = (PERSONA[PMODE]||PERSONA.partner).map((k,i)=>{
     if (!SECFN[k]) return '';
     const html = SECFN[k]();
-    const bd = k==='advisory' ? ' class="bd"' : '';
-    if (i < 4) return `<div${bd} style="margin-top:6px">${html}</div>`;
-    return `<details${bd} style="margin-top:14px"><summary class="lab" style="cursor:pointer;padding:6px 0;font-size:11px">▸ ${SECTITLE[k]||k} — expand</summary>${html}</details>`;
+    if (i < 4) return `<div style="margin-top:6px">${html}</div>`;
+    return `<details style="margin-top:14px"><summary class="lab" style="cursor:pointer;padding:6px 0;font-size:11px">▸ ${SECTITLE[k]||k} — expand</summary>${html}</details>`;
   }).join('');
   document.querySelectorAll('#persona button').forEach(b=>b.classList.toggle('on', b.dataset.persona===PMODE));
 }
 // ----- Drill-down drawer -----
 function openRisk(id, focusSec) {
   const r = RID(id); if (!r) return;
+  LAST_FOCUS=document.activeElement;
   const path = [r.commodities[0]?DATA.commodities[r.commodities[0]][0]:(r.fx[0]||r.cat), rkSectors(r)[0]?SECTORS[rkSectors(r)[0]][0]:'sector', 'company P&L'].filter(Boolean);
   const cos = r.companies.map(c=>{const ci=DATA.companies.find(x=>x.id===c);return ci?`<span class="pill" data-dd="${c}" style="cursor:pointer">${ci.name}</span>`:'';}).join(' ');
   const acts = (r.actions||[]).map(a=>{const p=PLAY[a];return p?`<div class="act"><div class="acth">${p[0]}</div><div style="font-size:12px;color:var(--ink2);margin-top:3px">${p[1]}</div><div class="actmeta"><span>urgency <b>${p[2]}</b></span><span>owner <b>${p[3]}</b></span><span>time <b>${p[4]}</b></span><span>value <b>${p[5]}</b></span><span>output <b>${p[6]}</b></span></div></div>`:'';}).join('');
@@ -2644,17 +2507,18 @@ function openRisk(id, focusSec) {
     <div class="dsect"><span class="lab">Affected companies (${r.companies.length})</span><div style="display:flex;flex-wrap:wrap;gap:6px">${cos}</div></div>
     <div class="dsect"><span class="lab">Recommended actions</span>${acts}</div>
     <div class="dsect"><span class="lab">Evidence</span>${ev}</div>
-    ${r.adv?`<div class="dsect bd"><span class="lab">Advisory opportunity</span><div class="act"><div class="acth">${r.adv.project}</div><div class="actmeta"><span>buyer <b>${r.adv.buyer}</b></span><span>value <b>${r.adv.value}</b></span><span>status <b>${r.adv.status}</b></span></div><p style="font-size:12px;color:var(--ink2);margin-top:7px"><b>First talking point:</b> ${r.adv.talk}</p></div></div>`:''}
     <div style="display:flex;gap:8px;margin:20px 0 6px;flex-wrap:wrap"><button class="btn pri" data-brief="${r.id}">Generate brief</button><button class="btn sec" data-scen="${r.id}">Run in stress lab</button></div>`;
   document.getElementById('scrim').classList.add('open');
   document.getElementById('drawer').classList.add('open');
+  const close=document.getElementById('drawer').querySelector('button'); if(close)close.focus();
   if (focusSec) {}
 }
-function closeDrawer(){ document.getElementById('drawer').classList.remove('open'); document.getElementById('scrim').classList.remove('open'); }
+function closeDrawer(){ const was=document.getElementById('drawer').classList.contains('open'); document.getElementById('drawer').classList.remove('open'); document.getElementById('scrim').classList.remove('open'); if(was&&LAST_FOCUS&&LAST_FOCUS.focus)LAST_FOCUS.focus(); }
 // ----- Brief generator -----
 let BRIEFTEXT = '', BRIEFTITLE = 'brief';
 function scenFromRisk(id){ const r=RID(id); if(!r)return; scReset(); if(r.commodities.includes('crude')) scActive.add('oil22'); if(r.commodities.includes('metcoal')) scActive.add('coal22'); if(r.commodities.includes('gold')) scActive.add('gold25'); if(r.commodities.includes('api')||r.commodities.includes('lithium')) scActive.add('china'); if(r.commodities.includes('steel')||r.commodities.includes('alum')) scActive.add('cbamcost'); if(r.fx.includes('USDINR')) scActive.add('usdinr10'); if(!scActive.size) scActive.add('usdinr10'); scSync(); tab('scenarios'); }
 function briefFor(kind, riskId) {
+  LAST_FOCUS=document.activeElement;
   const r = riskId ? RID(riskId) : RISKS.slice().sort((a,b)=>rkScore(b)-rkScore(a))[0];
   const date = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
   const secs = rkSectors(r).map(s=>SECTORS[s][0]).join(', ');
@@ -2673,19 +2537,20 @@ function briefFor(kind, riskId) {
   md += `## Scenario impact (directional — modelled estimate)\n${r.impact} Company margin impact applies sector-specific cost pass-through (airlines ~80%, pharma ~70%, FMCG ~45%, steel ~30%), adjustable for hedge cover and inventory. Directional bands (Low / Moderate / High / Severe), not point forecasts.\n\n`;
   if (brk.length) md += `## Threshold breaches\n${brk.map(x=>`- **${x.type}** — ${x.trig} → ${x.act} (owner ${x.owner}, by ${x.dl})`).join('\n')}\n\n`;
   md += `## Recommended actions\n${acts.map(a=>`- **${a[0]}** — ${a[1]} (owner: ${a[3]}, ${a[4]}, value ${a[5]}, output: ${a[6]})`).join('\n')||'- Review exposure and brief the risk owner.'}\n\n`;
-  if (persona==='client') { md += `## Talking points\n- ${r.adv?r.adv.talk:r.whyNow}\n- ${r.impact}\n- We can quantify your specific exposure in a short diagnostic.\n\n`; }
+  if (persona==='client') { md += `## Discussion points\n- ${r.whyNow}\n- ${r.impact}\n- Quantify the entity-specific exposure before relying on this directional view.\n\n`; }
   md += `## Evidence & assumptions\n${ev.map(e=>`- [${e.ty}] ${e.t} (${e.d}) — ${e.fact}${persona==='analyst'?` — assumption: ${e.assume} (conf ${e.conf}, verified ${e.ver})`:''} — ${e.u}`).join('\n')}\n\n`;
   if (persona==='analyst') { md += `## Change log\n${ev.map(e=>`- ${e.chg}`).join('\n')}\n\n`; }
   md += `## Open questions / what would change our view\n- A confirmed hedge cover ratio materially above assumption would lower the score.\n- Disclosed cost shares differing from estimates would reprice exposure.\n- A reversal in the underlying driver (${drivers(r)[0]}) would cut velocity.\n\n`;
-  if (persona!=='client') { md += `## Suggested consulting intervention\n${r.adv?`**${r.adv.project}** for ${r.adv.buyer} (value ${r.adv.value}, status ${r.adv.status}).\nFirst talking point: "${r.adv.talk}"`:'Scope a short diagnostic on the exposure and mitigation options.'}\n`; }
+  if (persona!=='client') { md += `## Suggested next analysis\nScope a short diagnostic on the exposure, available controls, and mitigation options.\n`; }
   md += `\n---\n*Illustrative analysis from public official sources and company disclosures. Directional estimates, not audit evidence or investment advice. Verify primary sources before external use.*`;
   BRIEFTEXT = md; BRIEFTITLE = `${kindName} — ${r.title.split('—')[0].trim()}`;
   const html = md.replace(/^# (.*)$/gm,'<div class="doc-h1">$1</div>').replace(/^## (.*)$/gm,'<h4>$1</h4>').replace(/^\- (.*)$/gm,'<li>$1</li>').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'$1').replace(/\n\n/g,'</p><p>').replace(/(<li>.*?<\/li>)/gs,m=>'<ul>'+m+'</ul>');
   document.getElementById('briefkind').textContent = kindName;
   document.getElementById('briefbody').innerHTML = '<p>'+html+'</p>';
   document.getElementById('briefmodal').classList.add('open');
+  const first=document.getElementById('briefmodal').querySelector('button'); if(first)first.focus();
 }
-function closeBrief(){ document.getElementById('briefmodal').classList.remove('open'); }
+function closeBrief(){ const was=document.getElementById('briefmodal').classList.contains('open'); document.getElementById('briefmodal').classList.remove('open'); if(was&&LAST_FOCUS&&LAST_FOCUS.focus)LAST_FOCUS.focus(); }
 function copyBrief(){ navigator.clipboard && navigator.clipboard.writeText(BRIEFTEXT); const b=event.target; const o=b.textContent; b.textContent='Copied ✓'; setTimeout(()=>b.textContent=o,1200); }
 function downloadBrief(){ const blob=new Blob([BRIEFTEXT],{type:'text/markdown'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=BRIEFTITLE.replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.md'; a.click(); }
 function printBriefDoc(){ const w=window.open('','_blank'); w.document.write('<pre style="font-family:Georgia,serif;white-space:pre-wrap;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.5">'+BRIEFTEXT.replace(/[<>]/g,'')+'</pre>'); w.document.close(); w.print(); }
@@ -2710,15 +2575,22 @@ document.getElementById('drawer').addEventListener('click', e => {
   const dd=e.target.closest('[data-dd]'); if(dd){ closeDrawer(); goDeep(dd.dataset.dd); return; }
 });
 document.getElementById('persona').addEventListener('click', e => { const b=e.target.closest('[data-persona]'); if(b){ PMODE=b.dataset.persona; try{localStorage.setItem('tpm-persona',PMODE);}catch(err){} renderCockpit(); } });
-document.addEventListener('keydown', e => { if(e.key==='Escape'){ closeDrawer(); closeBrief(); } });
-try { const _n=new Date(); document.getElementById('lastupd').textContent = 'opened ' + _n.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + ', ' + _n.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) + ' · data cycle 2026-W28'; } catch(e){}
+const CLICKABLE_DATA='[data-open],[data-dd],[data-risk],[data-cell],[data-out],[data-goto],[data-watch],[data-com],[data-id],[data-scen],[data-scen2],[data-mgoto]';
+function enhanceA11y(root=document){ const clicks=[...(root.matches&&root.matches(CLICKABLE_DATA)?[root]:[]),...root.querySelectorAll(CLICKABLE_DATA)]; clicks.forEach(el=>{ if(!/^(BUTTON|A|INPUT|SELECT)$/.test(el.tagName)){ el.setAttribute('role','button'); el.tabIndex=0; } }); const fields=[...(root.matches&&root.matches('input,select,textarea')?[root]:[]),...root.querySelectorAll('input,select,textarea')]; fields.forEach(el=>{ if(!el.getAttribute('aria-label')&&!el.closest('label')&&!document.querySelector(`label[for="${el.id}"]`)) el.setAttribute('aria-label',(el.placeholder||el.id||el.type).replace(/[-_]/g,' ')); }); }
+enhanceA11y(); new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)enhanceA11y(n);}))).observe(document.body,{childList:true,subtree:true});
+document.addEventListener('keydown', e => {
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches(CLICKABLE_DATA)&&e.target.getAttribute('role')==='button'){e.preventDefault();e.target.click();return;}
+  if(e.key==='Escape'){ closeDrawer(); closeBrief(); }
+  if(e.key==='Tab'){ const dlg=document.querySelector('#briefmodal.open,#drawer.open,#cmdk.open'); if(!dlg)return; const fs=[...dlg.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter(x=>!x.disabled&&x.offsetParent!==null); if(!fs.length)return; const first=fs[0],last=fs[fs.length-1]; if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();} }
+});
+try { const _n=new Date(); document.getElementById('lastupd').textContent = 'opened ' + _n.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + ', ' + _n.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); } catch(e){}
 try { if (!localStorage.getItem('tpm-seen')) document.getElementById('firsttime').style.display = ''; } catch(e){ document.getElementById('firsttime').style.display=''; }
 
 // ---- Deep-tier sector Sankeys — weighted by estimated supplier spending ----
 const SANKEYS = {};
 SANKEYS.chips = {
  tiers:['Materials, components & IP','Equipment & substrates','Fabs & memory','Chip designers'],
- note:`This is the deep-tier expansion of the <a onclick="showCom('chips')">Semiconductors</a> node below: Toto's electrostatic chucks, Ajinomoto's ABF film, Zeiss optics, SK Hynix HBM, and TSMC packaging are each effective single-source chokepoints. Monopoly power up-chain is offset by monopsony power down-chain — until a shock tests it.`,
+ note:`This is the deep-tier expansion of the <button class="linkbtn" type="button" onclick="showCom('chips')">Semiconductors</button> node below: Toto's electrostatic chucks, Ajinomoto's ABF film, Zeiss optics, SK Hynix HBM, and TSMC packaging are each effective single-source chokepoints. Monopoly power up-chain is offset by monopsony power down-chain — until a shock tests it.`,
  nodes:{
   toto:[0,'Toto — ceramic chucks','JP'], ajinomoto:[0,'Ajinomoto — ABF film','JP'], zeiss:[0,'Zeiss SMT — optics','DE'], trumpf:[0,'Trumpf — lasers','DE'], cymer:[0,'Cymer — EUV source','US'], vat:[0,'VAT Group — vacuum valves','CH'], pfeiffer:[0,'Pfeiffer Vacuum','DE'], mks:[0,'MKS Instruments','US'],
   shinetsu:[0,'Shin-Etsu — wafers','JP'], sumco:[0,'SUMCO — wafers','JP'], jsr:[0,'JSR — photoresist','JP'], entegris:[0,'Entegris — materials','US'], gases:[0,'Air Liquide / Linde — gases','EU'], hoya:[0,'Hoya — mask blanks','JP'],
@@ -2913,20 +2785,11 @@ show('tatasteel');
 renderOverview();
 renderGradeStrip();
 renderQuad();
-renderPipeline();
 renderCalendar();
 renderTimeline();
 window.toggleTheme = () => { const ed = document.body.classList.toggle('editorial'); document.getElementById('themebtn').textContent = ed ? 'Editorial' : 'Terminal'; try { localStorage.setItem('tpm-theme', ed ? 'editorial' : 'terminal'); } catch(e) {} };
 try { if (localStorage.getItem('tpm-theme') === 'editorial') { document.body.classList.add('editorial'); document.getElementById('themebtn').textContent = 'Editorial'; } } catch(e) {}
-window.toggleClient = () => {
-  const on = document.body.classList.toggle('client');
-  document.getElementById('clientbtn').textContent = on ? 'Client-safe' : 'Internal';
-  try { localStorage.setItem('tpm-client', on ? '1' : ''); } catch(e) {}
-  if (on) { const cur = TABS.find(t => document.getElementById('tab-'+t).style.display !== 'none'); if (cur === 'pipeline' || cur === 'cycles') tab('cockpit'); }
-};
-try { if (localStorage.getItem('tpm-client') === '1') { document.body.classList.add('client'); document.getElementById('clientbtn').textContent = 'Client-safe'; } } catch(e) {}
 renderPeriodic();
-  renderPeriodic();
 renderSankey();
 showCom('crude');
 renderDeep('titan');
@@ -2936,7 +2799,7 @@ renderDeep('titan');
 // model, so it added no independent information while inflating agreement.
 const capPct=(v,cap)=>clamp(100*v/cap,0,100);
 const riskVol=r=>{ if (typeof riskRealVolM === 'function') { const rv = riskRealVolM(r); if (rv != null) return capPct(rv*100, 12); } const cs=r.commodities.filter(c=>DATA.commodities[c]); return cs.length? cs.reduce((s,c)=>s+DATA.commodities[c][1]/5*100,0)/cs.length : 50; };
-const ctrlStrength=r=>clamp(40+(r.actions||[]).length*10+(r.conf==='High'?15:r.conf==='Medium'?5:0),0,100);
+const ctrlStrength=r=>RiskModels.controlStrength(r.controls||[]);
 const detectability=r=>clamp(100-(r.conf==='High'?70:r.conf==='Medium'?50:30),0,100);
 const dataQ=r=>CONFN[r.conf]||60;
 const dirOf=r=>{ const d=scoreDelta(r); return d>2?'up':d<-2?'down':'flat'; };
@@ -2953,6 +2816,7 @@ function spark(pts,w,h,col){ w=w||84; h=h||22; if(!pts.length){ const days=(type
 function mulberry(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
 const seedOf=s=>{ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; };
 function gaussR(rnd){ let u=0,v=0; while(u===0)u=rnd(); while(v===0)v=rnd(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+function studentT5(rnd){ let chi2=0; for(let i=0;i<5;i++){ const g=gaussR(rnd); chi2+=g*g; } return gaussR(rnd)/Math.sqrt(chi2/5)*Math.sqrt(3/5); }
 function pctile(sorted,p){ return sorted[clamp(Math.floor(p/100*sorted.length),0,sorted.length-1)]; }
 function std(id,fam,r,score,dir,conf,factors,assumptions,warnings,dq,raw){
   const f=factors.map(x=>({factor:x[0],contribution:Math.round(x[1]*10)/10})).sort((a,b)=>b.contribution-a.contribution).slice(0,3);
@@ -2978,13 +2842,13 @@ function scenShock(set){ const dir={}; set.forEach(id=>{ const d=scenDirect(id);
 function defaultScen(r){ if(r._scen) return new Set([r._scen]);
   const s=new Set(['y_oil10','y_inr8']); if(r.commodities.includes('crude'))s.add('h_oil22'); if(r.commodities.includes('metcoal'))s.add('h_coal22'); if(r.commodities.includes('gold'))s.add('h_gold25'); if(r.commodities.includes('api')||r.commodities.includes('lithium'))s.add('y_china'); if(r.commodities.includes('steel')||r.commodities.includes('alum'))s.add('y_cbam'); return s; }
 // Model 1 — Objective Rules: S = 0.25E + 0.15C + 0.15V + 0.10σ + 0.15L + 0.10W + 0.10P
-function mObjective(r){ const s=rsc(r), E=s.exp,C=s.con,V=s.vel,sig=riskVol(r),W=100-ctrlStrength(r),P=100-(CONFN[r.conf]||60);
+function mObjective(r){ const s=rsc(r), E=s.exp,C=s.con,V=s.vel,sig=riskVol(r),cs=ctrlStrength(r),W=cs==null?50:100-cs,P=100-(CONFN[r.conf]||60);
   const util=compo(r)/100, L=util>=1?100:util>=0.85?70:util>=0.70?40:0;
   let sc=clamp(0.25*E+0.15*C+0.15*V+0.10*sig+0.15*L+0.10*W+0.10*P,0,100); if(util>=1)sc=Math.max(sc,75);
   const warn=[]; if((CONFN[r.conf]||60)<40)warn.push('Low-confidence data; validate manually.'); if(E<40&&C>75)warn.push('Localized but concentrated exposure.');
   return std('rules-objective','objective',r,Math.round(sc),dirOf(r),clamp((CONFN[r.conf]||60)*0.7+30,0,100),
     [['exposure',0.25*E],['limit breach',0.15*L],['concentration',0.15*C],['velocity',0.15*V]],
-    ['S = 0.25 exposure + 0.15 concentration + 0.15 velocity + 0.10 volatility + 0.15 limit-breach + 0.10 control-weakness + 0.10 confidence-penalty.','Limit utilization proxied from the composite score; floor 75 when utilization ≥ 100%.'],warn,dataQ(r),
+    ['S = 0.25 exposure + 0.15 concentration + 0.15 velocity + 0.10 volatility + 0.15 screening-threshold + 0.10 control-weakness + 0.10 confidence-penalty.','The score threshold is a demonstration screening rule, not booked limit utilization.','Control strength is neutral when no control has both test evidence and a test date. Recommended actions never count as controls.'],warn.concat(cs==null?['Control effectiveness unavailable; neutral value used.']:[]),dataQ(r),
     {ExposureScore:Math.round(E),ConcentrationScore:Math.round(C),VelocityScore:Math.round(V),VolatilityScore:Math.round(sig),LimitBreachScore:L,ControlWeaknessScore:Math.round(W),ConfidencePenalty:Math.round(P)}); }
 // ---- Phase 2 math: GPD peaks-over-threshold fit (method of moments) + Gaussian-copula joint stress ----
 const QCACHE = {};
@@ -3038,39 +2902,36 @@ function copulaES(r){ const cs=r.commodities.filter(c=>DATA.commodities[c]).slic
   worstArr.sort((a,b)=>a-b); return worstArr[Math.floor(M*0.99)]; }
 // Model 3 — Quantitative Statistical: Monte Carlo loss distribution + volatility
 function mQuant(r){ const rnd=mulberry(seedOf(r.id)); const _rv=(typeof riskRealVolM==='function')?riskRealVolM(r):null; const sigma=_rv!=null?clamp(_rv,0.02,0.25):0.04+riskVol(r)/100*0.10; const N=5000, losses=[];
-  for(let i=0;i<N;i++){ let z=gaussR(rnd); if(rnd()<0.10)z*=2.4; losses.push(z*sigma); }
+  for(let i=0;i<N;i++) losses.push(studentT5(rnd)*sigma);
   losses.sort((a,b)=>a-b);
   QCACHE[r.id]=losses;
   const VaR95=-pctile(losses,5)*100, VaR99=-pctile(losses,1)*100;
   const tl=losses.slice(0,Math.floor(N*0.01)), ES99=(-tl.reduce((a,b)=>a+b,0)/tl.length)*100;
-  const thresh=sigma*100*1.5, breach=losses.filter(x=>-x*100>thresh).length/N;
-  const VolScore=clamp(riskVol(r),0,100),VaRScore=capPct(VaR99,25),ESScore=capPct(ES99,30),BreachScore=100*breach;
-  const sc=clamp(0.25*VolScore+0.25*VaRScore+0.30*ESScore+0.20*BreachScore,0,100);
+  const VolScore=clamp(riskVol(r),0,100),VaRScore=capPct(VaR99,25),ESScore=capPct(ES99,30);
+  const sc=clamp(0.30*VolScore+0.30*VaRScore+0.40*ESScore,0,100);
   return std('monte-carlo-quant','quant',r,Math.round(sc),dirOf(r),clamp(0.30*70+0.35*72+0.35*68,0,100),
-    [['expected shortfall 99%',0.30*ESScore],['VaR 99%',0.25*VaRScore],['volatility',0.25*VolScore],['breach probability',0.20*BreachScore]],
-    ['S = 0.25 vol + 0.25 VaR99 + 0.30 ES99 + 0.20 breach probability.','5,000-path Monte Carlo with fat-tailed innovations (≈ Student-t, df 5), deterministic per-risk seed; 10,000+ paths in production.',(_rv!=null?('σ = '+(_rv*100).toFixed(1)+'%/month from EWMA(λ=0.94) / rolling-36m vol on real price series (pipeline'+(typeof CDATA!=='undefined'&&CDATA&&CDATA.generated?' as of '+CDATA.generated.slice(0,10):'')+'); fitted GARCH(1,1) is P2.'):'Volatility seeded from ratings — no free price series exists for these commodities; EWMA on real series applies where one does.'),'Loss expressed as % of exposure.'],
-    [],dataQ(r),{VaR95:Math.round(VaR95*10)/10,VaR99:Math.round(VaR99*10)/10,ES99:Math.round(ES99*10)/10,breachProb:Math.round(breach*100)/100}); }
-// Model 4 — Stress & Tail: EVT + copula dependence + scenario library (uses the stacked scenario set)
-function mTail(r,q,set){ const gpd=null; // EVT fit removed: fitting a GPD to the
-  // simulator's own draws recovers the simulator's assumptions, not the market's
-  // tails. A real peaks-over-threshold fit needs market return history.
-  const EVT=gpd?capPct(gpd.ES995,40):capPct(q.ES99*1.35,40);
+    [['expected shortfall 99%',0.40*ESScore],['VaR 99%',0.30*VaRScore],['volatility',0.30*VolScore]],
+    ['S = 0.30 vol + 0.30 VaR99 + 0.40 ES99.','5,000-path Monte Carlo with standardized Student-t innovations (df 5) and deterministic per-risk seed.',(_rv!=null?('σ = '+(_rv*100).toFixed(1)+'%/month from EWMA(λ=0.94) / rolling-36m vol on real price series (pipeline'+(typeof CDATA!=='undefined'&&CDATA&&CDATA.generated?' as of '+CDATA.generated.slice(0,10):'')+').'):'Volatility seeded from ratings where no maintained market series exists.'),'Loss expressed as % of exposure; no breach probability is inferred without an explicit monetary limit.'],
+    ['Illustrative distribution model; not backtested against realised portfolio P&L.'],dataQ(r),{VaR95:Math.round(VaR95*10)/10,VaR99:Math.round(VaR99*10)/10,ES99:Math.round(ES99*10)/10,distribution:'Student-t',degreesOfFreedom:5,paths:N}); }
+// Model 4 — joint-stress proxy: scaled simulation tail + Gaussian dependence + selected scenarios
+function mTail(r,q,set){
+  const TailES=capPct(q.ES99*1.35,40);
   const copJ=copulaES(r), nC=r.commodities.length;
   const Copula=copJ!=null?capPct(copJ,18):capPct(q.ES99*(1+0.12*Math.max(0,nC-1)),45);
   let worst=0,worstId=null,mat=0; set.forEach(id=>{ const sh=propagate(scenDirect(id)); let mx=0; r.companies.forEach(co=>mx=Math.max(mx,Math.abs(marginImpact(co,sh)))); if(mx>worst){worst=mx;worstId=id;} if(mx>4)mat++; });
   const ScWorst=capPct(worst,15), Breadth=set.size?100*mat/set.size:0;
-  const shAll=scenShock(set), concMod=1+(rsc(r).con/100)*0.5, ctrlMod=1+((100-ctrlStrength(r))/100)*0.3;
+  const cs=ctrlStrength(r), shAll=scenShock(set), concMod=1+(rsc(r).con/100)*0.5, ctrlMod=cs==null?1:1+((100-cs)/100)*0.3;
   const comps=r.companies.map(co=>({co,imp:marginImpact(co,shAll)*concMod*ctrlMod}));
   const losers=comps.filter(x=>x.imp>0.05).sort((a,b)=>b.imp-a.imp), bens=comps.filter(x=>x.imp<-0.05).sort((a,b)=>a.imp-b.imp);
-  const sc=clamp(0.30*EVT+0.25*Copula+0.30*ScWorst+0.15*Breadth,0,100);
-  return std('evt-tail-stress','tail',r,Math.round(sc),dirOf(r),clamp(60+(r.conf==='High'?10:0)+(gpd?5:0),0,100),
-    [['EVT tail ES',0.30*EVT],['scenario worst loss',0.30*ScWorst],['copula joint stress',0.25*Copula],['scenario breadth',0.15*Breadth]],
-    ['S = 0.30 EVT + 0.25 copula stress + 0.30 scenario worst + 0.15 scenario breadth.',
-     gpd?`EVT: Generalized Pareto fitted by method-of-moments to Monte-Carlo loss exceedances above the 90th percentile (POT): ξ = ${gpd.xi}, σ = ${gpd.sigma}, u = ${gpd.u}. Market-history fit needs price series (backend).`:'EVT fallback: scaled Monte-Carlo tail ES (too few exceedances for a GPD fit).',
+  const sc=clamp(0.30*TailES+0.25*Copula+0.30*ScWorst+0.15*Breadth,0,100);
+  return std('joint-stress-proxy','tail',r,Math.round(sc),dirOf(r),clamp(55+(r.conf==='High'?10:0),0,100),
+    [['scaled tail ES',0.30*TailES],['scenario worst loss',0.30*ScWorst],['Gaussian joint stress',0.25*Copula],['scenario breadth',0.15*Breadth]],
+    ['S = 0.30 scaled tail ES + 0.25 Gaussian joint stress + 0.30 scenario worst + 0.15 scenario breadth.',
+     'Scaled tail ES is derived from the Monte Carlo output. It is not a fitted extreme-value distribution.',
      copJ!=null?'Copula: Gaussian-copula joint simulation (800 draws) of this risk\'s commodities using documented/live pairwise correlations; t-copula tail dependence is the next upgrade.':'Copula fallback: joint-stress heaviness × commodity count.',
      'Scenario components computed over the selected historical / hypothetical / hybrid set below.'],
-    (worst>10?['Severe scenario tail — analyst review recommended.']:[]),dataQ(r),
-    {EVT:Math.round(EVT),copula:Math.round(Copula),gpd_xi:gpd?gpd.xi:null,gpd_u:gpd?gpd.u:null,copulaJointES99:copJ!=null?Math.round(copJ*10)/10:null,worstScenario:worstId?SCENLIB[worstId][0]:'—',scenarioWorstPct:Math.round(worst*10)/10,breadthPct:Math.round(Breadth),
+    (worst>10?['Severe selected scenario result; analyst review recommended.']:[]).concat(cs==null?['Control effectiveness unavailable; no control modifier applied.']:[]),dataQ(r),
+    {scaledTailES:Math.round(TailES),gaussianJointStress:Math.round(Copula),copulaJointES99:copJ!=null?Math.round(copJ*10)/10:null,worstScenario:worstId?SCENLIB[worstId][0]:'—',scenarioWorstPct:Math.round(worst*10)/10,breadthPct:Math.round(Breadth),
      losers:losers.slice(0,6).map(x=>({co:DATA.companies.find(c=>c.id===x.co).name,id:x.co,pct:Math.round(x.imp*10)/10})),
      beneficiaries:bens.slice(0,3).map(x=>({co:DATA.companies.find(c=>c.id===x.co).name,pct:Math.round(x.imp*10)/10}))}); }
 // Model 5 — Network & Contagion: centrality + propagation through the commodity dependency graph
@@ -3082,17 +2943,16 @@ function mNetwork(r){ let cent=0; r.commodities.forEach(c=>{ let n=0; DATA.compa
   const sc=clamp(0.40*Centrality+0.35*Propagation+0.25*Breadth,0,100);
   return std('network-contagion','network',r,Math.round(sc),dirOf(r),clamp(55+(r.commodities.length>1?10:0),0,100),
     [['centrality',0.40*Centrality],['propagation loss',0.35*Propagation],['breadth of impact',0.25*Breadth]],
-    ['S = 0.40 centrality + 0.35 propagation loss + 0.25 breadth.','Centrality from shared-dependency degree across the 34-company universe (betweenness/eigenvector are Phase 3).','Contagion propagated through the commodity input graph with λ = 0.5 decay per step; edge weights from disclosed cost shares.'],
-    [],dataQ(r),{centralityDegree:cent,affectedCompanies:br}); }
-// Model 6 — Forecast: regime-aware logistic → P(breach, 30d) and severity forecast
+    ['S = 0.40 centrality + 0.35 propagation loss + 0.25 breadth.',`Centrality from shared-commodity-dependency degree across the ${DATA.companies.length}-company universe.`,`Propagation uses the commodity exposure map with λ = 0.5 decay. Edges are disclosed or estimated commodity dependencies, not contractual supplier links.`],
+    ['Exposure-map proxy; supplier identity, contract terms, substitution time and tier provenance are not modelled.'],dataQ(r),{centralityDegree:cent,affectedCompanies:br,networkType:'commodity dependency map'}); }
+// Model 6 — uncalibrated 30-day pressure index and directional severity
 function mForecast(r,tailScore,es99){ const s=rsc(r);
-  const z=0.5*(compo(r)-70)/15 + 0.3*(s.vel-55)/25 + 0.2*(tailScore-55)/25 + 0.25*(deadlineProx(r)-60)/40 - 0.55;
-  const pB=clamp(sigmoid(z),0.03,0.90);
-  const sevF=clamp(0.6*tailScore+0.4*es99*2,0,100), sc=clamp(0.60*pB*100+0.40*sevF,0,100);
-  return std('regime-forecast','forecast',r,Math.round(sc),dirOf(r),clamp(50+(r.conf==='High'?12:0),0,100),
-    [['pressure index (30d)',0.60*pB*100],['severity forecast',0.40*sevF]],
-    ['S = 0.60 × pressure index + 0.40 × severity forecast.','The pressure index is a logistic transform of the score, velocity, tail and deadline proximity, clamped 3–90%. Its coefficients have never been fitted to realised outcomes, so it is a monotone ranking device and NOT a probability — do not quote it as one. Platt scaling against real outcomes is what would make it a probability; see Model lab → Validation.','30-day horizon; gradient boosting and the Bayesian updating overlay are Phase 3.'],
-    [],dataQ(r),{pressureIndex30d:Math.round(pB*100)/100,breachProb30d:Math.round(pB*100)/100,severityForecast:Math.round(sevF),logit_z:Math.round(z*100)/100}); }
+  const pi=RiskModels.pressureIndex({score:compo(r),velocity:s.vel,tailScore,deadlineProximity:deadlineProx(r)});
+  const sevF=clamp(0.6*tailScore+0.4*es99*2,0,100), sc=clamp(0.60*pi.index0to100+0.40*sevF,0,100);
+  return std('pressure-index-30d','forecast',r,Math.round(sc),dirOf(r),clamp(45+(r.conf==='High'?10:0),0,100),
+    [['pressure index (30d)',0.60*pi.index0to100],['directional severity',0.40*sevF]],
+    ['S = 0.60 × pressure index + 0.40 × directional severity.','The pressure index is a monotone logistic transform whose coefficients have never been fitted to realised outcomes. It is not a probability.','30-day ranking horizon; outcome labels and calibration are required before probability language is permitted.'],
+    ['Uncalibrated ranking index; do not use as a likelihood estimate.'],dataQ(r),{pressureIndex30d:pi.index0to100,severityForecast:Math.round(sevF),logit:pi.logit,calibrated:pi.calibrated,isProbability:pi.isProbability}); }
 // Model 7 — Ensemble: PRD base weights × regime multipliers × confidence × data quality, normalized
 // Weights sum to 1. The structured-judgment family was removed: it claimed an
 // expert panel that did not exist and its ratings shared inputs with the
@@ -3107,19 +2967,16 @@ function computeModels(rid,scenSet){ const r=RID(rid), regime=detectRegime(), ss
   const wsRaw=keys.map(k=>ENS_BASE[k]*ENS_REGIME[regime][k]*(models[k].confidence_0_100/100)*(models[k].data_quality_0_100/100));
   const wsum=wsRaw.reduce((a,b)=>a+b,0)||1, w=wsRaw.map(x=>x/wsum), scores=keys.map(k=>models[k].score_0_100);
   const Sens=Math.round(scores.reduce((a,s,i)=>a+s*w[i],0)), mean=scores.reduce((a,b)=>a+b,0)/scores.length;
-  const disp=Math.round(Math.sqrt(scores.reduce((a,s)=>a+(s-mean)*(s-mean),0)/scores.length));
+  const summary=RiskModels.ensembleSummary(Object.fromEntries(keys.map((k,i)=>[k,scores[i]]))), disp=Math.round(summary.dispersion);
   const meanDQ=keys.reduce((a,k)=>a+models[k].data_quality_0_100,0)/keys.length;
   const confEns=Math.round(clamp(0.50*keys.reduce((a,k,i)=>a+models[k].confidence_0_100*w[i],0)+0.25*(100-disp)+0.25*meanDQ,0,100));
-  const warnings=[]; let floor=0;
+  const warnings=[];
   if(disp>25) warnings.push('High model disagreement; analyst review recommended.');
-  if(models.tail.score_0_100>85 || models.forecast.raw_metrics.breachProb30d>0.50) floor=70;
-  const sorted=scores.slice().sort((a,b)=>a-b), median=sorted[Math.floor(sorted.length/2)];
-  return {regime,models,keys,weights:w,scenSet:ss,ensemble:{score:Math.max(Sens,floor),confidence:confEns,dispersion:disp,dispBand:disp>25?'High':disp>=12?'Moderate':'Low',warnings,tag:'',breachProb:models.forecast.raw_metrics.breachProb30d,median,min:sorted[0],max:sorted[sorted.length-1]}}; }
+  return {regime,models,keys,weights:w,scenSet:ss,ensemble:{score:summary.median,weightedReference:Sens,confidence:confEns,dispersion:disp,dispBand:disp>25?'High':disp>=12?'Moderate':'Low',warnings,tag:'',pressureIndex:models.forecast.raw_metrics.pressureIndex30d,median:summary.median,min:summary.min,max:summary.max,decisionReady:summary.decisionReady}}; }
 // Action recommendation layer — PRD decision rules
-function ensembleAction(res,r){ const m=res.models, E=res.ensemble.score, pB=res.ensemble.breachProb;
-  if(m.objective.score_0_100>=70 && E>=70 && pB>0.5) return {t:'Immediate escalation',pk:'board-note',why:'Objective and ensemble both high with the pressure index above 50 — escalate now.'};
+function ensembleAction(res,r){ const m=res.models;
+  if(allBreaches().some(x=>x.rid===r.id&&x.sev==='urgent')) return {t:'Review evaluated trigger',pk:'board-note',why:'A stated screening rule has been crossed; confirm the evidence, ownership, and applicable policy.'};
   if(m.network.score_0_100>=55 && rsc(r).con>=70) return {t:'Counterparty / supplier contingency review',pk:'supplier-diversification',why:'High network centrality on concentrated exposure — contagion channel open.'};
-  if(compo(r)>=85) return {t:'Governance and control escalation',pk:'covenant-check',why:'Limit utilization critical — governance escalation.'};
   return {t:(PLAY[(r.actions||[])[0]]?PLAY[(r.actions||[])[0]][0]:'Review exposure'),pk:(r.actions||[])[0]||'board-note',why:''}; }
 // ---- Model lab UI: 5 model tabs + Ensemble + Validation + Evidence ----
 let MDLRISK=null, MDLSUB='ensemble', MSCEN=null;
@@ -3131,16 +2988,16 @@ const MPARAMS={
   params:['Weights: exposure .25 · concentration .15 · velocity .15 · volatility .10 · limit-breach .15 · control-weakness .10 · confidence-penalty .10','Limit-breach tiers: <70% util → 0 · 70–85 → 40 · 85–100 → 70 · ≥100 → 100 (score floor 75)','All inputs normalized and clamped 0–100'],
   limits:['Static weights — no learning from outcomes','Utilization proxied from the composite score, not booked limit data','Blind to nonlinearity and dependence (that is the tail model\'s job)']},
  'monte-carlo-quant':{read:'What the simulated loss distribution says: how bad is a normal-to-bad month, statistically?',
-  params:['5,000 paths · fat-tailed innovations (≈ Student-t df 5, 10% of draws ×2.4)','σ = 0.04 + volatility-rating × 0.10 · deterministic per-risk seed','Score: .25 vol + .25 VaR99 (cap 25%) + .30 ES99 (cap 30%) + .20 breach prob (threshold 1.5σ)'],
+  params:['5,000 paths · standardized Student-t innovations, df 5','σ from maintained market history where available; rating fallback otherwise · deterministic per-risk seed','Score: .30 vol + .30 VaR99 (cap 25%) + .40 ES99 (cap 30%)'],
   limits:['σ from EWMA(0.94)/rolling-36m vol on real series where one exists (ratings fallback for steel, coking coal, APIs, TiO2, lithium); fitted GARCH(1,1) remains P2','Single-factor: no cross-commodity dependence (see tail model)','10,000+ paths and empirical innovations in production']},
- 'evt-tail-stress':{read:'What crisis periods look like: fitted extreme tails, joint shocks, and the scenario library\'s worst case.',
-  params:['Blend: .30 EVT + .25 copula + .30 scenario worst + .15 scenario breadth','EVT: scaled Monte-Carlo tail ES. A real GPD peaks-over-threshold fit needs market return history and is not yet in place — the previous fit-to-simulation was circular and has been removed','Copula: Gaussian, 800 joint draws. ρ is the pipeline-computed Pearson correlation where overlapping price history exists; elsewhere a curated structural prior (0.55 for a documented linkage, 0.2 otherwise), which is a prior and not a measurement','Scenario caps: worst 15% margin, joint ES cap 18%'],
-  limits:['No fitted extreme-value distribution yet — the tail is a scaled simulation output, not a measurement','Gaussian copula understates tail dependence vs t-copula','Scenario set is user-selected — breadth depends on selection']},
+ 'joint-stress-proxy':{read:'How selected shocks, modeled tail loss, and Gaussian dependence combine. This is a stress proxy, not an extreme-value fit.',
+  params:['Blend: .30 scaled tail ES + .25 Gaussian joint stress + .30 scenario worst + .15 scenario breadth','Scaled tail ES is derived from the Monte Carlo output; no tail distribution is fitted','Gaussian dependence: 800 joint draws. Correlation uses maintained history where available and a labelled structural prior otherwise','Scenario caps: worst 15% margin, joint ES cap 18%'],
+  limits:['Not an extreme-value model','Gaussian dependence understates tail dependence','Scenario set is user-selected — breadth depends on selection']},
  'network-contagion':{read:'How far a shock travels: does this risk sit on a hub commodity that many companies share?',
   params:['Blend: .40 centrality + .35 propagation loss + .25 breadth','Centrality: shared-dependency degree across the company universe (cap: half the universe)','Propagation: 20% seed shock through the input graph, λ = 0.5 decay per step'],
   limits:['Degree centrality only — betweenness/eigenvector are Phase 3','Graph edges are cost shares, not contractual counterparty links']},
  'regime-forecast':{read:'The forward view: a ranked 30-day pressure index. Not a calibrated probability — the coefficients have never been fitted to outcomes.',
-  params:['S = 0.60 × pressure index + 0.40 × severity forecast','Calibrated logistic: z = .5(compo−70)/15 + .3(vel−55)/25 + .2(tail−55)/25 + .25(deadline−60)/40 − .55','Index clamped 3–90%; it is a ranking, not a probability'],
+  params:['S = 0.60 × pressure index + 0.40 × directional severity','Unfitted logistic transform: z = .5(compo−70)/15 + .3(vel−55)/25 + .2(tail−55)/25 + .25(deadline−60)/40 − .55','Index clamped 3–90; it is a ranking, not a probability'],
   limits:['Coefficients seeded, never fitted — so this is a ranking device, not a probability. See Model lab → Validation','No narrative/text signals yet (Phase 3)','Point-in-time: no path dependence']}
 };
 function modelCard(m){ const b=scoreBand(m.score_0_100), rm=m.raw_metrics, gov=MPARAMS[m.model_id];
@@ -3164,18 +3021,23 @@ function evidenceTab(r){ return `<div class="card">${r.evidence.map(e=>`<div cla
 // Replaces the synthetic-outcome backtest. Reports only what the accumulated
 // real score history in data/history.json can support, and says plainly what
 // is still missing. No synthetic outcomes, no manufactured metrics.
-const VALID_MIN_WEEKS = 12;
+let OUTCOMES=[]; try{OUTCOMES=JSON.parse(localStorage.getItem('rr-outcomes')||'[]');}catch(e){OUTCOMES=[];}
+function outcomeCaptureView(){ const recent=OUTCOMES.slice(-5).reverse(); return `<div class="card"><div class="lab">Local outcome capture — validation foundation</div><p class="meta">Record a governed outcome against the selected risk and current data/model vintage. Records stay in this browser until exported or cleared; they are not treated as validation metrics automatically.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px"><label>Outcome date<input id="out-date" type="date" value="${new Date().toISOString().slice(0,10)}"></label><label>Outcome type<select id="out-type"><option value="trigger-operative">trigger operative</option><option value="market-move">market/FX move</option><option value="materiality">materiality threshold</option><option value="action-disposition">action disposition</option></select></label><label>Observed value<input id="out-observed" type="number" step="any"></label><label>Declared threshold<input id="out-threshold" type="number" step="any"></label><label>Unit<input id="out-unit" type="text" placeholder="%, INR, yes/no"></label><label>Reviewer disposition<select id="out-disposition"><option>accepted</option><option>rejected</option><option>superseded</option><option>pending review</option></select></label></div><label style="display:block;margin-top:9px">Notes<input id="out-notes" type="text" style="width:100%" placeholder="Evidence ID or review note"></label><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn pri" type="button" onclick="saveOutcome()">Save local outcome</button><button class="ghost" type="button" onclick="exportOutcomes()">Export JSON</button><button class="ghost" type="button" onclick="clearOutcomes()">Clear local outcomes</button></div><div aria-live="polite" id="out-status" class="meta" style="margin-top:8px">${OUTCOMES.length} local record(s).</div>${recent.length?`<div style="overflow-x:auto;margin-top:9px"><table class="t"><tr><th>Date</th><th>Risk</th><th>Type</th><th>Observed / threshold</th><th>Disposition</th><th>Vintage</th></tr>${recent.map(o=>`<tr><td>${esc(o.outcome_date)}</td><td>${esc(o.risk_id)}</td><td>${esc(o.outcome_type)}</td><td>${esc(o.observed)} ${esc(o.unit)} / ${esc(o.threshold)}</td><td>${esc(o.reviewer_disposition)}</td><td>${esc(o.input_vintage)}</td></tr>`).join('')}</table></div>`:''}</div>`; }
+window.saveOutcome=()=>{ const g=id=>document.getElementById(id).value, observed=g('out-observed'),threshold=g('out-threshold'); if(observed===''||threshold===''){document.getElementById('out-status').textContent='Observed value and declared threshold are required.';return;} OUTCOMES.push({id:'out-'+Date.now().toString(36),risk_id:MDLRISK,outcome_date:g('out-date'),outcome_type:g('out-type'),observed:Number(observed),threshold:Number(threshold),unit:g('out-unit')||'unspecified',reviewer_disposition:g('out-disposition'),notes:g('out-notes'),input_vintage:(CDATA&&CDATA.generated)||'embedded-fallback',model_version:'registry-current',recorded_at:new Date().toISOString()}); localStorage.setItem('rr-outcomes',JSON.stringify(OUTCOMES)); renderModels(); };
+window.exportOutcomes=()=>{ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({schema_version:'1.0',outcomes:OUTCOMES},null,2)],{type:'application/json'}));a.download='risk-radar-outcomes.json';a.click();URL.revokeObjectURL(a.href); };
+window.clearOutcomes=()=>{OUTCOMES=[];localStorage.removeItem('rr-outcomes');renderModels();};
 function validationView(){
   const metric=(l,v,c)=>`<div class="kpi" style="cursor:default"><b style="color:${c||'var(--ink)'}">${v}</b><span>${l}</span></div>`;
   const H = (typeof CDATA !== 'undefined' && CDATA && CDATA.history && CDATA.history.dates) ? CDATA.history : null;
-  const days = H ? H.dates.length : 0;
-  const weeks = Math.floor(days / 7);
+  const observations = H ? H.dates.length : 0;
+  const elapsedDays = H && H.dates.length>1 ? Math.max(0,Math.round((new Date(H.dates[H.dates.length-1])-new Date(H.dates[0]))/86400000)) : 0;
   let h = `<div class="card" style="background:var(--amberbg);padding:12px 16px">
     <span class="chip sev3">not yet validated</span>
-    <span style="font-size:12.5px;color:var(--amber)">These models have not been backtested, because backtesting needs realised outcomes and the tool has not been running long enough to have any. Nothing on this page should be read as evidence that one model outperforms another.</span></div>`;
-  h += `<div class="kpis">${metric('real observation days', days)}${metric('complete weeks', weeks)}${metric('needed for a first backtest', VALID_MIN_WEEKS + ' weeks')}${metric('validation metrics available', weeks >= VALID_MIN_WEEKS ? 'yes' : 'no', weeks >= VALID_MIN_WEEKS ? 'var(--teal)' : 'var(--amber)')}</div>`;
+    <span style="font-size:12.5px;color:var(--amber)">These models have not been performance-validated. Score snapshots are being collected, but there is no governed outcome label series to test discrimination or calibration. Nothing here is evidence that one model outperforms another.</span></div>`;
+  h += `<div class="kpis">${metric('score snapshots', observations)}${metric('calendar span', elapsedDays+' days')}${metric('outcome labels', 'none')}${metric('validation metrics available', 'no', 'var(--amber)')}</div>`;
   if (!H) {
     h += `<div class="card"><p style="font-size:13px;color:var(--ink2)">No score history file loaded. The daily pipeline appends to <code>data/history.json</code> on every run; history accumulates in git, which is what will eventually make a real backtest possible.</p></div>`;
+    h += outcomeCaptureView();
     return h;
   }
   h += `<div class="card"><div class="lab">Real score history to date</div>
@@ -3197,18 +3059,19 @@ function validationView(){
       <li><b>Drift</b> — recomputed weekly, with an alert on AUC movement beyond 0.05.</li>
     </ul>
     <p class="meta" style="margin:6px 0 0">Outcome definition has to be fixed in advance and written down, not chosen after the fact — otherwise the backtest measures the choice, not the model.</p></div>`;
+  h += outcomeCaptureView();
   return h;
 }
 
 function ensembleView(res){ const e=res.ensemble, b=scoreBand(e.score), r=RID(MDLRISK);
   const bars=res.keys.map((k,i)=>({key:k,label:MDLTABS.find(t=>t[0]===k)[1],s:res.models[k].score_0_100,w:res.weights[i]}));
   const metric=(l,v,c)=>`<div class="kpi" style="cursor:default"><b style="color:${c||'var(--ink)'}">${v}</b><span>${l}</span></div>`;
-  let h=`<div class="kpis">${metric('final ensemble score',e.score,b[1])}${metric('confidence',e.confidence)}${metric('disagreement',e.dispBand+' (σ'+e.dispersion+')',e.dispersion>25?'var(--red)':e.dispersion>=12?'var(--amber)':'var(--teal)')}${metric('regime',res.regime)}${metric('pressure index 30d',Math.round(e.breachProb*100),e.breachProb>0.5?'var(--red)':'var(--ink)')}</div>`;
+  let h=`<div class="kpis">${metric('model median',e.score,b[1])}${metric('data-weighted reference',e.weightedReference)}${metric('disagreement',e.dispBand+' (σ'+e.dispersion+')',e.dispersion>25?'var(--red)':e.dispersion>=12?'var(--amber)':'var(--teal)')}${metric('regime',res.regime)}${metric('pressure index 30d',e.pressureIndex,'var(--ink)')}</div>`;
   if(e.warnings.length) h+=`<div class="card" style="background:var(--redbg);padding:12px 16px">${e.warnings.map(w=>`<span class="chip sev5">${w}</span>`).join(' ')}</div>`;
   if(e.tag) h+=`<div style="margin:6px 0"><span class="chip sev3">${e.tag}</span></div>`;
   h+=`<h2 style="font-size:15px">Model comparison — five lenses on this risk</h2><div class="card">`;
   bars.forEach(x=>{ const bb=scoreBand(x.s); h+=`<div class="crow" data-mgoto="${x.key}" style="cursor:pointer" title="Open the ${x.label} model card"><span class="cn" style="width:120px">${x.label}</span><span class="cbar" style="max-width:300px"><span style="width:${x.s}%;background:${bb[1]}"></span></span><span style="font-family:'Spline Sans Mono',monospace;font-weight:600;width:34px">${x.s}</span><span class="lab" style="width:110px">weight ${Math.round(x.w*100)}%</span></div>`; });
-  h+=`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)"><span class="lab">Range band — min ${e.min} · median ${e.median} · max ${e.max} · tick = ensemble</span><div class="crow"><span class="cn" style="width:120px">${e.min} → ${e.max}</span><span class="cbar" style="max-width:300px;position:relative"><span style="position:absolute;left:${e.min}%;width:${Math.max(2,e.max-e.min)}%;background:color-mix(in srgb,var(--th) 45%,transparent)"></span><span style="position:absolute;left:${clamp(e.median,0,99)}%;width:2px;background:var(--ink3)"></span><span style="position:absolute;left:${clamp(e.score,0,99)}%;width:3px;background:var(--ink)"></span></span><span class="lab">σ ${e.dispersion}</span></div><p class="meta" style="margin:6px 0 0">Click any model bar to open its factor decomposition. Wide span = the models see different risks.</p></div></div>`;
+  h+=`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)"><span class="lab">Range band — min ${e.min} · median ${e.median} · max ${e.max}</span><div class="crow"><span class="cn" style="width:120px">${e.min} → ${e.max}</span><span class="cbar" style="max-width:300px;position:relative"><span style="position:absolute;left:${e.min}%;width:${Math.max(2,e.max-e.min)}%;background:color-mix(in srgb,var(--th) 45%,transparent)"></span><span style="position:absolute;left:${clamp(e.median,0,99)}%;width:3px;background:var(--ink)"></span></span><span class="lab">σ ${e.dispersion}</span></div><p class="meta" style="margin:6px 0 0">These are related lenses sharing inputs, not independent model votes. Use the range and inspect disagreement; this summary is not decision-ready on its own.</p></div></div>`;
   const dev=bars.map(x=>({l:x.label,d:x.s-e.score})).sort((a,b)=>Math.abs(b.d)-Math.abs(a.d))[0];
   h+=`<h2 style="font-size:15px">Why scores disagree</h2><div class="card"><p style="font-size:13px;color:var(--ink2)">Weights adapt to the <b>${res.regime}</b> regime and each model's confidence and data quality. ${e.dispersion>25?'Disagreement is <b>high</b> (σ '+e.dispersion+') — itself a signal of structural uncertainty or regime change; treat the range, not the point estimate.':e.dispersion>=12?'Disagreement is <b>moderate</b> (σ '+e.dispersion+') — the lenses broadly align but weight different channels.':'The models <b>agree</b> (σ '+e.dispersion+'), so the ensemble is robust.'} Largest outlier: <b>${dev.l}</b> (${dev.d>0?'+':''}${dev.d} vs the ensemble). ${''}</p></div>`;
   const a=ensembleAction(res,r), p=PLAY[a.pk];
@@ -3221,7 +3084,7 @@ function renderModels(){
     `<optgroup label="Risk universe">` + RISKS.slice().sort((a,b)=>priority(b)-priority(a)).map(r=>`<option value="${r.id}"${r.id===MDLRISK?' selected':''}>${r.title}</option>`).join('') + `</optgroup>` +
     (CUSTOMRISKS.length ? `<optgroup label="Saved stress configurations">` + CUSTOMRISKS.map(r=>`<option value="${r.id}"${r.id===MDLRISK?' selected':''}>${r.title}</option>`).join('') + `</optgroup>` : '');
   const res=computeModels(MDLRISK,MSCEN);
-  document.getElementById('mdlregime').textContent = 'regime: '+res.regime+' · ensemble '+res.ensemble.score+'/100 · disagreement '+res.ensemble.dispBand+' · pressure index '+Math.round(res.ensemble.breachProb*100);
+  document.getElementById('mdlregime').textContent = 'regime: '+res.regime+' · model median '+res.ensemble.score+'/100 · disagreement '+res.ensemble.dispBand+' · pressure index '+res.ensemble.pressureIndex;
   document.getElementById('mdltabs').innerHTML = MDLTABS.map(t=>`<button class="tabbtn" data-msub="${t[0]}" style="${t[0]===MDLSUB?'background:var(--th);color:#fff':'background:var(--card2)'};border-radius:999px;padding:6px 14px">${t[1]}${res.models[t[0]]?' '+res.models[t[0]].score_0_100:''}</button>`).join('');
   document.getElementById('mdlbody').innerHTML = MDLSUB==='ensemble'?ensembleView(res) : MDLSUB==='tail'?tailTab(res) : MDLSUB==='validation'?validationView() : MDLSUB==='evidence'?evidenceTab(RID(MDLRISK)) : modelCard(res.models[MDLSUB]);
 }
@@ -3278,12 +3141,20 @@ function renderCfgList(){
   }).join('') : `<p class="meta">No saved configurations yet. Stack shocks, tune the assumptions, name it, and save — it becomes a risk item every model can score.</p>`;
 }
 function initConfigs(){ try{ CFGS = JSON.parse(localStorage.getItem('tpm-cfgs')||'[]'); }catch(e){ CFGS=[]; } CFGS.forEach(registerConfig); renderCfgList(); }
+function parseCsvLine(line){ const out=[]; let cur='',quoted=false; for(let i=0;i<line.length;i++){ const ch=line[i]; if(ch==='"'){ if(quoted&&line[i+1]==='"'){cur+='"';i++;}else quoted=!quoted; } else if(ch===','&&!quoted){out.push(cur.trim());cur='';} else cur+=ch; } out.push(cur.trim()); return out; }
+function parsePortfolioCsv(text){ const lines=String(text).replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim()); if(lines.length<2) throw new Error('CSV needs a header and at least one position.'); const heads=parseCsvLine(lines[0]).map(x=>x.toLowerCase()); const required=['name','factor','amount_inr','sensitivity_sign','hedge_coverage_pct']; required.forEach(h=>{if(!heads.includes(h))throw new Error('Missing column: '+h);}); return lines.slice(1).map(line=>{ const vals=parseCsvLine(line), row=Object.fromEntries(heads.map((h,i)=>[h,vals[i]])); const raw=String(row.sensitivity_sign||'').toLowerCase(); const sign=raw==='cost'||raw==='import'||raw==='1'||raw==='+'?1:raw==='revenue'||raw==='export'||raw==='-1'||raw==='-'?-1:Number(raw); return {name:row.name,factor:row.factor,amountInr:Number(String(row.amount_inr).replace(/[,₹\s]/g,'')),sensitivitySign:sign,hedgeCoveragePct:Number(row.hedge_coverage_pct||0)}; }); }
+document.getElementById('portfolioown').addEventListener('change',e=>document.getElementById('portfoliofile').disabled=!e.target.checked);
+document.getElementById('portfoliofile').addEventListener('change',async e=>{ const out=document.getElementById('portfolioout'); try{ const file=e.target.files[0]; if(!file)return; const rows=parsePortfolioCsv(await file.text()); const result=RiskModels.portfolioCfar(rows,CDATA||{}, {horizonMonths:1}); if(!result.available){out.innerHTML=`<p class="meta">Unavailable: ${esc(result.reason)}. Factor IDs must match maintained series such as <code>crude</code>, <code>gold</code>, <code>usdinr</code>, <code>wti</code>, or <code>natgas</code>.</p>`;return;} out.innerHTML=`<div class="kpis"><div class="kpi"><b>₹${result.cfArInr.toLocaleString('en-IN')}</b><span>95% one-month CFaR</span></div><div class="kpi"><b>₹${result.volatilityInr.toLocaleString('en-IN')}</b><span>portfolio volatility</span></div><div class="kpi"><b>${result.includedRows}/${rows.length}</b><span>positions included</span></div></div><p class="meta">${result.method}; zero correlation is used where no maintained pair exists. This result is not validated and excludes liquidity, basis, optionality, cash-flow timing, and non-linear instruments.</p>`; }catch(err){out.innerHTML=`<p style="color:var(--red)">${esc(err.message)}</p>`;} });
+document.getElementById('portfolioclear').addEventListener('click',()=>{document.getElementById('portfoliofile').value='';document.getElementById('portfolioout').innerHTML='';document.getElementById('portfolioown').checked=false;document.getElementById('portfoliofile').disabled=true;});
+document.getElementById('portfolioexample').addEventListener('click',()=>{ const csv='name,factor,amount_inr,sensitivity_sign,hedge_coverage_pct\nCrude purchases,crude,100000000,1,25\nUSD payables,usdinr,50000000,1,40\nGold inventory,gold,25000000,1,10\n'; const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='risk-radar-portfolio-example.csv'; a.click(); URL.revokeObjectURL(a.href); });
+document.getElementById('hedgerun').addEventListener('click',()=>{ const parse=id=>document.getElementById(id).value.split(/[\s,;]+/).filter(Boolean).map(Number); const out=document.getElementById('hedgeout'); try{ const exposure=parse('hedgeexp'), hedge=parse('hedgeinst'); const r=RiskModels.indAs109Diagnostics({exposureChanges:exposure,hedgeChanges:hedge}); if(r.correlation==null){out.innerHTML='<p class="meta">Need at least three matched, non-constant observations in each series.</p>';return;} out.innerHTML=`<div class="kpis"><div class="kpi"><b>${r.correlation}</b><span>correlation</span></div><div class="kpi"><b>${r.regressionSlope}</b><span>regression slope</span></div><div class="kpi"><b>${r.rSquared}</b><span>R²</span></div><div class="kpi"><b>${r.dollarOffset==null?'—':r.dollarOffset}</b><span>dollar offset</span></div></div><p class="meta">Economic-relationship evidence: <b>${r.economicRelationshipEvidence}</b>. ${r.observations} observations. Formal designation, hedge ratio, sources of ineffectiveness, credit-risk dominance, rebalancing, and accounting documentation still require governed judgement under ${r.standard}.</p>`; }catch(err){out.innerHTML=`<p style="color:var(--red)">${esc(err.message)}</p>`;} });
+document.getElementById('hedgeclear').addEventListener('click',()=>{document.getElementById('hedgeexp').value='';document.getElementById('hedgeinst').value='';document.getElementById('hedgeout').innerHTML='';});
 document.getElementById('mdlsel').addEventListener('change',e=>{ MDLRISK=e.target.value; MSCEN=defaultScen(RID(MDLRISK)); renderModels(); });
 document.getElementById('mdltabs').addEventListener('click',e=>{ const b=e.target.closest('[data-msub]'); if(b){ MDLSUB=b.dataset.msub; renderModels(); } });
 document.getElementById('mdlbody').addEventListener('click',e=>{ const c=e.target.closest('[data-scenchip]'); if(c){ MSCEN.has(c.dataset.scenchip)?MSCEN.delete(c.dataset.scenchip):MSCEN.add(c.dataset.scenchip); if(!MSCEN.size)MSCEN.add('y_inr8'); renderModels(); return; } const g=e.target.closest('[data-mgoto]'); if(g){ MDLSUB=g.dataset.mgoto; renderModels(); return; } const dd=e.target.closest('[data-dd]'); if(dd){ goDeep(dd.dataset.dd); } });
 
 // ===== P1: live-data pipeline consumption =====
-let CDATA = null, FIN = null;
+let CDATA = null, FIN = null, HEALTH = null, BENCHMARKS = null, MODELREGISTRY = null;
 window.LASTRATES = null;
 function fmtD(iso){ try { return new Date(iso + 'T00:00:00').toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'}); } catch(e) { return iso; } }
 function cvol(list){ if (!CDATA || !CDATA.vols) return null; const vs = list.map(c => CDATA.vols[c]).filter(Boolean).map(v => v.monthly); return vs.length ? vs.reduce((a,b)=>a+b,0)/vs.length : null; }
@@ -3301,10 +3172,16 @@ async function loadData(){
         gold: s.gold ? s.gold.v : DATA.snapshot.gold, brent: s.brent ? s.brent.v : DATA.snapshot.brent,
         note: 'Baseline = last pipeline run (' + (CDATA.generated||'').slice(0,10) + ') — sources and formulas in Methodology → Live data pipeline.' };
       if (CDATA.corr && Object.keys(CDATA.corr).length) LIVECORR = CDATA.corr;
+      document.getElementById('lastupd').textContent='market data '+(CDATA.generated||'').slice(0,16).replace('T',' ')+' UTC';
     }
   } catch(e) {}
   try { const r2 = await fetch('./data/financials.json', {cache:'no-store'}); if (r2.ok) FIN = await r2.json(); } catch(e) {}
+  try { const r3 = await fetch('./data/health.json', {cache:'no-store'}); if (r3.ok) HEALTH = await r3.json(); } catch(e) {}
+  try { const r4 = await fetch('./data/benchmarks.json', {cache:'no-store'}); if (r4.ok) BENCHMARKS = await r4.json(); } catch(e) {}
+  try { const r5 = await fetch('./data/model-registry.json', {cache:'no-store'}); if (r5.ok) MODELREGISTRY = await r5.json(); } catch(e) {}
 }
+function renderModelRegistry(){ const el=document.getElementById('modelregistry'); if(!el)return; if(!MODELREGISTRY){el.innerHTML='<p class="meta">Model registry unavailable; no governance status is inferred.</p>';return;} const rows=MODELREGISTRY.models.map(m=>`<tr><td style="font-weight:600">${esc(m.label)}</td><td>${esc(m.family)}</td><td>${esc(m.version)}</td><td><span class="chip ${m.decision_ready?'sev2':'sev3'}">${esc(m.status)}</span></td><td>${m.decision_ready?'evaluated rule only':'explain/rank only'}</td><td>${m.outputs.map(esc).join(' · ')}</td><td>${m.limitations.map(esc).join(' · ')}</td></tr>`).join(''); el.innerHTML=`<div style="overflow-x:auto"><table class="t"><tr><th>Model</th><th>Family</th><th>Version</th><th>Status</th><th>Permitted use</th><th>Outputs</th><th>Known limits</th></tr>${rows}</table></div><p class="meta" style="margin:8px 0 0">Generated from <code>data/model-registry.json</code>. ${esc(MODELREGISTRY.policy.decision_use)} No performance validation metrics exist yet because score history is not an outcome-labelled sample.</p>`; }
+function renderBenchmarks(){ const el=document.getElementById('benchmarkcard'); if(!el)return; if(!BENCHMARKS){el.innerHTML='<div style="font-weight:600">Market capability benchmark</div><p class="meta">Benchmark registry unavailable.</p>';return;} const rows=BENCHMARKS.benchmarks.map(b=>`<tr><td style="font-weight:600">${esc(b.vendor)}</td><td>${b.metrics.map(esc).join(' · ')}</td><td>${b.position_and_market_data?'yes':'no'}</td><td>${b.hedge_accounting?'yes':'no'}</td><td>${b.official_sources.map((u,i)=>`<a href="${esc(u)}" target="_blank" rel="noopener">official ${i+1}</a>`).join(' · ')}</td></tr>`).join(''); el.innerHTML=`<div style="font-weight:600;margin-bottom:6px">Market capability benchmark <span class="meta">checked ${esc(BENCHMARKS.checked_at)}</span></div><p class="sub" style="margin:0 0 10px">Feature coverage from official product pages; this is not a model-performance league table because the reviewed vendor pages do not publish comparable accuracy, calibration, or false-alert statistics.</p><div style="overflow-x:auto"><table class="t"><tr><th>Reference</th><th>Published capability metrics</th><th>Positions + market data</th><th>Hedge accounting</th><th>Sources</th></tr>${rows}</table></div><p class="meta" style="margin:8px 0 0">Risk Radar differentiates on India policy evidence, exposure mapping, hedgeability, provenance, and reviewable actions. Trade capture, full revaluation, counterparty exposure, accounting postings, and execution should integrate with established treasury platforms rather than be imitated here.</p>`; }
 const corrName = id => DATA.commodities[id] ? DATA.commodities[id][0] : id === 'usdinr' ? 'USD/INR' : id === 'wti' ? 'WTI' : id;
 function renderManagedCorr(){
   const el = document.getElementById('corrbox');
@@ -3360,6 +3237,8 @@ renderCockpit();
 renderModels();
 tab('cockpit');
 loadData().then(() => {
+  renderModelRegistry();
+  renderBenchmarks();
   if (CDATA && CDATA.corr && Object.keys(CDATA.corr).length) { renderManagedCorr(); renderPeriodic(); }
   else { const el = document.getElementById('corrbox');
     if (el) el.innerHTML = `<div style="font-weight:600">Price correlation matrix</div>

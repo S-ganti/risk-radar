@@ -41,7 +41,7 @@ OUT = os.path.join(ROOT, "data", "commodities.json")
 HEDGE_SCALE = {
     "4": "Listed contract available onshore in INR (MCX / NCDEX) and liquid globally. Hedge onshore, no FX leg, lightest permission burden.",
     "3": "Liquid listed contract exists offshore in USD only (LME / CME / ICE / SGX / DCE). Hedging needs an offshore commodity derivative under the RBI Master Direction plus an FX leg - and the FX leg is itself constrained by the April 2026 NDF prohibition.",
-    "2": "Listed but thin, or hedgeable only through a correlated proxy contract. Material basis risk; Ind AS 109 hedge effectiveness is hard to pass at 80-125%.",
+    "2": "Listed but thin, or hedgeable only through a correlated proxy contract. Material basis risk requires an evidenced economic relationship, documented hedge ratio, and ongoing review under Ind AS 109.",
     "1": "No exchange contract. OTC swap, index-linked supply contract or formula pricing only. Counterparty credit and disclosure burden sit with the client.",
     "0": "No financial hedge exists. Managed contractually only: pass-through clauses, indexation, tenders, inventory policy, dual sourcing.",
 }

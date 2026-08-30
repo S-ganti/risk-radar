@@ -34,6 +34,7 @@ from datetime import date, datetime, timedelta, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT, "data")
 RAW_DIR = os.path.join(DATA_DIR, "raw")
+HISTORY_LIMIT_DAYS = 730
 UA = {"User-Agent": "Mozilla/5.0 (risk-radar-pipeline; +https://github.com/S-ganti/risk-radar)"}
 TODAY = date.today()
 HISTORY_YEARS = 5.3
@@ -360,9 +361,9 @@ def main():
             compo = round(0.30 * meta["sev"] / 5 * 100 + 0.20 * vel +
                           0.25 * meta["exp"] + 0.15 * meta["con"] + 0.10 * meta["conf"])
             history["scores"].setdefault(rid, []).append(compo)
-        history["dates"] = history["dates"][-26:]
+        history["dates"] = history["dates"][-HISTORY_LIMIT_DAYS:]
         for rid in history["scores"]:
-            history["scores"][rid] = history["scores"][rid][-26:]
+            history["scores"][rid] = history["scores"][rid][-HISTORY_LIMIT_DAYS:]
 
     # ---- spot block ----
     spot = {}
@@ -408,19 +409,33 @@ def main():
             "Regime = 0.5*avg 5y vol percentile (Brent, Henry Hub, gold, USDINR) + 0.3*INR 20d momentum (3%=max) + 0.2*breadth(|move|>5%); thresholds 45/60/75.",
             "Velocity computed from |20d move| where a daily series exists (oil, gold, USDINR); other risks keep curated velocity, tagged in the UI.",
             "Exposure/concentration remain curated in P1 (computed from cost-base data in P2).",
+            "Score history retains up to 730 daily observations; validation additionally requires defined realised outcomes.",
             "natgas is US Henry Hub — Asian LNG is oil-indexed; steel/metcoal/API/TiO2/lithium have no free series (rating-based).",
             "MCX bhavcopy: TODO (WAF/session); gold INR derived as XAUUSD x USDINR meanwhile.",
         ],
     }
 
+    # Validate the in-memory candidates before replacing last-known-good files.
+    # A failed fetch or malformed candidate leaves the published artifacts intact.
+    from validate import validate_all
+    gate, health = validate_all(latest_override=latest, history_override=history)
+    if gate.errors:
+        details = "; ".join(check["detail"] for check in gate.errors)
+        raise RuntimeError(f"publication gate blocked: {details}")
+
     os.makedirs(DATA_DIR, exist_ok=True)
-    with open(os.path.join(DATA_DIR, "latest.json"), "w", encoding="utf-8") as f:
-        json.dump(latest, f, indent=1)
-    with open(hist_path, "w", encoding="utf-8") as f:
-        json.dump(history, f, indent=1)
+    def atomic_json(path, payload, indent=1):
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=indent)
+            f.write("\n")
+        os.replace(tmp, path)
+
+    atomic_json(os.path.join(DATA_DIR, "latest.json"), latest)
+    atomic_json(hist_path, history)
+    atomic_json(os.path.join(DATA_DIR, "health.json"), health, indent=2)
     for cid, closes in series.items():  # refetchable; data/raw is gitignored
-        with open(os.path.join(RAW_DIR, f"{cid}.json"), "w", encoding="utf-8") as f:
-            json.dump(closes, f)
+        atomic_json(os.path.join(RAW_DIR, f"{cid}.json"), closes, indent=None)
 
     print(f"\nWrote data/latest.json — {len(series)} series ({sum(1 for c in freq.values() if c=='D')} daily), "
           f"{len(corr)} corr pairs, regime={regime} (score {regime_score:.0f}), velocity={velocity}")

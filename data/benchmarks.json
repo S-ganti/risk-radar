@@ -1,0 +1,64 @@
+{
+  "checked_at": "2026-08-30",
+  "scope_note": "Vendor capability claims are taken from the linked official product pages. LCH model-governance practices are a separate institutional benchmark and are not attributed to LSEG Corporate Treasury Risk.",
+  "benchmarks": [
+    {
+      "vendor": "LSEG Corporate Treasury Risk / Open Risk Analytics",
+      "official_sources": [
+        "https://www.lseg.com/en/data-analytics/products/corporate-treasury-risk",
+        "https://www.lseg.com/en/media-centre/press-releases/2026/lseg-expands-models-as-a-service-with-open-risk-analytics"
+      ],
+      "metrics": ["Historical VaR", "stress testing with full revaluation", "sensitivity analysis", "P&L explain", "cashflow and stressed cashflows", "PFE/EPE", "CVA", "MtM", "hedge effectiveness diagnostics"],
+      "position_and_market_data": true,
+      "hedge_accounting": true,
+      "validation_disclosure": "Product pages emphasize transparent calculations; no public product-specific performance statistics were found."
+    },
+    {
+      "vendor": "Kyriba Commodities Risk Management",
+      "official_sources": [
+        "https://www.kyriba.com/products/risk-management/",
+        "https://www.kyriba.com/news/kyriba-expands-risk-portfolio-launches-commodities-risk/"
+      ],
+      "metrics": ["exposure forecasts", "hedge positions", "forward-curve valuation", "MtM", "settlement forecasts", "hedge designation and performance", "IFRS 9 and ASC 815 accounting"],
+      "position_and_market_data": true,
+      "hedge_accounting": true,
+      "validation_disclosure": "No public model-performance statistics were found on the reviewed official product pages."
+    },
+    {
+      "vendor": "FIS Commodity Risk Manager",
+      "official_sources": [
+        "https://www.fisglobal.com/products/fis-commodity-risk-manager",
+        "https://www.fisglobal.com/-/media/fisglobal/files/pdf/brochure/corporate-hedging-brochure.pdf"
+      ],
+      "metrics": ["VaR", "CVaR", "CFaR", "PFE", "CVA/DVA", "Greek sensitivities", "portfolio stress testing", "position percent hedged", "intraday MtM", "limits monitoring", "hedge effectiveness"],
+      "position_and_market_data": true,
+      "hedge_accounting": true,
+      "validation_disclosure": "No public model-performance statistics were found on the reviewed official product pages."
+    },
+    {
+      "vendor": "IBSFINtech Commodity Risk",
+      "official_sources": [
+        "https://www.ibsfintech.com/solutions/commodity-risk/"
+      ],
+      "metrics": ["real-time MtM", "exposure and hedge positions", "policy threshold limits", "exceptions", "audit trail", "accounting entries"],
+      "position_and_market_data": true,
+      "hedge_accounting": true,
+      "validation_disclosure": "No public quantitative model-performance statistics were found on the reviewed official product page."
+    },
+    {
+      "vendor": "LCH institutional governance reference",
+      "official_sources": [
+        "https://www.lseg.com/en/post-trade/clearing/risk-management/ltd-risk-management"
+      ],
+      "metrics": ["daily portfolio backtesting", "annual independent validation", "historical simulation VaR/ES", "4-10 year minimum lookback depending on service", "2-7 day holding periods", "daily parameter review"],
+      "position_and_market_data": true,
+      "hedge_accounting": false,
+      "validation_disclosure": "Public governance and model inventory metrics are disclosed; this is a clearing benchmark, not a corporate-treasury product comparison."
+    }
+  ],
+  "risk_radar_target": {
+    "differentiate_on": ["India policy evidence", "company and commodity exposure mapping", "basis and hedgeability", "source traceability", "reviewable next actions"],
+    "integrate_or_defer": ["trade capture", "independent valuation", "full revaluation VaR", "counterparty exposure", "hedge accounting postings", "execution"],
+    "minimum_metrics_before_validation_claim": ["defined outcomes", "coverage exceptions", "calibration", "discrimination", "false-alert rate", "ranking stability", "data freshness and provenance coverage"]
+  }
+}

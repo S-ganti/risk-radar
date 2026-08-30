@@ -4,3 +4,5 @@ __pycache__/
 PARTNER-BRIEF.html
 # Build artefact: the DATA.commodities literal emitted by build_commodities.py
 data/_commodities_block.js
+# Local research/audit working files are never published with the public demo.
+autoresearch/

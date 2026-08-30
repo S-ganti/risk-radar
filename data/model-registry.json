@@ -1,0 +1,109 @@
+{
+  "generated": "2026-08-30",
+  "policy": {
+    "decision_use": "Only evaluated rules backed by observed values and explicit limits may create alerts. Experimental model outputs may rank or explain but may not force escalation.",
+    "validation_minimum": "A model is not validated until its outcome definition, sample window, calibration/discrimination metrics, limitations, reviewer, and versioned result are recorded.",
+    "review_frequency": "quarterly, and after every material methodology or data change"
+  },
+  "models": [
+    {
+      "id": "attention-composite",
+      "version": "2.0.0",
+      "family": "rules",
+      "label": "Attention composite",
+      "status": "experimental",
+      "decision_ready": false,
+      "outputs": ["attention_score_0_100", "drivers", "change"],
+      "metrics_required": ["ranking stability", "top-decile hit rate", "false-alert rate"],
+      "limitations": ["severity, exposure and concentration include curated inputs", "score is not loss, probability, utilisation or capital"]
+    },
+    {
+      "id": "evaluated-breach-rules",
+      "version": "2.0.0",
+      "family": "rules",
+      "label": "Evaluated breach rules",
+      "status": "controlled",
+      "decision_ready": true,
+      "outputs": ["observed_value", "limit_value", "unit", "source", "breach_state"],
+      "metrics_required": ["rule coverage", "false-positive review", "stale-input rate"],
+      "limitations": ["only the currently configured score, movement, confidence and deadline rules are evaluated"]
+    },
+    {
+      "id": "monte-carlo-loss-proxy",
+      "version": "2.0.0",
+      "family": "quantitative",
+      "label": "Monte Carlo loss proxy",
+      "status": "experimental",
+      "decision_ready": false,
+      "outputs": ["VaR95_proxy", "VaR99_proxy", "ES99_proxy"],
+      "metrics_required": ["exception rate", "Kupiec coverage", "Christoffersen independence", "tail coverage"],
+      "limitations": ["not portfolio-position based", "rating volatility fallback where no market history exists", "not a regulatory VaR model"]
+    },
+    {
+      "id": "joint-stress-proxy",
+      "version": "2.1.0",
+      "family": "stress",
+      "label": "Joint stress proxy",
+      "status": "experimental",
+      "decision_ready": false,
+      "outputs": ["joint_stress", "scenario_worst", "scenario_breadth"],
+      "metrics_required": ["scenario coverage", "sensitivity stability", "correlation matrix diagnostics"],
+      "limitations": ["not an EVT model", "Gaussian dependence proxy", "some correlations and volatilities are fallbacks"]
+    },
+    {
+      "id": "dependency-network",
+      "version": "2.0.0",
+      "family": "network",
+      "label": "Dependency-network exposure",
+      "status": "experimental",
+      "decision_ready": false,
+      "outputs": ["degree_centrality", "affected_company_count", "propagation_proxy"],
+      "metrics_required": ["edge provenance coverage", "edge precision review", "sensitivity to inferred edges"],
+      "limitations": ["commodity dependency graph is not a contractual supplier network", "edge weights may be estimates"]
+    },
+    {
+      "id": "pressure-index-30d",
+      "version": "2.0.0",
+      "family": "forecast-ranking",
+      "label": "30-day pressure index",
+      "status": "experimental-uncalibrated",
+      "decision_ready": false,
+      "outputs": ["pressure_index_0_100", "severity_projection"],
+      "metrics_required": ["Brier score after calibration", "reliability curve", "AUC", "precision-recall"],
+      "limitations": ["not a probability", "coefficients have not been fitted to realised outcomes", "may not trigger escalation"]
+    },
+    {
+      "id": "model-range-summary",
+      "version": "2.0.0",
+      "family": "ensemble-display",
+      "label": "Model range and disagreement",
+      "status": "experimental",
+      "decision_ready": false,
+      "outputs": ["minimum", "median", "maximum", "dispersion"],
+      "metrics_required": ["component error correlation", "incremental information value", "ranking stability"],
+      "limitations": ["component families share inputs and are not independent", "no score floor or automatic action is permitted"]
+    },
+    {
+      "id": "portfolio-cfar",
+      "version": "0.1.0",
+      "family": "portfolio",
+      "label": "Local portfolio CFaR",
+      "status": "experimental",
+      "decision_ready": false,
+      "outputs": ["one_month_cfar_95_inr", "portfolio_volatility_inr", "included_rows"],
+      "metrics_required": ["coverage exceptions", "P&L attribution", "input completeness", "benchmark reconciliation"],
+      "limitations": ["normal variance-covariance approximation", "uses only factors with available monthly volatility", "correlation gaps default to zero", "input remains in the browser"]
+    },
+    {
+      "id": "ind-as-109-diagnostics",
+      "version": "0.1.0",
+      "family": "hedge-accounting",
+      "label": "Ind AS 109 relationship diagnostics",
+      "status": "decision-support-only",
+      "decision_ready": false,
+      "outputs": ["correlation", "regression_slope", "r_squared", "dollar_offset", "documentation_gaps"],
+      "metrics_required": ["reconciliation to treasury system", "accounting technical review", "designation completeness"],
+      "limitations": ["does not apply an 80-125 bright line", "does not replace documented judgement", "credit risk and hedge-ratio assessment require user evidence"]
+    }
+  ]
+}

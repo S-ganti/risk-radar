@@ -1,0 +1,138 @@
+{
+  "generated": "2026-08-30",
+  "fields": ["id", "claim_id", "source_url", "publisher", "source_type", "published_at", "as_of", "accessed_at", "verification_status", "confidence"],
+  "evidence": [
+    {
+      "id": "ev-rbi-fx-rules",
+      "claim_id": "rbi-fx",
+      "source_url": "https://worldtradescanner.com/03-RBI%20Circular-01.04.2026.htm",
+      "publisher": "World Trade Scanner mirror of RBI circular",
+      "source_type": "mirror",
+      "published_at": "2026-04-01",
+      "as_of": "2026-04-01",
+      "accessed_at": "2026-07-16",
+      "verification_status": "needs-primary-url",
+      "confidence": "medium"
+    },
+    {
+      "id": "ev-rbi-fcnr-window",
+      "claim_id": "rbi-fx",
+      "source_url": "https://www.business-standard.com/finance/news/rbi-opens-fcnr-b-swap-window-to-attract-foreign-currency-deposits-126060900723_1.html",
+      "publisher": "Business Standard",
+      "source_type": "secondary-news",
+      "published_at": "2026-06-09",
+      "as_of": "2026-06-08",
+      "accessed_at": "2026-07-16",
+      "verification_status": "needs-primary-url",
+      "confidence": "medium"
+    },
+    {
+      "id": "ev-cbam-definitive",
+      "claim_id": "cbam",
+      "source_url": "https://taxation-customs.ec.europa.eu/news/cbam-successfully-entered-force-1-january-2026-2026-01-14_en",
+      "publisher": "European Commission",
+      "source_type": "primary-official",
+      "published_at": "2026-01-14",
+      "as_of": "2026-01-01",
+      "accessed_at": "2026-07-01",
+      "verification_status": "verified",
+      "confidence": "high"
+    },
+    {
+      "id": "ev-ppac-crude-import",
+      "claim_id": "oil",
+      "source_url": "https://ppac.gov.in/import-export",
+      "publisher": "Petroleum Planning & Analysis Cell",
+      "source_type": "primary-official-homepage",
+      "published_at": null,
+      "as_of": "2026-05-31",
+      "accessed_at": "2026-07-07",
+      "verification_status": "needs-document-link",
+      "confidence": "medium"
+    },
+    {
+      "id": "ev-fbil-usdinr",
+      "claim_id": "usdinr",
+      "source_url": "https://www.fbil.org.in/",
+      "publisher": "Financial Benchmarks India",
+      "source_type": "market-data-homepage",
+      "published_at": null,
+      "as_of": "2026-07-16",
+      "accessed_at": "2026-07-16",
+      "verification_status": "needs-series-link",
+      "confidence": "medium"
+    },
+    {
+      "id": "ev-api-dependence",
+      "claim_id": "china",
+      "source_url": "https://www.policycircle.org/industry/bulk-drugs-india-api-dependence/",
+      "publisher": "Policy Circle",
+      "source_type": "secondary-analysis",
+      "published_at": "2026-03-01",
+      "as_of": "2026-03-01",
+      "accessed_at": "2026-07-01",
+      "verification_status": "needs-primary-parliament-source",
+      "confidence": "low"
+    },
+    {
+      "id": "ev-coking-coal",
+      "claim_id": "coal",
+      "source_url": "https://steel.gov.in",
+      "publisher": "Ministry of Steel",
+      "source_type": "primary-official-homepage",
+      "published_at": null,
+      "as_of": "2026-04-01",
+      "accessed_at": "2026-07-05",
+      "verification_status": "needs-document-link",
+      "confidence": "medium"
+    },
+    {
+      "id": "ev-gold-duty",
+      "claim_id": "gold",
+      "source_url": "https://www.cnbc.com/2026/05/13/india-hikes-bullion-import-duties-to-arrest-rupee-slide.html",
+      "publisher": "CNBC",
+      "source_type": "secondary-news",
+      "published_at": "2026-05-13",
+      "as_of": "2026-05-13",
+      "accessed_at": "2026-07-16",
+      "verification_status": "needs-cbic-notification",
+      "confidence": "medium"
+    },
+    {
+      "id": "ev-rates-commentary",
+      "claim_id": "rates",
+      "source_url": "https://www.mufgresearch.com",
+      "publisher": "MUFG Research",
+      "source_type": "analyst-commentary-homepage",
+      "published_at": null,
+      "as_of": "2026-06-08",
+      "accessed_at": "2026-07-04",
+      "verification_status": "needs-specific-report",
+      "confidence": "low"
+    },
+    {
+      "id": "ev-indas109",
+      "claim_id": "hedge-accounting-standard",
+      "source_url": "https://www.mca.gov.in/Ministry/pdf/9IndAS109_2017.pdf",
+      "publisher": "Ministry of Corporate Affairs",
+      "source_type": "primary-standard",
+      "published_at": "2017-01-01",
+      "as_of": "2017-01-01",
+      "accessed_at": "2026-08-30",
+      "verification_status": "verified",
+      "confidence": "high"
+    },
+    {
+      "id": "ev-indas39",
+      "claim_id": "legacy-80-125-band",
+      "source_url": "https://www.mca.gov.in/Ministry/pdf/Ind_AS39.pdf",
+      "publisher": "Ministry of Corporate Affairs",
+      "source_type": "primary-standard",
+      "published_at": null,
+      "as_of": null,
+      "accessed_at": "2026-08-30",
+      "verification_status": "verified",
+      "confidence": "high"
+    }
+  ]
+}

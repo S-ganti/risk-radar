@@ -1,0 +1,118 @@
+{
+  "generated": "2026-08-30T17:30:16+00:00",
+  "overall": "degraded",
+  "error_count": 0,
+  "warning_count": 1,
+  "checks": [
+    {
+      "id": "latest.freshness",
+      "status": "pass",
+      "detail": "latest.json is 0.0 hours old"
+    },
+    {
+      "id": "spot.required",
+      "status": "pass",
+      "detail": "USD/INR, gold and Brent records are present"
+    },
+    {
+      "id": "volatility.coverage",
+      "status": "pass",
+      "detail": "15 volatility series"
+    },
+    {
+      "id": "correlation.coverage",
+      "status": "pass",
+      "detail": "105 correlation pairs"
+    },
+    {
+      "id": "history.order",
+      "status": "pass",
+      "detail": "27 sorted, unique dates"
+    },
+    {
+      "id": "history.validation-window",
+      "status": "warning",
+      "detail": "27 score snapshots; outcome labels and a longer evaluation window are still required"
+    },
+    {
+      "id": "model-registry.ids",
+      "status": "pass",
+      "detail": "9 unique model records"
+    },
+    {
+      "id": "evidence-registry.ids",
+      "status": "pass",
+      "detail": "11 unique evidence records"
+    },
+    {
+      "id": "public-copy",
+      "status": "pass",
+      "detail": "no blocked trust or confidentiality phrases found"
+    }
+  ],
+  "sources": [
+    {
+      "id": "usdinr",
+      "state": "live",
+      "as_of": "2026-08-30",
+      "age_days": 0.7,
+      "source": "open.er-api.com"
+    },
+    {
+      "id": "eurinr",
+      "state": "live",
+      "as_of": "2026-08-30",
+      "age_days": 0.7,
+      "source": "open.er-api.com"
+    },
+    {
+      "id": "gbpinr",
+      "state": "live",
+      "as_of": "2026-08-30",
+      "age_days": 0.7,
+      "source": "open.er-api.com"
+    },
+    {
+      "id": "jpyinr",
+      "state": "live",
+      "as_of": "2026-08-30",
+      "age_days": 0.7,
+      "source": "open.er-api.com"
+    },
+    {
+      "id": "chfinr",
+      "state": "live",
+      "as_of": "2026-08-30",
+      "age_days": 0.7,
+      "source": "open.er-api.com"
+    },
+    {
+      "id": "gold",
+      "state": "live",
+      "as_of": "2026-08-30",
+      "age_days": 0.7,
+      "source": "gold-api.com"
+    },
+    {
+      "id": "brent",
+      "state": "live",
+      "as_of": "2026-08-25",
+      "age_days": 5.7,
+      "source": "Brent (EIA via FRED)"
+    },
+    {
+      "id": "eua",
+      "state": "stale",
+      "as_of": "2026-07-16",
+      "age_days": 45.7,
+      "source": "tradingeconomics.com/commodity/carbon (manual mark)"
+    },
+    {
+      "id": "gold_inr_10g",
+      "state": "live",
+      "as_of": "2026-08-30",
+      "age_days": 0.7,
+      "source": "derived: XAUUSD x USDINR (MCX feed TODO)"
+    }
+  ]
+}
