@@ -2,9 +2,9 @@
 
 Self-contained dashboard built from public official sources. Open: https://s-ganti.github.io/risk-radar/
 
-**87 companies · 97 commodity markets across 10 families · 5 model families · daily live-data pipeline.**
+**87 companies · 97 commodity markets across 10 families · 5 model families computed from real price history · 3 MCP servers · daily live-data pipeline.**
 
-Current research cycle: **2026-W28** (7 Jul 2026). Market data refreshes daily via GitHub Actions (`scripts/pipeline.py`, 18:30 IST → `data/latest.json`).
+Current research cycle: **2026-W28** (7 Jul 2026). Market data and model output refresh daily via GitHub Actions (18:30 IST → `data/latest.json`, `data/risk.json`).
 
 ## What it answers
 
@@ -28,16 +28,64 @@ Ranking the universe by *unhedgeable* share surfaces a different set of names th
 
 ```
 index.html                     the whole dashboard, single file, no build step
+engine/                        risk maths, pure stdlib — VaR/ES, GARCH, EVT,
+                               copulas, Ind AS 109 effectiveness, CFaR
+mcp_servers/                   three MCP servers over the same engine
 data/commodities.json          commodity reference sheet (fetched same-origin)
 data/latest.json               daily market data, vols, correlations, regime
+data/risk.json                 computed model output — GARCH fits, GPD tails,
+                               VaR/ES cross-checks with backtests, company CFaR
 data/history.json              real per-run score history — accumulates in git
 data/financials.json           FY26 revenue/EBITDA denominators, from filings
-scripts/build_commodities.py   source of truth for the reference sheet
-scripts/pipeline.py            daily market-data pipeline (stdlib only)
-scripts/migrations/            one-shot patches, kept as the record of what changed
+scripts/pipeline.py            daily market-data fetch (stdlib only)
+scripts/compute_risk.py        runs the engine over the fetched history
+scripts/backfill_history.py    one-shot recovery of history the old cap discarded
+tests/                         engine property tests and MCP smoke tests
 BRAINSTORM.md                  ranked feature roadmap for a risk-advisory partner
-PARTNER-REVIEW.md              correctness audit and architecture review
+PARTNER-REVIEW.md              correctness audit and architecture review (Jul)
+REVIEW-2026-09.md              September review: what was wrong, and the build
 ```
+
+## Models
+
+Every number below is computed from observed prices by `engine/`, which is pure
+standard library on purpose: the nightly job cannot break on a dependency
+resolution, and the MCP servers, the CI pipeline and the dashboard all run the
+*same* code, so a tool call and the page cannot disagree.
+
+| Layer | What runs |
+|---|---|
+| Volatility | EWMA(0.94) and GARCH(1,1) fitted by maximum likelihood; the term structure mean-reverts instead of scaling by √t |
+| VaR / ES | Historical simulation, normal parametric and Student-t Monte Carlo, reported together — disagreement between them is information about the tail, not something to resolve silently |
+| Validation | Rolling out-of-sample backtest with Kupiec coverage and Christoffersen independence. It also states when the estimation window is too thin to support the confidence level, rather than blaming the model |
+| Tails | Generalised Pareto peaks-over-threshold fitted by probability-weighted moments to **real** losses, with a mean-excess diagnostic |
+| Dependence | Measured correlations with PSD repair, and a Student-t copula whose degrees of freedom are estimated from the data — a Gaussian copula assigns vanishing probability to exactly the joint move an Indian import book carries |
+| Earnings impact | Cash-Flow-at-Risk in ₹ crore against FY26 cost base, net of revenue-side exposure to the same commodity |
+| Hedge accounting | Ind AS 109 dollar-offset and regression effectiveness against the 80–125% band |
+
+Where the data cannot support a calculation the engine returns a stated reason
+instead of a number. A company that sells what it buys is not scored as if a
+price rise only hurt it; a company where one input exceeds 35% of the cost base
+is flagged as a converter whose real exposure is a processing spread.
+
+## MCP servers
+
+```bash
+pip install mcp        # SDK 1.x and 2.x both supported
+```
+
+Registered in `.mcp.json`; all three speak stdio.
+
+- **`risk-engine`** — `run_var`, `backtest_var`, `fit_garch`, `fit_tail`, `joint_stress`, `hedge_effectiveness`, `basis_risk`, `company_cfar`, `model_summary`
+- **`india-markets`** — `get_spot`, `get_series`, `get_volatility`, `get_correlations`, `get_regime`, `hedgeability`, `score_history`
+- **`regwatch`** — `diff_watchlist`, `check_elapsed_deadlines`, `fetch_notifications`, `search_official`, `list_sources`
+
+The point of the MCP layer is not convenience. It is that the weekly cycle agent
+must **compute** its figures rather than assert them, and `regwatch` exists
+because of a specific failure: the RBI moved the FCNR(B) window forward by a
+month in August 2026 and the dashboard counted down to the old date for three
+weeks. Prices refreshed nightly the whole time. A stale price is an annoyance; a
+stale *rule* is a wrong answer delivered with confidence.
 
 The reference sheet is fetched at runtime; the scoring data the risk models consume is embedded, so **the models never depend on the network**.
 

@@ -37,6 +37,8 @@ RAW_DIR = os.path.join(DATA_DIR, "raw")
 UA = {"User-Agent": "Mozilla/5.0 (risk-radar-pipeline; +https://github.com/S-ganti/risk-radar)"}
 TODAY = date.today()
 HISTORY_YEARS = 5.3
+HISTORY_KEEP = 730  # score-history retention (days). Must exceed the 12-week
+                    # validation window by a wide margin - see REVIEW-2026-09.md §2.
 
 # --- Manual marks: no free keyless feed exists; update with each cycle. -----
 MANUAL_MARKS = {
@@ -360,9 +362,12 @@ def main():
             compo = round(0.30 * meta["sev"] / 5 * 100 + 0.20 * vel +
                           0.25 * meta["exp"] + 0.15 * meta["con"] + 0.10 * meta["conf"])
             history["scores"].setdefault(rid, []).append(compo)
-        history["dates"] = history["dates"][-26:]
+        # Keep ~2 years. The old 26-entry cap silently discarded four weeks of
+        # real observations and would have kept the twelve-week validation gate
+        # permanently out of reach; see scripts/backfill_history.py.
+        history["dates"] = history["dates"][-HISTORY_KEEP:]
         for rid in history["scores"]:
-            history["scores"][rid] = history["scores"][rid][-26:]
+            history["scores"][rid] = history["scores"][rid][-HISTORY_KEEP:]
 
     # ---- spot block ----
     spot = {}
