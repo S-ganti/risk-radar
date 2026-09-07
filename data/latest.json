@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07T07:18:48+00:00",
+ "generated": "2026-09-07T07:21:09+00:00",
  "spot": {
   "usdinr": {
    "v": 94.55,
@@ -27,7 +27,7 @@
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4400.0,
+   "v": 4398.7,
    "asof": "2026-09-07",
    "src": "gold-api.com"
   },
@@ -50,7 +50,7 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 133753,
+   "v": 133714,
    "asof": "2026-09-07",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
@@ -60,9 +60,9 @@
    "freq": "D",
    "monthly": 0.0104,
    "annual": 0.036,
-   "pct5y": 42.0,
+   "pct5y": 42.1,
    "asof": "2026-09-04",
-   "n": 1356,
+   "n": 1355,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
   },
@@ -840,6 +840,7 @@
    ]
   }
  },
+ "degraded_sources": [],
  "notes": [
   "Daily series (Brent, WTI, Henry Hub, LBMA gold, USDINR): EWMA vol lambda=0.94; monthly = daily*sqrt(21).",
   "Monthly series (IMF PCPS): rolling 36-month std of monthly log returns.",
@@ -848,6 +849,7 @@
   "Velocity computed from |20d move| where a daily series exists (oil, gold, USDINR); other risks keep curated velocity, tagged in the UI.",
   "Exposure/concentration remain curated in P1 (computed from cost-base data in P2).",
   "natgas is US Henry Hub \u2014 Asian LNG is oil-indexed; steel/metcoal/API/TiO2/lithium have no free series (rating-based).",
-  "MCX bhavcopy: TODO (WAF/session); gold INR derived as XAUUSD x USDINR meanwhile."
+  "MCX bhavcopy: TODO (WAF/session); gold INR derived as XAUUSD x USDINR meanwhile.",
+  "Price history is persisted to data/series/ and merged each run, so a feed outage degrades to slightly stale data rather than dropping the series. Anything running on persisted data is listed in degraded_sources with the date it is current to."
  ]
 }
