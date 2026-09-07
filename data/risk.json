@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07T07:21:16+00:00",
+ "generated": "2026-09-07T07:22:03+00:00",
  "engine_version": "1.0.0",
  "series": {
   "alum": {
@@ -2960,10 +2960,10 @@
   "hindalco": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 2787.2,
-   "expected_shortfall_cr": 3824.5,
-   "median_cr": -28.1,
-   "best_5pct_cr": -2752.9,
+   "cfar_cr": 2729.8,
+   "expected_shortfall_cr": 3737.6,
+   "median_cr": -23.7,
+   "best_5pct_cr": -2707.3,
    "cost_base_cr": 236847,
    "inputs_modelled": [
     "coal"
@@ -2978,8 +2978,8 @@
     "psd_repaired": false
    },
    "ebitda_cr": 38097,
-   "cfar_pct_ebitda": 7.3,
-   "statement": "5% chance the input basket costs more than Rs 2,787 crore of EBITDA over 1 months \u2014 7.3% of the year's EBITDA.",
+   "cfar_pct_ebitda": 7.2,
+   "statement": "5% chance the input basket costs more than Rs 2,730 crore of EBITDA over 1 months \u2014 7.2% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "hindalco",
    "name": "Hindalco",
@@ -3012,10 +3012,10 @@
   "hul": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 361.7,
-   "expected_shortfall_cr": 494.4,
-   "median_cr": -1.8,
-   "best_5pct_cr": -357.6,
+   "cfar_cr": 368.0,
+   "expected_shortfall_cr": 501.9,
+   "median_cr": 3.4,
+   "best_5pct_cr": -363.5,
    "cost_base_cr": 48715,
    "inputs_modelled": [
     "palm"
@@ -3031,7 +3031,7 @@
    },
    "ebitda_cr": 15048,
    "cfar_pct_ebitda": 2.4,
-   "statement": "5% chance the input basket costs more than Rs 362 crore of EBITDA over 1 months \u2014 2.4% of the year's EBITDA.",
+   "statement": "5% chance the input basket costs more than Rs 368 crore of EBITDA over 1 months \u2014 2.4% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "hul",
    "name": "Hindustan Unilever",
@@ -3061,10 +3061,10 @@
   "jswsteel": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 1506.9,
-   "expected_shortfall_cr": 2060.7,
-   "median_cr": -5.1,
-   "best_5pct_cr": -1540.4,
+   "cfar_cr": 1525.2,
+   "expected_shortfall_cr": 2075.5,
+   "median_cr": -24.5,
+   "best_5pct_cr": -1532.6,
    "cost_base_cr": 153422,
    "inputs_modelled": [
     "ironore"
@@ -3079,8 +3079,8 @@
     "psd_repaired": false
    },
    "ebitda_cr": 32048,
-   "cfar_pct_ebitda": 4.7,
-   "statement": "5% chance the input basket costs more than Rs 1,507 crore of EBITDA over 1 months \u2014 4.7% of the year's EBITDA.",
+   "cfar_pct_ebitda": 4.8,
+   "statement": "5% chance the input basket costs more than Rs 1,525 crore of EBITDA over 1 months \u2014 4.8% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "jswsteel",
    "name": "JSW Steel",
@@ -3106,10 +3106,10 @@
   "maruti": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 773.6,
-   "expected_shortfall_cr": 1069.8,
-   "median_cr": 4.5,
-   "best_5pct_cr": -781.5,
+   "cfar_cr": 757.4,
+   "expected_shortfall_cr": 1064.3,
+   "median_cr": -5.6,
+   "best_5pct_cr": -783.2,
    "cost_base_cr": 164589,
    "inputs_modelled": [
     "alum",
@@ -3126,8 +3126,8 @@
     "psd_repaired": false
    },
    "ebitda_cr": 23084,
-   "cfar_pct_ebitda": 3.4,
-   "statement": "5% chance the input basket costs more than Rs 774 crore of EBITDA over 1 months \u2014 3.4% of the year's EBITDA.",
+   "cfar_pct_ebitda": 3.3,
+   "statement": "5% chance the input basket costs more than Rs 757 crore of EBITDA over 1 months \u2014 3.3% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "maruti",
    "name": "Maruti Suzuki",
@@ -3180,10 +3180,10 @@
   "reliance": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 64528.1,
-   "expected_shortfall_cr": 88810.4,
-   "median_cr": 295.0,
-   "best_5pct_cr": -63497.7,
+   "cfar_cr": 65319.9,
+   "expected_shortfall_cr": 88150.0,
+   "median_cr": 782.9,
+   "best_5pct_cr": -62711.0,
    "cost_base_cr": 968008,
    "inputs_modelled": [
     "crude",
@@ -3199,8 +3199,8 @@
     "psd_repaired": false
    },
    "ebitda_cr": 207911,
-   "cfar_pct_ebitda": 31.0,
-   "statement": "5% chance the input basket costs more than Rs 64,528 crore of EBITDA over 1 months \u2014 31.0% of the year's EBITDA.",
+   "cfar_pct_ebitda": 31.4,
+   "statement": "5% chance the input basket costs more than Rs 65,320 crore of EBITDA over 1 months \u2014 31.4% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "reliance",
    "name": "Reliance Industries",
@@ -3237,10 +3237,10 @@
   "tatasteel": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 2103.9,
-   "expected_shortfall_cr": 2933.7,
-   "median_cr": -12.2,
-   "best_5pct_cr": -2186.7,
+   "cfar_cr": 2134.5,
+   "expected_shortfall_cr": 2932.6,
+   "median_cr": 6.8,
+   "best_5pct_cr": -2098.3,
    "cost_base_cr": 197292,
    "inputs_modelled": [
     "ironore",
@@ -3256,8 +3256,8 @@
     "psd_repaired": false
    },
    "ebitda_cr": 34848,
-   "cfar_pct_ebitda": 6.0,
-   "statement": "5% chance the input basket costs more than Rs 2,104 crore of EBITDA over 1 months \u2014 6.0% of the year's EBITDA.",
+   "cfar_pct_ebitda": 6.1,
+   "statement": "5% chance the input basket costs more than Rs 2,135 crore of EBITDA over 1 months \u2014 6.1% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "tatasteel",
    "name": "Tata Steel",
@@ -3298,10 +3298,10 @@
   "ultratech": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 873.5,
-   "expected_shortfall_cr": 1202.1,
-   "median_cr": -4.6,
-   "best_5pct_cr": -885.0,
+   "cfar_cr": 870.5,
+   "expected_shortfall_cr": 1197.4,
+   "median_cr": -6.2,
+   "best_5pct_cr": -907.6,
    "cost_base_cr": 69786,
    "inputs_modelled": [
     "coal"
@@ -3316,8 +3316,8 @@
     "psd_repaired": false
    },
    "ebitda_cr": 17598,
-   "cfar_pct_ebitda": 5.0,
-   "statement": "5% chance the input basket costs more than Rs 873 crore of EBITDA over 1 months \u2014 5.0% of the year's EBITDA.",
+   "cfar_pct_ebitda": 4.9,
+   "statement": "5% chance the input basket costs more than Rs 870 crore of EBITDA over 1 months \u2014 4.9% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "ultratech",
    "name": "UltraTech Cement",

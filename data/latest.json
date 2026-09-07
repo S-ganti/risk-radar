@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07T07:21:09+00:00",
+ "generated": "2026-09-07T07:21:51+00:00",
  "spot": {
   "usdinr": {
    "v": 94.55,
@@ -27,7 +27,7 @@
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4398.7,
+   "v": 4401.1,
    "asof": "2026-09-07",
    "src": "gold-api.com"
   },
@@ -50,7 +50,7 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 133714,
+   "v": 133787,
    "asof": "2026-09-07",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
