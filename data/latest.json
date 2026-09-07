@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07T07:13:54+00:00",
+ "generated": "2026-09-07T07:18:48+00:00",
  "spot": {
   "usdinr": {
    "v": 94.55,
@@ -27,7 +27,7 @@
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4399.1,
+   "v": 4400.0,
    "asof": "2026-09-07",
    "src": "gold-api.com"
   },
@@ -50,7 +50,7 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 133726,
+   "v": 133753,
    "asof": "2026-09-07",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
@@ -94,6 +94,16 @@
    "asof": "2026-09-01",
    "n": 1317,
    "src": "Henry Hub (EIA via FRED)",
+   "method": "EWMA(0.94) daily"
+  },
+  "gold": {
+   "freq": "D",
+   "monthly": 0.077,
+   "annual": 0.2668,
+   "pct5y": 91.7,
+   "asof": "2026-09-04",
+   "n": 1324,
+   "src": "LBMA gold PM fix",
    "method": "EWMA(0.94) daily"
   },
   "copper": {
@@ -202,6 +212,7 @@
   "crude": 8.01,
   "wti": 18.3,
   "natgas": 5.84,
+  "gold": 3.46,
   "copper": -0.07,
   "alum": -8.16,
   "wheat": 14.57,
@@ -219,6 +230,7 @@
   "alum|coffee": -0.02,
   "alum|copper": 0.57,
   "alum|crude": 0.3,
+  "alum|gold": 0.18,
   "alum|ironore": 0.28,
   "alum|natgas": 0.25,
   "alum|natrub": 0.25,
@@ -231,6 +243,7 @@
   "coal|coffee": -0.15,
   "coal|copper": 0.05,
   "coal|crude": 0.25,
+  "coal|gold": -0.1,
   "coal|ironore": 0.07,
   "coal|natgas": 0.04,
   "coal|natrub": 0.1,
@@ -242,6 +255,7 @@
   "cocoa|coffee": 0.35,
   "cocoa|copper": 0.01,
   "cocoa|crude": -0.0,
+  "cocoa|gold": -0.18,
   "cocoa|ironore": -0.02,
   "cocoa|natgas": 0.09,
   "cocoa|natrub": 0.16,
@@ -252,6 +266,7 @@
   "cocoa|wti": 0.01,
   "coffee|copper": 0.01,
   "coffee|crude": 0.1,
+  "coffee|gold": -0.06,
   "coffee|ironore": -0.01,
   "coffee|natgas": 0.13,
   "coffee|natrub": -0.07,
@@ -261,6 +276,7 @@
   "coffee|wheat": 0.21,
   "coffee|wti": -0.01,
   "copper|crude": -0.03,
+  "copper|gold": 0.41,
   "copper|ironore": 0.37,
   "copper|natgas": 0.02,
   "copper|natrub": 0.21,
@@ -269,6 +285,7 @@
   "copper|usdinr": -0.13,
   "copper|wheat": 0.34,
   "copper|wti": 0.05,
+  "crude|gold": -0.17,
   "crude|ironore": 0.19,
   "crude|natgas": 0.04,
   "crude|natrub": 0.13,
@@ -277,6 +294,14 @@
   "crude|usdinr": 0.37,
   "crude|wheat": 0.22,
   "crude|wti": 0.95,
+  "gold|ironore": 0.13,
+  "gold|natgas": -0.02,
+  "gold|natrub": 0.07,
+  "gold|palm": 0.19,
+  "gold|sugar": -0.16,
+  "gold|usdinr": -0.28,
+  "gold|wheat": -0.01,
+  "gold|wti": -0.13,
   "ironore|natgas": -0.14,
   "ironore|natrub": 0.06,
   "ironore|palm": 0.14,
@@ -310,18 +335,19 @@
   "mom20": -0.76,
   "mom60": -0.66
  },
- "breadth": 64.3,
+ "breadth": 60.0,
  "regime": {
   "label": "normal",
-  "score": 35.9,
+  "score": 40.7,
   "components": {
-   "avg_vol_pct5y": 46.0,
+   "avg_vol_pct5y": 57.5,
    "inr_mom20_component": 0,
-   "breadth": 64.3
+   "breadth": 60.0
   }
  },
  "velocity": {
   "oil": 53,
+  "gold": 23,
   "usdinr": 19
  },
  "history": {
