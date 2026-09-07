@@ -93,6 +93,42 @@ RISKS_META = {
 REGIME_DAILY = ["crude", "natgas", "gold", "usdinr"]  # 5y vol-percentile inputs
 
 
+SERIES_DIR = os.path.join(DATA_DIR, "series")
+
+
+def load_persisted(cid):
+    """Last-good price history committed to the repo."""
+    try:
+        with open(os.path.join(SERIES_DIR, f"{cid}.json"), encoding="utf-8") as f:
+            return [(d, float(v)) for d, v in json.load(f)]
+    except Exception:  # noqa: BLE001
+        return []
+
+
+def merge_series(cid, fetched):
+    """Union of the committed history and whatever this run fetched.
+
+    Feeds fail. LBMA's gold history is reachable from a laptop and blocked from
+    GitHub's runners, so a fetch-only pipeline silently lost gold entirely in CI
+    while looking healthy. Persisting the series makes an outage degrade to
+    slightly stale data instead of no data, and it applies to every source
+    rather than the one that happened to break first.
+    """
+    merged = dict(load_persisted(cid))
+    n_old = len(merged)
+    for d, v in fetched or []:
+        merged[d] = v
+    rows = sorted(merged.items())
+    cutoff = (TODAY - timedelta(days=int(HISTORY_YEARS * 365))).isoformat()
+    rows = [r for r in rows if r[0] >= cutoff]
+    if rows:
+        os.makedirs(SERIES_DIR, exist_ok=True)
+        with open(os.path.join(SERIES_DIR, f"{cid}.json"), "w", encoding="utf-8") as f:
+            json.dump(rows, f, separators=(",", ":"))
+    added = len(rows) - n_old
+    return rows, n_old, max(0, added)
+
+
 def http_get(url, timeout=45, retries=2):
     last = None
     for _ in range(retries + 1):
@@ -267,18 +303,33 @@ def main():
 
     print("Fetching FX history…")
     fx_hist = fetch_fx_history()
-    if fx_hist.get("INR"):
-        series["usdinr"], freq["usdinr"], labels["usdinr"] = fx_hist["INR"], "D", "USD/INR (ECB via frankfurter)"
+    _fx_rows, _fx_old, _fx_added = merge_series("usdinr", fx_hist.get("INR"))
+    if _fx_rows:
+        series["usdinr"], freq["usdinr"], labels["usdinr"] = _fx_rows, "D", "USD/INR (ECB via frankfurter)"
+        if not fx_hist.get("INR"):
+            print(f"  usdinr  [FETCH FAILED — using {_fx_old} persisted rows]")
 
     print("Fetching commodity series…")
+    degraded = []
     for cid, s in SOURCES.items():
-        rows = fetch_lbma_gold() if s["kind"] == "lbma" else fetch_fred(s["id"])
+        fetched = fetch_lbma_gold() if s["kind"] == "lbma" else fetch_fred(s["id"])
+        rows, n_old, added = merge_series(cid, fetched)
         need = 250 if s["freq"] == "D" else 40
         if len(rows) >= need:
             series[cid], freq[cid], labels[cid] = rows, s["freq"], s["label"]
-            print(f"  {cid:8s} {s['freq']} {len(rows):5d} rows  last {rows[-1][0]} = {rows[-1][1]}")
+            note = ""
+            if not fetched:
+                note = f"  [FETCH FAILED — using {n_old} persisted rows]"
+                degraded.append({"series": cid, "source": s["label"],
+                                 "using_persisted_to": rows[-1][0]})
+            elif added:
+                note = f"  (+{added} new)"
+            print(f"  {cid:8s} {s['freq']} {len(rows):5d} rows  last {rows[-1][0]} = {rows[-1][1]}{note}")
         else:
             print(f"  {cid:8s} skipped ({len(rows)} rows) — {s['label']}")
+            degraded.append({"series": cid, "source": s["label"],
+                             "using_persisted_to": None,
+                             "reason": f"only {len(rows)} rows after merge"})
 
     fx_spot = fetch_fx_spot()
     gold_spot = fetch_gold_spot()
@@ -406,6 +457,7 @@ def main():
                                   "breadth": breadth}},
         "velocity": velocity,
         "history": history,
+        "degraded_sources": degraded,
         "notes": [
             "Daily series (Brent, WTI, Henry Hub, LBMA gold, USDINR): EWMA vol lambda=0.94; monthly = daily*sqrt(21).",
             "Monthly series (IMF PCPS): rolling 36-month std of monthly log returns.",
@@ -415,6 +467,10 @@ def main():
             "Exposure/concentration remain curated in P1 (computed from cost-base data in P2).",
             "natgas is US Henry Hub — Asian LNG is oil-indexed; steel/metcoal/API/TiO2/lithium have no free series (rating-based).",
             "MCX bhavcopy: TODO (WAF/session); gold INR derived as XAUUSD x USDINR meanwhile.",
+            "Price history is persisted to data/series/ and merged each run, so a "
+            "feed outage degrades to slightly stale data rather than dropping the "
+            "series. Anything running on persisted data is listed in "
+            "degraded_sources with the date it is current to.",
         ],
     }
 
