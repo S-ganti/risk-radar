@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07T07:21:51+00:00",
+ "generated": "2026-09-07T18:09:53+00:00",
  "spot": {
   "usdinr": {
    "v": 94.55,
@@ -27,7 +27,7 @@
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4401.1,
+   "v": 4409.7,
    "asof": "2026-09-07",
    "src": "gold-api.com"
   },
@@ -50,7 +50,7 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 133787,
+   "v": 134048,
    "asof": "2026-09-07",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
@@ -58,11 +58,11 @@
  "vols": {
   "usdinr": {
    "freq": "D",
-   "monthly": 0.0104,
-   "annual": 0.036,
-   "pct5y": 42.1,
-   "asof": "2026-09-04",
-   "n": 1355,
+   "monthly": 0.0101,
+   "annual": 0.0349,
+   "pct5y": 39.6,
+   "asof": "2026-09-07",
+   "n": 1356,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
   },
@@ -208,7 +208,7 @@
   }
  },
  "moves": {
-  "usdinr": -0.76,
+  "usdinr": -0.85,
   "crude": 8.01,
   "wti": 18.3,
   "natgas": 5.84,
@@ -332,15 +332,15 @@
   "wheat|wti": 0.19
  },
  "inr": {
-  "mom20": -0.76,
-  "mom60": -0.66
+  "mom20": -0.85,
+  "mom60": -0.24
  },
  "breadth": 60.0,
  "regime": {
   "label": "normal",
-  "score": 40.7,
+  "score": 40.4,
   "components": {
-   "avg_vol_pct5y": 57.5,
+   "avg_vol_pct5y": 56.9,
    "inr_mom20_component": 0,
    "breadth": 60.0
   }
@@ -348,7 +348,7 @@
  "velocity": {
   "oil": 53,
   "gold": 23,
-  "usdinr": 19
+  "usdinr": 21
  },
  "history": {
   "dates": [
