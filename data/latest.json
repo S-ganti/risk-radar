@@ -1,34 +1,34 @@
 {
- "generated": "2026-09-14T18:26:29+00:00",
+ "generated": "2026-09-15T17:33:11+00:00",
  "spot": {
   "usdinr": {
-   "v": 95.61,
-   "asof": "2026-09-14",
+   "v": 95.67,
+   "asof": "2026-09-15",
    "src": "open.er-api.com"
   },
   "eurinr": {
-   "v": 110.89,
-   "asof": "2026-09-14",
+   "v": 110.52,
+   "asof": "2026-09-15",
    "src": "open.er-api.com"
   },
   "gbpinr": {
-   "v": 129.3,
-   "asof": "2026-09-14",
+   "v": 129.12,
+   "asof": "2026-09-15",
    "src": "open.er-api.com"
   },
   "jpyinr": {
    "v": 0.62,
-   "asof": "2026-09-14",
+   "asof": "2026-09-15",
    "src": "open.er-api.com"
   },
   "chfinr": {
-   "v": 117.09,
-   "asof": "2026-09-14",
+   "v": 117.04,
+   "asof": "2026-09-15",
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4309.2,
-   "asof": "2026-09-14",
+   "v": 4298.5,
+   "asof": "2026-09-15",
    "src": "gold-api.com"
   },
   "brent": {
@@ -50,19 +50,19 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 132462,
-   "asof": "2026-09-14",
+   "v": 132216,
+   "asof": "2026-09-15",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
  },
  "vols": {
   "usdinr": {
    "freq": "D",
-   "monthly": 0.0106,
-   "annual": 0.0366,
-   "pct5y": 43.8,
-   "asof": "2026-09-14",
-   "n": 1356,
+   "monthly": 0.0113,
+   "annual": 0.039,
+   "pct5y": 50.5,
+   "asof": "2026-09-15",
+   "n": 1357,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
   },
@@ -98,11 +98,11 @@
   },
   "gold": {
    "freq": "D",
-   "monthly": 0.0675,
-   "annual": 0.2338,
-   "pct5y": 85.6,
-   "asof": "2026-09-11",
-   "n": 1324,
+   "monthly": 0.0724,
+   "annual": 0.2507,
+   "pct5y": 88.8,
+   "asof": "2026-09-14",
+   "n": 1325,
    "src": "LBMA gold PM fix",
    "method": "EWMA(0.94) daily"
   },
@@ -208,11 +208,11 @@
   }
  },
  "moves": {
-  "usdinr": -0.05,
+  "usdinr": 0.28,
   "crude": 17.42,
   "wti": 14.73,
   "natgas": 0.72,
-  "gold": 0.3,
+  "gold": -2.82,
   "copper": -0.07,
   "alum": -8.16,
   "wheat": 14.57,
@@ -285,13 +285,13 @@
   "copper|usdinr": -0.13,
   "copper|wheat": 0.34,
   "copper|wti": 0.05,
-  "crude|gold": -0.19,
+  "crude|gold": -0.2,
   "crude|ironore": 0.19,
   "crude|natgas": 0.04,
   "crude|natrub": 0.13,
   "crude|palm": 0.25,
   "crude|sugar": 0.09,
-  "crude|usdinr": 0.37,
+  "crude|usdinr": 0.38,
   "crude|wheat": 0.22,
   "crude|wti": 0.95,
   "gold|ironore": 0.13,
@@ -299,9 +299,9 @@
   "gold|natrub": 0.07,
   "gold|palm": 0.19,
   "gold|sugar": -0.16,
-  "gold|usdinr": -0.3,
+  "gold|usdinr": -0.31,
   "gold|wheat": -0.01,
-  "gold|wti": -0.14,
+  "gold|wti": -0.15,
   "ironore|natgas": -0.14,
   "ironore|natrub": 0.06,
   "ironore|palm": 0.14,
@@ -328,27 +328,27 @@
   "sugar|wheat": 0.15,
   "sugar|wti": 0.06,
   "usdinr|wheat": 0.14,
-  "usdinr|wti": 0.31,
+  "usdinr|wti": 0.32,
   "wheat|wti": 0.19
  },
  "inr": {
-  "mom20": -0.05,
-  "mom60": 0.93
+  "mom20": 0.28,
+  "mom60": 1.29
  },
  "breadth": 53.3,
  "regime": {
   "label": "normal",
-  "score": 38.2,
+  "score": 42.2,
   "components": {
-   "avg_vol_pct5y": 55.1,
-   "inr_mom20_component": 0,
+   "avg_vol_pct5y": 57.6,
+   "inr_mom20_component": 9.3,
    "breadth": 53.3
   }
  },
  "velocity": {
   "oil": 100,
-  "gold": 2,
-  "usdinr": 1
+  "gold": 19,
+  "usdinr": 7
  },
  "history": {
   "dates": [
@@ -410,10 +410,12 @@
    "2026-09-11",
    "2026-09-12",
    "2026-09-13",
-   "2026-09-14"
+   "2026-09-14",
+   "2026-09-15"
   ],
   "scores": {
    "cbam": [
+    71,
     71,
     71,
     71,
@@ -533,9 +535,11 @@
     69,
     69,
     69,
+    69,
     69
    ],
    "coal": [
+    58,
     58,
     58,
     58,
@@ -655,7 +659,8 @@
     52,
     50,
     50,
-    50
+    50,
+    54
    ],
    "oil": [
     69,
@@ -716,9 +721,11 @@
     75,
     75,
     75,
+    75,
     75
    ],
    "rates": [
+    56,
     56,
     56,
     56,
@@ -838,6 +845,7 @@
     86,
     86,
     86,
+    86,
     86
    ],
    "usdinr": [
@@ -899,7 +907,8 @@
     64,
     64,
     64,
-    63
+    63,
+    64
    ]
   }
  },
