@@ -1,34 +1,34 @@
 {
- "generated": "2026-09-17T17:32:29+00:00",
+ "generated": "2026-09-18T16:59:44+00:00",
  "spot": {
   "usdinr": {
-   "v": 96.02,
-   "asof": "2026-09-17",
+   "v": 95.96,
+   "asof": "2026-09-18",
    "src": "open.er-api.com"
   },
   "eurinr": {
-   "v": 110.46,
-   "asof": "2026-09-17",
+   "v": 110.22,
+   "asof": "2026-09-18",
    "src": "open.er-api.com"
   },
   "gbpinr": {
-   "v": 128.9,
-   "asof": "2026-09-17",
+   "v": 128.25,
+   "asof": "2026-09-18",
    "src": "open.er-api.com"
   },
   "jpyinr": {
    "v": 0.62,
-   "asof": "2026-09-17",
+   "asof": "2026-09-18",
    "src": "open.er-api.com"
   },
   "chfinr": {
-   "v": 116.73,
-   "asof": "2026-09-17",
+   "v": 116.35,
+   "asof": "2026-09-18",
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4362.8,
-   "asof": "2026-09-17",
+   "v": 4382.9,
+   "asof": "2026-09-18",
    "src": "gold-api.com"
   },
   "brent": {
@@ -50,18 +50,18 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 134685,
-   "asof": "2026-09-17",
+   "v": 135221,
+   "asof": "2026-09-18",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
  },
  "vols": {
   "usdinr": {
    "freq": "D",
-   "monthly": 0.0106,
-   "annual": 0.0367,
-   "pct5y": 44.0,
-   "asof": "2026-09-17",
+   "monthly": 0.0103,
+   "annual": 0.0356,
+   "pct5y": 41.2,
+   "asof": "2026-09-18",
    "n": 1358,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
@@ -72,7 +72,7 @@
    "annual": 0.6949,
    "pct5y": 93.1,
    "asof": "2026-09-15",
-   "n": 1338,
+   "n": 1337,
    "src": "Brent (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -82,7 +82,7 @@
    "annual": 0.4839,
    "pct5y": 82.9,
    "asof": "2026-09-15",
-   "n": 1321,
+   "n": 1320,
    "src": "WTI (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -90,18 +90,18 @@
    "freq": "D",
    "monthly": 0.1446,
    "annual": 0.5009,
-   "pct5y": 4.5,
+   "pct5y": 4.4,
    "asof": "2026-09-15",
-   "n": 1321,
+   "n": 1320,
    "src": "Henry Hub (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
   "gold": {
    "freq": "D",
-   "monthly": 0.0689,
-   "annual": 0.2388,
-   "pct5y": 86.4,
-   "asof": "2026-09-16",
+   "monthly": 0.0676,
+   "annual": 0.2343,
+   "pct5y": 85.4,
+   "asof": "2026-09-17",
    "n": 1327,
    "src": "LBMA gold PM fix",
    "method": "EWMA(0.94) daily"
@@ -110,9 +110,9 @@
    "freq": "M",
    "monthly": 0.0406,
    "annual": 0.1406,
-   "pct5y": 34.6,
+   "pct5y": 36.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Copper (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   },
@@ -120,9 +120,9 @@
    "freq": "M",
    "monthly": 0.0459,
    "annual": 0.1591,
-   "pct5y": 57.7,
+   "pct5y": 60.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Aluminum (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   },
@@ -130,9 +130,9 @@
    "freq": "M",
    "monthly": 0.07,
    "annual": 0.2423,
-   "pct5y": 69.2,
+   "pct5y": 72.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Wheat (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   },
@@ -140,9 +140,9 @@
    "freq": "M",
    "monthly": 0.0621,
    "annual": 0.2153,
-   "pct5y": 30.8,
+   "pct5y": 28.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Sugar (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   },
@@ -150,9 +150,9 @@
    "freq": "M",
    "monthly": 0.0729,
    "annual": 0.2525,
-   "pct5y": 96.2,
+   "pct5y": 96.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Coffee (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   },
@@ -162,7 +162,7 @@
    "annual": 0.5225,
    "pct5y": 100.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Cocoa (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   },
@@ -170,9 +170,9 @@
    "freq": "M",
    "monthly": 0.0542,
    "annual": 0.1877,
-   "pct5y": 7.7,
+   "pct5y": 8.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Iron ore (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   },
@@ -180,9 +180,9 @@
    "freq": "M",
    "monthly": 0.0691,
    "annual": 0.2392,
-   "pct5y": 7.7,
+   "pct5y": 8.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Australian thermal coal (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   },
@@ -190,9 +190,9 @@
    "freq": "M",
    "monthly": 0.0496,
    "annual": 0.1718,
-   "pct5y": 3.8,
+   "pct5y": 4.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Palm oil (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   },
@@ -200,19 +200,19 @@
    "freq": "M",
    "monthly": 0.0694,
    "annual": 0.2404,
-   "pct5y": 50.0,
+   "pct5y": 48.0,
    "asof": "2026-07-01",
-   "n": 61,
+   "n": 60,
    "src": "Rubber (IMF PCPS via FRED)",
    "method": "rolling 36m std of monthly returns"
   }
  },
  "moves": {
-  "usdinr": 0.24,
+  "usdinr": 0.19,
   "crude": 41.51,
   "wti": 24.38,
   "natgas": 7.22,
-  "gold": -1.71,
+  "gold": -2.08,
   "copper": -0.07,
   "alum": -8.16,
   "wheat": 14.57,
@@ -285,7 +285,7 @@
   "copper|usdinr": -0.13,
   "copper|wheat": 0.34,
   "copper|wti": 0.05,
-  "crude|gold": -0.22,
+  "crude|gold": -0.21,
   "crude|ironore": 0.19,
   "crude|natgas": 0.05,
   "crude|natrub": 0.13,
@@ -301,7 +301,7 @@
   "gold|sugar": -0.16,
   "gold|usdinr": -0.31,
   "gold|wheat": -0.01,
-  "gold|wti": -0.16,
+  "gold|wti": -0.15,
   "ironore|natgas": -0.14,
   "ironore|natrub": 0.06,
   "ironore|palm": 0.14,
@@ -332,23 +332,23 @@
   "wheat|wti": 0.19
  },
  "inr": {
-  "mom20": 0.24,
-  "mom60": 1.64
+  "mom20": 0.19,
+  "mom60": 1.57
  },
  "breadth": 60.0,
  "regime": {
   "label": "normal",
-  "score": 42.9,
+  "score": 41.9,
   "components": {
-   "avg_vol_pct5y": 57.0,
-   "inr_mom20_component": 8.0,
+   "avg_vol_pct5y": 56.0,
+   "inr_mom20_component": 6.3,
    "breadth": 60.0
   }
  },
  "velocity": {
   "oil": 100,
-  "gold": 11,
-  "usdinr": 6
+  "gold": 14,
+  "usdinr": 5
  },
  "history": {
   "dates": [
@@ -413,10 +413,12 @@
    "2026-09-14",
    "2026-09-15",
    "2026-09-16",
-   "2026-09-17"
+   "2026-09-17",
+   "2026-09-18"
   ],
   "scores": {
    "cbam": [
+    71,
     71,
     71,
     71,
@@ -542,9 +544,11 @@
     69,
     69,
     69,
+    69,
     69
    ],
    "coal": [
+    58,
     58,
     58,
     58,
@@ -670,7 +674,8 @@
     50,
     54,
     53,
-    52
+    52,
+    53
    ],
    "oil": [
     69,
@@ -734,9 +739,11 @@
     75,
     75,
     75,
+    75,
     75
    ],
    "rates": [
+    56,
     56,
     56,
     56,
@@ -862,6 +869,7 @@
     86,
     86,
     86,
+    86,
     86
    ],
    "usdinr": [
@@ -924,6 +932,7 @@
     64,
     64,
     63,
+    64,
     64,
     64,
     64
