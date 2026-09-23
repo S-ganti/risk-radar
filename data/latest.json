@@ -1,39 +1,39 @@
 {
- "generated": "2026-09-22T17:33:51+00:00",
+ "generated": "2026-09-23T17:46:07+00:00",
  "spot": {
   "usdinr": {
-   "v": 95.87,
-   "asof": "2026-09-22",
+   "v": 95.65,
+   "asof": "2026-09-23",
    "src": "open.er-api.com"
   },
   "eurinr": {
-   "v": 109.98,
-   "asof": "2026-09-22",
+   "v": 109.54,
+   "asof": "2026-09-23",
    "src": "open.er-api.com"
   },
   "gbpinr": {
-   "v": 128.22,
-   "asof": "2026-09-22",
+   "v": 127.64,
+   "asof": "2026-09-23",
    "src": "open.er-api.com"
   },
   "jpyinr": {
    "v": 0.61,
-   "asof": "2026-09-22",
+   "asof": "2026-09-23",
    "src": "open.er-api.com"
   },
   "chfinr": {
-   "v": 116.7,
-   "asof": "2026-09-22",
+   "v": 116.53,
+   "asof": "2026-09-23",
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4337.9,
-   "asof": "2026-09-22",
+   "v": 4288.9,
+   "asof": "2026-09-23",
    "src": "gold-api.com"
   },
   "brent": {
-   "v": 130.8,
-   "asof": "2026-09-15",
+   "v": 114.89,
+   "asof": "2026-09-22",
    "src": "Brent (EIA via FRED)"
   },
   "eua": {
@@ -50,59 +50,59 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 133707,
-   "asof": "2026-09-22",
+   "v": 131893,
+   "asof": "2026-09-23",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
  },
  "vols": {
   "usdinr": {
    "freq": "D",
-   "monthly": 0.0101,
-   "annual": 0.0349,
-   "pct5y": 39.4,
-   "asof": "2026-09-22",
-   "n": 1357,
+   "monthly": 0.0099,
+   "annual": 0.0343,
+   "pct5y": 38.1,
+   "asof": "2026-09-23",
+   "n": 1358,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
   },
   "crude": {
    "freq": "D",
-   "monthly": 0.2006,
-   "annual": 0.6949,
-   "pct5y": 93.1,
-   "asof": "2026-09-15",
-   "n": 1334,
+   "monthly": 0.1855,
+   "annual": 0.6427,
+   "pct5y": 91.1,
+   "asof": "2026-09-22",
+   "n": 1339,
    "src": "Brent (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
   "wti": {
    "freq": "D",
-   "monthly": 0.1397,
-   "annual": 0.4839,
-   "pct5y": 82.8,
-   "asof": "2026-09-15",
-   "n": 1317,
+   "monthly": 0.1347,
+   "annual": 0.4666,
+   "pct5y": 81.4,
+   "asof": "2026-09-22",
+   "n": 1322,
    "src": "WTI (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
   "natgas": {
    "freq": "D",
-   "monthly": 0.1446,
-   "annual": 0.5009,
-   "pct5y": 4.2,
-   "asof": "2026-09-15",
-   "n": 1317,
+   "monthly": 0.1328,
+   "annual": 0.46,
+   "pct5y": 3.1,
+   "asof": "2026-09-22",
+   "n": 1322,
    "src": "Henry Hub (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
   "gold": {
    "freq": "D",
-   "monthly": 0.0641,
-   "annual": 0.2219,
-   "pct5y": 83.3,
-   "asof": "2026-09-21",
-   "n": 1326,
+   "monthly": 0.0621,
+   "annual": 0.2152,
+   "pct5y": 82.3,
+   "asof": "2026-09-22",
+   "n": 1327,
    "src": "LBMA gold PM fix",
    "method": "EWMA(0.94) daily"
   },
@@ -208,11 +208,11 @@
   }
  },
  "moves": {
-  "usdinr": 0.18,
-  "crude": 41.51,
-  "wti": 24.38,
-  "natgas": 7.22,
-  "gold": -5.63,
+  "usdinr": 0.34,
+  "crude": 23.92,
+  "wti": 11.66,
+  "natgas": 2.47,
+  "gold": -7.16,
   "copper": -0.07,
   "alum": -8.16,
   "wheat": 14.57,
@@ -285,15 +285,15 @@
   "copper|usdinr": -0.13,
   "copper|wheat": 0.34,
   "copper|wti": 0.05,
-  "crude|gold": -0.22,
+  "crude|gold": -0.2,
   "crude|ironore": 0.19,
-  "crude|natgas": 0.05,
+  "crude|natgas": 0.04,
   "crude|natrub": 0.13,
   "crude|palm": 0.25,
   "crude|sugar": 0.09,
-  "crude|usdinr": 0.36,
+  "crude|usdinr": 0.38,
   "crude|wheat": 0.22,
-  "crude|wti": 0.95,
+  "crude|wti": 0.94,
   "gold|ironore": 0.13,
   "gold|natgas": -0.02,
   "gold|natrub": 0.07,
@@ -301,7 +301,7 @@
   "gold|sugar": -0.16,
   "gold|usdinr": -0.3,
   "gold|wheat": -0.01,
-  "gold|wti": -0.16,
+  "gold|wti": -0.14,
   "ironore|natgas": -0.14,
   "ironore|natrub": 0.06,
   "ironore|palm": 0.14,
@@ -328,27 +328,27 @@
   "sugar|wheat": 0.15,
   "sugar|wti": 0.06,
   "usdinr|wheat": 0.14,
-  "usdinr|wti": 0.31,
+  "usdinr|wti": 0.32,
   "wheat|wti": 0.19
  },
  "inr": {
-  "mom20": 0.18,
-  "mom60": 0.98
+  "mom20": 0.34,
+  "mom60": 0.51
  },
- "breadth": 66.7,
+ "breadth": 60.0,
  "regime": {
   "label": "normal",
-  "score": 42.6,
+  "score": 42.2,
   "components": {
-   "avg_vol_pct5y": 55.0,
-   "inr_mom20_component": 6.0,
-   "breadth": 66.7
+   "avg_vol_pct5y": 53.6,
+   "inr_mom20_component": 11.3,
+   "breadth": 60.0
   }
  },
  "velocity": {
   "oil": 100,
-  "gold": 38,
-  "usdinr": 4
+  "gold": 48,
+  "usdinr": 8
  },
  "history": {
   "dates": [
@@ -418,10 +418,12 @@
    "2026-09-19",
    "2026-09-20",
    "2026-09-21",
-   "2026-09-22"
+   "2026-09-22",
+   "2026-09-23"
   ],
   "scores": {
    "cbam": [
+    71,
     71,
     71,
     71,
@@ -557,9 +559,11 @@
     69,
     69,
     69,
+    69,
     69
    ],
    "coal": [
+    58,
     58,
     58,
     58,
@@ -695,7 +699,8 @@
     54,
     54,
     54,
-    57
+    57,
+    59
    ],
    "oil": [
     69,
@@ -764,9 +769,11 @@
     75,
     75,
     75,
+    75,
     75
    ],
    "rates": [
+    56,
     56,
     56,
     56,
@@ -902,6 +909,7 @@
     86,
     86,
     86,
+    86,
     86
    ],
    "usdinr": [
@@ -971,7 +979,8 @@
     64,
     64,
     64,
-    64
+    64,
+    65
    ]
   }
  },
