@@ -1,34 +1,34 @@
 {
- "generated": "2026-09-23T17:46:07+00:00",
+ "generated": "2026-09-24T17:47:39+00:00",
  "spot": {
   "usdinr": {
-   "v": 95.65,
-   "asof": "2026-09-23",
+   "v": 95.81,
+   "asof": "2026-09-24",
    "src": "open.er-api.com"
   },
   "eurinr": {
-   "v": 109.54,
-   "asof": "2026-09-23",
+   "v": 109.2,
+   "asof": "2026-09-24",
    "src": "open.er-api.com"
   },
   "gbpinr": {
-   "v": 127.64,
-   "asof": "2026-09-23",
+   "v": 126.98,
+   "asof": "2026-09-24",
    "src": "open.er-api.com"
   },
   "jpyinr": {
    "v": 0.61,
-   "asof": "2026-09-23",
+   "asof": "2026-09-24",
    "src": "open.er-api.com"
   },
   "chfinr": {
-   "v": 116.53,
-   "asof": "2026-09-23",
+   "v": 116.21,
+   "asof": "2026-09-24",
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 4288.9,
-   "asof": "2026-09-23",
+   "v": 4260.7,
+   "asof": "2026-09-24",
    "src": "gold-api.com"
   },
   "brent": {
@@ -50,8 +50,8 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 131893,
-   "asof": "2026-09-23",
+   "v": 131245,
+   "asof": "2026-09-24",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
  },
@@ -59,9 +59,9 @@
   "usdinr": {
    "freq": "D",
    "monthly": 0.0099,
-   "annual": 0.0343,
-   "pct5y": 38.1,
-   "asof": "2026-09-23",
+   "annual": 0.0345,
+   "pct5y": 38.4,
+   "asof": "2026-09-24",
    "n": 1358,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
@@ -72,7 +72,7 @@
    "annual": 0.6427,
    "pct5y": 91.1,
    "asof": "2026-09-22",
-   "n": 1339,
+   "n": 1338,
    "src": "Brent (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -82,7 +82,7 @@
    "annual": 0.4666,
    "pct5y": 81.4,
    "asof": "2026-09-22",
-   "n": 1322,
+   "n": 1321,
    "src": "WTI (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -92,16 +92,16 @@
    "annual": 0.46,
    "pct5y": 3.1,
    "asof": "2026-09-22",
-   "n": 1322,
+   "n": 1321,
    "src": "Henry Hub (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
   "gold": {
    "freq": "D",
-   "monthly": 0.0621,
-   "annual": 0.2152,
-   "pct5y": 82.3,
-   "asof": "2026-09-22",
+   "monthly": 0.0614,
+   "annual": 0.2126,
+   "pct5y": 81.7,
+   "asof": "2026-09-23",
    "n": 1327,
    "src": "LBMA gold PM fix",
    "method": "EWMA(0.94) daily"
@@ -208,11 +208,11 @@
   }
  },
  "moves": {
-  "usdinr": 0.34,
+  "usdinr": 0.44,
   "crude": 23.92,
   "wti": 11.66,
   "natgas": 2.47,
-  "gold": -7.16,
+  "gold": -7.17,
   "copper": -0.07,
   "alum": -8.16,
   "wheat": 14.57,
@@ -285,7 +285,7 @@
   "copper|usdinr": -0.13,
   "copper|wheat": 0.34,
   "copper|wti": 0.05,
-  "crude|gold": -0.2,
+  "crude|gold": -0.21,
   "crude|ironore": 0.19,
   "crude|natgas": 0.04,
   "crude|natrub": 0.13,
@@ -299,7 +299,7 @@
   "gold|natrub": 0.07,
   "gold|palm": 0.19,
   "gold|sugar": -0.16,
-  "gold|usdinr": -0.3,
+  "gold|usdinr": -0.31,
   "gold|wheat": -0.01,
   "gold|wti": -0.14,
   "ironore|natgas": -0.14,
@@ -332,23 +332,23 @@
   "wheat|wti": 0.19
  },
  "inr": {
-  "mom20": 0.34,
-  "mom60": 0.51
+  "mom20": 0.44,
+  "mom60": 0.6
  },
  "breadth": 60.0,
  "regime": {
   "label": "normal",
-  "score": 42.2,
+  "score": 43.2,
   "components": {
    "avg_vol_pct5y": 53.6,
-   "inr_mom20_component": 11.3,
+   "inr_mom20_component": 14.7,
    "breadth": 60.0
   }
  },
  "velocity": {
   "oil": 100,
   "gold": 48,
-  "usdinr": 8
+  "usdinr": 11
  },
  "history": {
   "dates": [
@@ -419,10 +419,12 @@
    "2026-09-20",
    "2026-09-21",
    "2026-09-22",
-   "2026-09-23"
+   "2026-09-23",
+   "2026-09-24"
   ],
   "scores": {
    "cbam": [
+    71,
     71,
     71,
     71,
@@ -560,9 +562,11 @@
     69,
     69,
     69,
+    69,
     69
    ],
    "coal": [
+    58,
     58,
     58,
     58,
@@ -700,6 +704,7 @@
     54,
     54,
     57,
+    59,
     59
    ],
    "oil": [
@@ -770,9 +775,11 @@
     75,
     75,
     75,
+    75,
     75
    ],
    "rates": [
+    56,
     56,
     56,
     56,
@@ -910,6 +917,7 @@
     86,
     86,
     86,
+    86,
     86
    ],
    "usdinr": [
@@ -980,6 +988,7 @@
     64,
     64,
     64,
+    65,
     65
    ]
   }
