@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-12T21:38:40+00:00",
+ "generated": "2026-10-13T19:47:36+00:00",
  "engine_version": "1.0.0",
  "series": {
   "alum": {
@@ -1942,37 +1942,37 @@
   },
   "usdinr": {
    "id": "usdinr",
-   "n_returns": 1356,
-   "asof": "2026-10-12",
+   "n_returns": 1357,
+   "asof": "2026-10-13",
    "frequency": "daily",
-   "last_price": 95.78,
-   "ewma_sigma": 0.003163,
-   "ewma_sigma_annual": 0.0502,
-   "vol_percentile_5y": 77.4,
-   "skewness": -0.117,
-   "excess_kurtosis": 3.517,
+   "last_price": 95.28,
+   "ewma_sigma": 0.003324,
+   "ewma_sigma_annual": 0.0528,
+   "vol_percentile_5y": 80.6,
+   "skewness": -0.119,
+   "excess_kurtosis": 3.493,
    "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
    "garch": {
     "model": "GARCH(1,1)-normal",
-    "omega": 1.696074157691676e-08,
-    "alpha": 0.04776,
-    "beta": 0.95174,
+    "omega": 1.723242147063272e-08,
+    "alpha": 0.048187,
+    "beta": 0.951313,
     "persistence": 0.9995,
-    "mu": 0.00018728,
+    "mu": 0.00018329,
     "half_life_periods": 1385.9,
-    "sigma_uncond": 0.005824,
-    "sigma_next": 0.003077,
-    "loglik": 7576.801,
-    "aic": -15147.601,
-    "bic": -15131.964,
-    "n": 1356,
+    "sigma_uncond": 0.005871,
+    "sigma_next": 0.003235,
+    "loglik": 7581.156,
+    "aic": -15156.312,
+    "bic": -15140.673,
+    "n": 1357,
     "converged": true,
     "note": "Persistence at the boundary \u2014 behaves like EWMA with no mean reversion."
    },
    "garch_forecast": {
     "horizon": 21,
-    "sigma": 0.014191,
-    "sigma_per_period": 0.003097,
+    "sigma": 0.014909,
+    "sigma_per_period": 0.003253,
     "method": "GARCH(1,1) variance-path aggregation"
    },
    "var": {
@@ -1981,10 +1981,10 @@
       "method": "historical-simulation",
       "alpha": 0.95,
       "horizon": 1,
-      "var": 0.003881,
-      "es": 0.005976,
-      "n": 1356,
-      "n_effective": 1356.0,
+      "var": 0.003936,
+      "es": 0.005995,
+      "n": 1357,
+      "n_effective": 1357.0,
       "n_tail": 68,
       "overlapping": false
      },
@@ -1992,28 +1992,28 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 1,
-      "var": 0.004874,
-      "es": 0.00616,
-      "mu": 0.000187,
-      "sigma": 0.003077,
+      "var": 0.005138,
+      "es": 0.00649,
+      "mu": 0.000183,
+      "sigma": 0.003235,
       "sigma_source": "supplied",
-      "n": 1356
+      "n": 1357
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.95,
       "horizon": 1,
       "df": 5.7,
-      "var": 0.004806,
-      "es": 0.006737,
+      "var": 0.005063,
+      "es": 0.007094,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.003881,
-      "max": 0.004874,
-      "ratio": 1.256,
+      "min": 0.003936,
+      "max": 0.005138,
+      "ratio": 1.305,
       "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
     },
@@ -2022,10 +2022,10 @@
       "method": "historical-simulation",
       "alpha": 0.95,
       "horizon": 10,
-      "var": 0.011968,
+      "var": 0.01196,
       "es": 0.015643,
-      "n": 1347,
-      "n_effective": 134.7,
+      "n": 1348,
+      "n_effective": 134.8,
       "n_tail": 68,
       "overlapping": true
      },
@@ -2033,28 +2033,28 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 10,
-      "var": 0.011586,
-      "es": 0.015005,
-      "mu": 0.001873,
-      "sigma": 0.008182,
+      "var": 0.011642,
+      "es": 0.015066,
+      "mu": 0.001833,
+      "sigma": 0.008192,
       "sigma_source": "sample",
-      "n": 1356
+      "n": 1357
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.95,
       "horizon": 10,
       "df": 5.7,
-      "var": 0.011673,
-      "es": 0.015548,
+      "var": 0.011819,
+      "es": 0.015724,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.011586,
-      "max": 0.011968,
-      "ratio": 1.033,
+      "min": 0.011642,
+      "max": 0.01196,
+      "ratio": 1.027,
       "note": "estimators agree within 15%"
      }
     },
@@ -2063,10 +2063,10 @@
       "method": "historical-simulation",
       "alpha": 0.95,
       "horizon": 21,
-      "var": 0.012747,
+      "var": 0.012742,
       "es": 0.017184,
-      "n": 1336,
-      "n_effective": 63.6,
+      "n": 1337,
+      "n_effective": 63.7,
       "n_tail": 67,
       "overlapping": true
      },
@@ -2074,28 +2074,28 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 21,
-      "var": 0.01557,
-      "es": 0.020525,
-      "mu": 0.003933,
-      "sigma": 0.011857,
+      "var": 0.015678,
+      "es": 0.020639,
+      "mu": 0.003849,
+      "sigma": 0.011872,
       "sigma_source": "sample",
-      "n": 1356
+      "n": 1357
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.95,
       "horizon": 21,
       "df": 5.7,
-      "var": 0.01544,
-      "es": 0.020835,
+      "var": 0.015643,
+      "es": 0.021021,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.012747,
-      "max": 0.01557,
-      "ratio": 1.221,
+      "min": 0.012742,
+      "max": 0.015678,
+      "ratio": 1.23,
       "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
     },
@@ -2104,10 +2104,10 @@
       "method": "historical-simulation",
       "alpha": 0.99,
       "horizon": 1,
-      "var": 0.007006,
+      "var": 0.007005,
       "es": 0.009395,
-      "n": 1356,
-      "n_effective": 1356.0,
+      "n": 1357,
+      "n_effective": 1357.0,
       "n_tail": 14,
       "overlapping": false
      },
@@ -2115,29 +2115,29 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 1,
-      "var": 0.006971,
-      "es": 0.008014,
-      "mu": 0.000187,
-      "sigma": 0.003077,
+      "var": 0.007342,
+      "es": 0.008439,
+      "mu": 0.000183,
+      "sigma": 0.003235,
       "sigma_source": "supplied",
-      "n": 1356
+      "n": 1357
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.99,
       "horizon": 1,
       "df": 5.7,
-      "var": 0.00783,
-      "es": 0.009977,
+      "var": 0.008246,
+      "es": 0.0105,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.006971,
-      "max": 0.00783,
-      "ratio": 1.123,
-      "note": "estimators agree within 15%"
+      "min": 0.007005,
+      "max": 0.008246,
+      "ratio": 1.177,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
     },
     "99_10": {
@@ -2145,10 +2145,10 @@
       "method": "historical-simulation",
       "alpha": 0.99,
       "horizon": 10,
-      "var": 0.018251,
+      "var": 0.01825,
       "es": 0.020195,
-      "n": 1347,
-      "n_effective": 134.7,
+      "n": 1348,
+      "n_effective": 134.8,
       "n_tail": 14,
       "overlapping": true
      },
@@ -2156,28 +2156,28 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 10,
-      "var": 0.017162,
-      "es": 0.019934,
-      "mu": 0.001873,
-      "sigma": 0.008182,
+      "var": 0.017225,
+      "es": 0.020002,
+      "mu": 0.001833,
+      "sigma": 0.008192,
       "sigma_source": "sample",
-      "n": 1356
+      "n": 1357
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.99,
       "horizon": 10,
       "df": 5.7,
-      "var": 0.018113,
-      "es": 0.021377,
+      "var": 0.018266,
+      "es": 0.021859,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.017162,
-      "max": 0.018251,
-      "ratio": 1.063,
+      "min": 0.017225,
+      "max": 0.018266,
+      "ratio": 1.06,
       "note": "estimators agree within 15%"
      }
     },
@@ -2186,10 +2186,10 @@
       "method": "historical-simulation",
       "alpha": 0.99,
       "horizon": 21,
-      "var": 0.019646,
+      "var": 0.019643,
       "es": 0.023396,
-      "n": 1336,
-      "n_effective": 63.6,
+      "n": 1337,
+      "n_effective": 63.7,
       "n_tail": 14,
       "overlapping": true
      },
@@ -2197,28 +2197,28 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 21,
-      "var": 0.023651,
-      "es": 0.027669,
-      "mu": 0.003933,
-      "sigma": 0.011857,
+      "var": 0.023769,
+      "es": 0.027792,
+      "mu": 0.003849,
+      "sigma": 0.011872,
       "sigma_source": "sample",
-      "n": 1356
+      "n": 1357
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.99,
       "horizon": 21,
       "df": 5.7,
-      "var": 0.02425,
-      "es": 0.02876,
+      "var": 0.024517,
+      "es": 0.029126,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.019646,
-      "max": 0.02425,
-      "ratio": 1.234,
+      "min": 0.019643,
+      "max": 0.024517,
+      "ratio": 1.248,
       "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
     }
@@ -2227,33 +2227,33 @@
     "alpha": 0.99,
     "window": 1000,
     "horizon": 1,
-    "tested": 356,
+    "tested": 357,
     "exceptions": 10,
     "kupiec": {
      "test": "kupiec-pof",
-     "n": 356,
+     "n": 357,
      "exceptions": 10,
-     "rate": 0.0281,
+     "rate": 0.028,
      "expected_rate": 0.01,
-     "lr": 7.895,
-     "p_value": 0.005,
+     "lr": 7.858,
+     "p_value": 0.0051,
      "reject_5pct": true
     },
     "christoffersen": {
      "test": "christoffersen-independence",
-     "n": 356,
+     "n": 357,
      "n00": 337,
      "n01": 9,
-     "n10": 9,
+     "n10": 10,
      "n11": 0,
-     "lr": 0.468,
-     "p_value": 0.4938,
+     "lr": 0.52,
+     "p_value": 0.471,
      "reject_5pct": false
     },
     "conditional_coverage": {
      "test": "christoffersen-cc",
-     "lr": 8.363,
-     "p_value": 0.0153,
+     "lr": 8.378,
+     "p_value": 0.0152,
      "reject_5pct": true
     },
     "estimation_window_tail_obs": 10.0,
@@ -2263,33 +2263,33 @@
     "alpha": 0.95,
     "window": 250,
     "horizon": 1,
-    "tested": 1106,
+    "tested": 1107,
     "exceptions": 65,
     "kupiec": {
      "test": "kupiec-pof",
-     "n": 1106,
+     "n": 1107,
      "exceptions": 65,
-     "rate": 0.0588,
+     "rate": 0.0587,
      "expected_rate": 0.05,
-     "lr": 1.7,
-     "p_value": 0.1923,
+     "lr": 1.681,
+     "p_value": 0.1948,
      "reject_5pct": false
     },
     "christoffersen": {
      "test": "christoffersen-independence",
-     "n": 1106,
+     "n": 1107,
      "n00": 986,
      "n01": 55,
-     "n10": 54,
+     "n10": 55,
      "n11": 10,
-     "lr": 8.434,
-     "p_value": 0.0037,
+     "lr": 8.218,
+     "p_value": 0.0041,
      "reject_5pct": true
     },
     "conditional_coverage": {
      "test": "christoffersen-cc",
-     "lr": 10.134,
-     "p_value": 0.0063,
+     "lr": 9.899,
+     "p_value": 0.0071,
      "reject_5pct": true
     },
     "estimation_window_tail_obs": 12.5,
@@ -2299,39 +2299,39 @@
     "model": "GPD peaks-over-threshold",
     "side": "loss",
     "threshold_q": 0.9,
-    "u": 0.00263,
-    "n": 1356,
+    "u": 0.002637,
+    "n": 1357,
     "n_exceedances": 136,
-    "exceedance_rate": 0.1003,
-    "xi": 0.0912,
-    "sigma": 0.001774,
+    "exceedance_rate": 0.1002,
+    "xi": 0.0763,
+    "sigma": 0.001815,
     "estimator": "probability-weighted moments",
-    "xi_mom": 0.0597,
-    "sigma_mom": 0.001836,
+    "xi_mom": 0.0513,
+    "sigma_mom": 0.001864,
     "tail_shape": "heavy-tailed (xi > 0): losses beyond the threshold decay as a power law, so the worst case is materially worse than a normal model implies",
     "tail_table": [
      {
       "confidence": 0.95,
-      "var": 0.003905,
-      "es": 0.005985,
+      "var": 0.003933,
+      "es": 0.006005,
       "extrapolated": false
      },
      {
       "confidence": 0.99,
-      "var": 0.007182,
-      "es": 0.009591,
+      "var": 0.007211,
+      "es": 0.009553,
       "extrapolated": false
      },
      {
       "confidence": 0.995,
-      "var": 0.008748,
-      "es": 0.011314,
+      "var": 0.008751,
+      "es": 0.011221,
       "extrapolated": false
      },
      {
       "confidence": 0.999,
-      "var": 0.012791,
-      "es": 0.015762,
+      "var": 0.012658,
+      "es": 0.01545,
       "extrapolated": false
      }
     ]
@@ -2903,7 +2903,7 @@
    "crude|natrub": 0.1283,
    "crude|palm": 0.2481,
    "crude|sugar": 0.0912,
-   "crude|usdinr": 0.3707,
+   "crude|usdinr": 0.363,
    "crude|wheat": 0.2183,
    "crude|wti": 0.9401,
    "gold|ironore": 0.1268,
@@ -2924,7 +2924,7 @@
    "natgas|natrub": -0.1753,
    "natgas|palm": 0.0657,
    "natgas|sugar": 0.0355,
-   "natgas|usdinr": -0.0016,
+   "natgas|usdinr": -0.0021,
    "natgas|wheat": -0.0542,
    "natgas|wti": 0.0291,
    "natrub|palm": 0.3442,
@@ -2940,30 +2940,30 @@
    "sugar|wheat": 0.146,
    "sugar|wti": 0.0558,
    "usdinr|wheat": 0.1408,
-   "usdinr|wti": 0.3166,
+   "usdinr|wti": 0.3155,
    "wheat|wti": 0.1897
   },
   "measured_pairs": 105,
   "total_pairs": 105,
   "t_copula": {
-   "df": 6.88,
+   "df": 6.89,
    "method": "moment matching on pooled excess kurtosis",
-   "excess_kurtosis": 2.084,
+   "excess_kurtosis": 2.079,
    "n_pooled": 919
   },
   "psd_repaired": false,
   "aligned_months": 60,
   "top_tail_dependence": [],
-  "note": "A Gaussian copula implies zero tail dependence. Measured joint exceedance rates above zero are the reason the t copula with df=6.88 is used for joint stress."
+  "note": "A Gaussian copula implies zero tail dependence. Measured joint exceedance rates above zero are the reason the t copula with df=6.89 is used for joint stress."
  },
  "cfar": {
   "hindalco": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 2812.8,
-   "expected_shortfall_cr": 3832.6,
-   "median_cr": 5.0,
-   "best_5pct_cr": -2771.7,
+   "cfar_cr": 2672.5,
+   "expected_shortfall_cr": 3708.0,
+   "median_cr": -13.7,
+   "best_5pct_cr": -2681.3,
    "cost_base_cr": 236847,
    "inputs_modelled": [
     "coal"
@@ -2973,13 +2973,13 @@
     "retained_cost_share": 0.4,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.89,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 38097,
-   "cfar_pct_ebitda": 7.4,
-   "statement": "5% chance the input basket costs more than Rs 2,813 crore of EBITDA over 1 months \u2014 7.4% of the year's EBITDA.",
+   "cfar_pct_ebitda": 7.0,
+   "statement": "5% chance the input basket costs more than Rs 2,673 crore of EBITDA over 1 months \u2014 7.0% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "hindalco",
    "name": "Hindalco",
@@ -3012,10 +3012,10 @@
   "hul": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 357.9,
-   "expected_shortfall_cr": 489.4,
-   "median_cr": -0.6,
-   "best_5pct_cr": -365.6,
+   "cfar_cr": 366.3,
+   "expected_shortfall_cr": 503.0,
+   "median_cr": 1.3,
+   "best_5pct_cr": -352.7,
    "cost_base_cr": 48715,
    "inputs_modelled": [
     "palm"
@@ -3025,13 +3025,13 @@
     "retained_cost_share": 0.45,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.89,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 15048,
    "cfar_pct_ebitda": 2.4,
-   "statement": "5% chance the input basket costs more than Rs 358 crore of EBITDA over 1 months \u2014 2.4% of the year's EBITDA.",
+   "statement": "5% chance the input basket costs more than Rs 366 crore of EBITDA over 1 months \u2014 2.4% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "hul",
    "name": "Hindustan Unilever",
@@ -3061,10 +3061,10 @@
   "jswsteel": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 1569.4,
-   "expected_shortfall_cr": 2143.9,
-   "median_cr": -0.1,
-   "best_5pct_cr": -1535.8,
+   "cfar_cr": 1571.0,
+   "expected_shortfall_cr": 2130.2,
+   "median_cr": 0.2,
+   "best_5pct_cr": -1566.0,
    "cost_base_cr": 153422,
    "inputs_modelled": [
     "ironore"
@@ -3074,13 +3074,13 @@
     "retained_cost_share": 0.3,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.89,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 32048,
    "cfar_pct_ebitda": 4.9,
-   "statement": "5% chance the input basket costs more than Rs 1,569 crore of EBITDA over 1 months \u2014 4.9% of the year's EBITDA.",
+   "statement": "5% chance the input basket costs more than Rs 1,571 crore of EBITDA over 1 months \u2014 4.9% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "jswsteel",
    "name": "JSW Steel",
@@ -3106,10 +3106,10 @@
   "maruti": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 772.7,
-   "expected_shortfall_cr": 1060.8,
-   "median_cr": -6.5,
-   "best_5pct_cr": -795.3,
+   "cfar_cr": 771.3,
+   "expected_shortfall_cr": 1069.2,
+   "median_cr": 1.4,
+   "best_5pct_cr": -775.2,
    "cost_base_cr": 164589,
    "inputs_modelled": [
     "alum",
@@ -3121,13 +3121,13 @@
     "retained_cost_share": 0.5,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.89,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 23084,
    "cfar_pct_ebitda": 3.3,
-   "statement": "5% chance the input basket costs more than Rs 773 crore of EBITDA over 1 months \u2014 3.3% of the year's EBITDA.",
+   "statement": "5% chance the input basket costs more than Rs 771 crore of EBITDA over 1 months \u2014 3.3% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "maruti",
    "name": "Maruti Suzuki",
@@ -3160,30 +3160,30 @@
     {
      "input": "alum",
      "weight": 0.05,
-     "cfar_without_cr": 345.0,
-     "contribution_cr": 430.6
+     "cfar_without_cr": 345.1,
+     "contribution_cr": 430.9
     },
     {
      "input": "copper",
      "weight": 0.03,
-     "cfar_without_cr": 568.2,
-     "contribution_cr": 207.4
+     "cfar_without_cr": 568.3,
+     "contribution_cr": 207.7
     },
     {
      "input": "natrub",
      "weight": 0.01,
-     "cfar_without_cr": 710.8,
-     "contribution_cr": 64.8
+     "cfar_without_cr": 710.9,
+     "contribution_cr": 65.1
     }
    ]
   },
   "reliance": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 96313.8,
-   "expected_shortfall_cr": 134869.6,
-   "median_cr": -502.7,
-   "best_5pct_cr": -98076.0,
+   "cfar_cr": 95396.8,
+   "expected_shortfall_cr": 131300.0,
+   "median_cr": -647.7,
+   "best_5pct_cr": -97828.5,
    "cost_base_cr": 968008,
    "inputs_modelled": [
     "crude",
@@ -3194,13 +3194,13 @@
     "retained_cost_share": 0.3,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.89,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 207911,
-   "cfar_pct_ebitda": 46.3,
-   "statement": "5% chance the input basket costs more than Rs 96,314 crore of EBITDA over 1 months \u2014 46.3% of the year's EBITDA.",
+   "cfar_pct_ebitda": 45.9,
+   "statement": "5% chance the input basket costs more than Rs 95,397 crore of EBITDA over 1 months \u2014 45.9% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "reliance",
    "name": "Reliance Industries",
@@ -3223,24 +3223,24 @@
     {
      "input": "crude",
      "weight": 0.5,
-     "cfar_without_cr": 20817.8,
-     "contribution_cr": 74176.9
+     "cfar_without_cr": 20825.9,
+     "contribution_cr": 74214.7
     },
     {
      "input": "natgas",
      "weight": 0.04,
-     "cfar_without_cr": 92946.3,
-     "contribution_cr": 2048.4
+     "cfar_without_cr": 92982.6,
+     "contribution_cr": 2058.0
     }
    ]
   },
   "tatasteel": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 2110.0,
-   "expected_shortfall_cr": 2906.5,
-   "median_cr": -19.0,
-   "best_5pct_cr": -2079.9,
+   "cfar_cr": 2087.7,
+   "expected_shortfall_cr": 2860.2,
+   "median_cr": -18.1,
+   "best_5pct_cr": -2137.5,
    "cost_base_cr": 197292,
    "inputs_modelled": [
     "ironore",
@@ -3251,13 +3251,13 @@
     "retained_cost_share": 0.3,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.89,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 34848,
-   "cfar_pct_ebitda": 6.1,
-   "statement": "5% chance the input basket costs more than Rs 2,110 crore of EBITDA over 1 months \u2014 6.1% of the year's EBITDA.",
+   "cfar_pct_ebitda": 6.0,
+   "statement": "5% chance the input basket costs more than Rs 2,088 crore of EBITDA over 1 months \u2014 6.0% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "tatasteel",
    "name": "Tata Steel",
@@ -3284,24 +3284,24 @@
     {
      "input": "natgas",
      "weight": 0.02,
-     "cfar_without_cr": 438.6,
-     "contribution_cr": 1665.7
+     "cfar_without_cr": 438.8,
+     "contribution_cr": 1665.9
     },
     {
      "input": "ironore",
      "weight": 0.05,
-     "cfar_without_cr": 2121.5,
-     "contribution_cr": -17.2
+     "cfar_without_cr": 2122.3,
+     "contribution_cr": -17.6
     }
    ]
   },
   "ultratech": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 859.1,
-   "expected_shortfall_cr": 1145.2,
-   "median_cr": -11.0,
-   "best_5pct_cr": -900.9,
+   "cfar_cr": 882.7,
+   "expected_shortfall_cr": 1204.8,
+   "median_cr": 5.7,
+   "best_5pct_cr": -883.9,
    "cost_base_cr": 69786,
    "inputs_modelled": [
     "coal"
@@ -3311,13 +3311,13 @@
     "retained_cost_share": 0.55,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.89,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 17598,
-   "cfar_pct_ebitda": 4.9,
-   "statement": "5% chance the input basket costs more than Rs 859 crore of EBITDA over 1 months \u2014 4.9% of the year's EBITDA.",
+   "cfar_pct_ebitda": 5.0,
+   "statement": "5% chance the input basket costs more than Rs 883 crore of EBITDA over 1 months \u2014 5.0% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "ultratech",
    "name": "UltraTech Cement",
