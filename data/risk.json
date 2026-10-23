@@ -1,21 +1,21 @@
 {
- "generated": "2026-10-22T17:53:27+00:00",
+ "generated": "2026-10-23T17:47:10+00:00",
  "engine_version": "1.0.0",
  "series": {
   "alum": {
    "id": "alum",
-   "n_returns": 59,
-   "asof": "2026-07-01",
+   "n_returns": 61,
+   "asof": "2026-09-01",
    "frequency": "monthly",
-   "last_price": 3158.265,
-   "ewma_sigma": 0.045923,
-   "ewma_sigma_annual": 0.1591,
-   "vol_percentile_5y": 62.5,
-   "skewness": -0.397,
-   "excess_kurtosis": 0.069,
+   "last_price": 3283.054285714286,
+   "ewma_sigma": 0.045825,
+   "ewma_sigma_annual": 0.1587,
+   "vol_percentile_5y": 57.7,
+   "skewness": -0.429,
+   "excess_kurtosis": 0.167,
    "normality_note": "Return distribution is close enough to normal that the three VaR estimators should broadly agree.",
    "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
    },
    "var": {
     "95_1": {
@@ -24,27 +24,27 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 1,
-      "var": 0.07226,
-      "es": 0.091449,
-      "mu": 0.003277,
-      "sigma": 0.045923,
+      "var": 0.07157,
+      "es": 0.090718,
+      "mu": 0.003805,
+      "sigma": 0.045825,
       "sigma_source": "supplied",
-      "n": 59
+      "n": 61
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.95,
       "horizon": 1,
       "df": 30.0,
-      "var": 0.071844,
-      "es": 0.093056,
+      "var": 0.071155,
+      "es": 0.092322,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.071844,
-      "max": 0.07226,
+      "min": 0.071155,
+      "max": 0.07157,
       "ratio": 1.006,
       "note": "estimators agree within 15%"
      }
@@ -55,299 +55,50 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 1,
-      "var": 0.103556,
-      "es": 0.119118,
-      "mu": 0.003277,
-      "sigma": 0.045923,
+      "var": 0.102799,
+      "es": 0.118328,
+      "mu": 0.003805,
+      "sigma": 0.045825,
       "sigma_source": "supplied",
-      "n": 59
+      "n": 61
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.99,
       "horizon": 1,
       "df": 30.0,
-      "var": 0.106497,
-      "es": 0.125008,
+      "var": 0.105734,
+      "es": 0.124205,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.103556,
-      "max": 0.106497,
-      "ratio": 1.028,
-      "note": "estimators agree within 15%"
-     }
-    }
-   },
-   "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
-   }
-  },
-  "coal": {
-   "id": "coal",
-   "n_returns": 59,
-   "asof": "2026-07-01",
-   "frequency": "monthly",
-   "last_price": 140.3967857,
-   "ewma_sigma": 0.069062,
-   "ewma_sigma_annual": 0.2392,
-   "vol_percentile_5y": 8.3,
-   "skewness": -0.93,
-   "excess_kurtosis": 3.367,
-   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
-   "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
-   },
-   "var": {
-    "95_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.117192,
-      "es": 0.14605,
-      "mu": -0.003595,
-      "sigma": 0.069062,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 5.8,
-      "var": 0.115923,
-      "es": 0.159443,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.115923,
-      "max": 0.117192,
-      "ratio": 1.011,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "99_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.164257,
-      "es": 0.18766,
-      "mu": -0.003595,
-      "sigma": 0.069062,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 5.8,
-      "var": 0.18381,
-      "es": 0.232341,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.164257,
-      "max": 0.18381,
-      "ratio": 1.119,
-      "note": "estimators agree within 15%"
-     }
-    }
-   },
-   "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
-   }
-  },
-  "cocoa": {
-   "id": "cocoa",
-   "n_returns": 59,
-   "asof": "2026-07-01",
-   "frequency": "monthly",
-   "last_price": 5619.189873586655,
-   "ewma_sigma": 0.15082,
-   "ewma_sigma_annual": 0.5225,
-   "vol_percentile_5y": 100.0,
-   "skewness": 0.02,
-   "excess_kurtosis": 1.256,
-   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
-   "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
-   },
-   "var": {
-    "95_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.234197,
-      "es": 0.297219,
-      "mu": 0.01388,
-      "sigma": 0.15082,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 8.8,
-      "var": 0.231573,
-      "es": 0.315859,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.231573,
-      "max": 0.234197,
-      "ratio": 1.011,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "99_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.336981,
-      "es": 0.388088,
-      "mu": 0.01388,
-      "sigma": 0.15082,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 8.8,
-      "var": 0.3654,
-      "es": 0.446886,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.336981,
-      "max": 0.3654,
-      "ratio": 1.084,
-      "note": "estimators agree within 15%"
-     }
-    }
-   },
-   "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
-   }
-  },
-  "coffee": {
-   "id": "coffee",
-   "n_returns": 59,
-   "asof": "2026-07-01",
-   "frequency": "monthly",
-   "last_price": 359.1622727272727,
-   "ewma_sigma": 0.072903,
-   "ewma_sigma_annual": 0.2525,
-   "vol_percentile_5y": 95.8,
-   "skewness": 0.111,
-   "excess_kurtosis": -0.213,
-   "normality_note": "Return distribution is close enough to normal that the three VaR estimators should broadly agree.",
-   "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
-   },
-   "var": {
-    "95_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.111331,
-      "es": 0.141794,
-      "mu": 0.008585,
-      "sigma": 0.072903,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 30.0,
-      "var": 0.110671,
-      "es": 0.144345,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.110671,
-      "max": 0.111331,
-      "ratio": 1.006,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "99_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.161014,
-      "es": 0.185718,
-      "mu": 0.008585,
-      "sigma": 0.072903,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 30.0,
-      "var": 0.165682,
-      "es": 0.195068,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.161014,
-      "max": 0.165682,
+      "min": 0.102799,
+      "max": 0.105734,
       "ratio": 1.029,
       "note": "estimators agree within 15%"
      }
     }
    },
    "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
+    "error": "need >= 250 observations for a tail fit, have 61"
    }
   },
-  "copper": {
-   "id": "copper",
-   "n_returns": 59,
-   "asof": "2026-07-01",
+  "coal": {
+   "id": "coal",
+   "n_returns": 61,
+   "asof": "2026-09-01",
    "frequency": "monthly",
-   "last_price": 13542.82086956522,
-   "ewma_sigma": 0.040578,
-   "ewma_sigma_annual": 0.1406,
-   "vol_percentile_5y": 37.5,
-   "skewness": -1.01,
-   "excess_kurtosis": 3.54,
+   "last_price": 153.84,
+   "ewma_sigma": 0.067391,
+   "ewma_sigma_annual": 0.2334,
+   "vol_percentile_5y": 3.8,
+   "skewness": -0.965,
+   "excess_kurtosis": 3.512,
    "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
    "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
    },
    "var": {
     "95_1": {
@@ -356,1550 +107,27 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 1,
-      "var": 0.060502,
-      "es": 0.077458,
-      "mu": 0.006243,
-      "sigma": 0.040578,
+      "var": 0.112826,
+      "es": 0.140986,
+      "mu": -0.001978,
+      "sigma": 0.067391,
       "sigma_source": "supplied",
-      "n": 59
+      "n": 61
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.95,
       "horizon": 1,
       "df": 5.7,
-      "var": 0.059638,
-      "es": 0.085072,
+      "var": 0.111325,
+      "es": 0.153576,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.059638,
-      "max": 0.060502,
-      "ratio": 1.014,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "99_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.088156,
-      "es": 0.101906,
-      "mu": 0.006243,
-      "sigma": 0.040578,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 5.7,
-      "var": 0.099596,
-      "es": 0.127845,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.088156,
-      "max": 0.099596,
-      "ratio": 1.13,
-      "note": "estimators agree within 15%"
-     }
-    }
-   },
-   "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
-   }
-  },
-  "crude": {
-   "id": "crude",
-   "n_returns": 1338,
-   "asof": "2026-10-20",
-   "frequency": "daily",
-   "last_price": 115.22,
-   "ewma_sigma": 0.043778,
-   "ewma_sigma_annual": 0.695,
-   "vol_percentile_5y": 92.2,
-   "skewness": -0.202,
-   "excess_kurtosis": 4.736,
-   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
-   "garch": {
-    "model": "GARCH(1,1)-normal",
-    "omega": 1.1898027978416728e-05,
-    "alpha": 0.087703,
-    "beta": 0.897828,
-    "persistence": 0.985531,
-    "mu": 0.00031286,
-    "half_life_periods": 47.6,
-    "sigma_uncond": 0.028675,
-    "sigma_next": 0.040235,
-    "loglik": 4341.049,
-    "aic": -8676.098,
-    "bic": -8660.501,
-    "n": 1338,
-    "converged": true,
-    "note": "Stationary; volatility mean-reverts to sigma_uncond."
-   },
-   "garch_forecast": {
-    "horizon": 21,
-    "sigma": 0.17828,
-    "sigma_per_period": 0.038904,
-    "method": "GARCH(1,1) variance-path aggregation"
-   },
-   "var": {
-    "95_1": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.042249,
-      "es": 0.063675,
-      "n": 1338,
-      "n_effective": 1338.0,
-      "n_tail": 67,
-      "overlapping": false
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.065868,
-      "es": 0.08268,
-      "mu": 0.000313,
-      "sigma": 0.040235,
-      "sigma_source": "supplied",
-      "n": 1338
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 5.3,
-      "var": 0.064436,
-      "es": 0.091075,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.042249,
-      "max": 0.065868,
-      "ratio": 1.559,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "95_10": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.95,
-      "horizon": 10,
-      "var": 0.117191,
-      "es": 0.160216,
-      "n": 1329,
-      "n_effective": 132.9,
-      "n_tail": 67,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 10,
-      "var": 0.136111,
-      "es": 0.171483,
-      "mu": 0.003129,
-      "sigma": 0.084651,
-      "sigma_source": "sample",
-      "n": 1338
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 10,
-      "df": 5.3,
-      "var": 0.138199,
-      "es": 0.178428,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.117191,
-      "max": 0.138199,
-      "ratio": 1.179,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "95_21": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.95,
-      "horizon": 21,
-      "var": 0.15437,
-      "es": 0.230388,
-      "n": 1318,
-      "n_effective": 62.8,
-      "n_tail": 66,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 21,
-      "var": 0.195207,
-      "es": 0.246466,
-      "mu": 0.00657,
-      "sigma": 0.122672,
-      "sigma_source": "sample",
-      "n": 1338
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 21,
-      "df": 5.3,
-      "var": 0.196758,
-      "es": 0.253454,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.15437,
-      "max": 0.196758,
-      "ratio": 1.275,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "99_1": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.071118,
-      "es": 0.10144,
-      "n": 1338,
-      "n_effective": 1338.0,
-      "n_tail": 14,
-      "overlapping": false
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.093288,
-      "es": 0.106922,
-      "mu": 0.000313,
-      "sigma": 0.040235,
-      "sigma_source": "supplied",
-      "n": 1338
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 5.3,
-      "var": 0.105951,
-      "es": 0.135817,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.071118,
-      "max": 0.105951,
-      "ratio": 1.49,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "99_10": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.99,
-      "horizon": 10,
-      "var": 0.191283,
-      "es": 0.226938,
-      "n": 1329,
-      "n_effective": 132.9,
-      "n_tail": 14,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 10,
-      "var": 0.1938,
-      "es": 0.222485,
-      "mu": 0.003129,
-      "sigma": 0.084651,
-      "sigma_source": "sample",
-      "n": 1338
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 10,
-      "df": 5.3,
-      "var": 0.20245,
-      "es": 0.243029,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.191283,
-      "max": 0.20245,
-      "ratio": 1.058,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "99_21": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.99,
-      "horizon": 21,
-      "var": 0.305122,
-      "es": 0.343854,
-      "n": 1318,
-      "n_effective": 62.8,
-      "n_tail": 14,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 21,
-      "var": 0.278807,
-      "es": 0.320376,
-      "mu": 0.00657,
-      "sigma": 0.122672,
-      "sigma_source": "sample",
-      "n": 1338
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 21,
-      "df": 5.3,
-      "var": 0.28908,
-      "es": 0.33776,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.278807,
-      "max": 0.305122,
-      "ratio": 1.094,
-      "note": "estimators agree within 15%"
-     }
-    }
-   },
-   "backtest_99": {
-    "alpha": 0.99,
-    "window": 1000,
-    "horizon": 1,
-    "tested": 338,
-    "exceptions": 11,
-    "kupiec": {
-     "test": "kupiec-pof",
-     "n": 338,
-     "exceptions": 11,
-     "rate": 0.0325,
-     "expected_rate": 0.01,
-     "lr": 10.895,
-     "p_value": 0.001,
-     "reject_5pct": true
-    },
-    "christoffersen": {
-     "test": "christoffersen-independence",
-     "n": 338,
-     "n00": 316,
-     "n01": 10,
-     "n10": 10,
-     "n11": 1,
-     "lr": 0.847,
-     "p_value": 0.3574,
-     "reject_5pct": false
-    },
-    "conditional_coverage": {
-     "test": "christoffersen-cc",
-     "lr": 11.742,
-     "p_value": 0.0028,
-     "reject_5pct": true
-    },
-    "estimation_window_tail_obs": 10.0,
-    "verdict": "model rejected at 5% \u2014 exception rate is inconsistent with the stated confidence level"
-   },
-   "backtest_95": {
-    "alpha": 0.95,
-    "window": 250,
-    "horizon": 1,
-    "tested": 1088,
-    "exceptions": 62,
-    "kupiec": {
-     "test": "kupiec-pof",
-     "n": 1088,
-     "exceptions": 62,
-     "rate": 0.057,
-     "expected_rate": 0.05,
-     "lr": 1.072,
-     "p_value": 0.3006,
-     "reject_5pct": false
-    },
-    "christoffersen": {
-     "test": "christoffersen-independence",
-     "n": 1088,
-     "n00": 969,
-     "n01": 56,
-     "n10": 56,
-     "n11": 6,
-     "lr": 1.634,
-     "p_value": 0.2012,
-     "reject_5pct": false
-    },
-    "conditional_coverage": {
-     "test": "christoffersen-cc",
-     "lr": 2.706,
-     "p_value": 0.2585,
-     "reject_5pct": false
-    },
-    "estimation_window_tail_obs": 12.5,
-    "verdict": "coverage consistent with the stated confidence level"
-   },
-   "evt": {
-    "model": "GPD peaks-over-threshold",
-    "side": "loss",
-    "threshold_q": 0.9,
-    "u": 0.028462,
-    "n": 1338,
-    "n_exceedances": 134,
-    "exceedance_rate": 0.1001,
-    "xi": 0.1013,
-    "sigma": 0.018359,
-    "estimator": "probability-weighted moments",
-    "xi_mom": 0.1013,
-    "sigma_mom": 0.018358,
-    "tail_shape": "heavy-tailed (xi > 0): losses beyond the threshold decay as a power law, so the worst case is materially worse than a normal model implies",
-    "tail_table": [
-     {
-      "confidence": 0.95,
-      "var": 0.041674,
-      "es": 0.063592,
-      "extrapolated": false
-     },
-     {
-      "confidence": 0.99,
-      "var": 0.076107,
-      "es": 0.101906,
-      "extrapolated": false
-     },
-     {
-      "confidence": 0.995,
-      "var": 0.092755,
-      "es": 0.120431,
-      "extrapolated": false
-     },
-     {
-      "confidence": 0.999,
-      "var": 0.136233,
-      "es": 0.168809,
-      "extrapolated": false
-     }
-    ]
-   }
-  },
-  "gold": {
-   "id": "gold",
-   "n_returns": 1294,
-   "asof": "2026-09-04",
-   "frequency": "daily",
-   "last_price": 4415.4,
-   "ewma_sigma": 0.016809,
-   "ewma_sigma_annual": 0.2668,
-   "vol_percentile_5y": 91.5,
-   "skewness": -0.573,
-   "excess_kurtosis": 4.755,
-   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
-   "garch": {
-    "model": "GARCH(1,1)-normal",
-    "omega": 2.8746560679607155e-06,
-    "alpha": 0.072727,
-    "beta": 0.904168,
-    "persistence": 0.976896,
-    "mu": 0.00068922,
-    "half_life_periods": 29.7,
-    "sigma_uncond": 0.011154,
-    "sigma_next": 0.016309,
-    "loglik": 5287.585,
-    "aic": -10569.171,
-    "bic": -10553.674,
-    "n": 1294,
-    "converged": true,
-    "note": "Stationary; volatility mean-reverts to sigma_uncond."
-   },
-   "garch_forecast": {
-    "horizon": 21,
-    "sigma": 0.070637,
-    "sigma_per_period": 0.015414,
-    "method": "GARCH(1,1) variance-path aggregation"
-   },
-   "var": {
-    "95_1": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.016673,
-      "es": 0.027037,
-      "n": 1294,
-      "n_effective": 1294.0,
-      "n_tail": 65,
-      "overlapping": false
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.026137,
-      "es": 0.032952,
-      "mu": 0.000689,
-      "sigma": 0.016309,
-      "sigma_source": "supplied",
-      "n": 1294
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 5.3,
-      "var": 0.025557,
-      "es": 0.036354,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.016673,
-      "max": 0.026137,
-      "ratio": 1.568,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "95_10": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.95,
-      "horizon": 10,
-      "var": 0.046145,
-      "es": 0.065391,
-      "n": 1285,
-      "n_effective": 128.5,
-      "n_tail": 65,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 10,
-      "var": 0.051603,
-      "es": 0.066464,
-      "mu": 0.006892,
-      "sigma": 0.035563,
-      "sigma_source": "sample",
-      "n": 1294
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 10,
-      "df": 5.3,
-      "var": 0.051681,
-      "es": 0.068597,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.046145,
-      "max": 0.051681,
-      "ratio": 1.12,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "95_21": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.95,
-      "horizon": 21,
-      "var": 0.059721,
-      "es": 0.085695,
-      "n": 1274,
-      "n_effective": 60.7,
-      "n_tail": 64,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 21,
-      "var": 0.070295,
-      "es": 0.091829,
-      "mu": 0.014474,
-      "sigma": 0.051535,
-      "sigma_source": "sample",
-      "n": 1294
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 21,
-      "df": 5.3,
-      "var": 0.070912,
-      "es": 0.094028,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.059721,
-      "max": 0.070912,
-      "ratio": 1.187,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "99_1": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.029711,
-      "es": 0.043924,
-      "n": 1294,
-      "n_effective": 1294.0,
-      "n_tail": 13,
-      "overlapping": false
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.037251,
-      "es": 0.042778,
-      "mu": 0.000689,
-      "sigma": 0.016309,
-      "sigma_source": "supplied",
-      "n": 1294
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 5.3,
-      "var": 0.042378,
-      "es": 0.054499,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.029711,
-      "max": 0.042378,
-      "ratio": 1.426,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "99_10": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.99,
-      "horizon": 10,
-      "var": 0.070066,
-      "es": 0.107433,
-      "n": 1285,
-      "n_effective": 128.5,
-      "n_tail": 13,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 10,
-      "var": 0.075839,
-      "es": 0.08789,
-      "mu": 0.006892,
-      "sigma": 0.035563,
-      "sigma_source": "sample",
-      "n": 1294
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 10,
-      "df": 5.3,
-      "var": 0.078832,
-      "es": 0.094029,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.070066,
-      "max": 0.078832,
-      "ratio": 1.125,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "99_21": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.99,
-      "horizon": 21,
-      "var": 0.102168,
-      "es": 0.130044,
-      "n": 1274,
-      "n_effective": 60.7,
-      "n_tail": 13,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 21,
-      "var": 0.105416,
-      "es": 0.122879,
-      "mu": 0.014474,
-      "sigma": 0.051535,
-      "sigma_source": "sample",
-      "n": 1294
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 21,
-      "df": 5.3,
-      "var": 0.108139,
-      "es": 0.128765,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.102168,
-      "max": 0.108139,
-      "ratio": 1.058,
-      "note": "estimators agree within 15%"
-     }
-    }
-   },
-   "backtest_99": {
-    "alpha": 0.99,
-    "window": 1000,
-    "horizon": 1,
-    "tested": 294,
-    "exceptions": 14,
-    "kupiec": {
-     "test": "kupiec-pof",
-     "n": 294,
-     "exceptions": 14,
-     "rate": 0.0476,
-     "expected_rate": 0.01,
-     "lr": 22.004,
-     "p_value": 0.0,
-     "reject_5pct": true
-    },
-    "christoffersen": {
-     "test": "christoffersen-independence",
-     "n": 294,
-     "n00": 267,
-     "n01": 12,
-     "n10": 12,
-     "n11": 2,
-     "lr": 2.001,
-     "p_value": 0.1572,
-     "reject_5pct": false
-    },
-    "conditional_coverage": {
-     "test": "christoffersen-cc",
-     "lr": 24.005,
-     "p_value": 0.0,
-     "reject_5pct": true
-    },
-    "estimation_window_tail_obs": 10.0,
-    "verdict": "model rejected at 5% \u2014 exception rate is inconsistent with the stated confidence level"
-   },
-   "backtest_95": {
-    "alpha": 0.95,
-    "window": 250,
-    "horizon": 1,
-    "tested": 1044,
-    "exceptions": 56,
-    "kupiec": {
-     "test": "kupiec-pof",
-     "n": 1044,
-     "exceptions": 56,
-     "rate": 0.0536,
-     "expected_rate": 0.05,
-     "lr": 0.285,
-     "p_value": 0.5936,
-     "reject_5pct": false
-    },
-    "christoffersen": {
-     "test": "christoffersen-independence",
-     "n": 1044,
-     "n00": 934,
-     "n01": 53,
-     "n10": 53,
-     "n11": 3,
-     "lr": 0.0,
-     "p_value": 0.9933,
-     "reject_5pct": false
-    },
-    "conditional_coverage": {
-     "test": "christoffersen-cc",
-     "lr": 0.285,
-     "p_value": 0.8672,
-     "reject_5pct": false
-    },
-    "estimation_window_tail_obs": 12.5,
-    "verdict": "coverage consistent with the stated confidence level"
-   },
-   "evt": {
-    "model": "GPD peaks-over-threshold",
-    "side": "loss",
-    "threshold_q": 0.9,
-    "u": 0.011455,
-    "n": 1294,
-    "n_exceedances": 130,
-    "exceedance_rate": 0.1005,
-    "xi": 0.1959,
-    "sigma": 0.007037,
-    "estimator": "probability-weighted moments",
-    "xi_mom": 0.151,
-    "sigma_mom": 0.00743,
-    "tail_shape": "heavy-tailed (xi > 0): losses beyond the threshold decay as a power law, so the worst case is materially worse than a normal model implies",
-    "tail_table": [
-     {
-      "confidence": 0.95,
-      "var": 0.016717,
-      "es": 0.02675,
-      "extrapolated": false
-     },
-     {
-      "confidence": 0.99,
-      "var": 0.031981,
-      "es": 0.045734,
-      "extrapolated": false
-     },
-     {
-      "confidence": 0.995,
-      "var": 0.040191,
-      "es": 0.055943,
-      "extrapolated": false
-     },
-     {
-      "confidence": 0.999,
-      "var": 0.064157,
-      "es": 0.085748,
-      "extrapolated": false
-     }
-    ]
-   }
-  },
-  "ironore": {
-   "id": "ironore",
-   "n_returns": 59,
-   "asof": "2026-07-01",
-   "frequency": "monthly",
-   "last_price": 101.595652173913,
-   "ewma_sigma": 0.054183,
-   "ewma_sigma_annual": 0.1877,
-   "vol_percentile_5y": 8.3,
-   "skewness": -0.88,
-   "excess_kurtosis": 3.387,
-   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
-   "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
-   },
-   "var": {
-    "95_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.097041,
-      "es": 0.119682,
-      "mu": -0.007918,
-      "sigma": 0.054183,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 5.8,
-      "var": 0.095729,
-      "es": 0.130145,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.095729,
-      "max": 0.097041,
-      "ratio": 1.014,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "99_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.133966,
-      "es": 0.152327,
-      "mu": -0.007918,
-      "sigma": 0.054183,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 5.8,
-      "var": 0.149276,
-      "es": 0.187437,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.133966,
-      "max": 0.149276,
-      "ratio": 1.114,
-      "note": "estimators agree within 15%"
-     }
-    }
-   },
-   "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
-   }
-  },
-  "natgas": {
-   "id": "natgas",
-   "n_returns": 1322,
-   "asof": "2026-10-20",
-   "frequency": "daily",
-   "last_price": 3.1,
-   "ewma_sigma": 0.031955,
-   "ewma_sigma_annual": 0.5073,
-   "vol_percentile_5y": 3.7,
-   "skewness": 1.494,
-   "excess_kurtosis": 73.842,
-   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
-   "garch": {
-    "model": "GARCH(1,1)-normal",
-    "omega": 0.0005744076033219993,
-    "alpha": 0.298958,
-    "beta": 0.700542,
-    "persistence": 0.9995,
-    "mu": -0.00012974,
-    "half_life_periods": 1385.9,
-    "sigma_uncond": 1.071828,
-    "sigma_next": 0.056982,
-    "loglik": 2721.781,
-    "aic": -5437.561,
-    "bic": -5422.0,
-    "n": 1322,
-    "converged": true,
-    "note": "Persistence at the boundary \u2014 behaves like EWMA with no mean reversion."
-   },
-   "garch_forecast": {
-    "horizon": 21,
-    "sigma": 0.433694,
-    "sigma_per_period": 0.09464,
-    "method": "GARCH(1,1) variance-path aggregation"
-   },
-   "var": {
-    "95_1": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.106582,
-      "es": 0.213441,
-      "n": 1322,
-      "n_effective": 1322.0,
-      "n_tail": 67,
-      "overlapping": false
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.093857,
-      "es": 0.117667,
-      "mu": -0.00013,
-      "sigma": 0.056982,
-      "sigma_source": "supplied",
-      "n": 1322
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 4.5,
-      "var": 0.090017,
-      "es": 0.12972,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.090017,
-      "max": 0.106582,
-      "ratio": 1.184,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "95_10": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.95,
-      "horizon": 10,
-      "var": 0.314639,
-      "es": 0.535404,
-      "n": 1313,
-      "n_effective": 131.3,
-      "n_tail": 66,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 10,
-      "var": 0.548937,
-      "es": 0.68806,
-      "mu": -0.001297,
-      "sigma": 0.332941,
-      "sigma_source": "sample",
-      "n": 1322
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 10,
-      "df": 4.5,
-      "var": 0.550876,
-      "es": 0.723258,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.314639,
-      "max": 0.550876,
-      "ratio": 1.751,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "95_21": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.95,
-      "horizon": 21,
-      "var": 0.42726,
-      "es": 0.690078,
-      "n": 1302,
-      "n_effective": 62.0,
-      "n_tail": 66,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 21,
-      "var": 0.79633,
-      "es": 0.997938,
-      "mu": -0.002724,
-      "sigma": 0.482478,
-      "sigma_source": "sample",
-      "n": 1322
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 21,
-      "df": 4.5,
-      "var": 0.792452,
-      "es": 1.024813,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.42726,
-      "max": 0.79633,
-      "ratio": 1.864,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "99_1": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.244835,
-      "es": 0.455807,
-      "n": 1322,
-      "n_effective": 1322.0,
-      "n_tail": 14,
-      "overlapping": false
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.13269,
-      "es": 0.151999,
-      "mu": -0.00013,
-      "sigma": 0.056982,
-      "sigma_source": "supplied",
-      "n": 1322
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 4.5,
-      "var": 0.151591,
-      "es": 0.199075,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.13269,
-      "max": 0.244835,
-      "ratio": 1.845,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "99_10": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.99,
-      "horizon": 10,
-      "var": 0.579706,
-      "es": 1.10651,
-      "n": 1313,
-      "n_effective": 131.3,
-      "n_tail": 14,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 10,
-      "var": 0.775835,
-      "es": 0.888658,
-      "mu": -0.001297,
-      "sigma": 0.332941,
-      "sigma_source": "sample",
-      "n": 1322
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 10,
-      "df": 4.5,
-      "var": 0.831577,
-      "es": 0.999242,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.579706,
-      "max": 0.831577,
-      "ratio": 1.434,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    },
-    "99_21": {
-     "historical": {
-      "method": "historical-simulation",
-      "alpha": 0.99,
-      "horizon": 21,
-      "var": 0.753649,
-      "es": 1.246676,
-      "n": 1302,
-      "n_effective": 62.0,
-      "n_tail": 14,
-      "overlapping": true
-     },
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 21,
-      "var": 1.125136,
-      "es": 1.288632,
-      "mu": -0.002724,
-      "sigma": 0.482478,
-      "sigma_source": "sample",
-      "n": 1322
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 21,
-      "df": 4.5,
-      "var": 1.173712,
-      "es": 1.379827,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "sample"
-     },
-     "spread": {
-      "min": 0.753649,
-      "max": 1.173712,
-      "ratio": 1.557,
-      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
-     }
-    }
-   },
-   "backtest_99": {
-    "alpha": 0.99,
-    "window": 1000,
-    "horizon": 1,
-    "tested": 322,
-    "exceptions": 7,
-    "kupiec": {
-     "test": "kupiec-pof",
-     "n": 322,
-     "exceptions": 7,
-     "rate": 0.0217,
-     "expected_rate": 0.01,
-     "lr": 3.356,
-     "p_value": 0.0669,
-     "reject_5pct": false
-    },
-    "christoffersen": {
-     "test": "christoffersen-independence",
-     "n": 322,
-     "n00": 309,
-     "n01": 5,
-     "n10": 5,
-     "n11": 2,
-     "lr": 7.708,
-     "p_value": 0.0055,
-     "reject_5pct": true
-    },
-    "conditional_coverage": {
-     "test": "christoffersen-cc",
-     "lr": 11.064,
-     "p_value": 0.004,
-     "reject_5pct": true
-    },
-    "estimation_window_tail_obs": 10.0,
-    "verdict": "coverage consistent with the stated confidence level"
-   },
-   "backtest_95": {
-    "alpha": 0.95,
-    "window": 250,
-    "horizon": 1,
-    "tested": 1072,
-    "exceptions": 52,
-    "kupiec": {
-     "test": "kupiec-pof",
-     "n": 1072,
-     "exceptions": 52,
-     "rate": 0.0485,
-     "expected_rate": 0.05,
-     "lr": 0.051,
-     "p_value": 0.8218,
-     "reject_5pct": false
-    },
-    "christoffersen": {
-     "test": "christoffersen-independence",
-     "n": 1072,
-     "n00": 980,
-     "n01": 39,
-     "n10": 39,
-     "n11": 13,
-     "lr": 26.558,
-     "p_value": 0.0,
-     "reject_5pct": true
-    },
-    "conditional_coverage": {
-     "test": "christoffersen-cc",
-     "lr": 26.609,
-     "p_value": 0.0,
-     "reject_5pct": true
-    },
-    "estimation_window_tail_obs": 12.5,
-    "verdict": "coverage consistent with the stated confidence level"
-   },
-   "evt": {
-    "model": "GPD peaks-over-threshold",
-    "side": "loss",
-    "threshold_q": 0.9,
-    "u": 0.078137,
-    "n": 1322,
-    "n_exceedances": 133,
-    "exceedance_rate": 0.1006,
-    "xi": 0.4961,
-    "sigma": 0.037421,
-    "estimator": "probability-weighted moments",
-    "xi_mom": 0.3735,
-    "sigma_mom": 0.046526,
-    "tail_shape": "heavy-tailed (xi > 0): losses beyond the threshold decay as a power law, so the worst case is materially worse than a normal model implies",
-    "tail_table": [
-     {
-      "confidence": 0.95,
-      "var": 0.109412,
-      "es": 0.214466,
-      "extrapolated": false
-     },
-     {
-      "confidence": 0.99,
-      "var": 0.239815,
-      "es": 0.473252,
-      "extrapolated": false
-     },
-     {
-      "confidence": 0.995,
-      "var": 0.337123,
-      "es": 0.666362,
-      "extrapolated": false
-     },
-     {
-      "confidence": 0.999,
-      "var": 0.745805,
-      "es": 1.4774,
-      "extrapolated": false
-     }
-    ]
-   }
-  },
-  "natrub": {
-   "id": "natrub",
-   "n_returns": 59,
-   "asof": "2026-07-01",
-   "frequency": "monthly",
-   "last_price": 129.5048992157791,
-   "ewma_sigma": 0.069395,
-   "ewma_sigma_annual": 0.2404,
-   "vol_percentile_5y": 45.8,
-   "skewness": 0.14,
-   "excess_kurtosis": 0.574,
-   "normality_note": "Return distribution is close enough to normal that the three VaR estimators should broadly agree.",
-   "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
-   },
-   "var": {
-    "95_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.107256,
-      "es": 0.136253,
-      "mu": 0.006889,
-      "sigma": 0.069395,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 14.5,
-      "var": 0.107966,
-      "es": 0.143579,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.107256,
-      "max": 0.107966,
-      "ratio": 1.007,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "99_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.154548,
-      "es": 0.178064,
-      "mu": 0.006889,
-      "sigma": 0.069395,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 14.5,
-      "var": 0.164352,
-      "es": 0.197179,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.154548,
-      "max": 0.164352,
-      "ratio": 1.063,
-      "note": "estimators agree within 15%"
-     }
-    }
-   },
-   "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
-   }
-  },
-  "palm": {
-   "id": "palm",
-   "n_returns": 59,
-   "asof": "2026-07-01",
-   "frequency": "monthly",
-   "last_price": 1106.469929089015,
-   "ewma_sigma": 0.049594,
-   "ewma_sigma_annual": 0.1718,
-   "vol_percentile_5y": 4.2,
-   "skewness": -1.974,
-   "excess_kurtosis": 7.505,
-   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
-   "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
-   },
-   "var": {
-    "95_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.081129,
-      "es": 0.101853,
-      "mu": 0.000445,
-      "sigma": 0.049594,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 4.8,
-      "var": 0.078331,
-      "es": 0.111602,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.078331,
-      "max": 0.081129,
-      "ratio": 1.036,
-      "note": "estimators agree within 15%"
-     }
-    },
-    "99_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.99,
-      "horizon": 1,
-      "var": 0.114927,
-      "es": 0.131733,
-      "mu": 0.000445,
-      "sigma": 0.049594,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.99,
-      "horizon": 1,
-      "df": 4.8,
-      "var": 0.130192,
-      "es": 0.167494,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.114927,
-      "max": 0.130192,
-      "ratio": 1.133,
-      "note": "estimators agree within 15%"
-     }
-    }
-   },
-   "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
-   }
-  },
-  "sugar": {
-   "id": "sugar",
-   "n_returns": 59,
-   "asof": "2026-07-01",
-   "frequency": "monthly",
-   "last_price": 14.81227272727273,
-   "ewma_sigma": 0.062142,
-   "ewma_sigma_annual": 0.2153,
-   "vol_percentile_5y": 25.0,
-   "skewness": -0.185,
-   "excess_kurtosis": 2.516,
-   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
-   "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
-   },
-   "var": {
-    "95_1": {
-     "historical": null,
-     "parametric": {
-      "method": "parametric-normal",
-      "alpha": 0.95,
-      "horizon": 1,
-      "var": 0.106773,
-      "es": 0.13274,
-      "mu": -0.004559,
-      "sigma": 0.062142,
-      "sigma_source": "supplied",
-      "n": 59
-     },
-     "monte_carlo": {
-      "method": "monte-carlo-t",
-      "alpha": 0.95,
-      "horizon": 1,
-      "df": 6.4,
-      "var": 0.105402,
-      "es": 0.144139,
-      "paths": 20000,
-      "seed": 12345,
-      "sigma_source": "supplied"
-     },
-     "spread": {
-      "min": 0.105402,
-      "max": 0.106773,
+      "min": 0.111325,
+      "max": 0.112826,
       "ratio": 1.013,
       "note": "estimators agree within 15%"
      }
@@ -1910,69 +138,1841 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 1,
-      "var": 0.149123,
-      "es": 0.170181,
-      "mu": -0.004559,
-      "sigma": 0.062142,
+      "var": 0.158753,
+      "es": 0.181589,
+      "mu": -0.001978,
+      "sigma": 0.067391,
       "sigma_source": "supplied",
-      "n": 59
+      "n": 61
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.99,
       "horizon": 1,
-      "df": 6.4,
-      "var": 0.165388,
-      "es": 0.209155,
+      "df": 5.7,
+      "var": 0.177574,
+      "es": 0.22458,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.149123,
-      "max": 0.165388,
-      "ratio": 1.109,
+      "min": 0.158753,
+      "max": 0.177574,
+      "ratio": 1.119,
       "note": "estimators agree within 15%"
      }
     }
    },
    "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
+    "error": "need >= 250 observations for a tail fit, have 61"
+   }
+  },
+  "cocoa": {
+   "id": "cocoa",
+   "n_returns": 61,
+   "asof": "2026-09-01",
+   "frequency": "monthly",
+   "last_price": 5918.981427980948,
+   "ewma_sigma": 0.150947,
+   "ewma_sigma_annual": 0.5229,
+   "vol_percentile_5y": 96.2,
+   "skewness": 0.011,
+   "excess_kurtosis": 1.364,
+   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
+   "garch": {
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
+   },
+   "var": {
+    "95_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.234009,
+      "es": 0.297084,
+      "mu": 0.014277,
+      "sigma": 0.150947,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 8.4,
+      "var": 0.23001,
+      "es": 0.315411,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.23001,
+      "max": 0.234009,
+      "ratio": 1.017,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "99_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.336879,
+      "es": 0.388029,
+      "mu": 0.014277,
+      "sigma": 0.150947,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 8.4,
+      "var": 0.365495,
+      "es": 0.447542,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.336879,
+      "max": 0.365495,
+      "ratio": 1.085,
+      "note": "estimators agree within 15%"
+     }
+    }
+   },
+   "evt": {
+    "error": "need >= 250 observations for a tail fit, have 61"
+   }
+  },
+  "coffee": {
+   "id": "coffee",
+   "n_returns": 61,
+   "asof": "2026-09-01",
+   "frequency": "monthly",
+   "last_price": 330.1219047619048,
+   "ewma_sigma": 0.074311,
+   "ewma_sigma_annual": 0.2574,
+   "vol_percentile_5y": 100.0,
+   "skewness": 0.134,
+   "excess_kurtosis": -0.229,
+   "normality_note": "Return distribution is close enough to normal that the three VaR estimators should broadly agree.",
+   "garch": {
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
+   },
+   "var": {
+    "95_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.11531,
+      "es": 0.146362,
+      "mu": 0.006921,
+      "sigma": 0.074311,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 30.0,
+      "var": 0.114638,
+      "es": 0.148963,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.114638,
+      "max": 0.11531,
+      "ratio": 1.006,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "99_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.165953,
+      "es": 0.191135,
+      "mu": 0.006921,
+      "sigma": 0.074311,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 30.0,
+      "var": 0.170712,
+      "es": 0.200665,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.165953,
+      "max": 0.170712,
+      "ratio": 1.029,
+      "note": "estimators agree within 15%"
+     }
+    }
+   },
+   "evt": {
+    "error": "need >= 250 observations for a tail fit, have 61"
+   }
+  },
+  "copper": {
+   "id": "copper",
+   "n_returns": 61,
+   "asof": "2026-09-01",
+   "frequency": "monthly",
+   "last_price": 14473.05590909091,
+   "ewma_sigma": 0.040724,
+   "ewma_sigma_annual": 0.1411,
+   "vol_percentile_5y": 38.5,
+   "skewness": -1.034,
+   "excess_kurtosis": 3.596,
+   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
+   "garch": {
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
+   },
+   "var": {
+    "95_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.059857,
+      "es": 0.076874,
+      "mu": 0.007127,
+      "sigma": 0.040724,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 5.7,
+      "var": 0.059019,
+      "es": 0.084563,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.059019,
+      "max": 0.059857,
+      "ratio": 1.014,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "99_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.08761,
+      "es": 0.10141,
+      "mu": 0.007127,
+      "sigma": 0.040724,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 5.7,
+      "var": 0.099068,
+      "es": 0.127545,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.08761,
+      "max": 0.099068,
+      "ratio": 1.131,
+      "note": "estimators agree within 15%"
+     }
+    }
+   },
+   "evt": {
+    "error": "need >= 250 observations for a tail fit, have 61"
+   }
+  },
+  "crude": {
+   "id": "crude",
+   "n_returns": 1337,
+   "asof": "2026-10-20",
+   "frequency": "daily",
+   "last_price": 115.22,
+   "ewma_sigma": 0.043778,
+   "ewma_sigma_annual": 0.695,
+   "vol_percentile_5y": 92.2,
+   "skewness": -0.204,
+   "excess_kurtosis": 4.737,
+   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
+   "garch": {
+    "model": "GARCH(1,1)-normal",
+    "omega": 1.1915303554123783e-05,
+    "alpha": 0.087827,
+    "beta": 0.897668,
+    "persistence": 0.985494,
+    "mu": 0.00032805,
+    "half_life_periods": 47.4,
+    "sigma_uncond": 0.028661,
+    "sigma_next": 0.040225,
+    "loglik": 4337.735,
+    "aic": -8669.47,
+    "bic": -8653.875,
+    "n": 1337,
+    "converged": true,
+    "note": "Stationary; volatility mean-reverts to sigma_uncond."
+   },
+   "garch_forecast": {
+    "horizon": 21,
+    "sigma": 0.178218,
+    "sigma_per_period": 0.03889,
+    "method": "GARCH(1,1) variance-path aggregation"
+   },
+   "var": {
+    "95_1": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.042284,
+      "es": 0.063675,
+      "n": 1337,
+      "n_effective": 1337.0,
+      "n_tail": 67,
+      "overlapping": false
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.065836,
+      "es": 0.082645,
+      "mu": 0.000328,
+      "sigma": 0.040225,
+      "sigma_source": "supplied",
+      "n": 1337
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 5.3,
+      "var": 0.064405,
+      "es": 0.091037,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.042284,
+      "max": 0.065836,
+      "ratio": 1.557,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "95_10": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.95,
+      "horizon": 10,
+      "var": 0.117364,
+      "es": 0.160216,
+      "n": 1328,
+      "n_effective": 132.8,
+      "n_tail": 67,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 10,
+      "var": 0.135981,
+      "es": 0.171359,
+      "mu": 0.00328,
+      "sigma": 0.084665,
+      "sigma_source": "sample",
+      "n": 1337
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 10,
+      "df": 5.3,
+      "var": 0.138068,
+      "es": 0.178304,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.117364,
+      "max": 0.138068,
+      "ratio": 1.176,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "95_21": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.95,
+      "horizon": 21,
+      "var": 0.154414,
+      "es": 0.230388,
+      "n": 1317,
+      "n_effective": 62.7,
+      "n_tail": 66,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 21,
+      "var": 0.19492,
+      "es": 0.246187,
+      "mu": 0.006889,
+      "sigma": 0.122691,
+      "sigma_source": "sample",
+      "n": 1337
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 21,
+      "df": 5.3,
+      "var": 0.196472,
+      "es": 0.253176,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.154414,
+      "max": 0.196472,
+      "ratio": 1.272,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "99_1": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.071121,
+      "es": 0.10144,
+      "n": 1337,
+      "n_effective": 1337.0,
+      "n_tail": 14,
+      "overlapping": false
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.093249,
+      "es": 0.10688,
+      "mu": 0.000328,
+      "sigma": 0.040225,
+      "sigma_source": "supplied",
+      "n": 1337
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 5.3,
+      "var": 0.105908,
+      "es": 0.135769,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.071121,
+      "max": 0.105908,
+      "ratio": 1.489,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "99_10": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.99,
+      "horizon": 10,
+      "var": 0.191301,
+      "es": 0.226938,
+      "n": 1328,
+      "n_effective": 132.8,
+      "n_tail": 14,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 10,
+      "var": 0.193679,
+      "es": 0.22237,
+      "mu": 0.00328,
+      "sigma": 0.084665,
+      "sigma_source": "sample",
+      "n": 1337
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 10,
+      "df": 5.3,
+      "var": 0.202333,
+      "es": 0.242917,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.191301,
+      "max": 0.202333,
+      "ratio": 1.058,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "99_21": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.99,
+      "horizon": 21,
+      "var": 0.305148,
+      "es": 0.343854,
+      "n": 1317,
+      "n_effective": 62.7,
+      "n_tail": 14,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 21,
+      "var": 0.278533,
+      "es": 0.320109,
+      "mu": 0.006889,
+      "sigma": 0.122691,
+      "sigma_source": "sample",
+      "n": 1337
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 21,
+      "df": 5.3,
+      "var": 0.28881,
+      "es": 0.337496,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.278533,
+      "max": 0.305148,
+      "ratio": 1.096,
+      "note": "estimators agree within 15%"
+     }
+    }
+   },
+   "backtest_99": {
+    "alpha": 0.99,
+    "window": 1000,
+    "horizon": 1,
+    "tested": 337,
+    "exceptions": 11,
+    "kupiec": {
+     "test": "kupiec-pof",
+     "n": 337,
+     "exceptions": 11,
+     "rate": 0.0326,
+     "expected_rate": 0.01,
+     "lr": 10.941,
+     "p_value": 0.0009,
+     "reject_5pct": true
+    },
+    "christoffersen": {
+     "test": "christoffersen-independence",
+     "n": 337,
+     "n00": 316,
+     "n01": 9,
+     "n10": 10,
+     "n11": 1,
+     "lr": 0.981,
+     "p_value": 0.322,
+     "reject_5pct": false
+    },
+    "conditional_coverage": {
+     "test": "christoffersen-cc",
+     "lr": 11.922,
+     "p_value": 0.0026,
+     "reject_5pct": true
+    },
+    "estimation_window_tail_obs": 10.0,
+    "verdict": "model rejected at 5% \u2014 exception rate is inconsistent with the stated confidence level"
+   },
+   "backtest_95": {
+    "alpha": 0.95,
+    "window": 250,
+    "horizon": 1,
+    "tested": 1087,
+    "exceptions": 62,
+    "kupiec": {
+     "test": "kupiec-pof",
+     "n": 1087,
+     "exceptions": 62,
+     "rate": 0.057,
+     "expected_rate": 0.05,
+     "lr": 1.086,
+     "p_value": 0.2973,
+     "reject_5pct": false
+    },
+    "christoffersen": {
+     "test": "christoffersen-independence",
+     "n": 1087,
+     "n00": 968,
+     "n01": 56,
+     "n10": 56,
+     "n11": 6,
+     "lr": 1.629,
+     "p_value": 0.2019,
+     "reject_5pct": false
+    },
+    "conditional_coverage": {
+     "test": "christoffersen-cc",
+     "lr": 2.715,
+     "p_value": 0.2573,
+     "reject_5pct": false
+    },
+    "estimation_window_tail_obs": 12.5,
+    "verdict": "coverage consistent with the stated confidence level"
+   },
+   "evt": {
+    "model": "GPD peaks-over-threshold",
+    "side": "loss",
+    "threshold_q": 0.9,
+    "u": 0.028466,
+    "n": 1337,
+    "n_exceedances": 134,
+    "exceedance_rate": 0.1002,
+    "xi": 0.1016,
+    "sigma": 0.018349,
+    "estimator": "probability-weighted moments",
+    "xi_mom": 0.1014,
+    "sigma_mom": 0.018352,
+    "tail_shape": "heavy-tailed (xi > 0): losses beyond the threshold decay as a power law, so the worst case is materially worse than a normal model implies",
+    "tail_table": [
+     {
+      "confidence": 0.95,
+      "var": 0.041687,
+      "es": 0.063607,
+      "extrapolated": false
+     },
+     {
+      "confidence": 0.99,
+      "var": 0.076119,
+      "es": 0.101932,
+      "extrapolated": false
+     },
+     {
+      "confidence": 0.995,
+      "var": 0.092773,
+      "es": 0.12047,
+      "extrapolated": false
+     },
+     {
+      "confidence": 0.999,
+      "var": 0.13628,
+      "es": 0.168897,
+      "extrapolated": false
+     }
+    ]
+   }
+  },
+  "gold": {
+   "id": "gold",
+   "n_returns": 1293,
+   "asof": "2026-09-04",
+   "frequency": "daily",
+   "last_price": 4415.4,
+   "ewma_sigma": 0.016809,
+   "ewma_sigma_annual": 0.2668,
+   "vol_percentile_5y": 91.5,
+   "skewness": -0.573,
+   "excess_kurtosis": 4.751,
+   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
+   "garch": {
+    "model": "GARCH(1,1)-normal",
+    "omega": 2.8635279889354006e-06,
+    "alpha": 0.072533,
+    "beta": 0.904441,
+    "persistence": 0.976974,
+    "mu": 0.00069198,
+    "half_life_periods": 29.8,
+    "sigma_uncond": 0.011152,
+    "sigma_next": 0.016304,
+    "loglik": 5282.97,
+    "aic": -10559.94,
+    "bic": -10544.446,
+    "n": 1293,
+    "converged": true,
+    "note": "Stationary; volatility mean-reverts to sigma_uncond."
+   },
+   "garch_forecast": {
+    "horizon": 21,
+    "sigma": 0.070628,
+    "sigma_per_period": 0.015412,
+    "method": "GARCH(1,1) variance-path aggregation"
+   },
+   "var": {
+    "95_1": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.016683,
+      "es": 0.027037,
+      "n": 1293,
+      "n_effective": 1293.0,
+      "n_tail": 65,
+      "overlapping": false
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.026126,
+      "es": 0.032938,
+      "mu": 0.000692,
+      "sigma": 0.016304,
+      "sigma_source": "supplied",
+      "n": 1293
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 5.3,
+      "var": 0.025546,
+      "es": 0.03634,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.016683,
+      "max": 0.026126,
+      "ratio": 1.566,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "95_10": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.95,
+      "horizon": 10,
+      "var": 0.046166,
+      "es": 0.065391,
+      "n": 1284,
+      "n_effective": 128.4,
+      "n_tail": 65,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 10,
+      "var": 0.051596,
+      "es": 0.066462,
+      "mu": 0.00692,
+      "sigma": 0.035575,
+      "sigma_source": "sample",
+      "n": 1293
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 10,
+      "df": 5.3,
+      "var": 0.051674,
+      "es": 0.068596,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.046166,
+      "max": 0.051674,
+      "ratio": 1.119,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "95_21": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.95,
+      "horizon": 21,
+      "var": 0.059726,
+      "es": 0.085695,
+      "n": 1273,
+      "n_effective": 60.6,
+      "n_tail": 64,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 21,
+      "var": 0.070266,
+      "es": 0.091808,
+      "mu": 0.014532,
+      "sigma": 0.051553,
+      "sigma_source": "sample",
+      "n": 1293
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 21,
+      "df": 5.3,
+      "var": 0.070887,
+      "es": 0.094009,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.059726,
+      "max": 0.070887,
+      "ratio": 1.187,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "99_1": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.029712,
+      "es": 0.043924,
+      "n": 1293,
+      "n_effective": 1293.0,
+      "n_tail": 13,
+      "overlapping": false
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.037237,
+      "es": 0.042762,
+      "mu": 0.000692,
+      "sigma": 0.016304,
+      "sigma_source": "supplied",
+      "n": 1293
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 5.3,
+      "var": 0.042363,
+      "es": 0.054478,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.029712,
+      "max": 0.042363,
+      "ratio": 1.426,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "99_10": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.99,
+      "horizon": 10,
+      "var": 0.070114,
+      "es": 0.107433,
+      "n": 1284,
+      "n_effective": 128.4,
+      "n_tail": 13,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 10,
+      "var": 0.075841,
+      "es": 0.087896,
+      "mu": 0.00692,
+      "sigma": 0.035575,
+      "sigma_source": "sample",
+      "n": 1293
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 10,
+      "df": 5.3,
+      "var": 0.078837,
+      "es": 0.094035,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.070114,
+      "max": 0.078837,
+      "ratio": 1.124,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "99_21": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.99,
+      "horizon": 21,
+      "var": 0.102195,
+      "es": 0.130044,
+      "n": 1273,
+      "n_effective": 60.6,
+      "n_tail": 13,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 21,
+      "var": 0.1054,
+      "es": 0.122869,
+      "mu": 0.014532,
+      "sigma": 0.051553,
+      "sigma_source": "sample",
+      "n": 1293
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 21,
+      "df": 5.3,
+      "var": 0.108129,
+      "es": 0.128756,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.102195,
+      "max": 0.108129,
+      "ratio": 1.058,
+      "note": "estimators agree within 15%"
+     }
+    }
+   },
+   "backtest_99": {
+    "alpha": 0.99,
+    "window": 1000,
+    "horizon": 1,
+    "tested": 293,
+    "exceptions": 14,
+    "kupiec": {
+     "test": "kupiec-pof",
+     "n": 293,
+     "exceptions": 14,
+     "rate": 0.0478,
+     "expected_rate": 0.01,
+     "lr": 22.081,
+     "p_value": 0.0,
+     "reject_5pct": true
+    },
+    "christoffersen": {
+     "test": "christoffersen-independence",
+     "n": 293,
+     "n00": 266,
+     "n01": 12,
+     "n10": 12,
+     "n11": 2,
+     "lr": 1.991,
+     "p_value": 0.1583,
+     "reject_5pct": false
+    },
+    "conditional_coverage": {
+     "test": "christoffersen-cc",
+     "lr": 24.072,
+     "p_value": 0.0,
+     "reject_5pct": true
+    },
+    "estimation_window_tail_obs": 10.0,
+    "verdict": "model rejected at 5% \u2014 exception rate is inconsistent with the stated confidence level"
+   },
+   "backtest_95": {
+    "alpha": 0.95,
+    "window": 250,
+    "horizon": 1,
+    "tested": 1043,
+    "exceptions": 56,
+    "kupiec": {
+     "test": "kupiec-pof",
+     "n": 1043,
+     "exceptions": 56,
+     "rate": 0.0537,
+     "expected_rate": 0.05,
+     "lr": 0.292,
+     "p_value": 0.5886,
+     "reject_5pct": false
+    },
+    "christoffersen": {
+     "test": "christoffersen-independence",
+     "n": 1043,
+     "n00": 933,
+     "n01": 53,
+     "n10": 53,
+     "n11": 3,
+     "lr": 0.0,
+     "p_value": 0.9925,
+     "reject_5pct": false
+    },
+    "conditional_coverage": {
+     "test": "christoffersen-cc",
+     "lr": 0.292,
+     "p_value": 0.8642,
+     "reject_5pct": false
+    },
+    "estimation_window_tail_obs": 12.5,
+    "verdict": "coverage consistent with the stated confidence level"
+   },
+   "evt": {
+    "model": "GPD peaks-over-threshold",
+    "side": "loss",
+    "threshold_q": 0.9,
+    "u": 0.011457,
+    "n": 1293,
+    "n_exceedances": 130,
+    "exceedance_rate": 0.1005,
+    "xi": 0.1962,
+    "sigma": 0.007033,
+    "estimator": "probability-weighted moments",
+    "xi_mom": 0.1511,
+    "sigma_mom": 0.007427,
+    "tail_shape": "heavy-tailed (xi > 0): losses beyond the threshold decay as a power law, so the worst case is materially worse than a normal model implies",
+    "tail_table": [
+     {
+      "confidence": 0.95,
+      "var": 0.016722,
+      "es": 0.026757,
+      "extrapolated": false
+     },
+     {
+      "confidence": 0.99,
+      "var": 0.031988,
+      "es": 0.045749,
+      "extrapolated": false
+     },
+     {
+      "confidence": 0.995,
+      "var": 0.040201,
+      "es": 0.055966,
+      "extrapolated": false
+     },
+     {
+      "confidence": 0.999,
+      "var": 0.064184,
+      "es": 0.085804,
+      "extrapolated": false
+     }
+    ]
+   }
+  },
+  "ironore": {
+   "id": "ironore",
+   "n_returns": 61,
+   "asof": "2026-09-01",
+   "frequency": "monthly",
+   "last_price": 100.4409090909091,
+   "ewma_sigma": 0.051345,
+   "ewma_sigma_annual": 0.1779,
+   "vol_percentile_5y": 3.8,
+   "skewness": -0.895,
+   "excess_kurtosis": 3.587,
+   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
+   "garch": {
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
+   },
+   "var": {
+    "95_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.0923,
+      "es": 0.113755,
+      "mu": -0.007846,
+      "sigma": 0.051345,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 5.7,
+      "var": 0.091185,
+      "es": 0.123429,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.091185,
+      "max": 0.0923,
+      "ratio": 1.012,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "99_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.127291,
+      "es": 0.14469,
+      "mu": -0.007846,
+      "sigma": 0.051345,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 5.7,
+      "var": 0.141742,
+      "es": 0.177622,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.127291,
+      "max": 0.141742,
+      "ratio": 1.114,
+      "note": "estimators agree within 15%"
+     }
+    }
+   },
+   "evt": {
+    "error": "need >= 250 observations for a tail fit, have 61"
+   }
+  },
+  "natgas": {
+   "id": "natgas",
+   "n_returns": 1321,
+   "asof": "2026-10-20",
+   "frequency": "daily",
+   "last_price": 3.1,
+   "ewma_sigma": 0.031955,
+   "ewma_sigma_annual": 0.5073,
+   "vol_percentile_5y": 3.6,
+   "skewness": 1.494,
+   "excess_kurtosis": 73.784,
+   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
+   "garch": {
+    "model": "GARCH(1,1)-normal",
+    "omega": 0.0005774567272708542,
+    "alpha": 0.299463,
+    "beta": 0.700037,
+    "persistence": 0.9995,
+    "mu": -0.00012571,
+    "half_life_periods": 1385.9,
+    "sigma_uncond": 1.074669,
+    "sigma_next": 0.057053,
+    "loglik": 2718.821,
+    "aic": -5431.642,
+    "bic": -5416.084,
+    "n": 1321,
+    "converged": true,
+    "note": "Persistence at the boundary \u2014 behaves like EWMA with no mean reversion."
+   },
+   "garch_forecast": {
+    "horizon": 21,
+    "sigma": 0.434624,
+    "sigma_per_period": 0.094843,
+    "method": "GARCH(1,1) variance-path aggregation"
+   },
+   "var": {
+    "95_1": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.10661,
+      "es": 0.213441,
+      "n": 1321,
+      "n_effective": 1321.0,
+      "n_tail": 67,
+      "overlapping": false
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.09397,
+      "es": 0.11781,
+      "mu": -0.000126,
+      "sigma": 0.057053,
+      "sigma_source": "supplied",
+      "n": 1321
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 4.5,
+      "var": 0.090125,
+      "es": 0.129877,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.090125,
+      "max": 0.10661,
+      "ratio": 1.183,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "95_10": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.95,
+      "horizon": 10,
+      "var": 0.31468,
+      "es": 0.535404,
+      "n": 1312,
+      "n_effective": 131.2,
+      "n_tail": 66,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 10,
+      "var": 0.549104,
+      "es": 0.688279,
+      "mu": -0.001257,
+      "sigma": 0.333067,
+      "sigma_source": "sample",
+      "n": 1321
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 10,
+      "df": 4.5,
+      "var": 0.551043,
+      "es": 0.723491,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.31468,
+      "max": 0.551043,
+      "ratio": 1.751,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "95_21": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.95,
+      "horizon": 21,
+      "var": 0.427293,
+      "es": 0.690078,
+      "n": 1301,
+      "n_effective": 62.0,
+      "n_tail": 66,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 21,
+      "var": 0.796545,
+      "es": 0.998229,
+      "mu": -0.00264,
+      "sigma": 0.48266,
+      "sigma_source": "sample",
+      "n": 1321
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 21,
+      "df": 4.5,
+      "var": 0.792666,
+      "es": 1.025115,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.427293,
+      "max": 0.796545,
+      "ratio": 1.864,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "99_1": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.244886,
+      "es": 0.455807,
+      "n": 1321,
+      "n_effective": 1321.0,
+      "n_tail": 14,
+      "overlapping": false
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.132851,
+      "es": 0.152184,
+      "mu": -0.000126,
+      "sigma": 0.057053,
+      "sigma_source": "supplied",
+      "n": 1321
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 4.5,
+      "var": 0.151776,
+      "es": 0.199319,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.132851,
+      "max": 0.244886,
+      "ratio": 1.843,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "99_10": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.99,
+      "horizon": 10,
+      "var": 0.579783,
+      "es": 1.10651,
+      "n": 1312,
+      "n_effective": 131.2,
+      "n_tail": 14,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 10,
+      "var": 0.776087,
+      "es": 0.888952,
+      "mu": -0.001257,
+      "sigma": 0.333067,
+      "sigma_source": "sample",
+      "n": 1321
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 10,
+      "df": 4.5,
+      "var": 0.83185,
+      "es": 0.999579,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.579783,
+      "max": 0.83185,
+      "ratio": 1.435,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    },
+    "99_21": {
+     "historical": {
+      "method": "historical-simulation",
+      "alpha": 0.99,
+      "horizon": 21,
+      "var": 0.753772,
+      "es": 1.246676,
+      "n": 1301,
+      "n_effective": 62.0,
+      "n_tail": 14,
+      "overlapping": true
+     },
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 21,
+      "var": 1.125475,
+      "es": 1.289033,
+      "mu": -0.00264,
+      "sigma": 0.48266,
+      "sigma_source": "sample",
+      "n": 1321
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 21,
+      "df": 4.5,
+      "var": 1.17407,
+      "es": 1.380263,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "sample"
+     },
+     "spread": {
+      "min": 0.753772,
+      "max": 1.17407,
+      "ratio": 1.558,
+      "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
+     }
+    }
+   },
+   "backtest_99": {
+    "alpha": 0.99,
+    "window": 1000,
+    "horizon": 1,
+    "tested": 321,
+    "exceptions": 7,
+    "kupiec": {
+     "test": "kupiec-pof",
+     "n": 321,
+     "exceptions": 7,
+     "rate": 0.0218,
+     "expected_rate": 0.01,
+     "lr": 3.38,
+     "p_value": 0.066,
+     "reject_5pct": false
+    },
+    "christoffersen": {
+     "test": "christoffersen-independence",
+     "n": 321,
+     "n00": 308,
+     "n01": 5,
+     "n10": 5,
+     "n11": 2,
+     "lr": 7.696,
+     "p_value": 0.0055,
+     "reject_5pct": true
+    },
+    "conditional_coverage": {
+     "test": "christoffersen-cc",
+     "lr": 11.076,
+     "p_value": 0.0039,
+     "reject_5pct": true
+    },
+    "estimation_window_tail_obs": 10.0,
+    "verdict": "coverage consistent with the stated confidence level"
+   },
+   "backtest_95": {
+    "alpha": 0.95,
+    "window": 250,
+    "horizon": 1,
+    "tested": 1071,
+    "exceptions": 52,
+    "kupiec": {
+     "test": "kupiec-pof",
+     "n": 1071,
+     "exceptions": 52,
+     "rate": 0.0486,
+     "expected_rate": 0.05,
+     "lr": 0.048,
+     "p_value": 0.8272,
+     "reject_5pct": false
+    },
+    "christoffersen": {
+     "test": "christoffersen-independence",
+     "n": 1071,
+     "n00": 979,
+     "n01": 39,
+     "n10": 39,
+     "n11": 13,
+     "lr": 26.537,
+     "p_value": 0.0,
+     "reject_5pct": true
+    },
+    "conditional_coverage": {
+     "test": "christoffersen-cc",
+     "lr": 26.585,
+     "p_value": 0.0,
+     "reject_5pct": true
+    },
+    "estimation_window_tail_obs": 12.5,
+    "verdict": "coverage consistent with the stated confidence level"
+   },
+   "evt": {
+    "model": "GPD peaks-over-threshold",
+    "side": "loss",
+    "threshold_q": 0.9,
+    "u": 0.078165,
+    "n": 1321,
+    "n_exceedances": 132,
+    "exceedance_rate": 0.0999,
+    "xi": 0.4909,
+    "sigma": 0.03808,
+    "estimator": "probability-weighted moments",
+    "xi_mom": 0.3724,
+    "sigma_mom": 0.046944,
+    "tail_shape": "heavy-tailed (xi > 0): losses beyond the threshold decay as a power law, so the worst case is materially worse than a normal model implies",
+    "tail_table": [
+     {
+      "confidence": 0.95,
+      "var": 0.109566,
+      "es": 0.214643,
+      "extrapolated": false
+     },
+     {
+      "confidence": 0.99,
+      "var": 0.240721,
+      "es": 0.472264,
+      "extrapolated": false
+     },
+     {
+      "confidence": 0.995,
+      "var": 0.33805,
+      "es": 0.663443,
+      "extrapolated": false
+     },
+     {
+      "confidence": 0.999,
+      "var": 0.744198,
+      "es": 1.46122,
+      "extrapolated": false
+     }
+    ]
+   }
+  },
+  "natrub": {
+   "id": "natrub",
+   "n_returns": 61,
+   "asof": "2026-09-01",
+   "frequency": "monthly",
+   "last_price": 125.0750048275246,
+   "ewma_sigma": 0.069533,
+   "ewma_sigma_annual": 0.2409,
+   "vol_percentile_5y": 46.2,
+   "skewness": 0.174,
+   "excess_kurtosis": 0.649,
+   "normality_note": "Return distribution is close enough to normal that the three VaR estimators should broadly agree.",
+   "garch": {
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
+   },
+   "var": {
+    "95_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.108278,
+      "es": 0.137333,
+      "mu": 0.006093,
+      "sigma": 0.069533,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 13.2,
+      "var": 0.109057,
+      "es": 0.144631,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.108278,
+      "max": 0.109057,
+      "ratio": 1.007,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "99_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.155664,
+      "es": 0.179227,
+      "mu": 0.006093,
+      "sigma": 0.069533,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 13.2,
+      "var": 0.165838,
+      "es": 0.198511,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.155664,
+      "max": 0.165838,
+      "ratio": 1.065,
+      "note": "estimators agree within 15%"
+     }
+    }
+   },
+   "evt": {
+    "error": "need >= 250 observations for a tail fit, have 61"
+   }
+  },
+  "palm": {
+   "id": "palm",
+   "n_returns": 61,
+   "asof": "2026-09-01",
+   "frequency": "monthly",
+   "last_price": 1133.128854318491,
+   "ewma_sigma": 0.048608,
+   "ewma_sigma_annual": 0.1684,
+   "vol_percentile_5y": 3.8,
+   "skewness": -2.016,
+   "excess_kurtosis": 7.853,
+   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
+   "garch": {
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
+   },
+   "var": {
+    "95_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.079132,
+      "es": 0.099443,
+      "mu": 0.000821,
+      "sigma": 0.048608,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 4.8,
+      "var": 0.076421,
+      "es": 0.109065,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.076421,
+      "max": 0.079132,
+      "ratio": 1.035,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "99_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.112258,
+      "es": 0.128729,
+      "mu": 0.000821,
+      "sigma": 0.048608,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 4.8,
+      "var": 0.127453,
+      "es": 0.164126,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.112258,
+      "max": 0.127453,
+      "ratio": 1.135,
+      "note": "estimators agree within 15%"
+     }
+    }
+   },
+   "evt": {
+    "error": "need >= 250 observations for a tail fit, have 61"
+   }
+  },
+  "sugar": {
+   "id": "sugar",
+   "n_returns": 61,
+   "asof": "2026-09-01",
+   "frequency": "monthly",
+   "last_price": 17.93714285714286,
+   "ewma_sigma": 0.065223,
+   "ewma_sigma_annual": 0.2259,
+   "vol_percentile_5y": 42.3,
+   "skewness": -0.114,
+   "excess_kurtosis": 2.058,
+   "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
+   "garch": {
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
+   },
+   "var": {
+    "95_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.95,
+      "horizon": 1,
+      "var": 0.108554,
+      "es": 0.135809,
+      "mu": -0.001271,
+      "sigma": 0.065223,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.95,
+      "horizon": 1,
+      "df": 6.9,
+      "var": 0.106661,
+      "es": 0.145798,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.106661,
+      "max": 0.108554,
+      "ratio": 1.018,
+      "note": "estimators agree within 15%"
+     }
+    },
+    "99_1": {
+     "historical": null,
+     "parametric": {
+      "method": "parametric-normal",
+      "alpha": 0.99,
+      "horizon": 1,
+      "var": 0.153004,
+      "es": 0.175106,
+      "mu": -0.001271,
+      "sigma": 0.065223,
+      "sigma_source": "supplied",
+      "n": 61
+     },
+     "monte_carlo": {
+      "method": "monte-carlo-t",
+      "alpha": 0.99,
+      "horizon": 1,
+      "df": 6.9,
+      "var": 0.168233,
+      "es": 0.208883,
+      "paths": 20000,
+      "seed": 12345,
+      "sigma_source": "supplied"
+     },
+     "spread": {
+      "min": 0.153004,
+      "max": 0.168233,
+      "ratio": 1.1,
+      "note": "estimators agree within 15%"
+     }
+    }
+   },
+   "evt": {
+    "error": "need >= 250 observations for a tail fit, have 61"
    }
   },
   "usdinr": {
    "id": "usdinr",
    "n_returns": 1358,
-   "asof": "2026-10-22",
+   "asof": "2026-10-23",
    "frequency": "daily",
-   "last_price": 94.82,
-   "ewma_sigma": 0.00308,
-   "ewma_sigma_annual": 0.0489,
-   "vol_percentile_5y": 75.2,
+   "last_price": 94.94,
+   "ewma_sigma": 0.003002,
+   "ewma_sigma_annual": 0.0477,
+   "vol_percentile_5y": 73.0,
    "skewness": -0.111,
    "excess_kurtosis": 3.502,
    "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
    "garch": {
     "model": "GARCH(1,1)-normal",
-    "omega": 1.708446534659895e-08,
-    "alpha": 0.047911,
-    "beta": 0.951589,
+    "omega": 1.699460721852427e-08,
+    "alpha": 0.047808,
+    "beta": 0.951692,
     "persistence": 0.9995,
-    "mu": 0.00017746,
+    "mu": 0.00017737,
     "half_life_periods": 1385.9,
-    "sigma_uncond": 0.005845,
-    "sigma_next": 0.003071,
-    "loglik": 7587.585,
-    "aic": -15169.171,
-    "bic": -15153.529,
+    "sigma_uncond": 0.00583,
+    "sigma_next": 0.003007,
+    "loglik": 7587.438,
+    "aic": -15168.875,
+    "bic": -15153.234,
     "n": 1358,
     "converged": true,
     "note": "Persistence at the boundary \u2014 behaves like EWMA with no mean reversion."
    },
    "garch_forecast": {
     "horizon": 21,
-    "sigma": 0.014165,
-    "sigma_per_period": 0.003091,
+    "sigma": 0.013874,
+    "sigma_per_period": 0.003028,
     "method": "GARCH(1,1) variance-path aggregation"
    },
    "var": {
@@ -1992,10 +1992,10 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 1,
-      "var": 0.004874,
-      "es": 0.006157,
+      "var": 0.004769,
+      "es": 0.006025,
       "mu": 0.000177,
-      "sigma": 0.003071,
+      "sigma": 0.003007,
       "sigma_source": "supplied",
       "n": 1358
      },
@@ -2004,16 +2004,16 @@
       "alpha": 0.95,
       "horizon": 1,
       "df": 5.7,
-      "var": 0.004804,
-      "es": 0.006732,
+      "var": 0.004701,
+      "es": 0.006588,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
       "min": 0.003932,
-      "max": 0.004874,
-      "ratio": 1.24,
+      "max": 0.004769,
+      "ratio": 1.213,
       "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
     },
@@ -2022,8 +2022,8 @@
       "method": "historical-simulation",
       "alpha": 0.95,
       "horizon": 10,
-      "var": 0.012489,
-      "es": 0.016058,
+      "var": 0.012554,
+      "es": 0.016149,
       "n": 1349,
       "n_effective": 134.9,
       "n_tail": 68,
@@ -2033,10 +2033,10 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 10,
-      "var": 0.011691,
-      "es": 0.015112,
-      "mu": 0.001775,
-      "sigma": 0.008187,
+      "var": 0.011692,
+      "es": 0.015113,
+      "mu": 0.001774,
+      "sigma": 0.008186,
       "sigma_source": "sample",
       "n": 1358
      },
@@ -2046,15 +2046,15 @@
       "horizon": 10,
       "df": 5.7,
       "var": 0.011747,
-      "es": 0.015636,
+      "es": 0.015637,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.011691,
-      "max": 0.012489,
-      "ratio": 1.068,
+      "min": 0.011692,
+      "max": 0.012554,
+      "ratio": 1.074,
       "note": "estimators agree within 15%"
      }
     },
@@ -2074,9 +2074,9 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 21,
-      "var": 0.015787,
-      "es": 0.020744,
-      "mu": 0.003727,
+      "var": 0.015789,
+      "es": 0.020746,
+      "mu": 0.003725,
       "sigma": 0.011863,
       "sigma_source": "sample",
       "n": 1358
@@ -2086,15 +2086,15 @@
       "alpha": 0.95,
       "horizon": 21,
       "df": 5.7,
-      "var": 0.015654,
-      "es": 0.020882,
+      "var": 0.015656,
+      "es": 0.020883,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
       "min": 0.012736,
-      "max": 0.015787,
+      "max": 0.015789,
       "ratio": 1.24,
       "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
@@ -2115,10 +2115,10 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 1,
-      "var": 0.006967,
-      "es": 0.008007,
+      "var": 0.006818,
+      "es": 0.007837,
       "mu": 0.000177,
-      "sigma": 0.003071,
+      "sigma": 0.003007,
       "sigma_source": "supplied",
       "n": 1358
      },
@@ -2127,15 +2127,15 @@
       "alpha": 0.99,
       "horizon": 1,
       "df": 5.7,
-      "var": 0.007824,
-      "es": 0.009965,
+      "var": 0.007658,
+      "es": 0.009754,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.006967,
-      "max": 0.007824,
+      "min": 0.006818,
+      "max": 0.007658,
       "ratio": 1.123,
       "note": "estimators agree within 15%"
      }
@@ -2145,8 +2145,8 @@
       "method": "historical-simulation",
       "alpha": 0.99,
       "horizon": 10,
-      "var": 0.018355,
-      "es": 0.020732,
+      "var": 0.018408,
+      "es": 0.020752,
       "n": 1349,
       "n_effective": 134.9,
       "n_tail": 14,
@@ -2156,10 +2156,10 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 10,
-      "var": 0.01727,
-      "es": 0.020044,
-      "mu": 0.001775,
-      "sigma": 0.008187,
+      "var": 0.017271,
+      "es": 0.020045,
+      "mu": 0.001774,
+      "sigma": 0.008186,
       "sigma_source": "sample",
       "n": 1358
      },
@@ -2168,16 +2168,16 @@
       "alpha": 0.99,
       "horizon": 10,
       "df": 5.7,
-      "var": 0.018079,
-      "es": 0.021758,
+      "var": 0.01808,
+      "es": 0.021759,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.01727,
-      "max": 0.018355,
-      "ratio": 1.063,
+      "min": 0.017271,
+      "max": 0.018408,
+      "ratio": 1.066,
       "note": "estimators agree within 15%"
      }
     },
@@ -2197,9 +2197,9 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 21,
-      "var": 0.023872,
-      "es": 0.027892,
-      "mu": 0.003727,
+      "var": 0.023873,
+      "es": 0.027894,
+      "mu": 0.003725,
       "sigma": 0.011863,
       "sigma_source": "sample",
       "n": 1358
@@ -2209,15 +2209,15 @@
       "alpha": 0.99,
       "horizon": 21,
       "df": 5.7,
-      "var": 0.024197,
-      "es": 0.028769,
+      "var": 0.024199,
+      "es": 0.028771,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
       "min": 0.01964,
-      "max": 0.024197,
+      "max": 0.024199,
       "ratio": 1.232,
       "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
@@ -2339,18 +2339,18 @@
   },
   "wheat": {
    "id": "wheat",
-   "n_returns": 59,
-   "asof": "2026-07-01",
+   "n_returns": 61,
+   "asof": "2026-09-01",
    "frequency": "monthly",
-   "last_price": 228.73884495,
-   "ewma_sigma": 0.069953,
-   "ewma_sigma_annual": 0.2423,
-   "vol_percentile_5y": 75.0,
-   "skewness": -0.349,
-   "excess_kurtosis": 0.185,
+   "last_price": 246.85180245,
+   "ewma_sigma": 0.065891,
+   "ewma_sigma_annual": 0.2283,
+   "vol_percentile_5y": 53.8,
+   "skewness": -0.401,
+   "excess_kurtosis": 0.252,
    "normality_note": "Return distribution is close enough to normal that the three VaR estimators should broadly agree.",
    "garch": {
-    "error": "need >= 250 observations to identify GARCH(1,1), have 59"
+    "error": "need >= 250 observations to identify GARCH(1,1), have 61"
    },
    "var": {
     "95_1": {
@@ -2359,28 +2359,28 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 1,
-      "var": 0.118177,
-      "es": 0.147408,
-      "mu": -0.003114,
-      "sigma": 0.069953,
+      "var": 0.110144,
+      "es": 0.137677,
+      "mu": -0.001763,
+      "sigma": 0.065891,
       "sigma_source": "supplied",
-      "n": 59
+      "n": 61
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.95,
       "horizon": 1,
-      "df": 30.0,
-      "var": 0.117544,
-      "es": 0.149856,
+      "df": 27.8,
+      "var": 0.109362,
+      "es": 0.140059,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.117544,
-      "max": 0.118177,
-      "ratio": 1.005,
+      "min": 0.109362,
+      "max": 0.110144,
+      "ratio": 1.007,
       "note": "estimators agree within 15%"
      }
     },
@@ -2390,69 +2390,69 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 1,
-      "var": 0.16585,
-      "es": 0.189555,
-      "mu": -0.003114,
-      "sigma": 0.069953,
+      "var": 0.155048,
+      "es": 0.177376,
+      "mu": -0.001763,
+      "sigma": 0.065891,
       "sigma_source": "supplied",
-      "n": 59
+      "n": 61
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.99,
       "horizon": 1,
-      "df": 30.0,
-      "var": 0.17033,
-      "es": 0.198527,
+      "df": 27.8,
+      "var": 0.159767,
+      "es": 0.186035,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.16585,
-      "max": 0.17033,
-      "ratio": 1.027,
+      "min": 0.155048,
+      "max": 0.159767,
+      "ratio": 1.03,
       "note": "estimators agree within 15%"
      }
     }
    },
    "evt": {
-    "error": "need >= 250 observations for a tail fit, have 59"
+    "error": "need >= 250 observations for a tail fit, have 61"
    }
   },
   "wti": {
    "id": "wti",
-   "n_returns": 1322,
+   "n_returns": 1321,
    "asof": "2026-10-20",
    "frequency": "daily",
    "last_price": 107.89,
    "ewma_sigma": 0.041502,
    "ewma_sigma_annual": 0.6588,
    "vol_percentile_5y": 91.9,
-   "skewness": -0.466,
-   "excess_kurtosis": 4.557,
+   "skewness": -0.467,
+   "excess_kurtosis": 4.559,
    "normality_note": "Excess kurtosis above 1 means a normal VaR understates the tail; the historical and EVT figures are the ones to quote.",
    "garch": {
     "model": "GARCH(1,1)-normal",
-    "omega": 1.5956942293924157e-05,
-    "alpha": 0.104533,
-    "beta": 0.875671,
-    "persistence": 0.980204,
-    "mu": 0.0002891,
-    "half_life_periods": 34.7,
-    "sigma_uncond": 0.028391,
-    "sigma_next": 0.037975,
-    "loglik": 4279.202,
-    "aic": -8552.403,
-    "bic": -8536.842,
-    "n": 1322,
+    "omega": 1.5968577796366305e-05,
+    "alpha": 0.104648,
+    "beta": 0.87551,
+    "persistence": 0.980158,
+    "mu": 0.00030386,
+    "half_life_periods": 34.6,
+    "sigma_uncond": 0.028369,
+    "sigma_next": 0.037961,
+    "loglik": 4275.885,
+    "aic": -8545.771,
+    "bic": -8530.212,
+    "n": 1321,
     "converged": true,
     "note": "Stationary; volatility mean-reverts to sigma_uncond."
    },
    "garch_forecast": {
     "horizon": 21,
-    "sigma": 0.167164,
-    "sigma_per_period": 0.036478,
+    "sigma": 0.167081,
+    "sigma_per_period": 0.03646,
     "method": "GARCH(1,1) variance-path aggregation"
    },
    "var": {
@@ -2461,10 +2461,10 @@
       "method": "historical-simulation",
       "alpha": 0.95,
       "horizon": 1,
-      "var": 0.040536,
+      "var": 0.040541,
       "es": 0.06394,
-      "n": 1322,
-      "n_effective": 1322.0,
+      "n": 1321,
+      "n_effective": 1321.0,
       "n_tail": 67,
       "overlapping": false
      },
@@ -2472,28 +2472,28 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 1,
-      "var": 0.062174,
-      "es": 0.078042,
-      "mu": 0.000289,
-      "sigma": 0.037975,
+      "var": 0.062136,
+      "es": 0.077999,
+      "mu": 0.000304,
+      "sigma": 0.037961,
       "sigma_source": "supplied",
-      "n": 1322
+      "n": 1321
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.95,
       "horizon": 1,
       "df": 5.3,
-      "var": 0.06076,
-      "es": 0.085848,
+      "var": 0.060721,
+      "es": 0.085802,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.040536,
-      "max": 0.062174,
-      "ratio": 1.534,
+      "min": 0.040541,
+      "max": 0.062136,
+      "ratio": 1.533,
       "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
     },
@@ -2502,10 +2502,10 @@
       "method": "historical-simulation",
       "alpha": 0.95,
       "horizon": 10,
-      "var": 0.11857,
+      "var": 0.118614,
       "es": 0.160713,
-      "n": 1313,
-      "n_effective": 131.3,
+      "n": 1312,
+      "n_effective": 131.2,
       "n_tail": 66,
       "overlapping": true
      },
@@ -2513,28 +2513,28 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 10,
-      "var": 0.134415,
-      "es": 0.169296,
-      "mu": 0.002891,
-      "sigma": 0.083476,
+      "var": 0.134291,
+      "es": 0.169179,
+      "mu": 0.003039,
+      "sigma": 0.083491,
       "sigma_source": "sample",
-      "n": 1322
+      "n": 1321
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.95,
       "horizon": 10,
       "df": 5.3,
-      "var": 0.135029,
-      "es": 0.173872,
+      "var": 0.134908,
+      "es": 0.173755,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.11857,
-      "max": 0.135029,
-      "ratio": 1.139,
+      "min": 0.118614,
+      "max": 0.134908,
+      "ratio": 1.137,
       "note": "estimators agree within 15%"
      }
     },
@@ -2543,9 +2543,9 @@
       "method": "historical-simulation",
       "alpha": 0.95,
       "horizon": 21,
-      "var": 0.148676,
+      "var": 0.148682,
       "es": 0.210308,
-      "n": 1302,
+      "n": 1301,
       "n_effective": 62.0,
       "n_tail": 66,
       "overlapping": true
@@ -2554,28 +2554,28 @@
       "method": "parametric-normal",
       "alpha": 0.95,
       "horizon": 21,
-      "var": 0.192904,
-      "es": 0.243452,
-      "mu": 0.006071,
-      "sigma": 0.120969,
+      "var": 0.192629,
+      "es": 0.243185,
+      "mu": 0.006381,
+      "sigma": 0.120989,
       "sigma_source": "sample",
-      "n": 1322
+      "n": 1321
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.95,
       "horizon": 21,
       "df": 5.3,
-      "var": 0.193436,
-      "es": 0.248066,
+      "var": 0.193163,
+      "es": 0.248577,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.148676,
-      "max": 0.193436,
-      "ratio": 1.301,
+      "min": 0.148682,
+      "max": 0.193163,
+      "ratio": 1.299,
       "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
     },
@@ -2584,10 +2584,10 @@
       "method": "historical-simulation",
       "alpha": 0.99,
       "horizon": 1,
-      "var": 0.077325,
+      "var": 0.077326,
       "es": 0.10464,
-      "n": 1322,
-      "n_effective": 1322.0,
+      "n": 1321,
+      "n_effective": 1321.0,
       "n_tail": 14,
       "overlapping": false
      },
@@ -2595,27 +2595,27 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 1,
-      "var": 0.088054,
-      "es": 0.100922,
-      "mu": 0.000289,
-      "sigma": 0.037975,
+      "var": 0.088007,
+      "es": 0.10087,
+      "mu": 0.000304,
+      "sigma": 0.037961,
       "sigma_source": "supplied",
-      "n": 1322
+      "n": 1321
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.99,
       "horizon": 1,
       "df": 5.3,
-      "var": 0.099765,
-      "es": 0.127961,
+      "var": 0.099714,
+      "es": 0.1279,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "supplied"
      },
      "spread": {
-      "min": 0.077325,
-      "max": 0.099765,
+      "min": 0.077326,
+      "max": 0.099714,
       "ratio": 1.29,
       "note": "estimators disagree materially \u2014 tail shape is doing the work; quote the historical number and show the range"
      }
@@ -2625,10 +2625,10 @@
       "method": "historical-simulation",
       "alpha": 0.99,
       "horizon": 10,
-      "var": 0.186024,
+      "var": 0.186069,
       "es": 0.223481,
-      "n": 1313,
-      "n_effective": 131.3,
+      "n": 1312,
+      "n_effective": 131.2,
       "n_tail": 14,
       "overlapping": true
      },
@@ -2636,28 +2636,28 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 10,
-      "var": 0.191304,
-      "es": 0.219591,
-      "mu": 0.002891,
-      "sigma": 0.083476,
+      "var": 0.19119,
+      "es": 0.219482,
+      "mu": 0.003039,
+      "sigma": 0.083491,
       "sigma_source": "sample",
-      "n": 1322
+      "n": 1321
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.99,
       "horizon": 10,
       "df": 5.3,
-      "var": 0.197688,
-      "es": 0.232168,
+      "var": 0.197572,
+      "es": 0.232061,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.186024,
-      "max": 0.197688,
-      "ratio": 1.063,
+      "min": 0.186069,
+      "max": 0.197572,
+      "ratio": 1.062,
       "note": "estimators agree within 15%"
      }
     },
@@ -2666,9 +2666,9 @@
       "method": "historical-simulation",
       "alpha": 0.99,
       "horizon": 21,
-      "var": 0.253963,
+      "var": 0.25397,
       "es": 0.304755,
-      "n": 1302,
+      "n": 1301,
       "n_effective": 62.0,
       "n_tail": 14,
       "overlapping": true
@@ -2677,28 +2677,28 @@
       "method": "parametric-normal",
       "alpha": 0.99,
       "horizon": 21,
-      "var": 0.275344,
-      "es": 0.316336,
-      "mu": 0.006071,
-      "sigma": 0.120969,
+      "var": 0.275082,
+      "es": 0.316082,
+      "mu": 0.006381,
+      "sigma": 0.120989,
       "sigma_source": "sample",
-      "n": 1322
+      "n": 1321
      },
      "monte_carlo": {
       "method": "monte-carlo-t",
       "alpha": 0.99,
       "horizon": 21,
       "df": 5.3,
-      "var": 0.28312,
-      "es": 0.332314,
+      "var": 0.282387,
+      "es": 0.334387,
       "paths": 20000,
       "seed": 12345,
       "sigma_source": "sample"
      },
      "spread": {
-      "min": 0.253963,
-      "max": 0.28312,
-      "ratio": 1.115,
+      "min": 0.25397,
+      "max": 0.282387,
+      "ratio": 1.112,
       "note": "estimators agree within 15%"
      }
     }
@@ -2707,33 +2707,33 @@
     "alpha": 0.99,
     "window": 1000,
     "horizon": 1,
-    "tested": 322,
+    "tested": 321,
     "exceptions": 9,
     "kupiec": {
      "test": "kupiec-pof",
-     "n": 322,
+     "n": 321,
      "exceptions": 9,
      "rate": 0.028,
      "expected_rate": 0.01,
-     "lr": 7.047,
-     "p_value": 0.0079,
+     "lr": 7.083,
+     "p_value": 0.0078,
      "reject_5pct": true
     },
     "christoffersen": {
      "test": "christoffersen-independence",
-     "n": 322,
-     "n00": 303,
+     "n": 321,
+     "n00": 302,
      "n01": 9,
      "n10": 9,
      "n11": 0,
-     "lr": 0.519,
-     "p_value": 0.4711,
+     "lr": 0.521,
+     "p_value": 0.4704,
      "reject_5pct": false
     },
     "conditional_coverage": {
      "test": "christoffersen-cc",
-     "lr": 7.566,
-     "p_value": 0.0228,
+     "lr": 7.604,
+     "p_value": 0.0223,
      "reject_5pct": true
     },
     "estimation_window_tail_obs": 10.0,
@@ -2743,33 +2743,33 @@
     "alpha": 0.95,
     "window": 250,
     "horizon": 1,
-    "tested": 1072,
+    "tested": 1071,
     "exceptions": 52,
     "kupiec": {
      "test": "kupiec-pof",
-     "n": 1072,
+     "n": 1071,
      "exceptions": 52,
-     "rate": 0.0485,
+     "rate": 0.0486,
      "expected_rate": 0.05,
-     "lr": 0.051,
-     "p_value": 0.8218,
+     "lr": 0.048,
+     "p_value": 0.8272,
      "reject_5pct": false
     },
     "christoffersen": {
      "test": "christoffersen-independence",
-     "n": 1072,
-     "n00": 972,
+     "n": 1071,
+     "n00": 971,
      "n01": 47,
      "n10": 47,
      "n11": 5,
-     "lr": 2.141,
-     "p_value": 0.1434,
+     "lr": 2.136,
+     "p_value": 0.1439,
      "reject_5pct": false
     },
     "conditional_coverage": {
      "test": "christoffersen-cc",
-     "lr": 2.192,
-     "p_value": 0.3342,
+     "lr": 2.184,
+     "p_value": 0.3355,
      "reject_5pct": false
     },
     "estimation_window_tail_obs": 12.5,
@@ -2779,39 +2779,39 @@
     "model": "GPD peaks-over-threshold",
     "side": "loss",
     "threshold_q": 0.9,
-    "u": 0.02896,
-    "n": 1322,
-    "n_exceedances": 133,
-    "exceedance_rate": 0.1006,
-    "xi": 0.1735,
-    "sigma": 0.016694,
+    "u": 0.028988,
+    "n": 1321,
+    "n_exceedances": 132,
+    "exceedance_rate": 0.0999,
+    "xi": 0.1645,
+    "sigma": 0.01698,
     "estimator": "probability-weighted moments",
-    "xi_mom": 0.1317,
-    "sigma_mom": 0.017538,
+    "xi_mom": 0.1278,
+    "sigma_mom": 0.017725,
     "tail_shape": "heavy-tailed (xi > 0): losses beyond the threshold decay as a power law, so the worst case is materially worse than a normal model implies",
     "tail_table": [
      {
       "confidence": 0.95,
-      "var": 0.04137,
-      "es": 0.064173,
+      "var": 0.04144,
+      "es": 0.064215,
       "extrapolated": false
      },
      {
       "confidence": 0.99,
-      "var": 0.076361,
-      "es": 0.10651,
+      "var": 0.076502,
+      "es": 0.106181,
       "extrapolated": false
      },
      {
       "confidence": 0.995,
-      "var": 0.094715,
-      "es": 0.128716,
+      "var": 0.094708,
+      "es": 0.127971,
       "extrapolated": false
      },
      {
       "confidence": 0.999,
-      "var": 0.14689,
-      "es": 0.191844,
+      "var": 0.145916,
+      "es": 0.18926,
       "extrapolated": false
      }
     ]
@@ -2837,133 +2837,133 @@
    "wti"
   ],
   "pairs": {
-   "alum|coal": 0.323,
-   "alum|cocoa": 0.0171,
-   "alum|coffee": -0.025,
-   "alum|copper": 0.5804,
-   "alum|crude": 0.3118,
-   "alum|gold": 0.1869,
-   "alum|ironore": 0.3358,
-   "alum|natgas": 0.244,
-   "alum|natrub": 0.2502,
-   "alum|palm": 0.4614,
-   "alum|sugar": 0.0603,
-   "alum|usdinr": 0.0895,
-   "alum|wheat": 0.189,
-   "alum|wti": 0.4037,
-   "coal|cocoa": -0.1128,
-   "coal|coffee": -0.1588,
-   "coal|copper": 0.0518,
-   "coal|crude": 0.2593,
-   "coal|gold": -0.0953,
-   "coal|ironore": 0.1289,
-   "coal|natgas": 0.0376,
-   "coal|natrub": 0.0952,
-   "coal|palm": 0.1674,
-   "coal|sugar": -0.1618,
-   "coal|usdinr": 0.2313,
-   "coal|wheat": 0.1318,
-   "coal|wti": 0.3231,
-   "cocoa|coffee": 0.3495,
-   "cocoa|copper": 0.0107,
-   "cocoa|crude": -0.0008,
-   "cocoa|gold": -0.1807,
-   "cocoa|ironore": -0.0042,
-   "cocoa|natgas": 0.0901,
-   "cocoa|natrub": 0.1609,
-   "cocoa|palm": 0.091,
-   "cocoa|sugar": 0.0694,
-   "cocoa|usdinr": 0.0089,
-   "cocoa|wheat": -0.0129,
-   "cocoa|wti": 0.0197,
-   "coffee|copper": 0.0175,
-   "coffee|crude": 0.1032,
-   "coffee|gold": -0.0591,
-   "coffee|ironore": 0.026,
-   "coffee|natgas": 0.122,
-   "coffee|natrub": -0.0724,
-   "coffee|palm": 0.139,
-   "coffee|sugar": 0.0454,
-   "coffee|usdinr": 0.1405,
-   "coffee|wheat": 0.1947,
-   "coffee|wti": -0.0049,
-   "copper|crude": -0.0303,
-   "copper|gold": 0.4111,
-   "copper|ironore": 0.3817,
-   "copper|natgas": 0.0206,
-   "copper|natrub": 0.2083,
-   "copper|palm": 0.4979,
-   "copper|sugar": -0.0489,
-   "copper|usdinr": -0.1443,
-   "copper|wheat": 0.3568,
-   "copper|wti": 0.0438,
+   "alum|coal": 0.3133,
+   "alum|cocoa": 0.0168,
+   "alum|coffee": -0.0414,
+   "alum|copper": 0.6004,
+   "alum|crude": 0.2955,
+   "alum|gold": 0.2275,
+   "alum|ironore": 0.5094,
+   "alum|natgas": 0.2279,
+   "alum|natrub": 0.2775,
+   "alum|palm": 0.4637,
+   "alum|sugar": 0.0799,
+   "alum|usdinr": 0.0493,
+   "alum|wheat": 0.2035,
+   "alum|wti": 0.3907,
+   "coal|cocoa": -0.1165,
+   "coal|coffee": -0.1791,
+   "coal|copper": 0.0555,
+   "coal|crude": 0.2693,
+   "coal|gold": -0.0896,
+   "coal|ironore": 0.2001,
+   "coal|natgas": 0.0292,
+   "coal|natrub": 0.1058,
+   "coal|palm": 0.1641,
+   "coal|sugar": -0.1374,
+   "coal|usdinr": 0.2208,
+   "coal|wheat": 0.1409,
+   "coal|wti": 0.325,
+   "cocoa|coffee": 0.3475,
+   "cocoa|copper": 0.0185,
+   "cocoa|crude": -0.0133,
+   "cocoa|gold": -0.1507,
+   "cocoa|ironore": 0.0033,
+   "cocoa|natgas": 0.0909,
+   "cocoa|natrub": 0.1593,
+   "cocoa|palm": 0.0921,
+   "cocoa|sugar": 0.0772,
+   "cocoa|usdinr": -0.0003,
+   "cocoa|wheat": -0.0102,
+   "cocoa|wti": 0.0144,
+   "coffee|copper": 0.0167,
+   "coffee|crude": 0.0503,
+   "coffee|gold": -0.0257,
+   "coffee|ironore": 0.0628,
+   "coffee|natgas": 0.1076,
+   "coffee|natrub": -0.0604,
+   "coffee|palm": 0.1339,
+   "coffee|sugar": 0.0146,
+   "coffee|usdinr": 0.1225,
+   "coffee|wheat": 0.1792,
+   "coffee|wti": -0.0352,
+   "copper|crude": -0.0367,
+   "copper|gold": 0.4255,
+   "copper|ironore": 0.4151,
+   "copper|natgas": 0.0335,
+   "copper|natrub": 0.1907,
+   "copper|palm": 0.4997,
+   "copper|sugar": -0.0055,
+   "copper|usdinr": -0.1511,
+   "copper|wheat": 0.3619,
+   "copper|wti": 0.049,
    "crude|gold": -0.1902,
-   "crude|ironore": 0.182,
+   "crude|ironore": 0.2408,
    "crude|natgas": 0.0491,
-   "crude|natrub": 0.1296,
-   "crude|palm": 0.2563,
-   "crude|sugar": 0.107,
-   "crude|usdinr": 0.3719,
-   "crude|wheat": 0.2385,
+   "crude|natrub": 0.1376,
+   "crude|palm": 0.243,
+   "crude|sugar": 0.1112,
+   "crude|usdinr": 0.3729,
+   "crude|wheat": 0.2427,
    "crude|wti": 0.9352,
-   "gold|ironore": 0.1155,
+   "gold|ironore": 0.0335,
    "gold|natgas": -0.022,
-   "gold|natrub": 0.0672,
-   "gold|palm": 0.1926,
-   "gold|sugar": -0.1507,
+   "gold|natrub": 0.0204,
+   "gold|palm": 0.2008,
+   "gold|sugar": -0.073,
    "gold|usdinr": -0.3056,
-   "gold|wheat": -0.0028,
+   "gold|wheat": 0.0061,
    "gold|wti": -0.1356,
-   "ironore|natgas": -0.1268,
-   "ironore|natrub": 0.0758,
-   "ironore|palm": 0.1947,
-   "ironore|sugar": 0.0017,
-   "ironore|usdinr": -0.094,
-   "ironore|wheat": 0.1584,
-   "ironore|wti": 0.2276,
-   "natgas|natrub": -0.1765,
-   "natgas|palm": 0.061,
-   "natgas|sugar": 0.0254,
-   "natgas|usdinr": -0.0047,
-   "natgas|wheat": -0.0672,
+   "ironore|natgas": -0.0719,
+   "ironore|natrub": 0.0107,
+   "ironore|palm": 0.2479,
+   "ironore|sugar": -0.0061,
+   "ironore|usdinr": 0.0033,
+   "ironore|wheat": 0.1641,
+   "ironore|wti": 0.3286,
+   "natgas|natrub": -0.1663,
+   "natgas|palm": 0.0582,
+   "natgas|sugar": 0.0463,
+   "natgas|usdinr": -0.0045,
+   "natgas|wheat": -0.0568,
    "natgas|wti": 0.0312,
-   "natrub|palm": 0.3443,
-   "natrub|sugar": 0.1132,
-   "natrub|usdinr": 0.043,
-   "natrub|wheat": 0.1914,
-   "natrub|wti": 0.1777,
-   "palm|sugar": 0.2043,
-   "palm|usdinr": -0.076,
-   "palm|wheat": 0.3227,
-   "palm|wti": 0.2832,
-   "sugar|usdinr": 0.0884,
-   "sugar|wheat": 0.104,
-   "sugar|wti": 0.0784,
-   "usdinr|wheat": 0.2201,
-   "usdinr|wti": 0.2838,
-   "wheat|wti": 0.2177
+   "natrub|palm": 0.3487,
+   "natrub|sugar": 0.0801,
+   "natrub|usdinr": 0.0776,
+   "natrub|wheat": 0.1797,
+   "natrub|wti": 0.1912,
+   "palm|sugar": 0.2042,
+   "palm|usdinr": -0.088,
+   "palm|wheat": 0.3252,
+   "palm|wti": 0.2786,
+   "sugar|usdinr": 0.0653,
+   "sugar|wheat": 0.1301,
+   "sugar|wti": 0.0957,
+   "usdinr|wheat": 0.2232,
+   "usdinr|wti": 0.2868,
+   "wheat|wti": 0.2293
   },
   "measured_pairs": 105,
   "total_pairs": 105,
   "t_copula": {
-   "df": 6.88,
+   "df": 6.83,
    "method": "moment matching on pooled excess kurtosis",
-   "excess_kurtosis": 2.081,
-   "n_pooled": 904
+   "excess_kurtosis": 2.123,
+   "n_pooled": 924
   },
   "psd_repaired": false,
-  "aligned_months": 59,
+  "aligned_months": 61,
   "top_tail_dependence": [],
-  "note": "A Gaussian copula implies zero tail dependence. Measured joint exceedance rates above zero are the reason the t copula with df=6.88 is used for joint stress."
+  "note": "A Gaussian copula implies zero tail dependence. Measured joint exceedance rates above zero are the reason the t copula with df=6.83 is used for joint stress."
  },
  "cfar": {
   "hindalco": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 2757.0,
-   "expected_shortfall_cr": 3776.0,
-   "median_cr": -11.2,
-   "best_5pct_cr": -2714.0,
+   "cfar_cr": 2634.6,
+   "expected_shortfall_cr": 3608.0,
+   "median_cr": -7.4,
+   "best_5pct_cr": -2643.0,
    "cost_base_cr": 236847,
    "inputs_modelled": [
     "coal"
@@ -2973,13 +2973,13 @@
     "retained_cost_share": 0.4,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.83,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 38097,
-   "cfar_pct_ebitda": 7.2,
-   "statement": "5% chance the input basket costs more than Rs 2,757 crore of EBITDA over 1 months \u2014 7.2% of the year's EBITDA.",
+   "cfar_pct_ebitda": 6.9,
+   "statement": "5% chance the input basket costs more than Rs 2,635 crore of EBITDA over 1 months \u2014 6.9% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "hindalco",
    "name": "Hindalco",
@@ -3012,10 +3012,10 @@
   "hul": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 364.1,
-   "expected_shortfall_cr": 495.5,
-   "median_cr": 3.5,
-   "best_5pct_cr": -362.4,
+   "cfar_cr": 351.4,
+   "expected_shortfall_cr": 478.3,
+   "median_cr": 2.9,
+   "best_5pct_cr": -358.2,
    "cost_base_cr": 48715,
    "inputs_modelled": [
     "palm"
@@ -3025,13 +3025,13 @@
     "retained_cost_share": 0.45,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.83,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 15048,
-   "cfar_pct_ebitda": 2.4,
-   "statement": "5% chance the input basket costs more than Rs 364 crore of EBITDA over 1 months \u2014 2.4% of the year's EBITDA.",
+   "cfar_pct_ebitda": 2.3,
+   "statement": "5% chance the input basket costs more than Rs 351 crore of EBITDA over 1 months \u2014 2.3% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "hul",
    "name": "Hindustan Unilever",
@@ -3061,10 +3061,10 @@
   "jswsteel": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 1555.2,
-   "expected_shortfall_cr": 2104.1,
-   "median_cr": 4.4,
-   "best_5pct_cr": -1517.8,
+   "cfar_cr": 1473.8,
+   "expected_shortfall_cr": 2000.0,
+   "median_cr": 3.6,
+   "best_5pct_cr": -1427.7,
    "cost_base_cr": 153422,
    "inputs_modelled": [
     "ironore"
@@ -3074,13 +3074,13 @@
     "retained_cost_share": 0.3,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.83,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 32048,
-   "cfar_pct_ebitda": 4.9,
-   "statement": "5% chance the input basket costs more than Rs 1,555 crore of EBITDA over 1 months \u2014 4.9% of the year's EBITDA.",
+   "cfar_pct_ebitda": 4.6,
+   "statement": "5% chance the input basket costs more than Rs 1,474 crore of EBITDA over 1 months \u2014 4.6% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "jswsteel",
    "name": "JSW Steel",
@@ -3106,10 +3106,10 @@
   "maruti": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 778.8,
-   "expected_shortfall_cr": 1059.2,
-   "median_cr": 4.2,
-   "best_5pct_cr": -787.6,
+   "cfar_cr": 811.3,
+   "expected_shortfall_cr": 1086.5,
+   "median_cr": 6.6,
+   "best_5pct_cr": -799.3,
    "cost_base_cr": 164589,
    "inputs_modelled": [
     "alum",
@@ -3121,13 +3121,13 @@
     "retained_cost_share": 0.5,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.83,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 23084,
-   "cfar_pct_ebitda": 3.4,
-   "statement": "5% chance the input basket costs more than Rs 779 crore of EBITDA over 1 months \u2014 3.4% of the year's EBITDA.",
+   "cfar_pct_ebitda": 3.5,
+   "statement": "5% chance the input basket costs more than Rs 811 crore of EBITDA over 1 months \u2014 3.5% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "maruti",
    "name": "Maruti Suzuki",
@@ -3160,30 +3160,30 @@
     {
      "input": "alum",
      "weight": 0.05,
-     "cfar_without_cr": 345.1,
-     "contribution_cr": 431.4
+     "cfar_without_cr": 344.8,
+     "contribution_cr": 440.6
     },
     {
      "input": "copper",
      "weight": 0.03,
-     "cfar_without_cr": 568.1,
-     "contribution_cr": 208.4
+     "cfar_without_cr": 572.5,
+     "contribution_cr": 212.9
     },
     {
      "input": "natrub",
      "weight": 0.01,
-     "cfar_without_cr": 712.0,
-     "contribution_cr": 64.5
+     "cfar_without_cr": 713.9,
+     "contribution_cr": 71.5
     }
    ]
   },
   "reliance": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 69704.0,
-   "expected_shortfall_cr": 93995.1,
-   "median_cr": -728.4,
-   "best_5pct_cr": -73127.2,
+   "cfar_cr": 71438.4,
+   "expected_shortfall_cr": 99185.3,
+   "median_cr": -581.8,
+   "best_5pct_cr": -72929.7,
    "cost_base_cr": 968008,
    "inputs_modelled": [
     "crude",
@@ -3194,13 +3194,13 @@
     "retained_cost_share": 0.3,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.83,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 207911,
-   "cfar_pct_ebitda": 33.5,
-   "statement": "5% chance the input basket costs more than Rs 69,704 crore of EBITDA over 1 months \u2014 33.5% of the year's EBITDA.",
+   "cfar_pct_ebitda": 34.4,
+   "statement": "5% chance the input basket costs more than Rs 71,438 crore of EBITDA over 1 months \u2014 34.4% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "reliance",
    "name": "Reliance Industries",
@@ -3223,24 +3223,24 @@
     {
      "input": "crude",
      "weight": 0.5,
-     "cfar_without_cr": 21013.4,
-     "contribution_cr": 49303.8
+     "cfar_without_cr": 20995.4,
+     "contribution_cr": 49362.2
     },
     {
      "input": "natgas",
      "weight": 0.04,
-     "cfar_without_cr": 66811.7,
-     "contribution_cr": 3505.5
+     "cfar_without_cr": 66559.6,
+     "contribution_cr": 3798.0
     }
    ]
   },
   "tatasteel": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 2162.4,
-   "expected_shortfall_cr": 2969.4,
-   "median_cr": 4.4,
-   "best_5pct_cr": -2143.6,
+   "cfar_cr": 2182.3,
+   "expected_shortfall_cr": 2979.1,
+   "median_cr": -4.8,
+   "best_5pct_cr": -2200.7,
    "cost_base_cr": 197292,
    "inputs_modelled": [
     "ironore",
@@ -3251,13 +3251,13 @@
     "retained_cost_share": 0.3,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.83,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 34848,
-   "cfar_pct_ebitda": 6.2,
-   "statement": "5% chance the input basket costs more than Rs 2,162 crore of EBITDA over 1 months \u2014 6.2% of the year's EBITDA.",
+   "cfar_pct_ebitda": 6.3,
+   "statement": "5% chance the input basket costs more than Rs 2,182 crore of EBITDA over 1 months \u2014 6.3% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "tatasteel",
    "name": "Tata Steel",
@@ -3284,24 +3284,24 @@
     {
      "input": "natgas",
      "weight": 0.02,
-     "cfar_without_cr": 438.6,
-     "contribution_cr": 1693.0
+     "cfar_without_cr": 414.3,
+     "contribution_cr": 1738.6
     },
     {
      "input": "ironore",
      "weight": 0.05,
-     "cfar_without_cr": 2141.4,
-     "contribution_cr": -9.8
+     "cfar_without_cr": 2139.6,
+     "contribution_cr": 13.3
     }
    ]
   },
   "ultratech": {
    "confidence": 0.95,
    "horizon_months": 3,
-   "cfar_cr": 891.7,
-   "expected_shortfall_cr": 1223.5,
-   "median_cr": -3.6,
-   "best_5pct_cr": -886.1,
+   "cfar_cr": 866.2,
+   "expected_shortfall_cr": 1184.5,
+   "median_cr": -2.2,
+   "best_5pct_cr": -887.2,
    "cost_base_cr": 69786,
    "inputs_modelled": [
     "coal"
@@ -3311,13 +3311,13 @@
     "retained_cost_share": 0.55,
     "hedge_ratio": 0.0,
     "copula": "student-t",
-    "df": 6.88,
+    "df": 6.83,
     "paths": 12000,
     "psd_repaired": false
    },
    "ebitda_cr": 17598,
-   "cfar_pct_ebitda": 5.1,
-   "statement": "5% chance the input basket costs more than Rs 892 crore of EBITDA over 1 months \u2014 5.1% of the year's EBITDA.",
+   "cfar_pct_ebitda": 4.9,
+   "statement": "5% chance the input basket costs more than Rs 866 crore of EBITDA over 1 months \u2014 4.9% of the year's EBITDA.",
    "caveat": "Cost-base shares are estimates from segment disclosure and annual-report commentary, not the client's ledger. Confirming them is the first day of the engagement, not a prerequisite for the conversation.",
    "company": "ultratech",
    "name": "UltraTech Cement",
@@ -3625,16 +3625,16 @@
   "companies_scored": 7,
   "companies_skipped": 68,
   "refused": [
-   "alum: need >= 250 observations for a tail fit, have 59",
-   "coal: need >= 250 observations for a tail fit, have 59",
-   "cocoa: need >= 250 observations for a tail fit, have 59",
-   "coffee: need >= 250 observations for a tail fit, have 59",
-   "copper: need >= 250 observations for a tail fit, have 59",
-   "ironore: need >= 250 observations for a tail fit, have 59",
-   "natrub: need >= 250 observations for a tail fit, have 59",
-   "palm: need >= 250 observations for a tail fit, have 59",
-   "sugar: need >= 250 observations for a tail fit, have 59",
-   "wheat: need >= 250 observations for a tail fit, have 59"
+   "alum: need >= 250 observations for a tail fit, have 61",
+   "coal: need >= 250 observations for a tail fit, have 61",
+   "cocoa: need >= 250 observations for a tail fit, have 61",
+   "coffee: need >= 250 observations for a tail fit, have 61",
+   "copper: need >= 250 observations for a tail fit, have 61",
+   "ironore: need >= 250 observations for a tail fit, have 61",
+   "natrub: need >= 250 observations for a tail fit, have 61",
+   "palm: need >= 250 observations for a tail fit, have 61",
+   "sugar: need >= 250 observations for a tail fit, have 61",
+   "wheat: need >= 250 observations for a tail fit, have 61"
   ],
   "method_notes": [
    "GARCH(1,1) fitted by maximum likelihood (Nelder-Mead) on log returns; stationarity enforced by parameterisation, not by clipping.",
