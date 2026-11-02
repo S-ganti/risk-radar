@@ -6,3 +6,5 @@ PARTNER-BRIEF.html
 data/_commodities_block.js
 __pycache__/
 *.pyc
+# Commercial strategy doc - keep local, this repo is public
+PMF.md
