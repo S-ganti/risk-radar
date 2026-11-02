@@ -14,7 +14,7 @@ Sources (all free, no API keys):
         daily  (EIA):  Brent DCOILBRENTEU, WTI DCOILWTICO, Henry Hub DHHNGSP
         monthly (IMF PCPS): copper, aluminum, wheat, sugar, coffee, cocoa,
                             iron ore, Australian thermal coal, palm oil, rubber
-  - prices.lbma.org.uk       daily LBMA gold PM fix (JSON, full history)
+  - query1.finance.yahoo.com daily gold history (COMEX GC=F front month)
   - EUA / CBAM reference     manual marks with as-of dates (see MANUAL_MARKS) —
                              no reliable keyless API exists; update with cycles.
 MCX bhavcopy is a TODO (WAF/session handling) — INR commodity prints currently
@@ -53,7 +53,7 @@ SOURCES = {
     "crude":   {"kind": "fred", "id": "DCOILBRENTEU", "freq": "D", "label": "Brent (EIA via FRED)"},
     "wti":     {"kind": "fred", "id": "DCOILWTICO",   "freq": "D", "label": "WTI (EIA via FRED)"},
     "natgas":  {"kind": "fred", "id": "DHHNGSP",      "freq": "D", "label": "Henry Hub (EIA via FRED)"},
-    "gold":    {"kind": "lbma", "id": "gold_pm",      "freq": "D", "label": "LBMA gold PM fix"},
+    "gold":    {"kind": "yahoo", "id": "GC=F",        "freq": "D", "label": "COMEX gold front month (Yahoo)"},
     "copper":  {"kind": "fred", "id": "PCOPPUSDM",    "freq": "M", "label": "Copper (IMF PCPS via FRED)"},
     "alum":    {"kind": "fred", "id": "PALUMUSDM",    "freq": "M", "label": "Aluminum (IMF PCPS via FRED)"},
     "wheat":   {"kind": "fred", "id": "PWHEAMTUSDM",  "freq": "M", "label": "Wheat (IMF PCPS via FRED)"},
@@ -108,9 +108,9 @@ def load_persisted(cid):
 def merge_series(cid, fetched):
     """Union of the committed history and whatever this run fetched.
 
-    Feeds fail. LBMA's gold history is reachable from a laptop and blocked from
-    GitHub's runners, so a fetch-only pipeline silently lost gold entirely in CI
-    while looking healthy. Persisting the series makes an outage degrade to
+    Feeds fail, and they fail quietly. The LBMA gold feed started refusing every
+    caller; a fetch-only pipeline dropped gold in CI while still reporting
+    success. Persisting the series makes an outage degrade to
     slightly stale data instead of no data, and it applies to every source
     rather than the one that happened to break first.
     """
@@ -202,17 +202,31 @@ def fetch_fred(series_id):
     return rows
 
 
-def fetch_lbma_gold():
-    """LBMA PM fix full history JSON -> [(date, usd)] ascending."""
-    j = get_json("https://prices.lbma.org.uk/json/gold_pm.json", timeout=60)
-    if not j:
+def fetch_yahoo_daily(symbol):
+    """Yahoo chart API -> [(date, close)] ascending. Keyless JSON.
+
+    Gold used to come from the LBMA PM fix. That endpoint now returns 403 from
+    every address tried, a laptop as readily as a GitHub runner, so it is gone
+    rather than merely blocked in CI. COMEX GC=F front month is the replacement:
+    it is the contract a treasurer can actually trade, at the cost of small
+    discontinuities at each roll, which matter little for a volatility estimate.
+    """
+    j = get_json(
+        "https://query1.finance.yahoo.com/v8/finance/chart/"
+        f"{symbol}?range=5y&interval=1d", timeout=60)
+    try:
+        res = j["chart"]["result"][0]
+        stamps, closes = res["timestamp"], res["indicators"]["quote"][0]["close"]
+    except (TypeError, KeyError, IndexError):
         return []
     cutoff = (TODAY - timedelta(days=int(HISTORY_YEARS * 365))).isoformat()
     rows = []
-    for rec in j:
-        d, v = rec.get("d", ""), rec.get("v") or []
-        if d >= cutoff and v and v[0]:
-            rows.append((d, float(v[0])))
+    for ts, close in zip(stamps, closes):
+        if close is None:
+            continue
+        d = datetime.fromtimestamp(ts, timezone.utc).date().isoformat()
+        if d >= cutoff:
+            rows.append((d, round(float(close), 2)))
     rows.sort()
     return rows
 
@@ -312,7 +326,7 @@ def main():
     print("Fetching commodity series…")
     degraded = []
     for cid, s in SOURCES.items():
-        fetched = fetch_lbma_gold() if s["kind"] == "lbma" else fetch_fred(s["id"])
+        fetched = fetch_yahoo_daily(s["id"]) if s["kind"] == "yahoo" else fetch_fred(s["id"])
         rows, n_old, added = merge_series(cid, fetched)
         need = 250 if s["freq"] == "D" else 40
         if len(rows) >= need:
@@ -459,7 +473,7 @@ def main():
         "history": history,
         "degraded_sources": degraded,
         "notes": [
-            "Daily series (Brent, WTI, Henry Hub, LBMA gold, USDINR): EWMA vol lambda=0.94; monthly = daily*sqrt(21).",
+            "Daily series (Brent, WTI, Henry Hub, COMEX gold, USDINR): EWMA vol lambda=0.94; monthly = daily*sqrt(21).",
             "Monthly series (IMF PCPS): rolling 36-month std of monthly log returns.",
             "Correlations: Pearson on up to 60 overlapping monthly log returns (min 24), uniform across all series.",
             "Regime = 0.5*avg 5y vol percentile (Brent, Henry Hub, gold, USDINR) + 0.3*INR 20d momentum (3%=max) + 0.2*breadth(|move|>5%); thresholds 45/60/75.",
