@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-02T05:53:16+00:00",
+ "generated": "2026-11-02T22:13:13+00:00",
  "spot": {
   "usdinr": {
    "v": 95.08,
@@ -27,7 +27,7 @@
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 3916.8,
+   "v": 3947.7,
    "asof": "2026-11-02",
    "src": "gold-api.com"
   },
@@ -50,7 +50,7 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 119732,
+   "v": 120677,
    "asof": "2026-11-02",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
@@ -58,11 +58,11 @@
  "vols": {
   "usdinr": {
    "freq": "D",
-   "monthly": 0.0127,
-   "annual": 0.044,
-   "pct5y": 64.2,
-   "asof": "2026-10-30",
-   "n": 1355,
+   "monthly": 0.0123,
+   "annual": 0.0427,
+   "pct5y": 60.8,
+   "asof": "2026-11-02",
+   "n": 1356,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
   },
@@ -98,9 +98,9 @@
   },
   "gold": {
    "freq": "D",
-   "monthly": 0.0602,
-   "annual": 0.2085,
-   "pct5y": 77.2,
+   "monthly": 0.0619,
+   "annual": 0.2146,
+   "pct5y": 78.3,
    "asof": "2026-11-02",
    "n": 1257,
    "src": "COMEX gold front month (Yahoo)",
@@ -208,11 +208,11 @@
   }
  },
  "moves": {
-  "usdinr": -1.42,
+  "usdinr": -1.44,
   "crude": 8.02,
   "wti": 7.5,
   "natgas": -13.21,
-  "gold": -5.56,
+  "gold": -4.82,
   "copper": 0.99,
   "alum": 1.01,
   "wheat": 3.78,
@@ -332,22 +332,22 @@
   "wheat|wti": 0.23
  },
  "inr": {
-  "mom20": -1.42,
-  "mom60": -0.27
+  "mom20": -1.44,
+  "mom60": -0.41
  },
- "breadth": 46.7,
+ "breadth": 40.0,
  "regime": {
   "label": "normal",
-  "score": 40.8,
+  "score": 39.2,
   "components": {
-   "avg_vol_pct5y": 63.0,
+   "avg_vol_pct5y": 62.4,
    "inr_mom20_component": 0,
-   "breadth": 46.7
+   "breadth": 40.0
   }
  },
  "velocity": {
   "oil": 53,
-  "gold": 37,
+  "gold": 32,
   "usdinr": 36
  },
  "history": {
