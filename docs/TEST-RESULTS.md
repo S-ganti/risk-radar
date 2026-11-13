@@ -1,26 +1,26 @@
 # Test run
 
-2026-11-13T09:45:38.863007+00:00
+2026-11-13T09:50:13.343509+00:00
 
 ## node --test tests\html.test.js tests\models.test.js
 
 Exit: 0
 
 ```text
-✔ workspace script parses (2.5908ms)
-✔ atlas navigation and dependency tree script parses (0.9658ms)
-✔ market refresh and scenario script parses (0.7065ms)
-✔ directory has unique company IDs (2.5698ms)
-✔ original analytics retained alongside workbench (7.0306ms)
-✔ composite risk is deterministic and bounded (1.5405ms)
-✔ attention priority does not infer controls from recommended actions (0.1827ms)
-✔ breach engine only emits evaluated rules (0.2424ms)
-✔ pressure index cannot be mistaken for a probability (0.1783ms)
-✔ ensemble reports disagreement without a decision floor (2.5989ms)
-✔ control strength requires tested control evidence (0.1539ms)
-✔ Ind AS 109 diagnostics expose evidence and never apply an 80-125 bright line (0.2791ms)
-✔ stress engine keeps consumer cost and producer revenue channels separate (0.1636ms)
-✔ portfolio CFaR uses supplied positions, live vols, and correlations (0.3409ms)
+✔ workspace script parses (2.5522ms)
+✔ atlas navigation and dependency tree script parses (2.1617ms)
+✔ market refresh and scenario script parses (1.6486ms)
+✔ directory has unique company IDs (2.1778ms)
+✔ original analytics retained alongside workbench (9.7584ms)
+✔ composite risk is deterministic and bounded (1.3711ms)
+✔ attention priority does not infer controls from recommended actions (0.1876ms)
+✔ breach engine only emits evaluated rules (0.2716ms)
+✔ pressure index cannot be mistaken for a probability (0.2414ms)
+✔ ensemble reports disagreement without a decision floor (0.721ms)
+✔ control strength requires tested control evidence (0.1386ms)
+✔ Ind AS 109 diagnostics expose evidence and never apply an 80-125 bright line (0.2866ms)
+✔ stress engine keeps consumer cost and producer revenue channels separate (0.1514ms)
+✔ portfolio CFaR uses supplied positions, live vols, and correlations (0.3249ms)
 ℹ tests 14
 ℹ suites 0
 ℹ pass 14
@@ -28,7 +28,7 @@ Exit: 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 114.3689
+ℹ duration_ms 100.9787
 
 ```
 
@@ -39,7 +39,7 @@ Exit: 0
 ```text
 .............
 ----------------------------------------------------------------------
-Ran 13 tests in 0.161s
+Ran 13 tests in 0.313s
 
 OK
 
@@ -185,7 +185,7 @@ risk-engine-mcp
 india-markets-mcp
   PASS  spot marks returned
   PASS  stale manual marks identified  [eua,cbam_ref]
-  PASS  usdinr spot has as-of and source  [93.96 @ 2026-11-11]
+  PASS  usdinr spot has as-of and source  [93.85 @ 2026-11-12]
   PASS  series returns requested tail
   PASS  series summary computed
   PASS  unknown series refused with alternatives
@@ -194,7 +194,7 @@ india-markets-mcp
   PASS  regime label present  [normal]
   PASS  regime components exposed
   PASS  hedgeability lists commodities  [97 commodities]
-  PASS  score history has a span  [117 obs 2026-07-17->2026-11-11]
+  PASS  score history has a span  [118 obs 2026-07-17->2026-11-12]
   PASS  validation readiness stated  [True]
   PASS  moved/unmoved risks distinguished
 
@@ -205,8 +205,7 @@ regwatch-mcp  (network-dependent: content is not asserted)
   PASS  watchlist deadlines evaluated
   PASS  next deadline identified  [{"id": "eudr-application", "date": "2026-12-30", "days": 47}]
   PASS  no watchlist deadline is already elapsed  [[]]
-  PASS  rbi feed returns items or a stated error  [could not reach Reserve Bank of India: <urlopen error [Errno]
-  PASS  unreachable feed does not imply 'no change'
+  PASS  rbi feed returns items or a stated error  [0]
   PASS  unknown source refused
   PASS  watchlist diff runs
   PASS  diff refuses to conclude on its own
@@ -224,12 +223,12 @@ All MCP server tests passed.
 Exit: 0
 
 ```text
-PASS    latest.freshness: latest.json is 37.7 hours old
+PASS    latest.freshness: latest.json is 13.1 hours old
 PASS    spot.required: USD/INR, gold and Brent records are present
 PASS    volatility.coverage: 15 volatility series
 PASS    correlation.coverage: 105 correlation pairs
-PASS    history.order: 117 sorted, unique dates
-PASS    history.validation-window: 117 score snapshots retained; outcome labels are still required for validation
+PASS    history.order: 118 sorted, unique dates
+PASS    history.validation-window: 118 score snapshots retained; outcome labels are still required for validation
 PASS    model-registry.ids: 9 unique model records
 PASS    evidence-registry.ids: 11 unique evidence records
 WARNING advisory-scope: Advisory research retained by design; check content and local pursuit notes before publishing.
