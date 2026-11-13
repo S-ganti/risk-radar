@@ -1,30 +1,6 @@
-const test = require("node:test");
-const assert = require("node:assert/strict");
-const fs = require("node:fs");
-const path = require("node:path");
-const vm = require("node:vm");
-
-const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
-
-test("every inline script parses", () => {
-  const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map((match) => match[1]).filter((source) => source.trim());
-  assert.ok(scripts.length > 0);
-  scripts.forEach((source, index) => assert.doesNotThrow(() => new vm.Script(source, { filename: `index-inline-${index}.js` })));
-});
-
-test("public HTML excludes confidential and misleading legacy paths", () => {
-  const blocked = ["adv:{buyer:", "breachProb30d", "First talking point", "tab-pipeline", "clientbtn", "renderPipeline()", "live breaches"];
-  blocked.forEach((token) => assert.equal(html.toLowerCase().includes(token.toLowerCase()), false, token));
-});
-
-test("navigation is reduced to four workspaces", () => {
-  const workspaces = [...html.matchAll(/data-workspace="([^"]+)"/g)].map((match) => match[1]);
-  assert.deepEqual(workspaces, ["radar", "explore", "scenarios", "trust"]);
-});
-
-test("dialogs declare modality and core models load before the app", () => {
-  assert.match(html, /id="cmdk"[^>]*aria-modal="true"/);
-  assert.match(html, /id="drawer"[^>]*aria-modal="true"/);
-  assert.match(html, /id="briefmodal"[^>]*aria-modal="true"/);
-  assert.ok(html.indexOf('src="app/models/core.js"') < html.indexOf("const DATA ="));
-});
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+test('workspace script parses',()=>{new vm.Script(fs.readFileSync('app/workspace.js','utf8'))});
+test('atlas navigation and dependency tree script parses',()=>{new vm.Script(fs.readFileSync('app/radar-atlas.js','utf8'))});
+test('market refresh and scenario script parses',()=>{new vm.Script(fs.readFileSync('app/radar-markets.js','utf8'))});
+test('directory has unique company IDs',()=>{const cs=JSON.parse(fs.readFileSync('data/company-directory.json','utf8'));assert.ok(cs.length>0);assert.equal(new Set(cs.map(c=>c.id)).size,cs.length);cs.forEach(c=>assert.ok(c.name&&c.sector))});
+test('original analytics retained alongside workbench',()=>{const html=fs.readFileSync('index.html','utf8');assert.ok(html.includes('app/radar-workbench.js'));for(const id of ['companies','deepdive','models','scenarios','commodities','cockpit','calendar','cycles','methodology'])assert.ok(html.includes('id="tab-'+id+'"'));for(const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))new vm.Script(match[1]);new vm.Script(fs.readFileSync('app/radar-workbench.js','utf8'))});

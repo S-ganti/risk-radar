@@ -1,0 +1,437 @@
+[
+  {
+    "id": "reliance",
+    "name": "Reliance Industries",
+    "sector": "Energy, petchem, retail, telecom"
+  },
+  {
+    "id": "tcs",
+    "name": "TCS",
+    "sector": "IT services"
+  },
+  {
+    "id": "hdfcbank",
+    "name": "HDFC Bank",
+    "sector": "Banking"
+  },
+  {
+    "id": "bhartiairtel",
+    "name": "Bharti Airtel",
+    "sector": "Telecom"
+  },
+  {
+    "id": "icicibank",
+    "name": "ICICI Bank",
+    "sector": "Banking"
+  },
+  {
+    "id": "sbi",
+    "name": "State Bank of India",
+    "sector": "Banking"
+  },
+  {
+    "id": "infosys",
+    "name": "Infosys",
+    "sector": "IT services"
+  },
+  {
+    "id": "hul",
+    "name": "Hindustan Unilever",
+    "sector": "FMCG"
+  },
+  {
+    "id": "itc",
+    "name": "ITC",
+    "sector": "FMCG, tobacco, paper"
+  },
+  {
+    "id": "lic",
+    "name": "LIC",
+    "sector": "Insurance"
+  },
+  {
+    "id": "bajajfinance",
+    "name": "Bajaj Finance",
+    "sector": "NBFC"
+  },
+  {
+    "id": "bajajfinserv",
+    "name": "Bajaj Finserv",
+    "sector": "Financial services"
+  },
+  {
+    "id": "lt",
+    "name": "Larsen & Toubro",
+    "sector": "Engineering and construction"
+  },
+  {
+    "id": "hcltech",
+    "name": "HCL Tech",
+    "sector": "IT services"
+  },
+  {
+    "id": "kotakbank",
+    "name": "Kotak Mahindra Bank",
+    "sector": "Banking"
+  },
+  {
+    "id": "sunpharma",
+    "name": "Sun Pharma",
+    "sector": "Pharmaceuticals"
+  },
+  {
+    "id": "maruti",
+    "name": "Maruti Suzuki",
+    "sector": "Automotive"
+  },
+  {
+    "id": "mm",
+    "name": "Mahindra & Mahindra",
+    "sector": "Automotive and farm"
+  },
+  {
+    "id": "ultratech",
+    "name": "UltraTech Cement",
+    "sector": "Cement"
+  },
+  {
+    "id": "axisbank",
+    "name": "Axis Bank",
+    "sector": "Banking"
+  },
+  {
+    "id": "ntpc",
+    "name": "NTPC",
+    "sector": "Power generation"
+  },
+  {
+    "id": "titan",
+    "name": "Titan",
+    "sector": "Jewellery and watches"
+  },
+  {
+    "id": "adaniports",
+    "name": "Adani Ports",
+    "sector": "Ports and logistics"
+  },
+  {
+    "id": "wipro",
+    "name": "Wipro",
+    "sector": "IT services"
+  },
+  {
+    "id": "tatamotors",
+    "name": "Tata Motors",
+    "sector": "Automotive"
+  },
+  {
+    "id": "tatasteel",
+    "name": "Tata Steel",
+    "sector": "Steelmaking"
+  },
+  {
+    "id": "jswsteel",
+    "name": "JSW Steel",
+    "sector": "Steelmaking"
+  },
+  {
+    "id": "hindalco",
+    "name": "Hindalco",
+    "sector": "Aluminum and copper"
+  },
+  {
+    "id": "nestleindia",
+    "name": "Nestlé India",
+    "sector": "Food"
+  },
+  {
+    "id": "asianpaints",
+    "name": "Asian Paints",
+    "sector": "Paints"
+  },
+  {
+    "id": "coalindia",
+    "name": "Coal India",
+    "sector": "Mining"
+  },
+  {
+    "id": "powergrid",
+    "name": "Power Grid",
+    "sector": "Transmission"
+  },
+  {
+    "id": "adanient",
+    "name": "Adani Enterprises",
+    "sector": "Incubator, coal trading, solar"
+  },
+  {
+    "id": "ongc",
+    "name": "ONGC",
+    "sector": "Oil and gas production"
+  },
+  {
+    "id": "interglobe",
+    "name": "InterGlobe Aviation (IndiGo)",
+    "sector": "Airlines"
+  },
+  {
+    "id": "iocl",
+    "name": "Indian Oil Corporation",
+    "sector": "Refining and marketing"
+  },
+  {
+    "id": "bpcl",
+    "name": "Bharat Petroleum",
+    "sector": "Refining and marketing"
+  },
+  {
+    "id": "gail",
+    "name": "GAIL (India)",
+    "sector": "Gas transmission and petrochemicals"
+  },
+  {
+    "id": "petronet",
+    "name": "Petronet LNG",
+    "sector": "LNG regasification"
+  },
+  {
+    "id": "gujgas",
+    "name": "Gujarat Gas",
+    "sector": "City gas distribution"
+  },
+  {
+    "id": "igl",
+    "name": "Indraprastha Gas",
+    "sector": "City gas distribution"
+  },
+  {
+    "id": "tatapower",
+    "name": "Tata Power",
+    "sector": "Power generation and distribution"
+  },
+  {
+    "id": "adanipower",
+    "name": "Adani Power",
+    "sector": "Thermal power generation"
+  },
+  {
+    "id": "oilindia",
+    "name": "Oil India",
+    "sector": "Oil and gas production"
+  },
+  {
+    "id": "vedanta",
+    "name": "Vedanta",
+    "sector": "Diversified natural resources"
+  },
+  {
+    "id": "hindzinc",
+    "name": "Hindustan Zinc",
+    "sector": "Zinc, lead and silver mining"
+  },
+  {
+    "id": "nalco",
+    "name": "National Aluminium",
+    "sector": "Alumina and aluminium"
+  },
+  {
+    "id": "sail",
+    "name": "Steel Authority of India",
+    "sector": "Steelmaking"
+  },
+  {
+    "id": "jindalsteel",
+    "name": "Jindal Steel & Power",
+    "sector": "Steelmaking"
+  },
+  {
+    "id": "apollotyre",
+    "name": "Apollo Tyres",
+    "sector": "Tyres"
+  },
+  {
+    "id": "mrf",
+    "name": "MRF",
+    "sector": "Tyres"
+  },
+  {
+    "id": "balkrishna",
+    "name": "Balkrishna Industries",
+    "sector": "Off-highway tyres"
+  },
+  {
+    "id": "coromandel",
+    "name": "Coromandel International",
+    "sector": "Fertilisers and crop protection"
+  },
+  {
+    "id": "chambal",
+    "name": "Chambal Fertilisers",
+    "sector": "Urea and agri-inputs"
+  },
+  {
+    "id": "srf",
+    "name": "SRF",
+    "sector": "Specialty chemicals and packaging films"
+  },
+  {
+    "id": "tatachem",
+    "name": "Tata Chemicals",
+    "sector": "Soda ash and specialty chemicals"
+  },
+  {
+    "id": "deepaknitrite",
+    "name": "Deepak Nitrite",
+    "sector": "Intermediates and phenolics"
+  },
+  {
+    "id": "upl",
+    "name": "UPL",
+    "sector": "Crop protection"
+  },
+  {
+    "id": "pidilite",
+    "name": "Pidilite Industries",
+    "sector": "Adhesives and construction chemicals"
+  },
+  {
+    "id": "bergerpaints",
+    "name": "Berger Paints",
+    "sector": "Paints and coatings"
+  },
+  {
+    "id": "britannia",
+    "name": "Britannia Industries",
+    "sector": "Packaged foods"
+  },
+  {
+    "id": "marico",
+    "name": "Marico",
+    "sector": "Consumer staples"
+  },
+  {
+    "id": "godrejcp",
+    "name": "Godrej Consumer Products",
+    "sector": "Home and personal care"
+  },
+  {
+    "id": "awl",
+    "name": "AWL Agri Business",
+    "sector": "Edible oils and foods"
+  },
+  {
+    "id": "tataconsumer",
+    "name": "Tata Consumer Products",
+    "sector": "Beverages and foods"
+  },
+  {
+    "id": "varunbev",
+    "name": "Varun Beverages",
+    "sector": "Beverages bottling"
+  },
+  {
+    "id": "balrampur",
+    "name": "Balrampur Chini Mills",
+    "sector": "Sugar and ethanol"
+  },
+  {
+    "id": "polycab",
+    "name": "Polycab India",
+    "sector": "Wires and cables"
+  },
+  {
+    "id": "havells",
+    "name": "Havells India",
+    "sector": "Electrical consumer goods"
+  },
+  {
+    "id": "dixon",
+    "name": "Dixon Technologies",
+    "sector": "Electronics manufacturing"
+  },
+  {
+    "id": "motherson",
+    "name": "Samvardhana Motherson",
+    "sector": "Auto components"
+  },
+  {
+    "id": "bharatforge",
+    "name": "Bharat Forge",
+    "sector": "Forgings and defence"
+  },
+  {
+    "id": "exide",
+    "name": "Exide Industries",
+    "sector": "Lead-acid and lithium batteries"
+  },
+  {
+    "id": "amararaja",
+    "name": "Amara Raja Energy & Mobility",
+    "sector": "Batteries and energy storage"
+  },
+  {
+    "id": "bajajauto",
+    "name": "Bajaj Auto",
+    "sector": "Two and three-wheelers"
+  },
+  {
+    "id": "heromoto",
+    "name": "Hero MotoCorp",
+    "sector": "Two-wheelers"
+  },
+  {
+    "id": "ambuja",
+    "name": "Ambuja Cements",
+    "sector": "Cement"
+  },
+  {
+    "id": "gesco",
+    "name": "Great Eastern Shipping",
+    "sector": "Shipping"
+  },
+  {
+    "id": "concor",
+    "name": "Container Corporation",
+    "sector": "Rail logistics"
+  },
+  {
+    "id": "welspunliving",
+    "name": "Welspun Living",
+    "sector": "Home textiles"
+  },
+  {
+    "id": "vardhman",
+    "name": "Vardhman Textiles",
+    "sector": "Yarn and fabric"
+  },
+  {
+    "id": "jkpaper",
+    "name": "JK Paper",
+    "sector": "Paper and packaging board"
+  },
+  {
+    "id": "waaree",
+    "name": "Waaree Energies",
+    "sector": "Solar module manufacturing"
+  },
+  {
+    "id": "cipla",
+    "name": "Cipla",
+    "sector": "Pharmaceuticals"
+  },
+  {
+    "id": "aurobindo",
+    "name": "Aurobindo Pharma",
+    "sector": "Pharmaceuticals"
+  },
+  {
+    "id": "kalyan",
+    "name": "Kalyan Jewellers",
+    "sector": "Jewellery retail"
+  },
+  {
+    "id": "supremeind",
+    "name": "Supreme Industries",
+    "sector": "Plastic piping and products"
+  }
+]

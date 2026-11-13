@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "risk-engine": {
+      "command": "python",
+      "args": ["mcp_servers/risk_engine_mcp.py"],
+      "env": {}
+    },
+    "india-markets": {
+      "command": "python",
+      "args": ["mcp_servers/india_markets_mcp.py"],
+      "env": {}
+    },
+    "regwatch": {
+      "command": "python",
+      "args": ["mcp_servers/regwatch_mcp.py"],
+      "env": {}
+    }
+  }
+}

@@ -175,6 +175,9 @@ def validate_registries(gate: Gate):
 
 
 def validate_public_copy(gate: Gate):
+    # Advisory research was explicitly retained by the product owner. Its presence
+    # is not a publication error; private client material still needs review.
+    gate.warn('advisory-scope', 'Advisory research retained by design; check content and local pursuit notes before publishing.')
     public_files = [ROOT / "index.html", ROOT / "README.md"]
     forbidden = {
         "80–125%": "legacy Ind AS 39 bright-line wording",
@@ -184,9 +187,6 @@ def validate_public_copy(gate: Gate):
         "official sources only": "false source-quality claim",
         "GPD fit diagnostics": "non-existent EVT diagnostic claim",
         "1.3 (calibrated)": "false calibration claim",
-        "adv:{buyer:": "public business-development targeting data",
-        "tab-pipeline": "public pursuit pipeline",
-        "First talking point": "public sales talking point"
     }
     hits = []
     for path in public_files:

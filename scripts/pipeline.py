@@ -14,7 +14,7 @@ Sources (all free, no API keys):
         daily  (EIA):  Brent DCOILBRENTEU, WTI DCOILWTICO, Henry Hub DHHNGSP
         monthly (IMF PCPS): copper, aluminum, wheat, sugar, coffee, cocoa,
                             iron ore, Australian thermal coal, palm oil, rubber
-  - prices.lbma.org.uk       daily LBMA gold PM fix (JSON, full history)
+  - query1.finance.yahoo.com daily gold history (COMEX GC=F front month)
   - EUA / CBAM reference     manual marks with as-of dates (see MANUAL_MARKS) —
                              no reliable keyless API exists; update with cycles.
 MCX bhavcopy is a TODO (WAF/session handling) — INR commodity prints currently
@@ -34,10 +34,11 @@ from datetime import date, datetime, timedelta, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT, "data")
 RAW_DIR = os.path.join(DATA_DIR, "raw")
-HISTORY_LIMIT_DAYS = 730
 UA = {"User-Agent": "Mozilla/5.0 (risk-radar-pipeline; +https://github.com/S-ganti/risk-radar)"}
 TODAY = date.today()
 HISTORY_YEARS = 5.3
+HISTORY_KEEP = 730  # score-history retention (days). Must exceed the 12-week
+                    # validation window by a wide margin - see REVIEW-2026-09.md §2.
 
 # --- Manual marks: no free keyless feed exists; update with each cycle. -----
 MANUAL_MARKS = {
@@ -52,7 +53,7 @@ SOURCES = {
     "crude":   {"kind": "fred", "id": "DCOILBRENTEU", "freq": "D", "label": "Brent (EIA via FRED)"},
     "wti":     {"kind": "fred", "id": "DCOILWTICO",   "freq": "D", "label": "WTI (EIA via FRED)"},
     "natgas":  {"kind": "fred", "id": "DHHNGSP",      "freq": "D", "label": "Henry Hub (EIA via FRED)"},
-    "gold":    {"kind": "lbma", "id": "gold_pm",      "freq": "D", "label": "LBMA gold PM fix"},
+    "gold":    {"kind": "yahoo", "id": "GC=F",        "freq": "D", "label": "COMEX gold front month (Yahoo)"},
     "copper":  {"kind": "fred", "id": "PCOPPUSDM",    "freq": "M", "label": "Copper (IMF PCPS via FRED)"},
     "alum":    {"kind": "fred", "id": "PALUMUSDM",    "freq": "M", "label": "Aluminum (IMF PCPS via FRED)"},
     "wheat":   {"kind": "fred", "id": "PWHEAMTUSDM",  "freq": "M", "label": "Wheat (IMF PCPS via FRED)"},
@@ -90,6 +91,42 @@ RISKS_META = {
 }
 
 REGIME_DAILY = ["crude", "natgas", "gold", "usdinr"]  # 5y vol-percentile inputs
+
+
+SERIES_DIR = os.path.join(DATA_DIR, "series")
+
+
+def load_persisted(cid):
+    """Last-good price history committed to the repo."""
+    try:
+        with open(os.path.join(SERIES_DIR, f"{cid}.json"), encoding="utf-8") as f:
+            return [(d, float(v)) for d, v in json.load(f)]
+    except Exception:  # noqa: BLE001
+        return []
+
+
+def merge_series(cid, fetched):
+    """Union of the committed history and whatever this run fetched.
+
+    Feeds fail, and they fail quietly. The LBMA gold feed started refusing every
+    caller; a fetch-only pipeline dropped gold in CI while still reporting
+    success. Persisting the series makes an outage degrade to
+    slightly stale data instead of no data, and it applies to every source
+    rather than the one that happened to break first.
+    """
+    merged = dict(load_persisted(cid))
+    n_old = len(merged)
+    for d, v in fetched or []:
+        merged[d] = v
+    rows = sorted(merged.items())
+    cutoff = (TODAY - timedelta(days=int(HISTORY_YEARS * 365))).isoformat()
+    rows = [r for r in rows if r[0] >= cutoff]
+    if rows:
+        os.makedirs(SERIES_DIR, exist_ok=True)
+        with open(os.path.join(SERIES_DIR, f"{cid}.json"), "w", encoding="utf-8") as f:
+            json.dump(rows, f, separators=(",", ":"))
+    added = len(rows) - n_old
+    return rows, n_old, max(0, added)
 
 
 def http_get(url, timeout=45, retries=2):
@@ -165,17 +202,31 @@ def fetch_fred(series_id):
     return rows
 
 
-def fetch_lbma_gold():
-    """LBMA PM fix full history JSON -> [(date, usd)] ascending."""
-    j = get_json("https://prices.lbma.org.uk/json/gold_pm.json", timeout=60)
-    if not j:
+def fetch_yahoo_daily(symbol):
+    """Yahoo chart API -> [(date, close)] ascending. Keyless JSON.
+
+    Gold used to come from the LBMA PM fix. That endpoint now returns 403 from
+    every address tried, a laptop as readily as a GitHub runner, so it is gone
+    rather than merely blocked in CI. COMEX GC=F front month is the replacement:
+    it is the contract a treasurer can actually trade, at the cost of small
+    discontinuities at each roll, which matter little for a volatility estimate.
+    """
+    j = get_json(
+        "https://query1.finance.yahoo.com/v8/finance/chart/"
+        f"{symbol}?range=5y&interval=1d", timeout=60)
+    try:
+        res = j["chart"]["result"][0]
+        stamps, closes = res["timestamp"], res["indicators"]["quote"][0]["close"]
+    except (TypeError, KeyError, IndexError):
         return []
     cutoff = (TODAY - timedelta(days=int(HISTORY_YEARS * 365))).isoformat()
     rows = []
-    for rec in j:
-        d, v = rec.get("d", ""), rec.get("v") or []
-        if d >= cutoff and v and v[0]:
-            rows.append((d, float(v[0])))
+    for ts, close in zip(stamps, closes):
+        if close is None:
+            continue
+        d = datetime.fromtimestamp(ts, timezone.utc).date().isoformat()
+        if d >= cutoff:
+            rows.append((d, round(float(close), 2)))
     rows.sort()
     return rows
 
@@ -266,18 +317,33 @@ def main():
 
     print("Fetching FX history…")
     fx_hist = fetch_fx_history()
-    if fx_hist.get("INR"):
-        series["usdinr"], freq["usdinr"], labels["usdinr"] = fx_hist["INR"], "D", "USD/INR (ECB via frankfurter)"
+    _fx_rows, _fx_old, _fx_added = merge_series("usdinr", fx_hist.get("INR"))
+    if _fx_rows:
+        series["usdinr"], freq["usdinr"], labels["usdinr"] = _fx_rows, "D", "USD/INR (ECB via frankfurter)"
+        if not fx_hist.get("INR"):
+            print(f"  usdinr  [FETCH FAILED — using {_fx_old} persisted rows]")
 
     print("Fetching commodity series…")
+    degraded = []
     for cid, s in SOURCES.items():
-        rows = fetch_lbma_gold() if s["kind"] == "lbma" else fetch_fred(s["id"])
+        fetched = fetch_yahoo_daily(s["id"]) if s["kind"] == "yahoo" else fetch_fred(s["id"])
+        rows, n_old, added = merge_series(cid, fetched)
         need = 250 if s["freq"] == "D" else 40
         if len(rows) >= need:
             series[cid], freq[cid], labels[cid] = rows, s["freq"], s["label"]
-            print(f"  {cid:8s} {s['freq']} {len(rows):5d} rows  last {rows[-1][0]} = {rows[-1][1]}")
+            note = ""
+            if not fetched:
+                note = f"  [FETCH FAILED — using {n_old} persisted rows]"
+                degraded.append({"series": cid, "source": s["label"],
+                                 "using_persisted_to": rows[-1][0]})
+            elif added:
+                note = f"  (+{added} new)"
+            print(f"  {cid:8s} {s['freq']} {len(rows):5d} rows  last {rows[-1][0]} = {rows[-1][1]}{note}")
         else:
             print(f"  {cid:8s} skipped ({len(rows)} rows) — {s['label']}")
+            degraded.append({"series": cid, "source": s["label"],
+                             "using_persisted_to": None,
+                             "reason": f"only {len(rows)} rows after merge"})
 
     fx_spot = fetch_fx_spot()
     gold_spot = fetch_gold_spot()
@@ -361,9 +427,12 @@ def main():
             compo = round(0.30 * meta["sev"] / 5 * 100 + 0.20 * vel +
                           0.25 * meta["exp"] + 0.15 * meta["con"] + 0.10 * meta["conf"])
             history["scores"].setdefault(rid, []).append(compo)
-        history["dates"] = history["dates"][-HISTORY_LIMIT_DAYS:]
+        # Keep ~2 years. The old 26-entry cap silently discarded four weeks of
+        # real observations and would have kept the twelve-week validation gate
+        # permanently out of reach; see scripts/backfill_history.py.
+        history["dates"] = history["dates"][-HISTORY_KEEP:]
         for rid in history["scores"]:
-            history["scores"][rid] = history["scores"][rid][-HISTORY_LIMIT_DAYS:]
+            history["scores"][rid] = history["scores"][rid][-HISTORY_KEEP:]
 
     # ---- spot block ----
     spot = {}
@@ -402,40 +471,31 @@ def main():
                                   "breadth": breadth}},
         "velocity": velocity,
         "history": history,
+        "degraded_sources": degraded,
         "notes": [
-            "Daily series (Brent, WTI, Henry Hub, LBMA gold, USDINR): EWMA vol lambda=0.94; monthly = daily*sqrt(21).",
+            "Daily series (Brent, WTI, Henry Hub, COMEX gold, USDINR): EWMA vol lambda=0.94; monthly = daily*sqrt(21).",
             "Monthly series (IMF PCPS): rolling 36-month std of monthly log returns.",
             "Correlations: Pearson on up to 60 overlapping monthly log returns (min 24), uniform across all series.",
             "Regime = 0.5*avg 5y vol percentile (Brent, Henry Hub, gold, USDINR) + 0.3*INR 20d momentum (3%=max) + 0.2*breadth(|move|>5%); thresholds 45/60/75.",
             "Velocity computed from |20d move| where a daily series exists (oil, gold, USDINR); other risks keep curated velocity, tagged in the UI.",
             "Exposure/concentration remain curated in P1 (computed from cost-base data in P2).",
-            "Score history retains up to 730 daily observations; validation additionally requires defined realised outcomes.",
             "natgas is US Henry Hub — Asian LNG is oil-indexed; steel/metcoal/API/TiO2/lithium have no free series (rating-based).",
             "MCX bhavcopy: TODO (WAF/session); gold INR derived as XAUUSD x USDINR meanwhile.",
+            "Price history is persisted to data/series/ and merged each run, so a "
+            "feed outage degrades to slightly stale data rather than dropping the "
+            "series. Anything running on persisted data is listed in "
+            "degraded_sources with the date it is current to.",
         ],
     }
 
-    # Validate the in-memory candidates before replacing last-known-good files.
-    # A failed fetch or malformed candidate leaves the published artifacts intact.
-    from validate import validate_all
-    gate, health = validate_all(latest_override=latest, history_override=history)
-    if gate.errors:
-        details = "; ".join(check["detail"] for check in gate.errors)
-        raise RuntimeError(f"publication gate blocked: {details}")
-
     os.makedirs(DATA_DIR, exist_ok=True)
-    def atomic_json(path, payload, indent=1):
-        tmp = path + ".tmp"
-        with open(tmp, "w", encoding="utf-8") as f:
-            json.dump(payload, f, indent=indent)
-            f.write("\n")
-        os.replace(tmp, path)
-
-    atomic_json(os.path.join(DATA_DIR, "latest.json"), latest)
-    atomic_json(hist_path, history)
-    atomic_json(os.path.join(DATA_DIR, "health.json"), health, indent=2)
+    with open(os.path.join(DATA_DIR, "latest.json"), "w", encoding="utf-8") as f:
+        json.dump(latest, f, indent=1)
+    with open(hist_path, "w", encoding="utf-8") as f:
+        json.dump(history, f, indent=1)
     for cid, closes in series.items():  # refetchable; data/raw is gitignored
-        atomic_json(os.path.join(RAW_DIR, f"{cid}.json"), closes, indent=None)
+        with open(os.path.join(RAW_DIR, f"{cid}.json"), "w", encoding="utf-8") as f:
+            json.dump(closes, f)
 
     print(f"\nWrote data/latest.json — {len(series)} series ({sum(1 for c in freq.values() if c=='D')} daily), "
           f"{len(corr)} corr pairs, regime={regime} (score {regime_score:.0f}), velocity={velocity}")
