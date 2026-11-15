@@ -1,34 +1,34 @@
 {
- "generated": "2026-11-14T18:40:22+00:00",
+ "generated": "2026-11-15T19:17:24+00:00",
  "spot": {
   "usdinr": {
-   "v": 94.29,
-   "asof": "2026-11-14",
+   "v": 94.26,
+   "asof": "2026-11-15",
    "src": "open.er-api.com"
   },
   "eurinr": {
-   "v": 104.08,
-   "asof": "2026-11-14",
+   "v": 104.04,
+   "asof": "2026-11-15",
    "src": "open.er-api.com"
   },
   "gbpinr": {
-   "v": 124.65,
-   "asof": "2026-11-14",
+   "v": 124.62,
+   "asof": "2026-11-15",
    "src": "open.er-api.com"
   },
   "jpyinr": {
    "v": 0.59,
-   "asof": "2026-11-14",
+   "asof": "2026-11-15",
    "src": "open.er-api.com"
   },
   "chfinr": {
-   "v": 112.44,
-   "asof": "2026-11-14",
+   "v": 112.43,
+   "asof": "2026-11-15",
    "src": "open.er-api.com"
   },
   "gold": {
    "v": 3887.6,
-   "asof": "2026-11-14",
+   "asof": "2026-11-15",
    "src": "gold-api.com"
   },
   "brent": {
@@ -50,8 +50,8 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 117852,
-   "asof": "2026-11-14",
+   "v": 117815,
+   "asof": "2026-11-15",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
  },
@@ -62,7 +62,7 @@
    "annual": 0.0432,
    "pct5y": 62.2,
    "asof": "2026-11-13",
-   "n": 1357,
+   "n": 1356,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
   },
@@ -72,7 +72,7 @@
    "annual": 0.8773,
    "pct5y": 97.6,
    "asof": "2026-11-11",
-   "n": 1337,
+   "n": 1336,
    "src": "Brent (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -82,7 +82,7 @@
    "annual": 0.6105,
    "pct5y": 89.4,
    "asof": "2026-11-11",
-   "n": 1321,
+   "n": 1320,
    "src": "WTI (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -90,9 +90,9 @@
    "freq": "D",
    "monthly": 0.2252,
    "annual": 0.7801,
-   "pct5y": 27.6,
+   "pct5y": 27.5,
    "asof": "2026-11-11",
-   "n": 1321,
+   "n": 1320,
    "src": "Henry Hub (EIA via FRED)",
    "method": "EWMA(0.94) daily"
   },
@@ -471,10 +471,12 @@
    "2026-11-11",
    "2026-11-12",
    "2026-11-13",
-   "2026-11-14"
+   "2026-11-14",
+   "2026-11-15"
   ],
   "scores": {
    "cbam": [
+    71,
     71,
     71,
     71,
@@ -716,9 +718,11 @@
     69,
     69,
     69,
+    69,
     69
    ],
    "coal": [
+    58,
     58,
     58,
     58,
@@ -960,6 +964,7 @@
     54,
     59,
     59,
+    59,
     59
    ],
    "oil": [
@@ -1082,9 +1087,11 @@
     75,
     75,
     75,
+    75,
     75
    ],
    "rates": [
+    56,
     56,
     56,
     56,
@@ -1326,6 +1333,7 @@
     86,
     86,
     86,
+    86,
     86
    ],
    "usdinr": [
@@ -1447,6 +1455,7 @@
     70,
     71,
     68,
+    67,
     67,
     67
    ]
