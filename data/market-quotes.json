@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-11-18T04:29:24.196772+00:00",
+  "generated": "2026-11-18T14:08:17.442152+00:00",
   "mode": "public_snapshot",
   "note": "Public quotes can be delayed. Futures are benchmarks, not physical spot prices. Refresh time is not quote time.",
   "quotes": [
@@ -12,9 +12,9 @@
       "unit": "INR/share",
       "symbol": "RELIANCE.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1363.7,
-      "asof": "2026-11-18T04:29:21+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1363.0,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Reliance Industries Limited",
       "exchange": "NSI",
@@ -22,13 +22,13 @@
       "source_url": "https://finance.yahoo.com/quote/RELIANCE.NS",
       "status": "delayed_or_eod",
       "previous_close": 1367.0,
-      "change_pct": -0.24140453547915053,
-      "regularMarketVolume": 2674990,
-      "regularMarketDayHigh": 1373.0,
-      "regularMarketDayLow": 1354.5,
+      "change_pct": -0.2926115581565525,
+      "regularMarketVolume": 18226036,
+      "regularMarketDayHigh": 1376.5,
+      "regularMarketDayLow": 1354.0,
       "fiftyTwoWeekHigh": 1611.8,
       "fiftyTwoWeekLow": 1152.2,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:tcs",
@@ -38,9 +38,9 @@
       "unit": "INR/share",
       "symbol": "TCS.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 2402.9,
-      "asof": "2026-11-18T04:29:18+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 2379.5,
+      "asof": "2026-11-18T09:58:51+00:00",
       "currency": "INR",
       "provider_name": "Tata Consultancy Services Limited",
       "exchange": "NSI",
@@ -48,13 +48,13 @@
       "source_url": "https://finance.yahoo.com/quote/TCS.NS",
       "status": "delayed_or_eod",
       "previous_close": 2406.6,
-      "change_pct": -0.15374387102135012,
-      "regularMarketVolume": 353110,
-      "regularMarketDayHigh": 2406.0,
-      "regularMarketDayLow": 2382.0,
+      "change_pct": -1.126069974237509,
+      "regularMarketVolume": 1373954,
+      "regularMarketDayHigh": 2408.0,
+      "regularMarketDayLow": 2379.5,
       "fiftyTwoWeekHigh": 3350.0,
       "fiftyTwoWeekLow": 1976.8,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:hdfcbank",
@@ -64,9 +64,9 @@
       "unit": "INR/share",
       "symbol": "HDFCBANK.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 810.8,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 808.15,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "HDFC Bank Limited",
       "exchange": "NSI",
@@ -74,13 +74,13 @@
       "source_url": "https://finance.yahoo.com/quote/HDFCBANK.NS",
       "status": "delayed_or_eod",
       "previous_close": 814.95,
-      "change_pct": -0.5092336953187449,
-      "regularMarketVolume": 7477522,
+      "change_pct": -0.8344070188355146,
+      "regularMarketVolume": 21570420,
       "regularMarketDayHigh": 816.5,
-      "regularMarketDayLow": 806.7,
+      "regularMarketDayLow": 804.2,
       "fiftyTwoWeekHigh": 1017.5,
       "fiftyTwoWeekLow": 669.2,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:bhartiairtel",
@@ -90,9 +90,9 @@
       "unit": "INR/share",
       "symbol": "BHARTIARTL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 2137.0,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 2132.0,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Bharti Airtel Limited",
       "exchange": "NSI",
@@ -100,13 +100,13 @@
       "source_url": "https://finance.yahoo.com/quote/BHARTIARTL.NS",
       "status": "delayed_or_eod",
       "previous_close": 2138.3,
-      "change_pct": -0.06079595940701177,
-      "regularMarketVolume": 894333,
+      "change_pct": -0.294626572510881,
+      "regularMarketVolume": 3984624,
       "regularMarketDayHigh": 2155.0,
-      "regularMarketDayLow": 2134.6,
+      "regularMarketDayLow": 2122.5,
       "fiftyTwoWeekHigh": 2174.5,
       "fiftyTwoWeekLow": 1726.3,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:icicibank",
@@ -116,9 +116,9 @@
       "unit": "INR/share",
       "symbol": "ICICIBANK.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1605.4,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1601.3,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "ICICI Bank Limited",
       "exchange": "NSI",
@@ -126,13 +126,13 @@
       "source_url": "https://finance.yahoo.com/quote/ICICIBANK.NS",
       "status": "delayed_or_eod",
       "previous_close": 1598.7,
-      "change_pct": 0.4190905110402321,
-      "regularMarketVolume": 2650676,
+      "change_pct": 0.16263213861260617,
+      "regularMarketVolume": 10773891,
       "regularMarketDayHigh": 1610.1,
-      "regularMarketDayLow": 1599.0,
+      "regularMarketDayLow": 1591.0,
       "fiftyTwoWeekHigh": 1616.0,
       "fiftyTwoWeekLow": 1187.6,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:sbi",
@@ -142,9 +142,9 @@
       "unit": "INR/share",
       "symbol": "SBIN.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1111.8,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1135.0,
+      "asof": "2026-11-18T09:58:50+00:00",
       "currency": "INR",
       "provider_name": "State Bank of India",
       "exchange": "NSI",
@@ -152,13 +152,13 @@
       "source_url": "https://finance.yahoo.com/quote/SBIN.NS",
       "status": "delayed_or_eod",
       "previous_close": 1108.6,
-      "change_pct": 0.288652354320762,
-      "regularMarketVolume": 5115784,
-      "regularMarketDayHigh": 1118.95,
+      "change_pct": 2.3813819231463196,
+      "regularMarketVolume": 35415126,
+      "regularMarketDayHigh": 1142.65,
       "regularMarketDayLow": 1105.7,
       "fiftyTwoWeekHigh": 1234.7,
       "fiftyTwoWeekLow": 933.9,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:infosys",
@@ -168,9 +168,9 @@
       "unit": "INR/share",
       "symbol": "INFY.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1122.5,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1108.8,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Infosys Limited",
       "exchange": "NSI",
@@ -178,13 +178,13 @@
       "source_url": "https://finance.yahoo.com/quote/INFY.NS",
       "status": "delayed_or_eod",
       "previous_close": 1130.0,
-      "change_pct": -0.6637168141592875,
-      "regularMarketVolume": 1106940,
+      "change_pct": -1.8761061946902746,
+      "regularMarketVolume": 5931106,
       "regularMarketDayHigh": 1127.8,
-      "regularMarketDayLow": 1113.0,
+      "regularMarketDayLow": 1106.6,
       "fiftyTwoWeekHigh": 1728.0,
       "fiftyTwoWeekLow": 980.4,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:hul",
@@ -194,9 +194,9 @@
       "unit": "INR/share",
       "symbol": "HINDUNILVR.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1991.0,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1993.0,
+      "asof": "2026-11-18T09:58:54+00:00",
       "currency": "INR",
       "provider_name": "Hindustan Unilever Limited",
       "exchange": "NSI",
@@ -204,13 +204,13 @@
       "source_url": "https://finance.yahoo.com/quote/HINDUNILVR.NS",
       "status": "delayed_or_eod",
       "previous_close": 2009.9,
-      "change_pct": -0.9403452908104959,
-      "regularMarketVolume": 85941,
+      "change_pct": -0.8408378526294835,
+      "regularMarketVolume": 706767,
       "regularMarketDayHigh": 1999.8,
-      "regularMarketDayLow": 1982.1,
+      "regularMarketDayLow": 1978.0,
       "fiftyTwoWeekHigh": 2488.0,
       "fiftyTwoWeekLow": 1758.2,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:itc",
@@ -220,9 +220,9 @@
       "unit": "INR/share",
       "symbol": "ITC.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 290.7,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 296.6,
+      "asof": "2026-11-18T09:58:54+00:00",
       "currency": "INR",
       "provider_name": "ITC Limited",
       "exchange": "NSI",
@@ -230,13 +230,13 @@
       "source_url": "https://finance.yahoo.com/quote/ITC.NS",
       "status": "delayed_or_eod",
       "previous_close": 293.3,
-      "change_pct": -0.8864643709512565,
-      "regularMarketVolume": 1712022,
-      "regularMarketDayHigh": 292.8,
-      "regularMarketDayLow": 289.75,
-      "fiftyTwoWeekHigh": 409.8,
+      "change_pct": 1.1251278554381239,
+      "regularMarketVolume": 17012417,
+      "regularMarketDayHigh": 298.0,
+      "regularMarketDayLow": 288.8,
+      "fiftyTwoWeekHigh": 409.5,
       "fiftyTwoWeekLow": 252.8,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:lic",
@@ -246,9 +246,9 @@
       "unit": "INR/share",
       "symbol": "LICI.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 397.9,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 400.0,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Life Insurance Corporation of India",
       "exchange": "NSI",
@@ -256,13 +256,13 @@
       "source_url": "https://finance.yahoo.com/quote/LICI.NS",
       "status": "delayed_or_eod",
       "previous_close": 397.7,
-      "change_pct": 0.05028916268543515,
-      "regularMarketVolume": 1985949,
+      "change_pct": 0.578325370882582,
+      "regularMarketVolume": 10042449,
       "regularMarketDayHigh": 401.85,
-      "regularMarketDayLow": 396.55,
+      "regularMarketDayLow": 395.8,
       "fiftyTwoWeekHigh": 460.5,
       "fiftyTwoWeekLow": 360.75,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:bajajfinance",
@@ -272,9 +272,9 @@
       "unit": "INR/share",
       "symbol": "BAJFINANCE.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1107.4,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1093.85,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Bajaj Finance Limited",
       "exchange": "NSI",
@@ -282,13 +282,13 @@
       "source_url": "https://finance.yahoo.com/quote/BAJFINANCE.NS",
       "status": "delayed_or_eod",
       "previous_close": 1121.1,
-      "change_pct": -1.2220140933012047,
-      "regularMarketVolume": 1558135,
+      "change_pct": -2.430648470252428,
+      "regularMarketVolume": 9127668,
       "regularMarketDayHigh": 1117.3,
-      "regularMarketDayLow": 1102.0,
+      "regularMarketDayLow": 1089.85,
       "fiftyTwoWeekHigh": 1176.4,
       "fiftyTwoWeekLow": 787.9,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:bajajfinserv",
@@ -298,9 +298,9 @@
       "unit": "INR/share",
       "symbol": "BAJAJFINSV.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1858.3,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1856.2,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Bajaj Finserv Ltd.",
       "exchange": "NSI",
@@ -308,13 +308,13 @@
       "source_url": "https://finance.yahoo.com/quote/BAJAJFINSV.NS",
       "status": "delayed_or_eod",
       "previous_close": 1870.8,
-      "change_pct": -0.6681633525764341,
-      "regularMarketVolume": 225419,
-      "regularMarketDayHigh": 1861.1,
+      "change_pct": -0.78041479580927,
+      "regularMarketVolume": 1092313,
+      "regularMarketDayHigh": 1865.0,
       "regularMarketDayLow": 1838.1,
       "fiftyTwoWeekHigh": 2118.5,
       "fiftyTwoWeekLow": 1597.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:lt",
@@ -324,9 +324,9 @@
       "unit": "INR/share",
       "symbol": "LT.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 4178.2,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 4159.0,
+      "asof": "2026-11-18T09:58:54+00:00",
       "currency": "INR",
       "provider_name": "Larsen & Toubro Limited",
       "exchange": "NSI",
@@ -334,13 +334,13 @@
       "source_url": "https://finance.yahoo.com/quote/LT.NS",
       "status": "delayed_or_eod",
       "previous_close": 4155.5,
-      "change_pct": 0.5462639874864506,
-      "regularMarketVolume": 146012,
-      "regularMarketDayHigh": 4182.0,
-      "regularMarketDayLow": 4150.2,
+      "change_pct": 0.08422572494284353,
+      "regularMarketVolume": 1148435,
+      "regularMarketDayHigh": 4190.0,
+      "regularMarketDayLow": 4126.1,
       "fiftyTwoWeekHigh": 4440.0,
       "fiftyTwoWeekLow": 3288.1,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:hcltech",
@@ -350,9 +350,9 @@
       "unit": "INR/share",
       "symbol": "HCLTECH.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1349.0,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1344.7,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "HCL Technologies Limited",
       "exchange": "NSI",
@@ -360,13 +360,13 @@
       "source_url": "https://finance.yahoo.com/quote/HCLTECH.NS",
       "status": "delayed_or_eod",
       "previous_close": 1355.7,
-      "change_pct": -0.49420963339972257,
-      "regularMarketVolume": 328153,
-      "regularMarketDayHigh": 1354.0,
+      "change_pct": -0.8113889503577498,
+      "regularMarketVolume": 1677156,
+      "regularMarketDayHigh": 1362.0,
       "regularMarketDayLow": 1333.4,
       "fiftyTwoWeekHigh": 1780.1,
       "fiftyTwoWeekLow": 1030.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:kotakbank",
@@ -376,9 +376,9 @@
       "unit": "INR/share",
       "symbol": "KOTAKBANK.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 496.65,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 494.85,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Kotak Mahindra Bank Limited",
       "exchange": "NSI",
@@ -386,13 +386,13 @@
       "source_url": "https://finance.yahoo.com/quote/KOTAKBANK.NS",
       "status": "delayed_or_eod",
       "previous_close": 497.25,
-      "change_pct": -0.12066365007541435,
-      "regularMarketVolume": 2078021,
-      "regularMarketDayHigh": 498.6,
+      "change_pct": -0.4826546003016574,
+      "regularMarketVolume": 27152025,
+      "regularMarketDayHigh": 503.05,
       "regularMarketDayLow": 492.2,
-      "fiftyTwoWeekHigh": 498.6,
+      "fiftyTwoWeekHigh": 503.05,
       "fiftyTwoWeekLow": 345.5,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:sunpharma",
@@ -402,9 +402,9 @@
       "unit": "INR/share",
       "symbol": "SUNPHARMA.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1871.8,
-      "asof": "2026-11-18T04:29:18+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1871.5,
+      "asof": "2026-11-18T09:58:51+00:00",
       "currency": "INR",
       "provider_name": "Sun Pharmaceutical Industries Limited",
       "exchange": "NSI",
@@ -412,13 +412,13 @@
       "source_url": "https://finance.yahoo.com/quote/SUNPHARMA.NS",
       "status": "delayed_or_eod",
       "previous_close": 1870.0,
-      "change_pct": 0.09625668449197988,
-      "regularMarketVolume": 152506,
-      "regularMarketDayHigh": 1876.5,
+      "change_pct": 0.08021390374330917,
+      "regularMarketVolume": 1675346,
+      "regularMarketDayHigh": 1886.0,
       "regularMarketDayLow": 1857.6,
       "fiftyTwoWeekHigh": 2046.9,
       "fiftyTwoWeekLow": 1583.7,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:maruti",
@@ -428,9 +428,9 @@
       "unit": "INR/share",
       "symbol": "MARUTI.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 12720.0,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 12632.0,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Maruti Suzuki India Limited",
       "exchange": "NSI",
@@ -438,13 +438,13 @@
       "source_url": "https://finance.yahoo.com/quote/MARUTI.NS",
       "status": "delayed_or_eod",
       "previous_close": 12625.0,
-      "change_pct": 0.7524752475247531,
-      "regularMarketVolume": 119538,
+      "change_pct": 0.055445544554455495,
+      "regularMarketVolume": 576766,
       "regularMarketDayHigh": 12828.0,
       "regularMarketDayLow": 12584.0,
       "fiftyTwoWeekHigh": 17370.0,
       "fiftyTwoWeekLow": 10985.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:mm",
@@ -454,9 +454,9 @@
       "unit": "INR/share",
       "symbol": "M&M.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 3390.1,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 3359.1,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Mahindra & Mahindra Limited",
       "exchange": "NSI",
@@ -464,13 +464,13 @@
       "source_url": "https://finance.yahoo.com/quote/M%26M.NS",
       "status": "delayed_or_eod",
       "previous_close": 3399.0,
-      "change_pct": -0.2618417181524002,
-      "regularMarketVolume": 294174,
+      "change_pct": -1.1738746690203028,
+      "regularMarketVolume": 1524036,
       "regularMarketDayHigh": 3422.8,
-      "regularMarketDayLow": 3385.1,
+      "regularMarketDayLow": 3331.0,
       "fiftyTwoWeekHigh": 3839.9,
       "fiftyTwoWeekLow": 2744.3,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:ultratech",
@@ -480,9 +480,9 @@
       "unit": "INR/share",
       "symbol": "ULTRACEMCO.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 12375.0,
-      "asof": "2026-11-18T04:29:18+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 12428.0,
+      "asof": "2026-11-18T09:58:50+00:00",
       "currency": "INR",
       "provider_name": "UltraTech Cement Limited",
       "exchange": "NSI",
@@ -490,13 +490,13 @@
       "source_url": "https://finance.yahoo.com/quote/ULTRACEMCO.NS",
       "status": "delayed_or_eod",
       "previous_close": 12290.0,
-      "change_pct": 0.6916192026037438,
-      "regularMarketVolume": 33500,
-      "regularMarketDayHigh": 12376.0,
+      "change_pct": 1.1228641171684206,
+      "regularMarketVolume": 208800,
+      "regularMarketDayHigh": 12428.0,
       "regularMarketDayLow": 12225.0,
       "fiftyTwoWeekHigh": 13110.0,
       "fiftyTwoWeekLow": 10325.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:axisbank",
@@ -506,9 +506,9 @@
       "unit": "INR/share",
       "symbol": "AXISBANK.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1370.0,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1360.0,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Axis Bank Limited",
       "exchange": "NSI",
@@ -516,13 +516,13 @@
       "source_url": "https://finance.yahoo.com/quote/AXISBANK.NS",
       "status": "delayed_or_eod",
       "previous_close": 1369.0,
-      "change_pct": 0.07304601899196239,
-      "regularMarketVolume": 1666880,
+      "change_pct": -0.6574141709276837,
+      "regularMarketVolume": 6598974,
       "regularMarketDayHigh": 1372.9,
-      "regularMarketDayLow": 1363.5,
+      "regularMarketDayLow": 1356.5,
       "fiftyTwoWeekHigh": 1418.3,
       "fiftyTwoWeekLow": 1150.3,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:ntpc",
@@ -532,9 +532,9 @@
       "unit": "INR/share",
       "symbol": "NTPC.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 319.35,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 320.4,
+      "asof": "2026-11-18T09:58:54+00:00",
       "currency": "INR",
       "provider_name": "NTPC Limited",
       "exchange": "NSI",
@@ -542,13 +542,13 @@
       "source_url": "https://finance.yahoo.com/quote/NTPC.NS",
       "status": "delayed_or_eod",
       "previous_close": 321.8,
-      "change_pct": -0.7613424487259102,
-      "regularMarketVolume": 538416,
+      "change_pct": -0.4350528278433963,
+      "regularMarketVolume": 9285933,
       "regularMarketDayHigh": 320.75,
-      "regularMarketDayLow": 317.8,
+      "regularMarketDayLow": 317.1,
       "fiftyTwoWeekHigh": 414.4,
       "fiftyTwoWeekLow": 292.05,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:titan",
@@ -558,9 +558,9 @@
       "unit": "INR/share",
       "symbol": "TITAN.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 4789.5,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 4648.1,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Titan Company Limited",
       "exchange": "NSI",
@@ -568,13 +568,13 @@
       "source_url": "https://finance.yahoo.com/quote/TITAN.NS",
       "status": "delayed_or_eod",
       "previous_close": 4908.0,
-      "change_pct": -2.414425427872857,
-      "regularMarketVolume": 162289,
+      "change_pct": -5.295436022819877,
+      "regularMarketVolume": 1325067,
       "regularMarketDayHigh": 4881.3,
-      "regularMarketDayLow": 4785.0,
+      "regularMarketDayLow": 4648.1,
       "fiftyTwoWeekHigh": 5186.7,
       "fiftyTwoWeekLow": 3751.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:adaniports",
@@ -584,9 +584,9 @@
       "unit": "INR/share",
       "symbol": "ADANIPORTS.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1903.0,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1902.6,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Adani Ports and Special Economic Zone Limited",
       "exchange": "NSI",
@@ -594,13 +594,13 @@
       "source_url": "https://finance.yahoo.com/quote/ADANIPORTS.NS",
       "status": "delayed_or_eod",
       "previous_close": 1917.0,
-      "change_pct": -0.7303077725612894,
-      "regularMarketVolume": 167553,
+      "change_pct": -0.7511737089201942,
+      "regularMarketVolume": 833794,
       "regularMarketDayHigh": 1912.8,
-      "regularMarketDayLow": 1896.4,
+      "regularMarketDayLow": 1890.0,
       "fiftyTwoWeekHigh": 1979.0,
       "fiftyTwoWeekLow": 1292.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:wipro",
@@ -610,9 +610,9 @@
       "unit": "INR/share",
       "symbol": "WIPRO.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 187.91,
-      "asof": "2026-11-18T04:29:18+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 185.14,
+      "asof": "2026-11-18T09:58:51+00:00",
       "currency": "INR",
       "provider_name": "Wipro Limited",
       "exchange": "NSI",
@@ -620,13 +620,13 @@
       "source_url": "https://finance.yahoo.com/quote/WIPRO.NS",
       "status": "delayed_or_eod",
       "previous_close": 189.89,
-      "change_pct": -1.0427089367528564,
-      "regularMarketVolume": 1372689,
+      "change_pct": -2.5014482068566046,
+      "regularMarketVolume": 8932811,
       "regularMarketDayHigh": 189.32,
-      "regularMarketDayLow": 187.1,
+      "regularMarketDayLow": 185.14,
       "fiftyTwoWeekHigh": 273.1,
       "fiftyTwoWeekLow": 156.79,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:tatamotors",
@@ -636,7 +636,7 @@
       "unit": "INR/share",
       "symbol": "TATAMOTORS.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
       "status": "unavailable",
       "reason": "Public provider unavailable: HTTP Error 404: Not Found"
     },
@@ -648,9 +648,9 @@
       "unit": "INR/share",
       "symbol": "TATASTEEL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 179.3,
-      "asof": "2026-11-18T04:29:21+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 179.0,
+      "asof": "2026-11-18T09:58:50+00:00",
       "currency": "INR",
       "provider_name": "Tata Steel Limited",
       "exchange": "NSI",
@@ -658,13 +658,13 @@
       "source_url": "https://finance.yahoo.com/quote/TATASTEEL.NS",
       "status": "delayed_or_eod",
       "previous_close": 181.5,
-      "change_pct": -1.2121212121212088,
-      "regularMarketVolume": 3035661,
-      "regularMarketDayHigh": 181.0,
+      "change_pct": -1.377410468319562,
+      "regularMarketVolume": 17328059,
+      "regularMarketDayHigh": 181.41,
       "regularMarketDayLow": 178.4,
       "fiftyTwoWeekHigh": 224.4,
       "fiftyTwoWeekLow": 160.06,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:jswsteel",
@@ -674,9 +674,9 @@
       "unit": "INR/share",
       "symbol": "JSWSTEEL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1319.4,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1315.9,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "JSW Steel Limited",
       "exchange": "NSI",
@@ -684,13 +684,13 @@
       "source_url": "https://finance.yahoo.com/quote/JSWSTEEL.NS",
       "status": "delayed_or_eod",
       "previous_close": 1332.0,
-      "change_pct": -0.9459459459459363,
-      "regularMarketVolume": 202636,
+      "change_pct": -1.2087087087087056,
+      "regularMarketVolume": 1245511,
       "regularMarketDayHigh": 1327.6,
-      "regularMarketDayLow": 1313.1,
+      "regularMarketDayLow": 1310.0,
       "fiftyTwoWeekHigh": 1370.0,
       "fiftyTwoWeekLow": 1073.2,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:hindalco",
@@ -700,9 +700,9 @@
       "unit": "INR/share",
       "symbol": "HINDALCO.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 909.4,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 900.0,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Hindalco Industries Limited",
       "exchange": "NSI",
@@ -710,13 +710,13 @@
       "source_url": "https://finance.yahoo.com/quote/HINDALCO.NS",
       "status": "delayed_or_eod",
       "previous_close": 927.75,
-      "change_pct": -1.9779035300458103,
-      "regularMarketVolume": 1130920,
+      "change_pct": -2.991107518189162,
+      "regularMarketVolume": 7750494,
       "regularMarketDayHigh": 916.85,
-      "regularMarketDayLow": 903.65,
+      "regularMarketDayLow": 898.15,
       "fiftyTwoWeekHigh": 1176.0,
       "fiftyTwoWeekLow": 771.85,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:nestleindia",
@@ -726,9 +726,9 @@
       "unit": "INR/share",
       "symbol": "NESTLEIND.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1280.2,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1281.6,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Nestlé India Limited",
       "exchange": "NSI",
@@ -736,13 +736,13 @@
       "source_url": "https://finance.yahoo.com/quote/NESTLEIND.NS",
       "status": "delayed_or_eod",
       "previous_close": 1294.3,
-      "change_pct": -1.0893919493162207,
-      "regularMarketVolume": 104033,
-      "regularMarketDayHigh": 1286.8,
+      "change_pct": -0.9812253727883857,
+      "regularMarketVolume": 892273,
+      "regularMarketDayHigh": 1294.5,
       "regularMarketDayLow": 1274.0,
       "fiftyTwoWeekHigh": 1553.0,
       "fiftyTwoWeekLow": 1147.4,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:asianpaints",
@@ -752,9 +752,9 @@
       "unit": "INR/share",
       "symbol": "ASIANPAINT.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 2577.6,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 2580.3,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Asian Paints Limited",
       "exchange": "NSI",
@@ -762,13 +762,13 @@
       "source_url": "https://finance.yahoo.com/quote/ASIANPAINT.NS",
       "status": "delayed_or_eod",
       "previous_close": 2625.0,
-      "change_pct": -1.8057142857142883,
-      "regularMarketVolume": 157293,
+      "change_pct": -1.7028571428571393,
+      "regularMarketVolume": 742652,
       "regularMarketDayHigh": 2608.9,
-      "regularMarketDayLow": 2573.7,
+      "regularMarketDayLow": 2562.6,
       "fiftyTwoWeekHigh": 2985.7,
       "fiftyTwoWeekLow": 2115.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:coalindia",
@@ -778,9 +778,9 @@
       "unit": "INR/share",
       "symbol": "COALINDIA.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 390.55,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 388.0,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Coal India Limited",
       "exchange": "NSI",
@@ -788,13 +788,13 @@
       "source_url": "https://finance.yahoo.com/quote/COALINDIA.NS",
       "status": "delayed_or_eod",
       "previous_close": 391.55,
-      "change_pct": -0.2553952241093116,
-      "regularMarketVolume": 890731,
+      "change_pct": -0.9066530455880462,
+      "regularMarketVolume": 5963502,
       "regularMarketDayHigh": 393.2,
-      "regularMarketDayLow": 389.1,
+      "regularMarketDayLow": 386.55,
       "fiftyTwoWeekHigh": 491.25,
       "fiftyTwoWeekLow": 369.6,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:powergrid",
@@ -804,9 +804,9 @@
       "unit": "INR/share",
       "symbol": "POWERGRID.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 256.75,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 259.1,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Power Grid Corporation of India Limited",
       "exchange": "NSI",
@@ -814,13 +814,13 @@
       "source_url": "https://finance.yahoo.com/quote/POWERGRID.NS",
       "status": "delayed_or_eod",
       "previous_close": 258.0,
-      "change_pct": -0.4844961240310086,
-      "regularMarketVolume": 1637611,
-      "regularMarketDayHigh": 258.3,
+      "change_pct": 0.426356589147292,
+      "regularMarketVolume": 8698555,
+      "regularMarketDayHigh": 259.1,
       "regularMarketDayLow": 255.8,
       "fiftyTwoWeekHigh": 324.95,
       "fiftyTwoWeekLow": 242.3,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:adanient",
@@ -830,9 +830,9 @@
       "unit": "INR/share",
       "symbol": "ADANIENT.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 2704.4,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 2684.2,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Adani Enterprises Limited",
       "exchange": "NSI",
@@ -840,13 +840,13 @@
       "source_url": "https://finance.yahoo.com/quote/ADANIENT.NS",
       "status": "delayed_or_eod",
       "previous_close": 2745.1,
-      "change_pct": -1.4826417981129936,
-      "regularMarketVolume": 364718,
+      "change_pct": -2.218498415358283,
+      "regularMarketVolume": 1393768,
       "regularMarketDayHigh": 2748.0,
-      "regularMarketDayLow": 2690.4,
+      "regularMarketDayLow": 2666.0,
       "fiftyTwoWeekHigh": 3245.0,
       "fiftyTwoWeekLow": 1753.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:ongc",
@@ -856,9 +856,9 @@
       "unit": "INR/share",
       "symbol": "ONGC.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 223.96,
-      "asof": "2026-11-18T04:29:21+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 225.0,
+      "asof": "2026-11-18T09:58:54+00:00",
       "currency": "INR",
       "provider_name": "Oil and Natural Gas Corporation Limited",
       "exchange": "NSI",
@@ -866,13 +866,13 @@
       "source_url": "https://finance.yahoo.com/quote/ONGC.NS",
       "status": "delayed_or_eod",
       "previous_close": 223.52,
-      "change_pct": 0.19685039370078705,
-      "regularMarketVolume": 1082414,
-      "regularMarketDayHigh": 224.45,
-      "regularMarketDayLow": 223.2,
+      "change_pct": 0.6621331424480958,
+      "regularMarketVolume": 8249577,
+      "regularMarketDayHigh": 225.05,
+      "regularMarketDayLow": 223.06,
       "fiftyTwoWeekHigh": 307.5,
       "fiftyTwoWeekLow": 218.53,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:interglobe",
@@ -882,9 +882,9 @@
       "unit": "INR/share",
       "symbol": "INDIGO.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 5566.6,
-      "asof": "2026-11-18T04:29:21+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 5499.3,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "InterGlobe Aviation Limited",
       "exchange": "NSI",
@@ -892,13 +892,13 @@
       "source_url": "https://finance.yahoo.com/quote/INDIGO.NS",
       "status": "delayed_or_eod",
       "previous_close": 5611.0,
-      "change_pct": -0.7913027980751997,
-      "regularMarketVolume": 130925,
+      "change_pct": -1.9907324897522671,
+      "regularMarketVolume": 710170,
       "regularMarketDayHigh": 5610.0,
-      "regularMarketDayLow": 5558.1,
+      "regularMarketDayLow": 5486.6,
       "fiftyTwoWeekHigh": 5970.0,
       "fiftyTwoWeekLow": 3895.2,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:iocl",
@@ -908,9 +908,9 @@
       "unit": "INR/share",
       "symbol": "IOC.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 144.14,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 143.82,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Indian Oil Corporation Limited",
       "exchange": "NSI",
@@ -918,13 +918,13 @@
       "source_url": "https://finance.yahoo.com/quote/IOC.NS",
       "status": "delayed_or_eod",
       "previous_close": 145.56,
-      "change_pct": -0.975542731519663,
-      "regularMarketVolume": 1702183,
+      "change_pct": -1.1953833470733755,
+      "regularMarketVolume": 8581654,
       "regularMarketDayHigh": 145.96,
-      "regularMarketDayLow": 143.76,
+      "regularMarketDayLow": 143.09,
       "fiftyTwoWeekHigh": 188.96,
       "fiftyTwoWeekLow": 124.92,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:bpcl",
@@ -934,9 +934,9 @@
       "unit": "INR/share",
       "symbol": "BPCL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 304.7,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 305.5,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Bharat Petroleum Corporation Limited",
       "exchange": "NSI",
@@ -944,13 +944,13 @@
       "source_url": "https://finance.yahoo.com/quote/BPCL.NS",
       "status": "delayed_or_eod",
       "previous_close": 305.8,
-      "change_pct": -0.3597122302158362,
-      "regularMarketVolume": 463618,
+      "change_pct": -0.09810333551341088,
+      "regularMarketVolume": 5555042,
       "regularMarketDayHigh": 305.75,
-      "regularMarketDayLow": 302.7,
+      "regularMarketDayLow": 300.1,
       "fiftyTwoWeekHigh": 391.65,
       "fiftyTwoWeekLow": 266.6,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:gail",
@@ -960,9 +960,9 @@
       "unit": "INR/share",
       "symbol": "GAIL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 190.08,
-      "asof": "2026-11-18T04:29:21+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 190.0,
+      "asof": "2026-11-18T09:58:54+00:00",
       "currency": "INR",
       "provider_name": "GAIL (India) Limited",
       "exchange": "NSI",
@@ -970,13 +970,13 @@
       "source_url": "https://finance.yahoo.com/quote/GAIL.NS",
       "status": "delayed_or_eod",
       "previous_close": 187.0,
-      "change_pct": 1.6470588235294237,
-      "regularMarketVolume": 4901177,
+      "change_pct": 1.6042780748663166,
+      "regularMarketVolume": 14416631,
       "regularMarketDayHigh": 191.35,
       "regularMarketDayLow": 185.73,
       "fiftyTwoWeekHigh": 191.35,
       "fiftyTwoWeekLow": 134.36,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:petronet",
@@ -986,9 +986,9 @@
       "unit": "INR/share",
       "symbol": "PETRONET.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 330.0,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 325.5,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Petronet LNG Limited",
       "exchange": "NSI",
@@ -996,13 +996,13 @@
       "source_url": "https://finance.yahoo.com/quote/PETRONET.NS",
       "status": "delayed_or_eod",
       "previous_close": 328.1,
-      "change_pct": 0.5790917403230678,
-      "regularMarketVolume": 266440,
+      "change_pct": -0.7924413288631582,
+      "regularMarketVolume": 2344757,
       "regularMarketDayHigh": 330.8,
-      "regularMarketDayLow": 327.35,
+      "regularMarketDayLow": 324.95,
       "fiftyTwoWeekHigh": 336.3,
       "fiftyTwoWeekLow": 235.35,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:gujgas",
@@ -1012,7 +1012,7 @@
       "unit": "INR/share",
       "symbol": "GUJGASLTD.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
       "status": "unavailable",
       "reason": "Public provider unavailable: HTTP Error 404: Not Found"
     },
@@ -1024,9 +1024,9 @@
       "unit": "INR/share",
       "symbol": "IGL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 146.51,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 149.14,
+      "asof": "2026-11-18T10:00:00+00:00",
       "currency": "INR",
       "provider_name": "Indraprastha Gas Limited",
       "exchange": "NSI",
@@ -1034,13 +1034,13 @@
       "source_url": "https://finance.yahoo.com/quote/IGL.NS",
       "status": "delayed_or_eod",
       "previous_close": 148.19,
-      "change_pct": -1.1336797354747352,
-      "regularMarketVolume": 300610,
-      "regularMarketDayHigh": 148.0,
+      "change_pct": 0.6410688980363011,
+      "regularMarketVolume": 1417969,
+      "regularMarketDayHigh": 149.5,
       "regularMarketDayLow": 144.83,
-      "fiftyTwoWeekHigh": 213.0,
+      "fiftyTwoWeekHigh": 209.45,
       "fiftyTwoWeekLow": 125.63,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:tatapower",
@@ -1050,9 +1050,9 @@
       "unit": "INR/share",
       "symbol": "TATAPOWER.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 341.0,
-      "asof": "2026-11-18T04:29:18+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 338.0,
+      "asof": "2026-11-18T09:58:50+00:00",
       "currency": "INR",
       "provider_name": "The Tata Power Company Limited",
       "exchange": "NSI",
@@ -1060,13 +1060,13 @@
       "source_url": "https://finance.yahoo.com/quote/TATAPOWER.NS",
       "status": "delayed_or_eod",
       "previous_close": 344.5,
-      "change_pct": -1.0159651669085612,
-      "regularMarketVolume": 1280182,
+      "change_pct": -1.8867924528301883,
+      "regularMarketVolume": 6912851,
       "regularMarketDayHigh": 343.7,
-      "regularMarketDayLow": 339.35,
+      "regularMarketDayLow": 337.35,
       "fiftyTwoWeekHigh": 464.9,
       "fiftyTwoWeekLow": 333.2,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:adanipower",
@@ -1076,9 +1076,9 @@
       "unit": "INR/share",
       "symbol": "ADANIPOWER.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 207.31,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 205.3,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Adani Power Limited",
       "exchange": "NSI",
@@ -1086,13 +1086,13 @@
       "source_url": "https://finance.yahoo.com/quote/ADANIPOWER.NS",
       "status": "delayed_or_eod",
       "previous_close": 208.07,
-      "change_pct": -0.3652616907771411,
-      "regularMarketVolume": 3816730,
+      "change_pct": -1.331282741385098,
+      "regularMarketVolume": 13063692,
       "regularMarketDayHigh": 208.85,
-      "regularMarketDayLow": 205.6,
+      "regularMarketDayLow": 203.8,
       "fiftyTwoWeekHigh": 254.2,
       "fiftyTwoWeekLow": 128.1,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:oilindia",
@@ -1102,9 +1102,9 @@
       "unit": "INR/share",
       "symbol": "OIL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 432.35,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 435.5,
+      "asof": "2026-11-18T09:58:54+00:00",
       "currency": "INR",
       "provider_name": "Oil India Limited",
       "exchange": "NSI",
@@ -1112,13 +1112,13 @@
       "source_url": "https://finance.yahoo.com/quote/OIL.NS",
       "status": "delayed_or_eod",
       "previous_close": 433.5,
-      "change_pct": -0.26528258362167323,
-      "regularMarketVolume": 416822,
-      "regularMarketDayHigh": 435.45,
+      "change_pct": 0.46136101499423265,
+      "regularMarketVolume": 2640250,
+      "regularMarketDayHigh": 437.0,
       "regularMarketDayLow": 429.9,
       "fiftyTwoWeekHigh": 531.0,
       "fiftyTwoWeekLow": 395.6,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:vedanta",
@@ -1128,9 +1128,9 @@
       "unit": "INR/share",
       "symbol": "VEDL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 250.76,
-      "asof": "2026-11-18T04:29:24+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 245.4,
+      "asof": "2026-11-18T09:58:51+00:00",
       "currency": "INR",
       "provider_name": "Vedanta Limited",
       "exchange": "NSI",
@@ -1138,13 +1138,13 @@
       "source_url": "https://finance.yahoo.com/quote/VEDL.NS",
       "status": "delayed_or_eod",
       "previous_close": 255.03,
-      "change_pct": -1.674312825942048,
-      "regularMarketVolume": 2644881,
+      "change_pct": -3.7760263498411883,
+      "regularMarketVolume": 9831240,
       "regularMarketDayHigh": 253.75,
-      "regularMarketDayLow": 249.41,
+      "regularMarketDayLow": 245.0,
       "fiftyTwoWeekHigh": 795.0,
       "fiftyTwoWeekLow": 221.6,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:hindzinc",
@@ -1154,9 +1154,9 @@
       "unit": "INR/share",
       "symbol": "HINDZINC.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 532.35,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 527.0,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Hindustan Zinc Limited",
       "exchange": "NSI",
@@ -1164,13 +1164,13 @@
       "source_url": "https://finance.yahoo.com/quote/HINDZINC.NS",
       "status": "delayed_or_eod",
       "previous_close": 550.0,
-      "change_pct": -3.209090909090906,
-      "regularMarketVolume": 1643660,
+      "change_pct": -4.181818181818187,
+      "regularMarketVolume": 5750397,
       "regularMarketDayHigh": 540.95,
-      "regularMarketDayLow": 529.35,
+      "regularMarketDayLow": 525.7,
       "fiftyTwoWeekHigh": 733.0,
       "fiftyTwoWeekLow": 453.5,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:nalco",
@@ -1180,9 +1180,9 @@
       "unit": "INR/share",
       "symbol": "NATIONALUM.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 313.55,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 308.1,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "National Aluminium Company Limited",
       "exchange": "NSI",
@@ -1190,13 +1190,13 @@
       "source_url": "https://finance.yahoo.com/quote/NATIONALUM.NS",
       "status": "delayed_or_eod",
       "previous_close": 320.9,
-      "change_pct": -2.2904331567466407,
-      "regularMarketVolume": 1669294,
+      "change_pct": -3.988781551885312,
+      "regularMarketVolume": 7444803,
       "regularMarketDayHigh": 316.25,
-      "regularMarketDayLow": 311.5,
+      "regularMarketDayLow": 304.2,
       "fiftyTwoWeekHigh": 445.15,
       "fiftyTwoWeekLow": 249.4,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:sail",
@@ -1206,9 +1206,9 @@
       "unit": "INR/share",
       "symbol": "SAIL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 166.84,
-      "asof": "2026-11-18T04:29:18+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 164.0,
+      "asof": "2026-11-18T09:58:50+00:00",
       "currency": "INR",
       "provider_name": "Steel Authority of India Limited",
       "exchange": "NSI",
@@ -1216,13 +1216,13 @@
       "source_url": "https://finance.yahoo.com/quote/SAIL.NS",
       "status": "delayed_or_eod",
       "previous_close": 171.31,
-      "change_pct": -2.6093047691319815,
-      "regularMarketVolume": 3146691,
+      "change_pct": -4.267118090012256,
+      "regularMarketVolume": 23288551,
       "regularMarketDayHigh": 170.32,
-      "regularMarketDayLow": 165.75,
+      "regularMarketDayLow": 162.03,
       "fiftyTwoWeekHigh": 209.7,
       "fiftyTwoWeekLow": 124.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:jindalsteel",
@@ -1232,9 +1232,9 @@
       "unit": "INR/share",
       "symbol": "JINDALSTEL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1112.0,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1103.0,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Jindal Steel Limited",
       "exchange": "NSI",
@@ -1242,13 +1242,13 @@
       "source_url": "https://finance.yahoo.com/quote/JINDALSTEL.NS",
       "status": "delayed_or_eod",
       "previous_close": 1137.5,
-      "change_pct": -2.2417582417582405,
-      "regularMarketVolume": 137635,
+      "change_pct": -3.0329670329670377,
+      "regularMarketVolume": 598341,
       "regularMarketDayHigh": 1129.0,
-      "regularMarketDayLow": 1107.4,
+      "regularMarketDayLow": 1101.4,
       "fiftyTwoWeekHigh": 1306.2,
       "fiftyTwoWeekLow": 977.1,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:apollotyre",
@@ -1258,9 +1258,9 @@
       "unit": "INR/share",
       "symbol": "APOLLOTYRE.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 414.9,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 415.1,
+      "asof": "2026-11-18T09:59:55+00:00",
       "currency": "INR",
       "provider_name": "Apollo Tyres Limited",
       "exchange": "NSI",
@@ -1268,13 +1268,13 @@
       "source_url": "https://finance.yahoo.com/quote/APOLLOTYRE.NS",
       "status": "delayed_or_eod",
       "previous_close": 418.7,
-      "change_pct": -0.9075710532600922,
-      "regularMarketVolume": 101434,
+      "change_pct": -0.8598041557200786,
+      "regularMarketVolume": 631772,
       "regularMarketDayHigh": 420.9,
-      "regularMarketDayLow": 414.15,
+      "regularMarketDayLow": 412.3,
       "fiftyTwoWeekHigh": 539.2,
       "fiftyTwoWeekLow": 365.3,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:mrf",
@@ -1284,9 +1284,9 @@
       "unit": "INR/share",
       "symbol": "MRF.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 128350.0,
-      "asof": "2026-11-18T04:29:02+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 128845.0,
+      "asof": "2026-11-18T09:59:56+00:00",
       "currency": "INR",
       "provider_name": "MRF Limited",
       "exchange": "NSI",
@@ -1294,13 +1294,13 @@
       "source_url": "https://finance.yahoo.com/quote/MRF.NS",
       "status": "delayed_or_eod",
       "previous_close": 128840.0,
-      "change_pct": -0.3803166718410411,
-      "regularMarketVolume": 657,
+      "change_pct": 0.003880782365728308,
+      "regularMarketVolume": 2002,
       "regularMarketDayHigh": 129390.0,
       "regularMarketDayLow": 128100.0,
-      "fiftyTwoWeekHigh": 157510.0,
+      "fiftyTwoWeekHigh": 157450.0,
       "fiftyTwoWeekLow": 115190.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:balkrishna",
@@ -1310,9 +1310,9 @@
       "unit": "INR/share",
       "symbol": "BALKRISIND.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 2301.7,
-      "asof": "2026-11-18T04:28:46+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 2286.4,
+      "asof": "2026-11-18T10:00:01+00:00",
       "currency": "INR",
       "provider_name": "Balkrishna Industries Limited",
       "exchange": "NSI",
@@ -1320,13 +1320,13 @@
       "source_url": "https://finance.yahoo.com/quote/BALKRISIND.NS",
       "status": "delayed_or_eod",
       "previous_close": 2326.4,
-      "change_pct": -1.0617262723521481,
-      "regularMarketVolume": 5145,
+      "change_pct": -1.719394773039895,
+      "regularMarketVolume": 65263,
       "regularMarketDayHigh": 2329.0,
-      "regularMarketDayLow": 2295.1,
+      "regularMarketDayLow": 2278.7,
       "fiftyTwoWeekHigh": 2775.0,
       "fiftyTwoWeekLow": 1964.7,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:coromandel",
@@ -1336,9 +1336,9 @@
       "unit": "INR/share",
       "symbol": "COROMANDEL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1953.1,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1959.0,
+      "asof": "2026-11-18T09:58:49+00:00",
       "currency": "INR",
       "provider_name": "Coromandel International Limited",
       "exchange": "NSI",
@@ -1346,13 +1346,13 @@
       "source_url": "https://finance.yahoo.com/quote/COROMANDEL.NS",
       "status": "delayed_or_eod",
       "previous_close": 1973.5,
-      "change_pct": -1.0336964783379865,
-      "regularMarketVolume": 11444,
+      "change_pct": -0.7347352419559194,
+      "regularMarketVolume": 73329,
       "regularMarketDayHigh": 1976.7,
       "regularMarketDayLow": 1944.9,
       "fiftyTwoWeekHigh": 2499.0,
       "fiftyTwoWeekLow": 1651.1,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:chambal",
@@ -1362,9 +1362,9 @@
       "unit": "INR/share",
       "symbol": "CHAMBLFERT.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 372.0,
-      "asof": "2026-11-18T04:29:09+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 371.65,
+      "asof": "2026-11-18T10:00:01+00:00",
       "currency": "INR",
       "provider_name": "Chambal Fertilisers and Chemicals Limited",
       "exchange": "NSI",
@@ -1372,13 +1372,13 @@
       "source_url": "https://finance.yahoo.com/quote/CHAMBLFERT.NS",
       "status": "delayed_or_eod",
       "previous_close": 372.9,
-      "change_pct": -0.24135156878518638,
-      "regularMarketVolume": 57522,
-      "regularMarketDayHigh": 373.2,
+      "change_pct": -0.33521051220166687,
+      "regularMarketVolume": 214005,
+      "regularMarketDayHigh": 374.0,
       "regularMarketDayLow": 369.15,
       "fiftyTwoWeekHigh": 497.8,
       "fiftyTwoWeekLow": 350.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:srf",
@@ -1388,9 +1388,9 @@
       "unit": "INR/share",
       "symbol": "SRF.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 2445.5,
-      "asof": "2026-11-18T04:29:19+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 2445.0,
+      "asof": "2026-11-18T09:58:51+00:00",
       "currency": "INR",
       "provider_name": "SRF Limited",
       "exchange": "NSI",
@@ -1398,13 +1398,13 @@
       "source_url": "https://finance.yahoo.com/quote/SRF.NS",
       "status": "delayed_or_eod",
       "previous_close": 2479.4,
-      "change_pct": -1.3672662740985775,
-      "regularMarketVolume": 29110,
+      "change_pct": -1.3874324433330698,
+      "regularMarketVolume": 178119,
       "regularMarketDayHigh": 2464.9,
-      "regularMarketDayLow": 2437.5,
+      "regularMarketDayLow": 2429.1,
       "fiftyTwoWeekHigh": 3143.0,
       "fiftyTwoWeekLow": 2178.3,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:tatachem",
@@ -1414,9 +1414,9 @@
       "unit": "INR/share",
       "symbol": "TATACHEM.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 639.8,
-      "asof": "2026-11-18T04:29:18+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 634.6,
+      "asof": "2026-11-18T09:59:57+00:00",
       "currency": "INR",
       "provider_name": "Tata Chemicals Limited",
       "exchange": "NSI",
@@ -1424,13 +1424,13 @@
       "source_url": "https://finance.yahoo.com/quote/TATACHEM.NS",
       "status": "delayed_or_eod",
       "previous_close": 649.45,
-      "change_pct": -1.4858726614828122,
-      "regularMarketVolume": 395078,
+      "change_pct": -2.2865501578258507,
+      "regularMarketVolume": 1229123,
       "regularMarketDayHigh": 649.0,
-      "regularMarketDayLow": 637.3,
+      "regularMarketDayLow": 632.65,
       "fiftyTwoWeekHigh": 854.85,
       "fiftyTwoWeekLow": 570.05,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:deepaknitrite",
@@ -1440,9 +1440,9 @@
       "unit": "INR/share",
       "symbol": "DEEPAKNTR.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1565.6,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1562.9,
+      "asof": "2026-11-18T09:59:49+00:00",
       "currency": "INR",
       "provider_name": "Deepak Nitrite Limited",
       "exchange": "NSI",
@@ -1450,13 +1450,13 @@
       "source_url": "https://finance.yahoo.com/quote/DEEPAKNTR.NS",
       "status": "delayed_or_eod",
       "previous_close": 1590.1,
-      "change_pct": -1.5407835985158158,
-      "regularMarketVolume": 34251,
-      "regularMarketDayHigh": 1589.8,
+      "change_pct": -1.7105842399848914,
+      "regularMarketVolume": 278599,
+      "regularMarketDayHigh": 1593.8,
       "regularMarketDayLow": 1558.9,
       "fiftyTwoWeekHigh": 1897.9,
       "fiftyTwoWeekLow": 1280.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:upl",
@@ -1466,9 +1466,9 @@
       "unit": "INR/share",
       "symbol": "UPL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 545.7,
-      "asof": "2026-11-18T04:29:21+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 552.0,
+      "asof": "2026-11-18T09:58:51+00:00",
       "currency": "INR",
       "provider_name": "UPL Limited",
       "exchange": "NSI",
@@ -1476,13 +1476,13 @@
       "source_url": "https://finance.yahoo.com/quote/UPL.NS",
       "status": "delayed_or_eod",
       "previous_close": 551.7,
-      "change_pct": -1.087547580206638,
-      "regularMarketVolume": 1244206,
-      "regularMarketDayHigh": 549.0,
+      "change_pct": 0.054377379010328575,
+      "regularMarketVolume": 4102971,
+      "regularMarketDayHigh": 561.5,
       "regularMarketDayLow": 535.5,
       "fiftyTwoWeekHigh": 812.2,
       "fiftyTwoWeekLow": 476.45,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:pidilite",
@@ -1492,9 +1492,9 @@
       "unit": "INR/share",
       "symbol": "PIDILITIND.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1529.9,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1530.2,
+      "asof": "2026-11-18T09:58:49+00:00",
       "currency": "INR",
       "provider_name": "Pidilite Industries Limited",
       "exchange": "NSI",
@@ -1502,13 +1502,13 @@
       "source_url": "https://finance.yahoo.com/quote/PIDILITIND.NS",
       "status": "delayed_or_eod",
       "previous_close": 1534.6,
-      "change_pct": -0.30626873452364034,
-      "regularMarketVolume": 76494,
-      "regularMarketDayHigh": 1537.0,
+      "change_pct": -0.28671966636255597,
+      "regularMarketVolume": 593711,
+      "regularMarketDayHigh": 1548.0,
       "regularMarketDayLow": 1516.0,
       "fiftyTwoWeekHigh": 1707.5,
       "fiftyTwoWeekLow": 1259.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:bergerpaints",
@@ -1518,9 +1518,9 @@
       "unit": "INR/share",
       "symbol": "BERGEPAINT.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 471.35,
-      "asof": "2026-11-18T04:29:17+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 467.15,
+      "asof": "2026-11-18T09:59:50+00:00",
       "currency": "INR",
       "provider_name": "Berger Paints India Limited",
       "exchange": "NSI",
@@ -1528,13 +1528,13 @@
       "source_url": "https://finance.yahoo.com/quote/BERGEPAINT.NS",
       "status": "delayed_or_eod",
       "previous_close": 478.9,
-      "change_pct": -1.576529546878258,
-      "regularMarketVolume": 49069,
+      "change_pct": -2.453539361035706,
+      "regularMarketVolume": 600176,
       "regularMarketDayHigh": 479.65,
-      "regularMarketDayLow": 470.15,
+      "regularMarketDayLow": 464.0,
       "fiftyTwoWeekHigh": 594.55,
       "fiftyTwoWeekLow": 391.1,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:britannia",
@@ -1544,9 +1544,9 @@
       "unit": "INR/share",
       "symbol": "BRITANNIA.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 4711.7,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 4673.2,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Britannia Industries Limited",
       "exchange": "NSI",
@@ -1554,13 +1554,13 @@
       "source_url": "https://finance.yahoo.com/quote/BRITANNIA.NS",
       "status": "delayed_or_eod",
       "previous_close": 4700.0,
-      "change_pct": 0.2489361702127546,
-      "regularMarketVolume": 14048,
-      "regularMarketDayHigh": 4717.5,
-      "regularMarketDayLow": 4682.7,
+      "change_pct": -0.5702127659574452,
+      "regularMarketVolume": 218875,
+      "regularMarketDayHigh": 4724.0,
+      "regularMarketDayLow": 4673.2,
       "fiftyTwoWeekHigh": 6271.0,
       "fiftyTwoWeekLow": 4499.9,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:marico",
@@ -1570,9 +1570,9 @@
       "unit": "INR/share",
       "symbol": "MARICO.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 912.4,
-      "asof": "2026-11-18T04:29:21+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 906.05,
+      "asof": "2026-11-18T09:58:54+00:00",
       "currency": "INR",
       "provider_name": "Marico Limited",
       "exchange": "NSI",
@@ -1580,13 +1580,13 @@
       "source_url": "https://finance.yahoo.com/quote/MARICO.NS",
       "status": "delayed_or_eod",
       "previous_close": 924.0,
-      "change_pct": -1.255411255411254,
-      "regularMarketVolume": 274069,
+      "change_pct": -1.9426406926406958,
+      "regularMarketVolume": 1703366,
       "regularMarketDayHigh": 916.8,
-      "regularMarketDayLow": 909.5,
+      "regularMarketDayLow": 903.5,
       "fiftyTwoWeekHigh": 925.0,
       "fiftyTwoWeekLow": 707.25,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:godrejcp",
@@ -1596,9 +1596,9 @@
       "unit": "INR/share",
       "symbol": "GODREJCP.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 885.05,
-      "asof": "2026-11-18T04:29:17+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 896.45,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Godrej Consumer Products Limited",
       "exchange": "NSI",
@@ -1606,13 +1606,13 @@
       "source_url": "https://finance.yahoo.com/quote/GODREJCP.NS",
       "status": "delayed_or_eod",
       "previous_close": 894.5,
-      "change_pct": -1.0564561207378476,
-      "regularMarketVolume": 75535,
-      "regularMarketDayHigh": 893.95,
+      "change_pct": 0.21799888205702445,
+      "regularMarketVolume": 1207964,
+      "regularMarketDayHigh": 900.5,
       "regularMarketDayLow": 879.05,
       "fiftyTwoWeekHigh": 1273.9,
       "fiftyTwoWeekLow": 777.2,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:awl",
@@ -1622,9 +1622,9 @@
       "unit": "INR/share",
       "symbol": "AWL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 167.44,
-      "asof": "2026-11-18T04:29:15+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 170.85,
+      "asof": "2026-11-18T09:59:55+00:00",
       "currency": "INR",
       "provider_name": "AWL Agri Business Limited",
       "exchange": "NSI",
@@ -1632,13 +1632,13 @@
       "source_url": "https://finance.yahoo.com/quote/AWL.NS",
       "status": "delayed_or_eod",
       "previous_close": 168.42,
-      "change_pct": -0.581878636741473,
-      "regularMarketVolume": 263805,
-      "regularMarketDayHigh": 168.25,
+      "change_pct": 1.442821517634485,
+      "regularMarketVolume": 2589105,
+      "regularMarketDayHigh": 171.87,
       "regularMarketDayLow": 166.53,
       "fiftyTwoWeekHigh": 282.9,
       "fiftyTwoWeekLow": 159.65,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:tataconsumer",
@@ -1648,9 +1648,9 @@
       "unit": "INR/share",
       "symbol": "TATACONSUM.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1110.2,
-      "asof": "2026-11-18T04:29:18+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1130.9,
+      "asof": "2026-11-18T09:58:51+00:00",
       "currency": "INR",
       "provider_name": "Tata Consumer Products Limited",
       "exchange": "NSI",
@@ -1658,13 +1658,13 @@
       "source_url": "https://finance.yahoo.com/quote/TATACONSUM.NS",
       "status": "delayed_or_eod",
       "previous_close": 1112.4,
-      "change_pct": -0.19777058612010512,
-      "regularMarketVolume": 155526,
-      "regularMarketDayHigh": 1115.9,
+      "change_pct": 1.663070837828129,
+      "regularMarketVolume": 1298917,
+      "regularMarketDayHigh": 1130.9,
       "regularMarketDayLow": 1101.0,
       "fiftyTwoWeekHigh": 1282.7,
       "fiftyTwoWeekLow": 916.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:varunbev",
@@ -1674,9 +1674,9 @@
       "unit": "INR/share",
       "symbol": "VBL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 428.7,
-      "asof": "2026-11-18T04:29:18+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 424.55,
+      "asof": "2026-11-18T09:58:51+00:00",
       "currency": "INR",
       "provider_name": "Varun Beverages Limited",
       "exchange": "NSI",
@@ -1684,13 +1684,13 @@
       "source_url": "https://finance.yahoo.com/quote/VBL.NS",
       "status": "delayed_or_eod",
       "previous_close": 430.0,
-      "change_pct": -0.30232558139534627,
-      "regularMarketVolume": 609031,
+      "change_pct": -1.2674418604651128,
+      "regularMarketVolume": 2998848,
       "regularMarketDayHigh": 431.25,
-      "regularMarketDayLow": 426.0,
+      "regularMarketDayLow": 423.45,
       "fiftyTwoWeekHigh": 555.8,
       "fiftyTwoWeekLow": 381.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:balrampur",
@@ -1700,9 +1700,9 @@
       "unit": "INR/share",
       "symbol": "BALRAMCHIN.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 649.2,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 637.45,
+      "asof": "2026-11-18T09:59:55+00:00",
       "currency": "INR",
       "provider_name": "Balrampur Chini Mills Limited",
       "exchange": "NSI",
@@ -1710,13 +1710,13 @@
       "source_url": "https://finance.yahoo.com/quote/BALRAMCHIN.NS",
       "status": "delayed_or_eod",
       "previous_close": 656.65,
-      "change_pct": -1.134546562095473,
-      "regularMarketVolume": 60218,
+      "change_pct": -2.9239320794943957,
+      "regularMarketVolume": 250351,
       "regularMarketDayHigh": 656.0,
-      "regularMarketDayLow": 646.0,
+      "regularMarketDayLow": 635.0,
       "fiftyTwoWeekHigh": 780.95,
       "fiftyTwoWeekLow": 393.55,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:polycab",
@@ -1726,9 +1726,9 @@
       "unit": "INR/share",
       "symbol": "POLYCAB.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 7513.0,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 7307.5,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Polycab India Limited",
       "exchange": "NSI",
@@ -1736,13 +1736,13 @@
       "source_url": "https://finance.yahoo.com/quote/POLYCAB.NS",
       "status": "delayed_or_eod",
       "previous_close": 7702.0,
-      "change_pct": -2.4539080758244625,
-      "regularMarketVolume": 216874,
+      "change_pct": -5.122046221760579,
+      "regularMarketVolume": 864033,
       "regularMarketDayHigh": 7670.0,
-      "regularMarketDayLow": 7485.0,
+      "regularMarketDayLow": 7293.0,
       "fiftyTwoWeekHigh": 10126.0,
       "fiftyTwoWeekLow": 6663.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:havells",
@@ -1752,9 +1752,9 @@
       "unit": "INR/share",
       "symbol": "HAVELLS.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1157.5,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1140.0,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Havells India Limited",
       "exchange": "NSI",
@@ -1762,13 +1762,13 @@
       "source_url": "https://finance.yahoo.com/quote/HAVELLS.NS",
       "status": "delayed_or_eod",
       "previous_close": 1175.0,
-      "change_pct": -1.4893617021276562,
-      "regularMarketVolume": 146513,
+      "change_pct": -2.9787234042553234,
+      "regularMarketVolume": 981389,
       "regularMarketDayHigh": 1175.5,
-      "regularMarketDayLow": 1141.7,
+      "regularMarketDayLow": 1134.8,
       "fiftyTwoWeekHigh": 1514.7,
       "fiftyTwoWeekLow": 999.2,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:dixon",
@@ -1778,9 +1778,9 @@
       "unit": "INR/share",
       "symbol": "DIXON.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 12863.0,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 12615.0,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Dixon Technologies (India) Limited",
       "exchange": "NSI",
@@ -1788,13 +1788,13 @@
       "source_url": "https://finance.yahoo.com/quote/DIXON.NS",
       "status": "delayed_or_eod",
       "previous_close": 13081.0,
-      "change_pct": -1.6665392554086056,
-      "regularMarketVolume": 54683,
+      "change_pct": -3.562418775322984,
+      "regularMarketVolume": 258021,
       "regularMarketDayHigh": 13098.0,
-      "regularMarketDayLow": 12832.0,
+      "regularMarketDayLow": 12605.0,
       "fiftyTwoWeekHigh": 15775.0,
       "fiftyTwoWeekLow": 9600.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:motherson",
@@ -1804,9 +1804,9 @@
       "unit": "INR/share",
       "symbol": "MOTHERSON.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 159.74,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 157.24,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Samvardhana Motherson International Limited",
       "exchange": "NSI",
@@ -1814,13 +1814,13 @@
       "source_url": "https://finance.yahoo.com/quote/MOTHERSON.NS",
       "status": "delayed_or_eod",
       "previous_close": 164.39,
-      "change_pct": -2.828639211630868,
-      "regularMarketVolume": 2727949,
+      "change_pct": -4.349412981324885,
+      "regularMarketVolume": 17922266,
       "regularMarketDayHigh": 162.56,
-      "regularMarketDayLow": 159.01,
+      "regularMarketDayLow": 156.75,
       "fiftyTwoWeekHigh": 173.27,
       "fiftyTwoWeekLow": 102.82,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:bharatforge",
@@ -1830,9 +1830,9 @@
       "unit": "INR/share",
       "symbol": "BHARATFORG.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1706.9,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1684.5,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Bharat Forge Limited",
       "exchange": "NSI",
@@ -1840,13 +1840,13 @@
       "source_url": "https://finance.yahoo.com/quote/BHARATFORG.NS",
       "status": "delayed_or_eod",
       "previous_close": 1714.7,
-      "change_pct": -0.4548900682335044,
-      "regularMarketVolume": 175455,
+      "change_pct": -1.761241033416927,
+      "regularMarketVolume": 715677,
       "regularMarketDayHigh": 1712.0,
-      "regularMarketDayLow": 1684.0,
+      "regularMarketDayLow": 1682.3,
       "fiftyTwoWeekHigh": 2295.0,
       "fiftyTwoWeekLow": 1323.8,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:exide",
@@ -1856,9 +1856,9 @@
       "unit": "INR/share",
       "symbol": "EXIDEIND.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 386.05,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 389.05,
+      "asof": "2026-11-18T09:59:55+00:00",
       "currency": "INR",
       "provider_name": "Exide Industries Limited",
       "exchange": "NSI",
@@ -1866,13 +1866,13 @@
       "source_url": "https://finance.yahoo.com/quote/EXIDEIND.NS",
       "status": "delayed_or_eod",
       "previous_close": 380.15,
-      "change_pct": 1.5520189398921636,
-      "regularMarketVolume": 1375528,
+      "change_pct": 2.341181112718682,
+      "regularMarketVolume": 4885111,
       "regularMarketDayHigh": 390.9,
       "regularMarketDayLow": 377.7,
       "fiftyTwoWeekHigh": 496.4,
       "fiftyTwoWeekLow": 287.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:amararaja",
@@ -1882,9 +1882,9 @@
       "unit": "INR/share",
       "symbol": "ARE&M.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 745.5,
-      "asof": "2026-11-18T04:29:24+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 747.4,
+      "asof": "2026-11-18T09:59:50+00:00",
       "currency": "INR",
       "provider_name": "Amara Raja Energy & Mobility Limited",
       "exchange": "NSI",
@@ -1892,13 +1892,13 @@
       "source_url": "https://finance.yahoo.com/quote/ARE%26M.NS",
       "status": "delayed_or_eod",
       "previous_close": 746.85,
-      "change_pct": -0.1807591885920945,
-      "regularMarketVolume": 73547,
-      "regularMarketDayHigh": 747.6,
+      "change_pct": 0.07364263238935909,
+      "regularMarketVolume": 252686,
+      "regularMarketDayHigh": 749.95,
       "regularMarketDayLow": 737.65,
       "fiftyTwoWeekHigh": 1017.3,
       "fiftyTwoWeekLow": 670.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:bajajauto",
@@ -1908,9 +1908,9 @@
       "unit": "INR/share",
       "symbol": "BAJAJ-AUTO.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 10654.0,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 10570.0,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Bajaj Auto Limited",
       "exchange": "NSI",
@@ -1918,13 +1918,13 @@
       "source_url": "https://finance.yahoo.com/quote/BAJAJ-AUTO.NS",
       "status": "delayed_or_eod",
       "previous_close": 10770.0,
-      "change_pct": -1.0770659238625857,
-      "regularMarketVolume": 59790,
+      "change_pct": -1.8570102135561761,
+      "regularMarketVolume": 381806,
       "regularMarketDayHigh": 10745.0,
-      "regularMarketDayLow": 10578.0,
+      "regularMarketDayLow": 10541.0,
       "fiftyTwoWeekHigh": 12470.0,
       "fiftyTwoWeekLow": 8624.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:heromoto",
@@ -1934,9 +1934,9 @@
       "unit": "INR/share",
       "symbol": "HEROMOTOCO.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 5266.0,
-      "asof": "2026-11-18T04:29:16+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 5253.0,
+      "asof": "2026-11-18T09:58:49+00:00",
       "currency": "INR",
       "provider_name": "Hero MotoCorp Limited",
       "exchange": "NSI",
@@ -1944,13 +1944,13 @@
       "source_url": "https://finance.yahoo.com/quote/HEROMOTOCO.NS",
       "status": "delayed_or_eod",
       "previous_close": 5329.0,
-      "change_pct": -1.182210546068685,
-      "regularMarketVolume": 91338,
+      "change_pct": -1.4261587539876164,
+      "regularMarketVolume": 535041,
       "regularMarketDayHigh": 5320.5,
-      "regularMarketDayLow": 5252.5,
+      "regularMarketDayLow": 5233.5,
       "fiftyTwoWeekHigh": 6388.5,
       "fiftyTwoWeekLow": 4671.5,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:ambuja",
@@ -1960,9 +1960,9 @@
       "unit": "INR/share",
       "symbol": "AMBUJACEM.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 389.3,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 384.8,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Ambuja Cements Limited",
       "exchange": "NSI",
@@ -1970,13 +1970,13 @@
       "source_url": "https://finance.yahoo.com/quote/AMBUJACEM.NS",
       "status": "delayed_or_eod",
       "previous_close": 390.2,
-      "change_pct": -0.23065094823166987,
-      "regularMarketVolume": 477893,
+      "change_pct": -1.3839056893900525,
+      "regularMarketVolume": 1779547,
       "regularMarketDayHigh": 390.85,
-      "regularMarketDayLow": 385.6,
+      "regularMarketDayLow": 382.6,
       "fiftyTwoWeekHigh": 573.1,
       "fiftyTwoWeekLow": 341.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:gesco",
@@ -1986,9 +1986,9 @@
       "unit": "INR/share",
       "symbol": "GESHIP.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1545.9,
-      "asof": "2026-11-18T04:29:24+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1530.6,
+      "asof": "2026-11-18T09:59:56+00:00",
       "currency": "INR",
       "provider_name": "The Great Eastern Shipping Company Limited",
       "exchange": "NSI",
@@ -1996,13 +1996,13 @@
       "source_url": "https://finance.yahoo.com/quote/GESHIP.NS",
       "status": "delayed_or_eod",
       "previous_close": 1548.5,
-      "change_pct": -0.1679044236357674,
-      "regularMarketVolume": 59339,
-      "regularMarketDayHigh": 1556.0,
-      "regularMarketDayLow": 1535.2,
+      "change_pct": -1.1559573781078525,
+      "regularMarketVolume": 654219,
+      "regularMarketDayHigh": 1582.0,
+      "regularMarketDayLow": 1530.0,
       "fiftyTwoWeekHigh": 1798.0,
       "fiftyTwoWeekLow": 1056.9,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:concor",
@@ -2012,9 +2012,9 @@
       "unit": "INR/share",
       "symbol": "CONCOR.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 439.85,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 436.95,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Container Corporation of India Limited",
       "exchange": "NSI",
@@ -2022,13 +2022,13 @@
       "source_url": "https://finance.yahoo.com/quote/CONCOR.NS",
       "status": "delayed_or_eod",
       "previous_close": 441.9,
-      "change_pct": -0.46390586105452547,
-      "regularMarketVolume": 106790,
+      "change_pct": -1.1201629327902252,
+      "regularMarketVolume": 555247,
       "regularMarketDayHigh": 441.95,
-      "regularMarketDayLow": 436.25,
+      "regularMarketDayLow": 434.6,
       "fiftyTwoWeekHigh": 543.7,
       "fiftyTwoWeekLow": 404.25,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:welspunliving",
@@ -2038,9 +2038,9 @@
       "unit": "INR/share",
       "symbol": "WELSPUNLIV.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 257.52,
-      "asof": "2026-11-18T04:29:19+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 255.97,
+      "asof": "2026-11-18T10:00:02+00:00",
       "currency": "INR",
       "provider_name": "Welspun Living Limited",
       "exchange": "NSI",
@@ -2048,13 +2048,13 @@
       "source_url": "https://finance.yahoo.com/quote/WELSPUNLIV.NS",
       "status": "delayed_or_eod",
       "previous_close": 265.62,
-      "change_pct": -3.0494691664784357,
-      "regularMarketVolume": 1447817,
+      "change_pct": -3.6330095625329406,
+      "regularMarketVolume": 3422575,
       "regularMarketDayHigh": 263.93,
-      "regularMarketDayLow": 255.43,
-      "fiftyTwoWeekHigh": 267.42,
+      "regularMarketDayLow": 253.39,
+      "fiftyTwoWeekHigh": 267.5,
       "fiftyTwoWeekLow": 107.1,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:vardhman",
@@ -2064,9 +2064,9 @@
       "unit": "INR/share",
       "symbol": "VTL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 524.8,
-      "asof": "2026-11-18T04:28:50+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 527.6,
+      "asof": "2026-11-18T10:00:03+00:00",
       "currency": "INR",
       "provider_name": "Vardhman Textiles Limited",
       "exchange": "NSI",
@@ -2074,13 +2074,13 @@
       "source_url": "https://finance.yahoo.com/quote/VTL.NS",
       "status": "delayed_or_eod",
       "previous_close": 527.35,
-      "change_pct": -0.48354982459468676,
-      "regularMarketVolume": 19016,
+      "change_pct": 0.04740684554849217,
+      "regularMarketVolume": 146694,
       "regularMarketDayHigh": 531.0,
-      "regularMarketDayLow": 522.2,
+      "regularMarketDayLow": 521.15,
       "fiftyTwoWeekHigh": 688.0,
       "fiftyTwoWeekLow": 391.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:jkpaper",
@@ -2090,9 +2090,9 @@
       "unit": "INR/share",
       "symbol": "JKPAPER.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 357.65,
-      "asof": "2026-11-18T04:29:24+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 358.05,
+      "asof": "2026-11-18T09:59:56+00:00",
       "currency": "INR",
       "provider_name": "JK Paper Limited",
       "exchange": "NSI",
@@ -2100,13 +2100,13 @@
       "source_url": "https://finance.yahoo.com/quote/JKPAPER.NS",
       "status": "delayed_or_eod",
       "previous_close": 364.45,
-      "change_pct": -1.8658252160790312,
-      "regularMarketVolume": 101939,
+      "change_pct": -1.756070791603781,
+      "regularMarketVolume": 335443,
       "regularMarketDayHigh": 366.9,
-      "regularMarketDayLow": 356.1,
+      "regularMarketDayLow": 356.05,
       "fiftyTwoWeekHigh": 442.0,
       "fiftyTwoWeekLow": 304.85,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:waaree",
@@ -2116,9 +2116,9 @@
       "unit": "INR/share",
       "symbol": "WAAREEENER.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 2407.3,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 2392.0,
+      "asof": "2026-11-18T09:58:50+00:00",
       "currency": "INR",
       "provider_name": "Waaree Energies Limited",
       "exchange": "NSI",
@@ -2126,13 +2126,13 @@
       "source_url": "https://finance.yahoo.com/quote/WAAREEENER.NS",
       "status": "delayed_or_eod",
       "previous_close": 2441.5,
-      "change_pct": -1.4007782101167265,
-      "regularMarketVolume": 160825,
+      "change_pct": -2.027442146221581,
+      "regularMarketVolume": 415378,
       "regularMarketDayHigh": 2449.0,
       "regularMarketDayLow": 2386.3,
       "fiftyTwoWeekHigh": 3557.0,
       "fiftyTwoWeekLow": 2161.5,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:cipla",
@@ -2142,9 +2142,9 @@
       "unit": "INR/share",
       "symbol": "CIPLA.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1394.4,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1417.0,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Cipla Limited",
       "exchange": "NSI",
@@ -2152,13 +2152,13 @@
       "source_url": "https://finance.yahoo.com/quote/CIPLA.NS",
       "status": "delayed_or_eod",
       "previous_close": 1388.0,
-      "change_pct": 0.4610951008645614,
-      "regularMarketVolume": 90955,
-      "regularMarketDayHigh": 1395.0,
+      "change_pct": 2.089337175792516,
+      "regularMarketVolume": 2908712,
+      "regularMarketDayHigh": 1435.0,
       "regularMarketDayLow": 1381.3,
       "fiftyTwoWeekHigh": 1539.7,
       "fiftyTwoWeekLow": 1165.7,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:aurobindo",
@@ -2168,9 +2168,9 @@
       "unit": "INR/share",
       "symbol": "AUROPHARMA.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1793.5,
-      "asof": "2026-11-18T04:29:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1796.3,
+      "asof": "2026-11-18T09:58:48+00:00",
       "currency": "INR",
       "provider_name": "Aurobindo Pharma Limited",
       "exchange": "NSI",
@@ -2178,13 +2178,13 @@
       "source_url": "https://finance.yahoo.com/quote/AUROPHARMA.NS",
       "status": "delayed_or_eod",
       "previous_close": 1794.1,
-      "change_pct": -0.03344295189787738,
-      "regularMarketVolume": 256551,
-      "regularMarketDayHigh": 1803.1,
+      "change_pct": 0.12262415695891704,
+      "regularMarketVolume": 1192113,
+      "regularMarketDayHigh": 1817.4,
       "regularMarketDayLow": 1788.7,
       "fiftyTwoWeekHigh": 1859.9,
       "fiftyTwoWeekLow": 1106.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:kalyan",
@@ -2194,9 +2194,9 @@
       "unit": "INR/share",
       "symbol": "KALYANKJIL.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 665.5,
-      "asof": "2026-11-18T04:29:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 650.0,
+      "asof": "2026-11-18T09:58:55+00:00",
       "currency": "INR",
       "provider_name": "Kalyan Jewellers India Limited",
       "exchange": "NSI",
@@ -2204,13 +2204,13 @@
       "source_url": "https://finance.yahoo.com/quote/KALYANKJIL.NS",
       "status": "delayed_or_eod",
       "previous_close": 682.75,
-      "change_pct": -2.5265470523617717,
-      "regularMarketVolume": 3115678,
+      "change_pct": -4.796777737092639,
+      "regularMarketVolume": 13018202,
       "regularMarketDayHigh": 687.4,
-      "regularMarketDayLow": 665.15,
+      "regularMarketDayLow": 645.8,
       "fiftyTwoWeekHigh": 729.35,
       "fiftyTwoWeekLow": 327.05,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "stock:supremeind",
@@ -2220,9 +2220,9 @@
       "unit": "INR/share",
       "symbol": "SUPREMEIND.NS",
       "benchmark": "NSE equity (check provider legal entity after corporate actions)",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 3206.0,
-      "asof": "2026-11-18T04:29:09+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 3151.0,
+      "asof": "2026-11-18T09:58:51+00:00",
       "currency": "INR",
       "provider_name": "The Supreme Industries Limited",
       "exchange": "NSI",
@@ -2230,13 +2230,13 @@
       "source_url": "https://finance.yahoo.com/quote/SUPREMEIND.NS",
       "status": "delayed_or_eod",
       "previous_close": 3231.3,
-      "change_pct": -0.7829666078668085,
-      "regularMarketVolume": 18562,
+      "change_pct": -2.4850679293163758,
+      "regularMarketVolume": 126429,
       "regularMarketDayHigh": 3226.5,
-      "regularMarketDayLow": 3181.0,
+      "regularMarketDayLow": 3151.0,
       "fiftyTwoWeekHigh": 4074.8,
       "fiftyTwoWeekLow": 3078.5,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:gold",
@@ -2248,22 +2248,22 @@
       "benchmark": "COMEX gold futures",
       "unit": "USD/troy oz",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 3791.0,
-      "asof": "2026-11-18T04:19:24+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 3786.9,
+      "asof": "2026-11-18T13:58:19+00:00",
       "currency": "USD",
       "provider_name": "Gold Dec 26",
       "exchange": "CMX",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/GC%3DF",
       "previous_close": 3864.2,
-      "change_pct": -1.894311888618594,
-      "regularMarketVolume": 51010,
+      "change_pct": -2.000414057243405,
+      "regularMarketVolume": 148226,
       "regularMarketDayHigh": 3859.3,
-      "regularMarketDayLow": 3782.3,
+      "regularMarketDayLow": 3744.6,
       "fiftyTwoWeekHigh": 5586.2,
-      "fiftyTwoWeekLow": 3782.3,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fiftyTwoWeekLow": 3744.6,
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:silver",
@@ -2275,22 +2275,22 @@
       "benchmark": "COMEX silver futures",
       "unit": "USD/troy oz",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 45.925,
-      "asof": "2026-11-18T04:19:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 45.82,
+      "asof": "2026-11-18T13:58:17+00:00",
       "currency": "USD",
       "provider_name": "Silver Dec 26",
       "exchange": "CMX",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/SI%3DF",
       "previous_close": 47.357,
-      "change_pct": -3.023840192579774,
-      "regularMarketVolume": 14550,
+      "change_pct": -3.245560318432328,
+      "regularMarketVolume": 41874,
       "regularMarketDayHigh": 47.525,
-      "regularMarketDayLow": 45.685,
+      "regularMarketDayLow": 45.05,
       "fiftyTwoWeekHigh": 121.3,
-      "fiftyTwoWeekLow": 45.685,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fiftyTwoWeekLow": 45.05,
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:pallad",
@@ -2302,22 +2302,22 @@
       "benchmark": "NYMEX palladium futures",
       "unit": "USD/troy oz",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 950.5,
-      "asof": "2026-11-18T04:17:34+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 957.5,
+      "asof": "2026-11-18T13:58:09+00:00",
       "currency": "USD",
       "provider_name": "Palladium Dec 26",
       "exchange": "NYM",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/PA%3DF",
       "previous_close": 976.3,
-      "change_pct": -2.6426303390351236,
-      "regularMarketVolume": 1579,
+      "change_pct": -1.925637611389941,
+      "regularMarketVolume": 5403,
       "regularMarketDayHigh": 975.5,
-      "regularMarketDayLow": 946.5,
+      "regularMarketDayLow": 940.0,
       "fiftyTwoWeekHigh": 2169.9,
       "fiftyTwoWeekLow": 930.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:platinum",
@@ -2329,22 +2329,22 @@
       "benchmark": "NYMEX platinum futures",
       "unit": "USD/troy oz",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1403.4,
-      "asof": "2026-11-18T04:19:00+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1370.6,
+      "asof": "2026-11-18T13:58:15+00:00",
       "currency": "USD",
       "provider_name": "Platinum Jan 27",
       "exchange": "NYM",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/PL%3DF",
       "previous_close": 1426.5,
-      "change_pct": -1.6193480546792816,
-      "regularMarketVolume": 3423,
+      "change_pct": -3.918682089029102,
+      "regularMarketVolume": 14108,
       "regularMarketDayHigh": 1431.7,
-      "regularMarketDayLow": 1401.3,
+      "regularMarketDayLow": 1355.0,
       "fiftyTwoWeekHigh": 2852.4,
-      "fiftyTwoWeekLow": 1401.3,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fiftyTwoWeekLow": 1355.0,
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:diamonds",
@@ -2353,7 +2353,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:copper",
@@ -2365,22 +2365,22 @@
       "benchmark": "COMEX copper futures",
       "unit": "USD/lb",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 5.889,
-      "asof": "2026-11-18T04:19:22+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 5.723,
+      "asof": "2026-11-18T13:58:19+00:00",
       "currency": "USD",
       "provider_name": "Copper Dec 26",
       "exchange": "CMX",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/HG%3DF",
       "previous_close": 5.986,
-      "change_pct": -1.6204477113264226,
-      "regularMarketVolume": 13491,
+      "change_pct": -4.393585031740733,
+      "regularMarketVolume": 53862,
       "regularMarketDayHigh": 6.04,
-      "regularMarketDayLow": 5.883,
+      "regularMarketDayLow": 5.699,
       "fiftyTwoWeekHigh": 6.83,
       "fiftyTwoWeekLow": 4.92,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:alum",
@@ -2389,7 +2389,7 @@
       "kind": "commodity",
       "status": "monthly_reference",
       "reason": "Monthly reference, not a live price",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
       "price": 3283.054285714286,
       "asof": "2026-09-01",
       "unit": "USD/tonne",
@@ -2404,7 +2404,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:bauxite",
@@ -2413,7 +2413,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:zinc",
@@ -2422,7 +2422,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:lead",
@@ -2431,7 +2431,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:nickel",
@@ -2440,7 +2440,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:tin",
@@ -2449,7 +2449,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:ironore",
@@ -2458,7 +2458,7 @@
       "kind": "commodity",
       "status": "monthly_reference",
       "reason": "Monthly reference, not a live price",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
       "price": 100.4409090909091,
       "asof": "2026-09-01",
       "unit": "USD/dry metric tonne",
@@ -2473,7 +2473,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:hrc",
@@ -2482,7 +2482,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:scrap",
@@ -2491,7 +2491,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:ferroalloy",
@@ -2500,7 +2500,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:limestone",
@@ -2509,7 +2509,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:cement",
@@ -2518,7 +2518,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:tio2",
@@ -2527,7 +2527,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:lithium",
@@ -2536,7 +2536,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:cobalt",
@@ -2545,7 +2545,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:graphite",
@@ -2554,7 +2554,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:ree",
@@ -2563,7 +2563,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:antimony",
@@ -2572,7 +2572,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:uranium",
@@ -2581,7 +2581,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:chips",
@@ -2590,7 +2590,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:poly",
@@ -2599,7 +2599,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:fluorspar",
@@ -2608,7 +2608,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:crude",
@@ -2620,22 +2620,22 @@
       "benchmark": "ICE Brent futures",
       "unit": "USD/barrel",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 92.71,
-      "asof": "2026-11-18T04:18:33+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 89.85,
+      "asof": "2026-11-18T13:57:59+00:00",
       "currency": "USD",
       "provider_name": "Brent Crude Oil Last Day Financial Futures",
       "exchange": "NYM",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/BZ%3DF",
-      "previous_close": 93.14,
-      "change_pct": -0.4616706033927498,
-      "regularMarketVolume": 1133,
-      "regularMarketDayHigh": 93.47,
-      "regularMarketDayLow": 92.38,
+      "previous_close": 90.37,
+      "change_pct": -0.5754121943122859,
+      "regularMarketVolume": 9979,
+      "regularMarketDayHigh": 90.75,
+      "regularMarketDayLow": 88.38,
       "fiftyTwoWeekHigh": 126.1,
       "fiftyTwoWeekLow": 58.72,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:dubai",
@@ -2644,7 +2644,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:diesel",
@@ -2653,7 +2653,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:jet",
@@ -2662,7 +2662,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:lpg",
@@ -2671,7 +2671,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:naphtha",
@@ -2680,7 +2680,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:petcoke",
@@ -2689,7 +2689,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:bitumen",
@@ -2698,7 +2698,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:gasoline",
@@ -2710,22 +2710,22 @@
       "benchmark": "NYMEX RBOB gasoline futures",
       "unit": "USD/gallon",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 2.4828,
-      "asof": "2026-11-18T04:18:33+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 2.4733,
+      "asof": "2026-11-18T13:58:17+00:00",
       "currency": "USD",
       "provider_name": "RBOB Gasoline Jan 27",
       "exchange": "NYM",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/RB%3DF",
       "previous_close": 2.5022,
-      "change_pct": -0.7753177204060435,
-      "regularMarketVolume": 435,
+      "change_pct": -1.1549836144193137,
+      "regularMarketVolume": 7671,
       "regularMarketDayHigh": 2.5081,
-      "regularMarketDayLow": 2.477,
+      "regularMarketDayLow": 2.444,
       "fiftyTwoWeekHigh": 3.8232,
       "fiftyTwoWeekLow": 1.6656,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:lng",
@@ -2734,7 +2734,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:natgas",
@@ -2746,22 +2746,22 @@
       "benchmark": "NYMEX Henry Hub futures",
       "unit": "USD/MMBtu",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 3.174,
-      "asof": "2026-11-18T04:19:23+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 3.257,
+      "asof": "2026-11-18T13:58:15+00:00",
       "currency": "USD",
       "provider_name": "Natural Gas Dec 26",
       "exchange": "NYM",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/NG%3DF",
       "previous_close": 3.208,
-      "change_pct": -1.0598503740648413,
-      "regularMarketVolume": 2872,
-      "regularMarketDayHigh": 3.208,
-      "regularMarketDayLow": 3.166,
+      "change_pct": 1.5274314214463791,
+      "regularMarketVolume": 63138,
+      "regularMarketDayHigh": 3.285,
+      "regularMarketDayLow": 3.153,
       "fiftyTwoWeekHigh": 7.827,
       "fiftyTwoWeekLow": 2.483,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:apmgas",
@@ -2770,7 +2770,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:coal",
@@ -2779,7 +2779,7 @@
       "kind": "commodity",
       "status": "monthly_reference",
       "reason": "Monthly reference, not a live price",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
       "price": 153.84,
       "asof": "2026-09-01",
       "unit": "USD/tonne",
@@ -2794,7 +2794,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:elec",
@@ -2803,7 +2803,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:ttf",
@@ -2812,7 +2812,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:plastics",
@@ -2821,7 +2821,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:ethylene",
@@ -2830,7 +2830,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:propylene",
@@ -2839,7 +2839,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:benzene",
@@ -2848,7 +2848,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:methanol",
@@ -2857,7 +2857,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:pta",
@@ -2866,7 +2866,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:meg",
@@ -2875,7 +2875,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:pvc",
@@ -2884,7 +2884,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:styrene",
@@ -2893,7 +2893,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:vam",
@@ -2902,7 +2902,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:carbonblack",
@@ -2911,7 +2911,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:caustic",
@@ -2920,7 +2920,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:sodaash",
@@ -2929,7 +2929,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:sbr",
@@ -2938,7 +2938,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:phenol",
@@ -2947,7 +2947,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:api",
@@ -2956,7 +2956,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:palm",
@@ -2965,7 +2965,7 @@
       "kind": "commodity",
       "status": "monthly_reference",
       "reason": "Monthly reference, not a live price",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
       "price": 1133.128854318491,
       "asof": "2026-09-01",
       "unit": "USD/tonne",
@@ -2983,22 +2983,22 @@
       "benchmark": "ICE cotton futures",
       "unit": "US cents/lb",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 81.3,
-      "asof": "2026-11-17T16:30:41+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 80.95,
+      "asof": "2026-11-18T13:30:38+00:00",
       "currency": "USX",
       "provider_name": "CT=F",
       "exchange": "NYM",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/CT%3DF",
-      "previous_close": 82.61,
-      "change_pct": -1.585764435298398,
-      "regularMarketVolume": 20617,
+      "previous_close": 81.4,
+      "change_pct": -0.5528255528255532,
+      "regularMarketVolume": 8546,
       "regularMarketDayHigh": 79.9,
       "regularMarketDayLow": 78.63,
       "fiftyTwoWeekHigh": 92.15,
       "fiftyTwoWeekLow": 60.71,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:sugar",
@@ -3010,22 +3010,22 @@
       "benchmark": "ICE sugar no.11 futures",
       "unit": "US cents/lb",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 18.17,
-      "asof": "2026-11-17T17:59:57+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 18.06,
+      "asof": "2026-11-18T13:48:14+00:00",
       "currency": "USX",
       "provider_name": "Sugar #11 Mar 27",
       "exchange": "NYB",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/SB%3DF",
       "previous_close": 18.17,
-      "change_pct": 0.0,
-      "regularMarketVolume": 0,
-      "regularMarketDayHigh": 18.33,
-      "regularMarketDayLow": 17.97,
+      "change_pct": -0.6053935057787729,
+      "regularMarketVolume": 42972,
+      "regularMarketDayHigh": 18.09,
+      "regularMarketDayLow": 17.75,
       "fiftyTwoWeekHigh": 21.29,
       "fiftyTwoWeekLow": 13.22,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:wheat",
@@ -3037,22 +3037,22 @@
       "benchmark": "CBOT wheat futures",
       "unit": "US cents/bushel",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 606.5,
-      "asof": "2026-11-18T04:18:44+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 603.25,
+      "asof": "2026-11-18T13:44:58+00:00",
       "currency": "USX",
       "provider_name": "Chicago SRW Wheat Futures,Dec-2",
       "exchange": "CBT",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/ZW%3DF",
       "previous_close": 610.25,
-      "change_pct": -0.6145022531749311,
-      "regularMarketVolume": 2616,
+      "change_pct": -1.1470708725932033,
+      "regularMarketVolume": 15271,
       "regularMarketDayHigh": 611.75,
-      "regularMarketDayLow": 604.75,
+      "regularMarketDayLow": 599.5,
       "fiftyTwoWeekHigh": 775.75,
       "fiftyTwoWeekLow": 501.5,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:rice",
@@ -3064,7 +3064,7 @@
       "benchmark": "CBOT rough rice futures",
       "unit": "USD/cwt",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
       "price": 18.43,
       "asof": "2026-11-18T02:59:12+00:00",
       "currency": "USD",
@@ -3079,7 +3079,7 @@
       "regularMarketDayLow": 18.395,
       "fiftyTwoWeekHigh": 18.515,
       "fiftyTwoWeekLow": 9.245,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:maize",
@@ -3091,22 +3091,22 @@
       "benchmark": "CBOT corn futures",
       "unit": "US cents/bushel",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 445.25,
-      "asof": "2026-11-18T04:16:29+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 444.25,
+      "asof": "2026-11-18T13:44:55+00:00",
       "currency": "USX",
       "provider_name": "Corn Futures,Dec-2026",
       "exchange": "CBT",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/ZC%3DF",
       "previous_close": 446.75,
-      "change_pct": -0.3357582540570836,
-      "regularMarketVolume": 8153,
+      "change_pct": -0.5595970900951319,
+      "regularMarketVolume": 21284,
       "regularMarketDayHigh": 447.75,
-      "regularMarketDayLow": 444.5,
+      "regularMarketDayLow": 442.75,
       "fiftyTwoWeekHigh": 544.5,
       "fiftyTwoWeekLow": 398.5,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:soyoil",
@@ -3118,22 +3118,22 @@
       "benchmark": "CBOT soybean oil futures",
       "unit": "US cents/lb",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 61.76,
-      "asof": "2026-11-18T04:17:30+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 61.47,
+      "asof": "2026-11-18T13:44:55+00:00",
       "currency": "USX",
       "provider_name": "Soybean Oil Futures,Dec-2026",
       "exchange": "CBT",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/ZL%3DF",
-      "previous_close": 62.13,
-      "change_pct": -0.5955255110252744,
-      "regularMarketVolume": 4359,
-      "regularMarketDayHigh": 62.25,
-      "regularMarketDayLow": 61.63,
+      "previous_close": 62.39,
+      "change_pct": -1.4745952877063706,
+      "regularMarketVolume": 15088,
+      "regularMarketDayHigh": 62.5,
+      "regularMarketDayLow": 61.33,
       "fiftyTwoWeekHigh": 79.69,
       "fiftyTwoWeekLow": 47.51,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:sunoil",
@@ -3142,7 +3142,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:mustard",
@@ -3151,7 +3151,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:copra",
@@ -3160,7 +3160,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:natrub",
@@ -3169,7 +3169,7 @@
       "kind": "commodity",
       "status": "monthly_reference",
       "reason": "Monthly reference, not a live price",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
       "price": 125.0750048275246,
       "asof": "2026-09-01",
       "unit": "US cents/kg",
@@ -3187,22 +3187,22 @@
       "benchmark": "ICE cocoa futures",
       "unit": "USD/tonne",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 5184.0,
-      "asof": "2026-11-17T18:29:56+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 5031.0,
+      "asof": "2026-11-18T13:48:13+00:00",
       "currency": "USD",
       "provider_name": "Cocoa Dec 26",
       "exchange": "NYB",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/CC%3DF",
       "previous_close": 5177.0,
-      "change_pct": 0.1352134440795849,
-      "regularMarketVolume": 0,
-      "regularMarketDayHigh": 5262.0,
-      "regularMarketDayLow": 5125.0,
+      "change_pct": -2.8201661193741567,
+      "regularMarketVolume": 8866,
+      "regularMarketDayHigh": 5206.0,
+      "regularMarketDayLow": 5011.0,
       "fiftyTwoWeekHigh": 6675.0,
       "fiftyTwoWeekLow": 2798.0,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:coffee",
@@ -3214,22 +3214,22 @@
       "benchmark": "ICE arabica coffee futures",
       "unit": "US cents/lb",
       "quote_type": "Futures benchmark; basis differs from physical procurement",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 279.95,
-      "asof": "2026-11-17T18:29:55+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 274.9,
+      "asof": "2026-11-18T13:48:10+00:00",
       "currency": "USX",
       "provider_name": "Coffee Dec 26",
       "exchange": "NYB",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/KC%3DF",
       "previous_close": 281.4,
-      "change_pct": -0.5152807391613279,
-      "regularMarketVolume": 0,
-      "regularMarketDayHigh": 282.25,
-      "regularMarketDayLow": 273.55,
-      "fiftyTwoWeekHigh": 418.45,
+      "change_pct": -2.309879175550822,
+      "regularMarketVolume": 6724,
+      "regularMarketDayHigh": 280.45,
+      "regularMarketDayLow": 274.5,
+      "fiftyTwoWeekHigh": 415.35,
       "fiftyTwoWeekLow": 242.7,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:tea",
@@ -3238,7 +3238,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:milk",
@@ -3247,7 +3247,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:ethanol",
@@ -3256,7 +3256,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:pulp",
@@ -3265,7 +3265,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:tobacco",
@@ -3274,7 +3274,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:spices",
@@ -3283,7 +3283,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:shrimp",
@@ -3292,7 +3292,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:castor",
@@ -3301,7 +3301,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:lumber",
@@ -3310,7 +3310,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:urea",
@@ -3319,7 +3319,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:ammonia",
@@ -3328,7 +3328,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:dap",
@@ -3337,7 +3337,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:potash",
@@ -3346,7 +3346,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:sulphur",
@@ -3355,7 +3355,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:drybulk",
@@ -3364,7 +3364,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:crudetanker",
@@ -3373,7 +3373,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:container",
@@ -3382,7 +3382,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:bunker",
@@ -3391,7 +3391,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:eua",
@@ -3400,7 +3400,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:ccts",
@@ -3409,7 +3409,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:rec",
@@ -3418,7 +3418,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "commodity:vcm",
@@ -3427,7 +3427,7 @@
       "kind": "commodity",
       "status": "unavailable",
       "reason": "No configured public price feed for this physical market",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00"
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "macro:usdinr",
@@ -3437,9 +3437,9 @@
       "symbol": "INR=X",
       "unit": "INR/USD",
       "benchmark": "USD / INR",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 93.285,
-      "asof": "2026-11-18T04:29:19+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 93.43,
+      "asof": "2026-11-18T13:46:59+00:00",
       "currency": "INR",
       "provider_name": "USD/INR",
       "exchange": "CCY",
@@ -3447,13 +3447,13 @@
       "source_url": "https://finance.yahoo.com/quote/INR%3DX",
       "status": "delayed_or_eod",
       "previous_close": 93.47,
-      "change_pct": -0.1979244677436598,
+      "change_pct": -0.042794479512131556,
       "regularMarketVolume": 0,
-      "regularMarketDayHigh": 93.47,
+      "regularMarketDayHigh": 93.5725,
       "regularMarketDayLow": 93.235,
       "fiftyTwoWeekHigh": 97.0541,
       "fiftyTwoWeekLow": 85.8629,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "macro:eurusd",
@@ -3463,9 +3463,9 @@
       "symbol": "EURUSD=X",
       "unit": "USD/EUR",
       "benchmark": "EUR / USD",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 1.0989,
-      "asof": "2026-11-18T04:28:46+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 1.0971,
+      "asof": "2026-11-18T14:07:43+00:00",
       "currency": "USD",
       "provider_name": "EUR/USD",
       "exchange": "CCY",
@@ -3473,13 +3473,13 @@
       "source_url": "https://finance.yahoo.com/quote/EURUSD%3DX",
       "status": "delayed_or_eod",
       "previous_close": 1.1002,
-      "change_pct": -0.11816033448465157,
+      "change_pct": -0.28176695146338027,
       "regularMarketVolume": 0,
       "regularMarketDayHigh": 1.1004,
-      "regularMarketDayLow": 1.0984,
+      "regularMarketDayLow": 1.0958,
       "fiftyTwoWeekHigh": 1.2024,
-      "fiftyTwoWeekLow": 1.097,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fiftyTwoWeekLow": 1.0958,
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     },
     {
       "id": "macro:nifty",
@@ -3489,23 +3489,23 @@
       "symbol": "^NSEI",
       "unit": "index points",
       "benchmark": "NIFTY 50",
-      "attempted_at": "2026-11-18T04:29:24.196772+00:00",
-      "price": 25299.5,
-      "asof": "2026-11-18T04:29:25+00:00",
+      "attempted_at": "2026-11-18T14:08:17.442152+00:00",
+      "price": 25227.95,
+      "asof": "2026-11-18T10:01:09+00:00",
       "currency": "INR",
       "provider_name": "NIFTY 50",
       "exchange": "NSI",
       "source": "Yahoo Finance public chart",
       "source_url": "https://finance.yahoo.com/quote/%5ENSEI",
       "status": "delayed_or_eod",
-      "previous_close": 25387.4,
-      "change_pct": -0.3462347463702553,
+      "previous_close": 25291.1,
+      "change_pct": -0.2496925796030891,
       "regularMarketVolume": 0,
       "regularMarketDayHigh": 25390.8,
-      "regularMarketDayLow": 25206.2,
+      "regularMarketDayLow": 25141.8,
       "fiftyTwoWeekHigh": 26373.2,
       "fiftyTwoWeekLow": 22179.9,
-      "fetched_at": "2026-11-18T04:29:24.196772+00:00"
+      "fetched_at": "2026-11-18T14:08:17.442152+00:00"
     }
   ]
 }
