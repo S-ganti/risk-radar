@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T00:38:52+00:00",
+ "generated": "2026-11-24T22:56:36+00:00",
  "spot": {
   "usdinr": {
    "v": 93.0,
@@ -27,7 +27,7 @@
    "src": "open.er-api.com"
   },
   "gold": {
-   "v": 3648.9,
+   "v": 3555.6,
    "asof": "2026-11-24",
    "src": "gold-api.com"
   },
@@ -50,7 +50,7 @@
    "src": "EC official CBAM certificate price via cbamguide.com (manual mark)"
   },
   "gold_inr_10g": {
-   "v": 109103,
+   "v": 106313,
    "asof": "2026-11-24",
    "src": "derived: XAUUSD x USDINR (MCX feed TODO)"
   }
@@ -58,11 +58,11 @@
  "vols": {
   "usdinr": {
    "freq": "D",
-   "monthly": 0.0143,
-   "annual": 0.0495,
-   "pct5y": 76.0,
-   "asof": "2026-11-23",
-   "n": 1356,
+   "monthly": 0.0139,
+   "annual": 0.048,
+   "pct5y": 73.3,
+   "asof": "2026-11-24",
+   "n": 1357,
    "src": "USD/INR (ECB via frankfurter)",
    "method": "EWMA(0.94) daily"
   },
@@ -98,11 +98,11 @@
   },
   "gold": {
    "freq": "D",
-   "monthly": 0.0956,
-   "annual": 0.331,
-   "pct5y": 95.7,
+   "monthly": 0.0983,
+   "annual": 0.3405,
+   "pct5y": 96.1,
    "asof": "2026-11-24",
-   "n": 1272,
+   "n": 1273,
    "src": "COMEX gold front month (Yahoo)",
    "method": "EWMA(0.94) daily"
   },
@@ -208,11 +208,11 @@
   }
  },
  "moves": {
-  "usdinr": -2.37,
+  "usdinr": -2.31,
   "crude": -19.34,
   "wti": -17.02,
   "natgas": 0.0,
-  "gold": -9.77,
+  "gold": -12.75,
   "copper": 0.99,
   "alum": 1.01,
   "wheat": 3.78,
@@ -285,7 +285,7 @@
   "copper|usdinr": -0.15,
   "copper|wheat": 0.36,
   "copper|wti": 0.05,
-  "crude|gold": -0.15,
+  "crude|gold": -0.13,
   "crude|ironore": 0.24,
   "crude|natgas": -0.0,
   "crude|natrub": 0.14,
@@ -299,9 +299,9 @@
   "gold|natrub": 0.06,
   "gold|palm": 0.2,
   "gold|sugar": -0.1,
-  "gold|usdinr": -0.23,
+  "gold|usdinr": -0.21,
   "gold|wheat": -0.0,
-  "gold|wti": -0.11,
+  "gold|wti": -0.1,
   "ironore|natgas": -0.07,
   "ironore|natrub": 0.01,
   "ironore|palm": 0.25,
@@ -332,23 +332,23 @@
   "wheat|wti": 0.23
  },
  "inr": {
-  "mom20": -2.37,
-  "mom60": -2.36
+  "mom20": -2.31,
+  "mom60": -2.14
  },
  "breadth": 40.0,
  "regime": {
   "label": "normal",
-  "score": 44.5,
+  "score": 44.2,
   "components": {
-   "avg_vol_pct5y": 72.9,
+   "avg_vol_pct5y": 72.3,
    "inr_mom20_component": 0,
    "breadth": 40.0
   }
  },
  "velocity": {
   "oil": 100,
-  "gold": 65,
-  "usdinr": 59
+  "gold": 85,
+  "usdinr": 58
  },
  "history": {
   "dates": [
